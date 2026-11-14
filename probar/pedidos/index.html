@@ -22,7 +22,7 @@ header{padding:18px 0 6px;display:flex;align-items:center;gap:12px}
 .logo .a{font-family:var(--disp);font-weight:600;font-size:12px;letter-spacing:.02em}
 .logo .b{font-family:var(--script);font-size:19px;color:#4a4a45;position:relative}
 .logo .b::after{content:"";position:absolute;width:7px;height:4px;background:var(--leaf);border-radius:7px 0;left:-6px;top:3px;transform:rotate(-25deg)}
-.logo .c{font-size:5.5px;letter-spacing:.14em;margin-top:3px;font-weight:600}
+.logo .a,.logo .b{display:block;text-align:center}.logo .a{font-size:10px!important}.logo .a{letter-spacing:.06em;margin-right:-.06em}.logo .b{margin-top:2px}
 header h1{font-family:var(--disp);font-weight:600;font-size:26px;line-height:1;margin:0;letter-spacing:.01em}
 header h1 span{font-family:var(--script);font-weight:400;font-size:32px;margin-left:4px}
 .subs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
@@ -114,7 +114,7 @@ label.f input,label.f select{border:1px solid var(--line);background:var(--card)
 <div class="demo">Demo de <b>Compila Software</b> · productos y precios de ejemplo</div>
 <div class="wrap">
   <header>
-    <div class="logo" aria-hidden="true"><span class="a">ALMACÉN</span><span class="b">Natural</span><span class="c">ALMACÉN NATURAL</span></div>
+    <div class="logo" aria-hidden="true"><span class="a">ALMACÉN</span><span class="b">Natural</span></div>
     <div><h1>Almacén <span>Natural</span></h1><p>Almacén natural y orgánico · Viandas caseras y saludables</p></div>
   </header>
   <div class="seg" role="group" aria-label="Vista">
@@ -133,8 +133,8 @@ label.f input,label.f select{border:1px solid var(--line);background:var(--card)
       <p>Resolvé tus almuerzos de la semana. Elegís tus favoritas y tenés beneficios en cada pedido.</p>
       <div class="subs" id="subs"></div>
     </div>
-    <div class="promo">🌿 <b>Promo:</b> llevando dos productos seleccionados, <b>el segundo tiene 30% OFF</b>. Aceite de chía, aceite de coco y MCT Premium.</div>
-    <p style="font-size:13px;color:var(--dim);margin:8px 0 12px">🚘 Envío <b style="color:var(--green)">sin cargo en Nordelta</b> · también a Tigre y alrededores</p>
+    <div class="promo">🌿 <b>Promo:</b> llevando dos productos seleccionados, <b>el segundo tiene 30% OFF</b>.</div>
+    <p style="font-size:13px;color:var(--dim);margin:8px 0 12px">🚘 Envío <b style="color:var(--green)">sin cargo en la zona</b> · también a barrios cercanos</p>
     <input class="search" id="q" type="search" placeholder="Buscar: granola, viandas, kombucha…" aria-label="Buscar productos">
     <div class="chips" id="cats" role="group" aria-label="Categorías"></div>
     <div class="tags">
@@ -169,23 +169,14 @@ const CATS=["Todo","Viandas","Congelados","Almacén","Snacks","Bebidas"];
 const P=[
  {id:1,c:"Viandas",n:"Wok de vegetales con arroz yamaní",d:"Porción 400 g",p:7800,e:"🥘",bg:"#f3e6cf",veg:1,tacc:1},
  {id:2,c:"Viandas",n:"Milanesas de berenjena con puré",d:"2 milanesas + puré",p:7500,e:"🍆",bg:"#ece3f1",veg:0,tacc:0},
- {id:3,c:"Viandas",n:"Bowl de quinoa y garbanzos",d:"Con vegetales asados",p:8200,e:"🥗",bg:"#e3ecd9",veg:1,tacc:1},
- {id:4,c:"Viandas",n:"Tarta de calabaza y queso",d:"Porción individual",p:6900,e:"🥧",bg:"#f8e3cf",veg:0,tacc:0},
  {id:5,c:"Congelados",n:"Medallones de lentejas x4",d:"Listos para horno",p:5600,e:"🧆",bg:"#efe5d6",veg:1,tacc:1},
  {id:6,c:"Congelados",n:"Empanadas integrales x6",d:"Verdura, choclo y queso",p:7200,e:"🥟",bg:"#f4ead7",veg:0,tacc:0},
- {id:7,c:"Congelados",n:"Ñoquis de calabaza 500 g",d:"Caseros",p:4900,e:"🎃",bg:"#f9e4cc",veg:1,tacc:0},
  {id:8,c:"Almacén",n:"Granola sin azúcar 500 g",d:"Avena, almendras y coco",p:6400,e:"🥣",bg:"#efe7d5",veg:1,tacc:0},
- {id:9,c:"Almacén",n:"Mix de frutos secos 250 g",d:"Nueces, almendras, pasas",p:5900,e:"🥜",bg:"#eee2d2",veg:1,tacc:1},
- {id:10,c:"Almacén",n:"Aceite de oliva orgánico 500 ml",d:"Extra virgen",p:12500,e:"🫒",bg:"#e6ebd3",veg:1,tacc:1},
- {id:11,c:"Almacén",n:"Miel pura 500 g",d:"De productor",p:6200,e:"🍯",bg:"#f7e7c4",veg:0,tacc:1},
+ {id:10,c:"Almacén",n:"Aceite de oliva orgánico 500 ml",d:"Extra virgen",p:12500,e:"🫒",bg:"#e6ebd3",veg:1,tacc:1,promo:1},
  {id:12,c:"Snacks",n:"Chips de garbanzo",d:"Sal marina, 100 g",p:3200,e:"🌾",bg:"#f2ead8",veg:1,tacc:1},
- {id:13,c:"Snacks",n:"Barritas de cereal x5",d:"Con chips de cacao",p:4300,e:"🍫",bg:"#ece0d6",veg:1,tacc:0},
  {id:14,c:"Bebidas",n:"Kombucha 500 ml",d:"Jengibre y limón",p:3900,e:"🧉",bg:"#e3eedf",veg:1,tacc:1},
- {id:15,c:"Bebidas",n:"Jugo prensado en frío",d:"Verde detox, 500 ml",p:4200,e:"🥬",bg:"#dfeed6",veg:1,tacc:1},
- {id:16,c:"Almacén",n:"Aceite de chía",d:"Prensado en frío, 250 ml",p:9800,e:"🌱",bg:"#eef3e5",veg:1,tacc:1,promo:1},
- {id:17,c:"Almacén",n:"Aceite de coco",d:"Neutro, 360 ml",p:8900,e:"🥥",bg:"#f3efe6",veg:1,tacc:1,promo:1},
- {id:18,c:"Almacén",n:"MCT Premium",d:"Aceite MCT, 250 ml",p:14500,e:"✨",bg:"#f6f0dd",veg:1,tacc:1,promo:1},
- {id:21,c:"Suscripción",n:"Suscripción semanal de viandas",d:"5 viandas por semana",p:36000,e:"📅"},
+  {id:17,c:"Almacén",n:"Aceite de coco",d:"Neutro, 360 ml",p:8900,e:"🥥",bg:"#f3efe6",veg:1,tacc:1,promo:1},
+  {id:21,c:"Suscripción",n:"Suscripción semanal de viandas",d:"5 viandas por semana",p:36000,e:"📅"},
  {id:22,c:"Suscripción",n:"Suscripción quincenal de viandas",d:"10 viandas cada 15 días",p:70000,e:"📅"},
  {id:23,c:"Suscripción",n:"Suscripción mensual de viandas",d:"20 viandas por mes",p:136000,e:"📅"}
 ];
@@ -216,8 +207,8 @@ function refresh(){renderList();if(!$("#sheet").hidden&&step==="cart")openCart()
 $("#q").addEventListener("input",renderList);$("#fTacc").addEventListener("change",renderList);$("#fVeg").addEventListener("change",renderList);
 // ---- checkout
 let step="cart",ent="riviera";
-const ENV=1500,BARRIOS=["Nordelta","Tigre centro","Benavídez","Rincón de Milberg","Dique Luján","Don Torcuato"];
-const envCost=()=>ent!=="envio"?0:(($("#cBarrio")||{}).value||"Nordelta")==="Nordelta"?0:ENV;
+const ENV=1500,BARRIOS=["Zona 1","Zona 2","Zona 3"];
+const envCost=()=>ent!=="envio"?0:(($("#cBarrio")||{}).value||"Zona 1")==="Zona 1"?0:ENV;
 function totals(){const d=disc(),e=envCost();return `<div class="tot"><span>Subtotal</span><span>${fmt(sub())}</span></div>${d?`<div class="tot" style="color:var(--terra)"><span>Promo 2º al 30%</span><span>-${fmt(d)}</span></div>`:""}<div class="tot"><span>Envío</span><span>${ent!=="envio"?"Retiro sin costo":e?fmt(e):"Sin cargo en Nordelta"}</span></div><div class="tot big"><span>Total</span><span>${fmt(sub()-d+e)}</span></div>`}
 function openSheet(){$("#scrim").hidden=false;$("#sheet").hidden=false}
 function close(){$("#scrim").hidden=true;$("#sheet").hidden=true}
@@ -265,10 +256,10 @@ function confirmOrder(){const name=$("#cName").value.trim()||"Cliente";
 const ST=[["Nuevo","n","Preparar"],["Preparando","p","Marcar listo"],["Listo para entregar","l",null]];
 ORD=[
  {nro:1046,name:"Martina",ent:"bahia",dia:"Hoy",pago:"Transferencia / Mercado Pago",items:[{n:"Bowl de quinoa y garbanzos",q:2,p:8200},{n:"Kombucha 500 ml",q:2,p:3900}],tot:24200,st:1,hora:"12:40"},
- {nro:1045,name:"Diego",ent:"envio",barrio:"Nordelta",dir:"Barrio Castores, lote 214",dia:"Hoy",pago:"Transferencia / Mercado Pago",items:[{n:"Empanadas integrales x6",q:1,p:7200},{n:"Medallones de lentejas x4",q:2,p:5600},{n:"Granola sin azúcar 500 g",q:1,p:6400}],tot:24800,st:0,hora:"12:15"},
- {nro:1044,name:"Carolina",ent:"envio",barrio:"Nordelta",dir:"Barrio Los Lagos, lote 88",dia:"Lunes a viernes",pago:"Transferencia / Mercado Pago",items:[{n:"Suscripción semanal de viandas",q:1,p:36000}],tot:36000,st:1,hora:"12:02"},
+ {nro:1045,name:"Diego",ent:"envio",barrio:"Zona 1",dir:"Calle Ejemplo 100",dia:"Hoy",pago:"Transferencia / Mercado Pago",items:[{n:"Empanadas integrales x6",q:1,p:7200},{n:"Medallones de lentejas x4",q:2,p:5600},{n:"Granola sin azúcar 500 g",q:1,p:6400}],tot:24800,st:0,hora:"12:15"},
+ {nro:1044,name:"Carolina",ent:"envio",barrio:"Zona 1",dir:"Calle Ejemplo 230",dia:"Lunes a viernes",pago:"Transferencia / Mercado Pago",items:[{n:"Suscripción semanal de viandas",q:1,p:36000}],tot:36000,st:1,hora:"12:02"},
  {nro:1043,name:"Sofía",ent:"riviera",dia:"Hoy",pago:"Efectivo al retirar",items:[{n:"Wok de vegetales con arroz yamaní",q:3,p:7800}],tot:23400,st:2,hora:"11:52"},
- {nro:1042,name:"Pablo",ent:"riviera",dia:"Hoy",pago:"Transferencia / Mercado Pago",items:[{n:"Aceite de chía",q:1,p:9800},{n:"Aceite de coco (2º al 30%)",q:1,p:8900}],tot:16030,st:0,hora:"11:30"}
+ {nro:1042,name:"Pablo",ent:"riviera",dia:"Hoy",pago:"Transferencia / Mercado Pago",items:[{n:"Aceite de oliva orgánico 500 ml",q:1,p:12500},{n:"Aceite de coco (2º al 30%)",q:1,p:8900}],tot:16030,st:0,hora:"11:30"}
 ];
 let pf="Todos";
 function renderPanel(){const F=["Todos","Sucursal Centro","Sucursal Norte","Envío"];

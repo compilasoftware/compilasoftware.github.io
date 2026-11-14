@@ -398,6 +398,64 @@ header{background:#090a0f;top:env(safe-area-inset-top,0px)}
   .wa-f{display:grid;place-items:center;position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));width:56px;height:56px;border-radius:50%;background:#25d366;z-index:60;box-shadow:0 12px 26px -8px rgba(0,0,0,.6);opacity:0;transform:translateY(16px) scale(.85);pointer-events:none;transition:opacity .25s,transform .25s}
   .wa-f.on{opacity:1;transform:none;pointer-events:auto}
 }
+
+/* ===== v9 ===== */
+.b .ui{flex:1;justify-content:center;margin-top:6px;background:rgba(255,255,255,.035);border:1px solid var(--line);border-radius:14px;padding:12px;font-size:14px;display:flex;flex-direction:column;gap:8px}
+.ui-h{display:flex;gap:10px;align-items:baseline;font-family:var(--mono);font-size:12.5px;color:var(--dim)}
+.ui-h b{color:var(--txt);font-weight:500}.ui-h b:last-child{margin-left:auto;color:var(--ok)}
+.feed{display:flex;flex-direction:column;gap:6px}
+.fd{display:flex;justify-content:space-between;align-items:center;gap:10px;background:rgba(255,255,255,.05);border-radius:9px;padding:8px 11px;animation:fdIn .45s cubic-bezier(.2,.8,.2,1)}
+.fd small{display:block;color:var(--dim);font-size:12.5px}
+.fd em{font-style:normal;font-family:var(--mono);font-size:12px;padding:2px 8px;border-radius:999px;background:rgba(109,139,255,.18);color:#b9c6ff;white-space:nowrap}
+.fd em.cf{background:rgba(255,197,109,.16);color:#ffd59a}.fd em.ok{background:rgba(61,220,151,.15);color:var(--ok)}
+@keyframes fdIn{from{opacity:0;transform:translateY(-12px) scale(.97)}}
+.cal{display:grid;grid-template-columns:auto repeat(5,1fr);gap:5px;font-size:12.5px;align-items:center}
+.cal span{color:var(--dim);font-family:var(--mono);font-size:11.5px;text-align:center}
+.cal button{font:inherit;font-size:12px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--txt);border-radius:8px;padding:7px 0;cursor:pointer;transition:background .2s,border-color .2s,transform .15s}
+.cal button:hover{border-color:var(--acc)}
+.cal button.r{background:rgba(255,255,255,.1);color:var(--dim);cursor:default;border-color:transparent}
+.cal button.vos{background:var(--acc);color:#0a0b10;border-color:var(--acc);animation:pk .35s}
+@keyframes pk{50%{transform:scale(1.12)}}
+.ui-ok{font-family:var(--mono);font-size:12.5px;color:var(--ok);opacity:0;transform:translateY(4px);transition:.3s}
+.ui-ok.on{opacity:1;transform:none}.ui-ok::before{content:"✓ "}
+.b .ui-web{flex-direction:row;align-items:center;justify-content:center;gap:18px}.ui-web .brw{flex:1;max-width:400px}
+.brw{flex:1;border-radius:10px;overflow:hidden;background:#fff;color:#14172e}
+.brw-b{display:flex;gap:4px;align-items:center;padding:6px 8px;background:#eef0f6;font-family:var(--mono);font-size:10.5px;color:#6b7083}
+.brw-b i{width:6px;height:6px;border-radius:50%;background:#c9ccd8}.brw-b span{margin-left:6px}
+.site{--b:#4d63ff;padding:8px;display:flex;flex-direction:column;gap:6px}
+.site-h{display:flex;justify-content:space-between;align-items:center;font-size:12px}.site-h b{color:var(--b);transition:color .3s}
+.site-h span{background:var(--b);color:#fff;border-radius:6px;padding:2px 8px;font-size:11px;font-weight:600;transition:background .3s}
+.site-hero{height:34px;border-radius:7px;background:linear-gradient(120deg,var(--b),color-mix(in srgb,var(--b) 45%,#fff));transition:background .3s}
+.site-p{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}.site-p i{height:22px;border-radius:5px;background:color-mix(in srgb,var(--b) 14%,#fff);transition:background .3s}
+.sw{display:flex;flex-direction:column;gap:7px}
+.sw button{width:24px;height:24px;border-radius:50%;border:2px solid transparent;background:var(--c);cursor:pointer;box-shadow:0 0 0 1px rgba(255,255,255,.15);transition:transform .15s}
+.sw button:hover{transform:scale(1.12)}.sw button.on{border-color:#fff}
+.gl{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px;font-size:13.5px;color:var(--dim)}
+.gl b{color:var(--txt);font-family:var(--mono)}
+.gl input{width:100%;accent-color:var(--acc);height:22px}
+.calc{display:flex;flex-direction:column;gap:6px}
+.calc div{display:flex;justify-content:space-between;gap:10px;background:rgba(255,255,255,.05);border-radius:9px;padding:7px 11px}
+.calc em{font-style:normal;color:var(--ok);font-family:var(--mono);font-size:13px;transition:transform .15s}
+.d-stack .b p{font-size:15.5px}
+.vs{margin-top:40px;max-width:820px;border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.vs-r{display:grid;grid-template-columns:1.6fr repeat(3,1fr);align-items:center;border-top:1px solid var(--line)}
+.vs-r:first-child{border-top:0}
+.vs-r>*{padding:14px 16px;text-align:center}
+.vs-r>span:first-child{text-align:left;font-weight:500}
+.vs-hd span{font-size:13.5px;color:var(--dim);font-weight:500;padding-block:12px}
+.vs-r>:last-child{background:rgba(109,139,255,.1);align-self:stretch;display:grid;place-items:center}
+.vs-hd .vs-y{color:var(--txt);font-weight:700}
+.vs i{display:grid;place-items:center;font-style:normal}
+.vs i::before{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-size:14px;font-weight:700}
+.vs i.si::before{content:"✓";background:rgba(61,220,151,.16);color:var(--ok)}
+.vs i.no::before{content:"✕";background:rgba(255,255,255,.06);color:#6f7488}
+.vs i.mid::before{content:"~";background:rgba(255,197,109,.14);color:#ffc56d}
+@media (max-width:760px){
+  .vs-r{grid-template-columns:1.5fr repeat(3,.8fr)}.vs-r>*{padding:11px 6px}.vs-r>span:first-child{padding-left:12px;font-size:14.5px}
+  .vs-hd span{font-size:11.5px;line-height:1.2}
+  .d-stack .b{padding:16px;gap:7px}.d-stack .b h3{font-size:24px}.d-stack .b p{font-size:14.5px}
+  .b .ui{padding:10px;gap:6px;font-size:13px}.b .ui-web{flex-direction:column;gap:10px}.ui-web .brw{width:100%;max-width:260px;flex:none}.sw{flex-direction:row}.fd{padding:6px 9px}.cal button{padding:6px 0}
+}
 </style>
 </head>
 <body>
@@ -455,30 +513,33 @@ header{background:#090a0f;top:env(safe-area-inset-top,0px)}
 
 <section class="d2" id="hacemos"><div class="d-in">
   <div class="d-h"><h2>Qué hacemos.</h2><p class="sub">Software que se usa todos los días en un negocio real, desde el celular o la compu.</p><div class="d-n" aria-hidden="true"><b id="dnum">1</b> de 4</div></div>
-  <div class="d-stack"><article class="b"><h3>Sistemas de pedidos</h3><p>Tu cliente elige, paga y queda todo registrado. Vos recibís cada pedido completo en un panel.</p><div class="mini"><div>Pedido #2041 <em>nuevo</em></div><div>Pedido #2040 <em>confirmado</em></div><div>Pedido #2038 <em>entregado</em></div></div></article>
-<article class="b"><h3>Turnos y reservas</h3><p>Agenda online que tus clientes reservan solos.</p><div class="mini"><div>Jueves 16:30 <em>reservado</em></div><div>Jueves 17:00 <em>libre</em></div></div></article>
-<article class="b"><h3>Webs a medida</h3><p>Tu sitio, conectado a tu sistema y con tu marca.</p><div class="mini"><div>Dominio propio <em>listo</em></div><div>Celular y compu <em>listo</em></div></div></article>
-<article class="b"><h3>Gestión interna</h3><p>Producción, stock, compras y reparto: el sistema hace las cuentas y ordena el trabajo de tu equipo.</p><div class="mini"><div>A producir <em>14 kg</em></div><div>Comprar a proveedor <em>3 insumos</em></div><div>Recorrido del miércoles <em>4 paradas</em></div></div></article></div>
+  <div class="d-stack">
+<article class="b"><h3>Sistemas de pedidos</h3><p>Tu cliente elige y paga. Vos lo recibís completo.</p>
+  <div class="ui"><div class="ui-h"><span>Hoy</span><b id="pedN">18 pedidos</b><b id="pedT">$342.000</b></div><div class="feed" id="feed"></div></div></article>
+<article class="b"><h3>Turnos y reservas</h3><p>Tus clientes reservan solos. Probá: tocá un horario libre.</p>
+  <div class="ui"><div class="cal" id="cal"></div><div class="ui-ok" id="calOk">Recordatorio por WhatsApp programado</div></div></article>
+<article class="b"><h3>Webs a medida</h3><p>Con tu marca y conectada a tu sistema. Elegí un color.</p>
+  <div class="ui ui-web"><div class="brw"><div class="brw-b"><i></i><i></i><i></i><span>tumarca.com.ar</span></div>
+    <div class="site" id="site"><div class="site-h"><b>Tu marca</b><span>Pedir</span></div><div class="site-hero"></div><div class="site-p"><i></i><i></i><i></i></div></div></div>
+    <div class="sw" id="sw"><button aria-label="Azul" style="--c:#4d63ff"></button><button aria-label="Verde" style="--c:#1f9d6b"></button><button aria-label="Rojo" style="--c:#e2463b"></button><button aria-label="Violeta" style="--c:#8b5cf6"></button><button aria-label="Naranja" style="--c:#f08a24"></button></div></div></article>
+<article class="b"><h3>Gestión interna</h3><p>El sistema hace las cuentas. Mové la barra.</p>
+  <div class="ui"><label class="gl">Pedidos de la semana <b id="gv">40</b><input type="range" min="10" max="120" value="40" id="gr" aria-label="Pedidos de la semana"></label>
+    <div class="calc"><div>A producir <em id="g1">14 kg</em></div><div>Comprar al proveedor <em id="g2">3 insumos</em></div><div>Recorridos de reparto <em id="g3">4</em></div></div></div></article>
+</div>
 </div></section>
 
 
 <section class="sec porque" id="porque">
   <div class="wrap">
     <h2>Por qué Compila.</h2>
-    <p class="sub">Lo que nos diferencia, al lado de lo que usás hoy.</p>
-    <div class="cmp"><table>
-      <thead><tr><th></th><th>WhatsApp y planillas</th><th>Plataformas genéricas</th><th class="y">Compila</th></tr></thead>
-      <tbody>
-        <tr><td>Hecho para tu negocio</td><td>No</td><td>Plantilla igual para todos</td><td class="y">Sí, a medida</td></tr>
-        <tr><td>Con tu marca</td><td>No</td><td>A medias</td><td class="y">Completa</td></tr>
-        <tr><td>Pedidos ordenados</td><td>A mano</td><td>Sí</td><td class="y">Sí, con tu logística</td></tr>
-        <tr><td>Lo probás antes de decidir</td><td>No aplica</td><td>Prueba genérica</td><td class="y">Con tus productos</td></tr>
-        <tr><td>Comisión por venta</td><td>No</td><td>Muchas cobran un porcentaje</td><td class="y">No, abono fijo</td></tr>
-        <tr><td>Cambiás precios y productos</td><td>Chat por chat</td><td>Sí</td><td class="y">Sí, desde tu panel</td></tr>
-        <tr><td>Quién te atiende</td><td>Nadie</td><td>Soporte general</td><td class="y">Quien lo desarrolló</td></tr>
-        <tr><td>Tus datos</td><td>Dispersos en chats</td><td>En la plataforma</td><td class="y">Tuyos, siempre</td></tr>
-      </tbody>
-    </table></div>
+    <div class="vs" role="table" aria-label="Compila frente a otras opciones">
+      <div class="vs-r vs-hd" role="row"><span role="columnheader"></span><span role="columnheader">Chats y planillas</span><span role="columnheader">Apps genéricas</span><span role="columnheader" class="vs-y">Compila</span></div>
+      <div class="vs-r" role="row"><span role="cell">Hecho a tu medida</span><i role="cell" class="no" aria-label="No"></i><i role="cell" class="mid" aria-label="A medias"></i><i role="cell" class="si" aria-label="Sí"></i></div>
+      <div class="vs-r" role="row"><span role="cell">Con tu marca</span><i role="cell" class="no" aria-label="No"></i><i role="cell" class="mid" aria-label="A medias"></i><i role="cell" class="si" aria-label="Sí"></i></div>
+      <div class="vs-r" role="row"><span role="cell">Sin comisión por venta</span><i role="cell" class="si" aria-label="Sí"></i><i role="cell" class="no" aria-label="No"></i><i role="cell" class="si" aria-label="Sí"></i></div>
+      <div class="vs-r" role="row"><span role="cell">Lo probás antes de decidir</span><i role="cell" class="no" aria-label="No"></i><i role="cell" class="mid" aria-label="A medias"></i><i role="cell" class="si" aria-label="Sí"></i></div>
+      <div class="vs-r" role="row"><span role="cell">Te atiende quien lo hizo</span><i role="cell" class="no" aria-label="No"></i><i role="cell" class="no" aria-label="No"></i><i role="cell" class="si" aria-label="Sí"></i></div>
+    </div>
   </div>
 </section>
 
@@ -529,7 +590,7 @@ header{background:#090a0f;top:env(safe-area-inset-top,0px)}
     <article class="pj"><div class="mock" style="background:#faf3d6;color:#a6162a"><b>Congelados caseros</b><div class="l"><span>Carne</span><span>$24.000</span></div><div class="l"><span>Pollo</span><span>$13.500</span></div><div class="l"><span>Combo Infaltable</span><span>$99.000</span></div><div class="bt" style="background:#a6162a;color:#faf3d6">Enviar pedido</div></div><div><small>Congelados</small><h3>Congelados con reparto semanal</h3><p>Sistema de pedidos semanales con reparto por zonas.</p><ul><li>Pedidos lunes y martes, entrega miércoles</li><li>Cobro por alias o efectivo</li><li>Recorrido ordenado por barrio</li><li>Panel con editor de menú</li></ul></div></article>
     <article class="pj"><div class="mock" style="background:#fff;color:#6e140d"><b>Pizzería del barrio</b><div class="l"><span>Muzzarella</span><span>$10.000</span></div><div class="l"><span>Napolitana</span><span>$12.000</span></div><div class="l"><span>Jamón y morrones</span><span>$12.000</span></div><div class="bt" style="background:#e5312f;color:#fff">Pedir</div></div><div><small>Pizzería</small><h3>Pizzería con delivery</h3><p>Pedidos desde el celular conectados a la cocina y al reparto.</p><ul><li>Menú con fotos</li><li>Lista de lo que hay que hornear</li><li>Orden de entrega para el repartidor</li></ul></div></article>
     <article class="pj"><div class="mock" style="background:#0d0b0a;color:#e2681f"><b>Del campo a tu casa</b><div class="l"><span>Milanesa de pollo</span><span>$18.000</span></div><div class="l"><span>Pollo entero</span><span>$9.500</span></div><div class="l"><span>Maple de campo</span><span>$12.000</span></div><div class="bt" style="background:#e2681f;color:#1a0d05">Mensaje al proveedor</div></div><div><small>Granja y elaborados</small><h3>Productos de granja</h3><p>Del pedido a la producción y la compra de insumos.</p><ul><li>Dos entregas por semana</li><li>Lista de producción automática</li><li>Compra calculada por rendimiento</li></ul></div></article>
-    <article class="pj"><div class="mock" style="background:#f3eed9;color:#3f4a24"><b>Almacén gourmet</b><div class="l"><span>Aceites</span></div><div class="l"><span>Pastas</span></div><div class="l"><span>Salsas importadas</span></div><div class="bt" style="background:#3f4a24;color:#f3eed9">Armar caja</div></div><div><small>Delicatessen</small><h3>Delicatessen y regalos</h3><p>Pedidos y regalos empresariales.</p><ul><li>Catálogo de importados</li><li>Cajas de regalo para empresas</li></ul></div></article>
+    <article class="pj"><div class="mock" style="background:#f3eed9;color:#3f4a24"><b>Almacén gourmet</b><div class="l"><span>Aceites</span></div><div class="l"><span>Pastas</span></div><div class="l"><span>Salsas importadas</span></div><div class="bt" style="background:#3f4a24;color:#f3eed9">Armar caja</div></div><div><small>Delicatessen</small><h3>Delicatessen y regalos</h3><p>Pedidos y regalos empresariales.</p><ul><li>Web propia con catálogo de importados</li><li>Cajas de regalo para empresas</li><li>Pedidos desde la web, directo al panel</li></ul></div></article>
   </div>
 </div></section>
 
@@ -621,7 +682,7 @@ function paso(i) {
   if (i === actual) return;
   const nuevo = i > actual, p = PASOS[i]; actual = i;
   caps.forEach((c, k) => c.classList.toggle("on", k === i));
-  moverReloj(p.h); lugar.textContent = p.l;
+  lugar.textContent = p.l;
   dia.style.color = p.i; dia.style.backgroundColor = p.s;
   sost.classList.toggle("cansado", !!p.cansado); sost.classList.toggle("calma", !!p.ok);
   saltar.hidden = !!p.ok;
@@ -631,6 +692,14 @@ function paso(i) {
   let h = ""; for (let k = 0; k <= i; k++) PASOS[k].m.forEach(x => { const [t, c] = x.split("|"); h += M(t, (c || "") + (k === i && nuevo ? " nuevo" : "")); });
   bd.innerHTML = h;
   if (nuevo) { tel.classList.remove("vibra"); void tel.offsetWidth; tel.classList.add("vibra"); }
+}
+// El reloj avanza con el scroll: se queda quieto un rato en cada hora y después corre parejo hasta la siguiente
+function relojScroll(pd) {
+  const n = PASOS.length, f = Math.min(n - .001, pd * n), i = Math.floor(f), fr = f - i, a = PASOS[i], b = PASOS[i + 1];
+  let m = aMin(a.h);
+  if (b && !!a.ok === !!b.ok) { let mb = aMin(b.h); if (mb < m) mb += 1440; const k = Math.max(0, (fr - .45) / .55); m = m + (mb - m) * k; }
+  m = Math.round(m) % 1440; const t = String(Math.floor(m / 60)).padStart(2, "0") + ":" + String(m % 60).padStart(2, "0");
+  if (reloj.textContent !== t) reloj.textContent = t;
 }
 saltar.addEventListener("click", () => {
   const d = dia.offsetHeight - innerHeight, k = PASOS.findIndex(p => p.ok);
@@ -646,11 +715,9 @@ saltar.addEventListener("click", () => {
   const prog = el => { const r = el.getBoundingClientRect(), d = el.offsetHeight - innerHeight; return d > 0 ? clamp(-r.top / d) : 0; };
 
   // Etiquetas de la comparación para el celular
-  const heads = $$(".cmp thead th").map(h => h.textContent);
-  $$(".cmp tbody tr").forEach(tr => [...tr.cells].forEach((c, i) => { if (i) c.dataset.l = heads[i]; }));
 
   // Aparecer al entrar en pantalla
-  $$("h2, .cmp tr, .pj, .pl, .faq, .form, .pnote, .yc, .pvc").forEach(e => { if (!e.closest(".stk, .dia, .d-in, .tst-in")) e.classList.add("rv"); });
+  $$("h2, .vs-r, .pj, .pl, .faq, .form, .pnote, .yc, .pvc").forEach(e => { if (!e.closest(".stk, .dia, .d-in, .tst-in")) e.classList.add("rv"); });
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), {rootMargin:"0px 0px -8% 0px"});
   $$(".rv").forEach(e => io.observe(e));
 
@@ -697,6 +764,7 @@ saltar.addEventListener("click", () => {
     // Reloj
     const n = typeof PASOS !== "undefined" ? PASOS.length : 10, pd = prog(dia), i = Math.min(n - 1, Math.floor(pd * n));
     if (i !== pasoAct) { pasoAct = i; paso(i); }
+    relojScroll(pd);
     barra.style.transform = `scaleX(${pd})`;
     // Proyectos de costado (compu)
     if (innerWidth > 860) track.style.transform = `translateX(${-prog(proy) * Math.max(0, track.scrollWidth - innerWidth + 48)}px)`;
@@ -705,6 +773,31 @@ saltar.addEventListener("click", () => {
   requestAnimationFrame(frame);
   // ===== v7 =====
   const d2 = $(".d2"), dc = $$(".d-stack .b"), dnum = $("#dnum");
+
+  // ===== Qué hacemos: mini sistemas =====
+  const feed = $("#feed"), pedN = $("#pedN"), pedT = $("#pedT");
+  const PED = [["2 kg de carne","Nordelta · transferencia",24000],["Combo semanal","Tigre · efectivo",99000],["3 de pollo","San Isidro · pagado",40500],["1 maple + pastas","Pacheco · transferencia",21000],["Caja de regalo","Olivos · pagado",58000]];
+  let pn = 18, pt = 342000, pk = 0;
+  const fmt = n => "$" + n.toLocaleString("es-AR");
+  const filaPed = ([a, b], st) => `<div class="fd"><span><b>${a}</b><small>${b}</small></span><em class="${st[1]}">${st[0]}</em></div>`;
+  const ST = [["nuevo",""],["confirmado","cf"],["entregado","ok"]];
+  let filas = [0, 1, 2].map(k => ({o: PED[k], s: Math.min(2, k)}));
+  const pintaFeed = () => { feed.innerHTML = filas.map(f => filaPed(f.o, ST[f.s])).join(""); pedN.textContent = pn + " pedidos"; pedT.textContent = fmt(pt); };
+  pintaFeed();
+  const nuevoPed = () => { const o = PED[(pk++ + 3) % PED.length]; filas = [{o, s: 0}, ...filas.map(f => ({o: f.o, s: Math.min(2, f.s + 1)}))].slice(0, 3); pn++; pt += o[2]; pintaFeed(); };
+  let vivo = false; new IntersectionObserver(es => es.forEach(e => vivo = e.isIntersecting)).observe($(".d2"));
+  setInterval(() => { if (vivo && !document.hidden) nuevoPed(); }, 2600);
+
+  const cal = $("#cal"), calOk = $("#calOk"), DIAS = ["Lu","Ma","Mi","Ju","Vi"], HS = ["10:00","15:00","17:30"], OCUP = ["0-1","0-3","1-0","1-2","2-1","2-4","1-4"];
+  cal.innerHTML = "<span></span>" + DIAS.map(d => `<span>${d}</span>`).join("") + HS.map((h, r) => `<span>${h}</span>` + DIAS.map((d, c) => { const oc = OCUP.includes(r + "-" + c); return `<button type="button" class="${oc ? "r" : ""}" ${oc ? "disabled" : ""} aria-label="${d} ${h} ${oc ? "ocupado" : "libre"}">${oc ? "—" : "libre"}</button>`; }).join("")).join("");
+  cal.addEventListener("click", e => { const b = e.target.closest("button"); if (!b || b.disabled) return; const ya = b.classList.toggle("vos"); b.textContent = ya ? "vos" : "libre"; calOk.classList.toggle("on", !!cal.querySelector(".vos")); });
+
+  const site = $("#site"), sw = $$("#sw button"); sw[0].classList.add("on");
+  sw.forEach(b => b.addEventListener("click", () => { sw.forEach(x => x.classList.toggle("on", x === b)); site.style.setProperty("--b", b.style.getPropertyValue("--c")); }));
+
+  const gr = $("#gr"), gv = $("#gv"), g1 = $("#g1"), g2 = $("#g2"), g3 = $("#g3");
+  const calcG = () => { const q = +gr.value; gv.textContent = q; g1.textContent = Math.round(q * .35) + " kg"; g2.textContent = Math.max(1, Math.ceil(q / 14)) + " insumos"; g3.textContent = Math.max(1, Math.ceil(q / 11)); };
+  gr.addEventListener("input", calcG); calcG();
   const fw = $(".fw"), lis = $$(".fases li"), lnf = $("#lnf"), dfill = $("#dfill"), dpct = $("#dpct"), dtxt = $("#dtxt");
   const ETAPAS = ["Esperando inicio","Relevamiento","Prototipo funcional","Desarrollo y pruebas","Puesta en producción","En línea, con soporte"];
   function frame2() {
