@@ -523,6 +523,18 @@ header{background:#090a0f;top:env(safe-area-inset-top,0px)}
   .lk-sb{font-size:11px}
   .lk-w{margin-top:12px;border-radius:14px}.lk-w div{padding:8px 4px}.lk-w b{font-size:17px}.lk-w small{font-size:9.5px}
 }
+
+/* ===== v12: fotos reales de fondo ===== */
+.dia{background:#0b0c15!important;color:#fff!important}
+.dia .dia-in{max-width:none;padding-left:max(24px,calc((100vw - 1152px) / 2));padding-right:max(24px,calc((100vw - 1152px) / 2))}
+.fotos{position:absolute;inset:0;overflow:hidden;z-index:0}
+.ft{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transform:scale(1.07);transition:opacity .8s ease,transform 7s ease-out}
+.ft.on{opacity:1;transform:scale(1)}
+.fotos::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,9,16,.88) 0%,rgba(8,9,16,.62) 45%,rgba(8,9,16,.28) 100%)}
+.dtx,.dia .esc{position:relative;z-index:1}
+.dia .c p{opacity:.88}
+.dia .lugar{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.25)}
+@media (max-width:860px){.fotos::after{background:linear-gradient(180deg,rgba(8,9,16,.9) 0%,rgba(8,9,16,.62) 40%,rgba(8,9,16,.35) 100%)}}
 </style>
 </head>
 <body>
@@ -562,6 +574,7 @@ header{background:#090a0f;top:env(safe-area-inset-top,0px)}
 
 <section class="dia" id="dia" aria-label="Un día en tu negocio">
   <div class="dia-in">
+    <div class="fotos" aria-hidden="true"><div class="ft" data-n="0"></div><div class="ft" data-n="1"></div><div class="ft" data-n="2"></div><div class="ft" data-n="3"></div><div class="ft" data-n="4"></div><div class="ft" data-n="5"></div><div class="ft" data-n="6"></div><div class="ft" data-n="7"></div><div class="ft" data-n="8"></div></div>
     <div class="dtx">
       <div class="dk"><span>Un día en tu negocio</span><b class="lugar" id="lugar">En casa</b></div>
       <div class="tit" id="tit"></div>
@@ -749,12 +762,17 @@ const caps = [...tit.children], reloj = document.getElementById("reloj"), dia = 
 const ICO = {wa: WA, tel: "✆", bk: "$", nota: "✎", bat2: "!", cp: "c"};
 const nota = n => `<div class="nt${n.big ? " big" : ""}"><span class="ic ${n.ic}">${ICO[n.ic]}</span><div><b>${n.t}<small>${n.tm}</small></b><span>${n.x}</span></div></div>`;
 const aMin = h => { const [a, b] = h.split(":").map(Number); return a * 60 + b; };
+const fts = [...document.querySelectorAll("#dia .ft")];
+// Las fotos se cargan recién cuando la sección está por aparecer
+new IntersectionObserver((es, o) => es.forEach(e => { if (!e.isIntersecting) return;
+  const cel = innerWidth < 861; fts.forEach(f => f.style.backgroundImage = `url(img/dia/m${f.dataset.n}${cel ? "-cel" : ""}.jpg)`); o.disconnect(); }), {rootMargin: "120% 0px"}).observe(dia);
 let actual = -1;
 function paso(i) {
   if (i === actual) return;
   const nuevo = i > actual, p = PASOS[i]; actual = i;
   caps.forEach((c, k) => c.classList.toggle("on", k === i));
-  lugar.textContent = p.l; dia.style.color = p.i; dia.style.backgroundColor = p.s;
+  lugar.textContent = p.l;
+  fts.forEach((f, k) => f.classList.toggle("on", k === i));
   lk.style.setProperty("--w1", p.w[0]); lk.style.setProperty("--w2", p.w[1]);
   batN.textContent = p.bat + "%"; batF.style.width = p.bat + "%"; batF.parentElement.parentElement.classList.toggle("baja", p.bat < 20);
   saltar.hidden = !!p.ok;
