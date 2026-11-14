@@ -3,6 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://compilasoftware.github.io/">
+<meta property="og:title" content="Compila Software · Tu sistema a medida">
+<meta property="og:description" content="Webs, apps y sistemas para pymes: pedidos, turnos, stock, reparto y caja. Lo ves funcionando antes de decidir.">
+<meta property="og:image" content="https://compilasoftware.github.io/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="es_AR">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="apple-touch-icon" href="/apple-touch-icon.jpg">
 <title>Compila Software | Software a medida para pymes</title>
@@ -537,6 +546,51 @@ header{background:#090a0f;top:env(safe-area-inset-top,0px)}
 .dia .c p{opacity:.88}
 .dia .lugar{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.25)}
 @media (max-width:860px){.fotos::after{background:linear-gradient(180deg,rgba(8,9,16,.9) 0%,rgba(8,9,16,.62) 40%,rgba(8,9,16,.35) 100%)}}
+
+/* ===== v13 ===== */
+.dia{background:radial-gradient(55% 65% at 76% 55%,color-mix(in srgb,var(--glow,#4d63ff) 30%,transparent),transparent 70%),#0b0c15!important;transition:background .6s}
+.bat i{border-color:currentColor!important}
+.bat u{background:currentColor}
+.lk>*{transition:opacity .35s}
+.lk.abierto>:not(.app):not(.lk-sb){opacity:0}
+.lk.abierto .lk-sb{color:#111322;position:relative;z-index:3}
+.lk.abierto .bat.baja u{background:#ff4d4d}
+.app{position:absolute;inset:0;z-index:2;background:#f4f5f9;color:#111322;padding:46px 11px 12px;display:flex;flex-direction:column;gap:7px;opacity:0;transform:translateY(28px) scale(.97);transition:opacity .45s,transform .55s cubic-bezier(.2,.8,.2,1);pointer-events:none}
+.lk.abierto .app{opacity:1;transform:none}
+.ah{display:flex;justify-content:space-between;align-items:flex-end;gap:8px;padding:0 3px 4px}
+.ah small{display:block;font-family:var(--mono);font-size:10.5px;color:#6b7083;text-transform:uppercase;letter-spacing:.05em}
+.ah b{font-size:16.5px;letter-spacing:-.02em}
+.ah2{font-family:var(--mono);font-size:10.5px;color:#6b7083;text-transform:uppercase;letter-spacing:.05em;padding:6px 3px 0}
+.tabs{display:flex;gap:5px}.tabs span{font-size:11px;padding:4px 8px;border-radius:999px;background:#e6e8f0;color:#4a4f63;font-weight:600}.tabs span.on{background:#111322;color:#fff}
+.ar{display:flex;justify-content:space-between;align-items:center;gap:8px;background:#fff;border-radius:12px;padding:8px 10px;box-shadow:0 1px 2px rgba(17,19,34,.06);animation:ntIn .45s cubic-bezier(.2,.8,.2,1) both}
+.ar:nth-child(3){animation-delay:.06s}.ar:nth-child(4){animation-delay:.12s}.ar:nth-child(5){animation-delay:.18s}.ar:nth-child(6){animation-delay:.24s}
+.ar b{display:block;font-size:12.5px}.ar small{display:block;font-size:11px;color:#6b7083}
+.tg{font-style:normal;font-size:10.5px;font-weight:700;padding:3px 7px;border-radius:999px;white-space:nowrap}
+.tg.ok{background:#def7ea;color:#0b6b43}.tg.az{background:#e3e8ff;color:#3346c9}.tg.am{background:#fff1d6;color:#8a5a00}.tg.gr{background:#eef0f5;color:#111322}
+.af{margin-top:auto;font-size:11px;color:#4a4f63;background:#e9ecf6;border-radius:10px;padding:8px 10px;line-height:1.35}
+.cta-mid{padding:0 0 40px}
+.cm{display:flex;justify-content:space-between;align-items:center;gap:30px;padding:44px;border-radius:24px;background:linear-gradient(120deg,rgba(77,99,255,.22),rgba(61,220,151,.1));border:1px solid var(--line)}
+.cm h2{font-size:clamp(30px,3.6vw,46px)}
+.cm .sub{margin-top:10px}
+.cm .ctas{margin-top:0;flex:none}
+.qn{display:grid;grid-template-columns:220px 1fr;gap:48px;align-items:center;max-width:980px}
+.qf{width:220px;height:220px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 6px #14161f,0 0 0 7px var(--line),0 30px 60px -30px rgba(77,99,255,.7)}
+.qk{font-family:var(--mono);font-size:14px;color:var(--acc);margin-bottom:10px}
+.firma{display:block;width:210px;height:auto;margin-top:18px;mix-blend-mode:screen;opacity:.92}
+.resp{margin:12px 0 0;color:var(--ok);font-size:16px}
+.resp::before{content:"● ";font-size:12px;vertical-align:2px}
+footer{padding:34px 0}
+footer .wrap{align-items:center}
+.fb{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+footer .fl a{display:inline-flex;align-items:center;gap:7px}
+footer .fl svg{width:17px;height:17px}
+@media (max-width:860px){
+  .cm{flex-direction:column;align-items:flex-start;padding:28px 22px}
+  .qn{grid-template-columns:1fr;gap:22px}
+  .qf{width:140px;height:140px}
+  .firma{width:170px}
+  .app{padding:34px 8px 9px;gap:5px}.ah b{font-size:14px}.ar{padding:6px 8px;border-radius:10px}.ar b{font-size:11px}.ar small{font-size:9.5px}.tg{font-size:9px;padding:2px 6px}.af{font-size:9.5px;padding:6px 8px}.tabs span{font-size:9.5px;padding:3px 6px}
+}
 </style>
 </head>
 <body>
@@ -576,7 +630,6 @@ header{background:#090a0f;top:env(safe-area-inset-top,0px)}
 
 <section class="dia" id="dia" aria-label="Un día en tu negocio">
   <div class="dia-in">
-    <div class="fotos" aria-hidden="true"><div class="ft" data-n="0"></div><div class="ft" data-n="1"></div><div class="ft" data-n="2"></div><div class="ft" data-n="3"></div><div class="ft" data-n="4"></div><div class="ft" data-n="5"></div><div class="ft" data-n="6"></div><div class="ft" data-n="7"></div></div>
     <div class="dtx">
       <div class="dk"><span>Un día en distintos negocios</span><b class="lugar" id="lugar">En casa</b></div>
       <div class="tit" id="tit"></div>
@@ -590,6 +643,7 @@ header{background:#090a0f;top:env(safe-area-inset-top,0px)}
         <div class="lk-w" id="lkW"></div>
         <div class="lk-n" id="lkN"></div>
         <div class="lk-more" id="lkMore"></div>
+        <div class="app" id="app"></div>
       </div>
     </div>
   </div>
@@ -669,17 +723,23 @@ header{background:#090a0f;top:env(safe-area-inset-top,0px)}
   </div>
 </section>
 
-<section class="proy" id="proyectos"><div class="proy-in">
-  <div class="wrap"><h2>Proyectos.</h2><p class="sub">Sistemas que diseñamos para negocios de Buenos Aires, cada uno con sus propias reglas.</p></div>
-  <div class="ptrack">
-    <article class="pj"><div class="mock" style="background:#faf3d6;color:#a6162a"><b>Congelados caseros</b><div class="l"><span>Carne</span><span>$24.000</span></div><div class="l"><span>Pollo</span><span>$13.500</span></div><div class="l"><span>Combo Infaltable</span><span>$99.000</span></div><div class="bt" style="background:#a6162a;color:#faf3d6">Enviar pedido</div></div><div><small>Congelados</small><h3>Congelados con reparto semanal</h3><p>Sistema de pedidos semanales con reparto por zonas.</p><ul><li>Pedidos lunes y martes, entrega miércoles</li><li>Cobro por alias o efectivo</li><li>Recorrido ordenado por barrio</li><li>Panel con editor de menú</li></ul></div></article>
-    <article class="pj"><div class="mock" style="background:#fff;color:#6e140d"><b>Pizzería del barrio</b><div class="l"><span>Muzzarella</span><span>$10.000</span></div><div class="l"><span>Napolitana</span><span>$12.000</span></div><div class="l"><span>Jamón y morrones</span><span>$12.000</span></div><div class="bt" style="background:#e5312f;color:#fff">Pedir</div></div><div><small>Pizzería</small><h3>Pizzería con delivery</h3><p>Pedidos desde el celular conectados a la cocina y al reparto.</p><ul><li>Menú con fotos</li><li>Lista de lo que hay que hornear</li><li>Orden de entrega para el repartidor</li></ul></div></article>
-    <article class="pj"><div class="mock" style="background:#0d0b0a;color:#e2681f"><b>Del campo a tu casa</b><div class="l"><span>Milanesa de pollo</span><span>$18.000</span></div><div class="l"><span>Pollo entero</span><span>$9.500</span></div><div class="l"><span>Maple de campo</span><span>$12.000</span></div><div class="bt" style="background:#e2681f;color:#1a0d05">Mensaje al proveedor</div></div><div><small>Granja y elaborados</small><h3>Productos de granja</h3><p>Del pedido a la producción y la compra de insumos.</p><ul><li>Dos entregas por semana</li><li>Lista de producción automática</li><li>Compra calculada por rendimiento</li></ul></div></article>
-    <article class="pj"><div class="mock" style="background:#f3eed9;color:#3f4a24"><b>Almacén gourmet</b><div class="l"><span>Aceites</span></div><div class="l"><span>Pastas</span></div><div class="l"><span>Salsas importadas</span></div><div class="bt" style="background:#3f4a24;color:#f3eed9">Armar caja</div></div><div><small>Delicatessen</small><h3>Delicatessen y regalos</h3><p>Pedidos y regalos empresariales.</p><ul><li>Web propia con catálogo de importados</li><li>Cajas de regalo para empresas</li><li>Pedidos desde la web, directo al panel</li></ul></div></article>
+
+<section class="cta-mid"><div class="wrap"><div class="cm">
+  <div><h2>¿Lo querés con tu marca?</h2><p class="sub">Te armamos el boceto con tus productos y lo ves funcionando antes de decidir.</p></div>
+  <div class="ctas"><a class="btn" href="https://wa.me/5491125259699?text=Hola%20Compila!%20Quiero%20ver%20un%20boceto%20para%20mi%20negocio" target="_blank" rel="noopener">Escribinos por WhatsApp</a><a class="btn o" href="#contacto">Contanos tu proyecto</a></div>
+</div></div></section>
+
+<section class="sec quien" id="quien"><div class="wrap qn">
+  <img class="qf" src="img/agustin.jpg" alt="Agustín Frare" width="220" height="220" loading="lazy">
+  <div>
+    <div class="qk">Quién está detrás</div>
+    <h2>Hablás conmigo.</h2>
+    <p class="sub">Soy Agustín Frare y estoy detrás de Compila. La primera charla, el boceto y el soporte los hacés conmigo, por WhatsApp, videollamada o en persona. Sin intermediarios ni tickets.</p>
+    <img class="firma" src="img/firma.jpg" alt="Firma de Agustín Frare" width="230" height="120" loading="lazy">
   </div>
 </div></section>
 
-<section class="sec" id="precios" style="padding-top:60px">
+<section class="sec" id="precios">
   <div class="wrap">
     <h2>Precios.</h2>
     <div class="pr">
@@ -704,6 +764,7 @@ header{background:#090a0f;top:env(safe-area-inset-top,0px)}
   <div class="wrap">
     <div class="prm mono" aria-hidden="true">$ compila nuevo-proyecto<span class="bl"></span></div><h2>Contanos tu proyecto.</h2>
     <p class="sub">Con un mensaje alcanza: qué hace tu negocio y qué te gustaría resolver.</p>
+    <p class="resp">Te respondemos en el día, por WhatsApp.</p>
     <form class="form" id="form" novalidate>
       <label>Tu nombre<input name="nombre" autocomplete="name"></label>
       <label>Tu negocio<input name="negocio"></label>
@@ -714,7 +775,14 @@ header{background:#090a0f;top:env(safe-area-inset-top,0px)}
   </div>
 </section>
 </main>
-<footer><div class="wrap"><span>Compila Software · Buenos Aires</span><span class="fl"><a href="https://wa.me/5491125259699" target="_blank" rel="noopener">WhatsApp 11 2525-9699</a><a href="https://instagram.com/compilasoftware" target="_blank" rel="noopener">@compilasoftware</a><span>compilasoftware@gmail.com</span></span></div></footer>
+<footer><div class="wrap">
+  <div class="fb"><a class="logo" href="#" aria-label="Compila Software, inicio">compila<i aria-hidden="true"></i></a><span>Software a medida para pymes · Buenos Aires</span></div>
+  <div class="fl">
+    <a href="https://wa.me/5491125259699" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.2A9.7 9.7 0 0 0 3.7 16.9L2.4 21.6l4.8-1.3A9.7 9.7 0 1 0 12 2.2Zm0 17.7a8 8 0 0 1-4.1-1.1l-.3-.2-2.8.7.8-2.7-.2-.3A8 8 0 1 1 12 19.9Z"/></svg>11 2525-9699</a>
+    <a href="https://instagram.com/compilasoftware" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4ZM17.3 5.5a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4ZM12 2c-2.7 0-3 0-4.1.1C4.3 2.3 2.3 4.3 2.1 7.9 2 9 2 9.3 2 12s0 3 .1 4.1c.2 3.6 2.2 5.6 5.8 5.8 1.1.1 1.4.1 4.1.1s3 0 4.1-.1c3.6-.2 5.6-2.2 5.8-5.8.1-1.1.1-1.4.1-4.1s0-3-.1-4.1c-.2-3.6-2.2-5.6-5.8-5.8C15 2 14.7 2 12 2Zm0 1.8c2.7 0 3 0 4 .1 2.7.1 3.9 1.4 4.1 4.1.1 1 .1 1.3.1 4s0 3-.1 4c-.1 2.7-1.4 3.9-4.1 4.1-1 .1-1.3.1-4 .1s-3 0-4-.1c-2.7-.1-3.9-1.4-4.1-4.1-.1-1-.1-1.3-.1-4s0-3 .1-4C3.9 5.3 5.2 4 7.9 3.9c1-.1 1.3-.1 4.1-.1Z"/></svg>@compilasoftware</a>
+    <a href="mailto:compilasoftware@gmail.com"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm1 2.3V17h16V7.3l-8 5.2-8-5.2ZM5.6 7 12 11.1 18.4 7H5.6Z"/></svg>compilasoftware@gmail.com</a>
+  </div>
+</div></footer>
 <a class="wa-f" id="waf" href="https://wa.me/5491125259699?text=Hola%20Compila!" target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp"><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path fill="#fff" d="M12 2.2A9.7 9.7 0 0 0 3.7 16.9L2.4 21.6l4.8-1.3A9.7 9.7 0 1 0 12 2.2Zm0 17.7a8 8 0 0 1-4.1-1.1l-.3-.2-2.8.7.8-2.7-.2-.3A8 8 0 1 1 12 19.9Zm4.4-6c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1a6.5 6.5 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.7-1.7c-.2-.4-.4-.4-.5-.4h-.5a.9.9 0 0 0-.7.3 2.8 2.8 0 0 0-.9 2.1 4.9 4.9 0 0 0 1 2.6 11.2 11.2 0 0 0 4.3 3.8c1.6.7 2.2.7 3 .6a2.6 2.6 0 0 0 1.7-1.2 2.1 2.1 0 0 0 .2-1.2c-.1-.1-.2-.2-.5-.3Z"/></svg></a>
 
 <script>
@@ -739,40 +807,35 @@ const N = (ic, t, x, tm = "ahora", big) => ({ic, t, x, tm, big});
 const PASOS = [
   {h:"10:00", w:["#ff8a5c","#c2185b"], l:"Peluquería · turnos", t:"Turnos por WhatsApp.", p:"Te escriben mientras atendés, y a la tarde alguien no viene.", bat:88, mas:12,
     n:[N("wa","Caro","¿Tenés turno mañana a las 5?"), N("wa","Luli","Perdón, hoy no llego 🙏","3 min"), N("tel","Teléfono","Llamada perdida","8 min"), N("wa","Sofi","¿Cuánto sale el alisado?","12 min")]},
-  {h:"10:00", w:["#6d8bff","#3ddc97"], l:"Peluquería · turnos", ok:1, t:"Con Compila, se reservan solos.", p:"Agenda online, seña y recordatorio automático. Nadie se olvida.", bat:91, wd:[["9","turnos hoy"],["3","señas cobradas"],["0","ausentes"]],
+  {h:"10:00", w:["#6d8bff","#3ddc97"], l:"Peluquería · turnos", ok:1, ap:'<div class="ah"><div><small>Peluquería</small><b>Agenda de hoy</b></div><em class="tg ok">0 ausentes</em></div><div class="ar"><span><b>10:00 · Caro</b><small>Corte y color</small></span><em class="tg ok">Seña pagada</em></div><div class="ar"><span><b>11:30 · Luli</b><small>Alisado</small></span><em class="tg ok">Confirmado</em></div><div class="ar"><span><b>13:00 · Sofi</b><small>Corte</small></span><em class="tg az">Recordatorio enviado</em></div><div class="ar"><span><b>15:00 · Libre</b><small>Se reserva desde tu link</small></span><em class="tg gr">Disponible</em></div><div class="ar"><span><b>17:00 · Mica</b><small>Color</small></span><em class="tg ok">Seña pagada</em></div><div class="af">Las clientas reservan solas, de día o de noche.</div>', t:"Con Compila, se reservan solos.", p:"Agenda online, seña y recordatorio automático. Nadie se olvida.", bat:91, wd:[["9","turnos hoy"],["3","señas cobradas"],["0","ausentes"]],
     n:[N("cp","Turno confirmado","Caro · mañana 17:00 · seña pagada","ahora",1), N("cp","Recordatorios enviados","A las 9 clientas de hoy","8:00",1)]},
   {h:"12:30", w:["#ffb547","#ff4d6d"], l:"Rotisería · pedidos", t:"Mediodía de pedidos.", p:"Cada uno pide distinto, y sumás a mano entre la cocina y el teléfono.", bat:62, mas:27,
     n:[N("wa","Clientes","2 milanesas con puré y 1 tarta"), N("wa","Juan","Cambio: mejor 3 empanadas","1 min"), N("nota","Notas","mila 2 · tarta 1 · ¿total?","4 min"), N("wa","Ana","¿A qué hora llega?","6 min")]},
-  {h:"12:30", w:["#4d63ff","#3ddc97"], l:"Rotisería · pedidos", ok:1, t:"Los pedidos llegan completos.", p:"Qué quiere, adónde va y cómo paga. La cocina ve la lista sola.", bat:70, wd:[["23","pedidos"],["$412k","vendido"],["0","sin responder"]],
+  {h:"12:30", w:["#4d63ff","#3ddc97"], l:"Rotisería · pedidos", ok:1, ap:'<div class="ah"><div><small>Rotisería</small><b>Pedidos del mediodía</b></div><em class="tg ok">$412.000</em></div><div class="tabs"><span class="on">Nuevos 3</span><span>En cocina 8</span><span>Enviados 12</span></div><div class="ar"><span><b>#231 · 2 milanesas con puré</b><small>Envío a Nordelta · 13:15</small></span><em class="tg ok">Pagado</em></div><div class="ar"><span><b>#232 · 3 empanadas y 1 tarta</b><small>Retira en el local · 13:00</small></span><em class="tg ok">Pagado</em></div><div class="ar"><span><b>#233 · Pollo con papas</b><small>Envío a Tigre · 13:30</small></span><em class="tg am">Efectivo</em></div><div class="af">Para cocina: 8 milanesas · 3 tartas · 12 empanadas</div>', t:"Los pedidos llegan completos.", p:"Qué quiere, adónde va y cómo paga. La cocina ve la lista sola.", bat:70, wd:[["23","pedidos"],["$412k","vendido"],["0","sin responder"]],
     n:[N("cp","Nuevo pedido · pagado","2 milanesas con puré · envío 13:15","ahora",1), N("cp","Lista para cocina","8 milanesas · 3 tartas · 12 empanadas","12:00",1)]},
   {h:"16:00", w:["#ff7a59","#b23cff"], l:"Distribuidora · reparto", t:"Armás el reparto a mano.", p:"Y el teléfono no para: “¿dónde está mi pedido?”", bat:41, mas:18,
     n:[N("wa","Kiosco Tito","¿Hoy me llega?"), N("tel","Teléfono","3 llamadas perdidas","2 min"), N("wa","Repartidor","¿Voy primero a Tigre o a Pacheco?","5 min"), N("wa","Almacén Rosa","Me faltó una caja","9 min")]},
-  {h:"16:00", w:["#6d8bff","#9a7cff"], l:"Distribuidora · reparto", ok:1, t:"El recorrido se arma solo.", p:"Paradas ordenadas, y cada cliente recibe el aviso de cuándo llega.", bat:58, wd:[["14","paradas"],["2 h 10","recorrido"],["14","avisos"]],
+  {h:"16:00", w:["#6d8bff","#9a7cff"], l:"Distribuidora · reparto", ok:1, ap:'<div class="ah"><div><small>Distribuidora</small><b>Ruta de hoy</b></div><em class="tg az">14 paradas</em></div><div class="ar"><span><b>1 · Kiosco Tito</b><small>Llega 15:40</small></span><em class="tg ok">Avisado</em></div><div class="ar"><span><b>2 · Almacén Rosa</b><small>Llega 16:05</small></span><em class="tg ok">Avisado</em></div><div class="ar"><span><b>3 · Despensa Sol</b><small>Llega 16:30</small></span><em class="tg ok">Avisado</em></div><div class="ar"><span><b>4 · Maxikiosco 24</b><small>Llega 16:50</small></span><em class="tg az">En camino</em></div><div class="ar"><span><b>5 · Autoservicio Lili</b><small>Llega 17:10</small></span><em class="tg az">En camino</em></div><div class="af">Recorrido total: 2 h 10 min, ordenado por zona.</div>', t:"El recorrido se arma solo.", p:"Paradas ordenadas, y cada cliente recibe el aviso de cuándo llega.", bat:58, wd:[["14","paradas"],["2 h 10","recorrido"],["14","avisos"]],
     n:[N("cp","Ruta lista","14 paradas ordenadas por zona","ahora",1), N("cp","Aviso enviado","Kiosco Tito: llega en 20 min","15:52",1)]},
   {h:"22:00", w:["#3a2a8f","#c2185b"], l:"Kiosco · caja y stock", cansado:1, t:"Cierre de caja.", p:"No te cierra la cuenta, y recién ahí ves que te quedaste sin stock.", bat:9, mas:22,
     n:[N("nota","Notas","Caja: faltan $8.500 ¿?"), N("wa","Turno noche","Se terminó la Coca de 1,5","4 min"), N("bk","Banco","Hoy entraron 47 transferencias","9 min"), N("wa","Proveedor","¿Me pasás el pedido de mañana?","15 min")]},
-  {h:"22:00", w:["#4d63ff","#3ddc97"], l:"Kiosco · caja y stock", ok:1, t:"La caja cierra sola.", p:"Ventas, diferencias y lo que hay que reponer, en tu celular.", bat:64, wd:[["$1,4M","vendido"],["$0","diferencia"],["5","a reponer"]],
+  {h:"22:00", w:["#4d63ff","#3ddc97"], l:"Kiosco · caja y stock", ok:1, ap:'<div class="ah"><div><small>Kiosco</small><b>Cierre de caja</b></div><em class="tg gr">Turno noche</em></div><div class="ar"><span><b>Vendido hoy</b><small>231 tickets</small></span><em class="tg gr">$1.465.400</em></div><div class="ar"><span><b>Efectivo</b><small>Contado por el turno</small></span><em class="tg gr">$612.000</em></div><div class="ar"><span><b>Transferencias</b><small>47 recibidas</small></span><em class="tg gr">$853.400</em></div><div class="ar"><span><b>Diferencia</b><small>Caja cuadrada</small></span><em class="tg ok">$0</em></div><div class="ah2">Para reponer</div><div class="ar"><span><b>Coca-Cola 1,5 L</b><small>Quedan 3</small></span><em class="tg am">12 u.</em></div><div class="ar"><span><b>Agua 500 ml</b><small>Quedan 5</small></span><em class="tg am">24 u.</em></div>', t:"La caja cierra sola.", p:"Ventas, diferencias y lo que hay que reponer, en tu celular.", bat:64, wd:[["$1,4M","vendido"],["$0","diferencia"],["5","a reponer"]],
     n:[N("cp","Cierre del día","Caja cuadrada · turno noche OK","ahora",1), N("cp","Pedido al proveedor","Listo para enviar: 5 productos","21:58",1)]}
 ];
 const tit = document.getElementById("tit");
 tit.innerHTML = PASOS.map(p => `<div class="c"><h2>${p.t}</h2><p>${p.p}</p></div>`).join("");
 const caps = [...tit.children], reloj = document.getElementById("reloj"), dia = document.getElementById("dia"), lugar = document.getElementById("lugar"),
   lk = document.getElementById("lk"), lkN = document.getElementById("lkN"), lkMore = document.getElementById("lkMore"), batN = document.getElementById("batN"),
-  batF = document.getElementById("batF"), lkW = document.getElementById("lkW"), saltar = document.getElementById("saltar");
+  batF = document.getElementById("batF"), lkW = document.getElementById("lkW"), app = document.getElementById("app"), saltar = document.getElementById("saltar");
 const ICO = {wa: WA, tel: "✆", bk: "$", nota: "✎", bat2: "!", cp: "c"};
 const nota = n => `<div class="nt${n.big ? " big" : ""}"><span class="ic ${n.ic}">${ICO[n.ic]}</span><div><b>${n.t}<small>${n.tm}</small></b><span>${n.x}</span></div></div>`;
 const aMin = h => { const [a, b] = h.split(":").map(Number); return a * 60 + b; };
-const fts = [...document.querySelectorAll("#dia .ft")];
-// Las fotos se cargan recién cuando la sección está por aparecer
-new IntersectionObserver((es, o) => es.forEach(e => { if (!e.isIntersecting) return;
-  const cel = innerWidth < 861; fts.forEach(f => f.style.backgroundImage = `url(img/dia/m${f.dataset.n}${cel ? "-cel" : ""}.jpg)`); o.disconnect(); }), {rootMargin: "120% 0px"}).observe(dia);
 let actual = -1;
 function paso(i) {
   if (i === actual) return;
   const nuevo = i > actual, p = PASOS[i]; actual = i;
   caps.forEach((c, k) => c.classList.toggle("on", k === i));
   lugar.textContent = p.l;
-  fts.forEach((f, k) => f.classList.toggle("on", k === i));
   lk.style.setProperty("--w1", p.w[0]); lk.style.setProperty("--w2", p.w[1]);
   batN.textContent = p.bat + "%"; batF.style.width = p.bat + "%"; batF.parentElement.parentElement.classList.toggle("baja", p.bat < 20);
   let lista;
@@ -781,6 +844,8 @@ function paso(i) {
   lkW.innerHTML = p.wd ? p.wd.map(([a, b]) => `<div><b>${a}</b><small>${b}</small></div>`).join("") : "";
   lkN.innerHTML = lista.map(nota).join("");
   lkMore.textContent = p.ok ? "" : `y ${p.mas} notificaciones más`;
+  lk.classList.toggle("abierto", !!p.ok); if (p.ok) app.innerHTML = p.ap;
+  dia.style.setProperty("--glow", p.ok ? "#4d63ff" : p.w[1]);
   if (nuevo && !p.ok) { lk.classList.remove("vibra"); void lk.offsetWidth; lk.classList.add("vibra"); }
 }
 function relojScroll(pd) {
@@ -856,7 +921,7 @@ saltar.addEventListener("click", () => {
     relojScroll(pd);
     barra.style.transform = `scaleX(${pd})`;
     // Proyectos de costado (compu)
-    if (innerWidth > 860) track.style.transform = `translateX(${-prog(proy) * Math.max(0, track.scrollWidth - innerWidth + 48)}px)`;
+    if (track && innerWidth > 860) track.style.transform = `translateX(${-prog(proy) * Math.max(0, track.scrollWidth - innerWidth + 48)}px)`;
     requestAnimationFrame(frame);
   }
   requestAnimationFrame(frame);
@@ -904,7 +969,7 @@ saltar.addEventListener("click", () => {
   }
   requestAnimationFrame(frame2);
   const waf = $("#waf"), contacto = $("#contacto");
-  const verWa = () => { const c = contacto.getBoundingClientRect(); waf.classList.toggle("on", scrollY > innerHeight * 1.3 && c.top > innerHeight * .6); };
+  const verWa = () => { const c = contacto.getBoundingClientRect(), d = dia.getBoundingClientRect(); waf.classList.toggle("on", scrollY > innerHeight * 1.3 && c.top > innerHeight * .6 && !(d.top < innerHeight && d.bottom > 0)); };
   addEventListener("scroll", verWa, {passive: true}); verWa();
 })();
 </script>
