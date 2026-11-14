@@ -571,9 +571,12 @@ function paso(i) {
     lapw.style.transform = `translateY(${ini * (1 - q) - H * .06 * q}px) scale(${esc})`;
     const out = clamp(p / .16);
     hd.style.opacity = 1 - out; hd.style.transform = `translateY(${-70 * out}px)`; hd.style.pointerEvents = out > .7 ? "none" : "";
-    const movil = innerWidth < 760;
-    flies.forEach((f, n) => { const s = +f.dataset.s, t = ease(clamp((p - s) / .24)), X = movil ? (n % 2 ? 23.5 : -23.5) : +f.dataset.x, Y = movil ? [-50,-50,-36,-36,-22,-22][n] : +f.dataset.y;
-      f.style.opacity = clamp(t * 4); f.style.transform = `translate(${t * X}vw, ${t * Y}vh) scale(${.25 + .75 * t}) rotate(${(1 - t) * (X > 0 ? 8 : -8)}deg)`; });
+    // En celular las tarjetas se acomodan en 3 filas dentro del espacio visible (debajo del menú, arriba de la compu)
+    const movil = innerWidth < 760, stH = lapw.parentElement.offsetHeight;
+    flies.forEach((f, n) => { const s = +f.dataset.s, t = ease(clamp((p - s) / .24)); let X, Y;
+      if (movil) { X = (n % 2 ? 23.5 : -23.5) * innerWidth / 100; Y = 14 + (n >> 1) * stH * .17 - (stH * .78 - f.offsetHeight); }
+      else { X = +f.dataset.x * innerWidth / 100; Y = +f.dataset.y * innerHeight / 100; }
+      f.style.opacity = clamp(t * 4); f.style.transform = `translate(${t * X}px, ${t * Y}px) scale(${.25 + .75 * t}) rotate(${(1 - t) * (X > 0 ? 8 : -8)}deg)`; });
     // Reloj
     const n = window.PASOS ? PASOS.length : 10, pd = prog(dia), i = Math.min(n - 1, Math.floor(pd * n));
     if (i !== pasoAct) { pasoAct = i; paso(i); }
