@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.jpg">
 <title>Compila Software | Software a medida para pymes</title>
 <meta name="description" content="Sistemas a medida para pymes de Buenos Aires: pedidos, turnos, stock, reparto y gestión. Lo ves funcionando con tu marca antes de decidir.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -250,7 +252,7 @@ header{background:#090a0f;top:env(safe-area-inset-top,0px)}
 @media (max-width:760px){.hd .sub{font-size:16px}}
 
 /* Reloj y proyectos con sticky nativo */
-.dia{height:340vh}
+.dia{height:320vh}
 .dia-in{position:sticky;top:0;height:100vh}
 .prog{position:sticky;bottom:0;top:calc(100vh - 4px);margin-top:-4px}
 .proy{height:300vh;padding:0;overflow:visible}
@@ -264,7 +266,7 @@ header{background:#090a0f;top:env(safe-area-inset-top,0px)}
 
 /* ===== Celular ===== */
 .stk{height:calc(100svh - 66px)}
-.dia-in{height:100svh}
+.dia-in{height:100svh;height:100dvh}
 @media (min-width:861px){.proy-in{height:calc(100svh - 66px)}}
 @media (max-width:760px){
   .fly{width:44vw;margin-left:-22vw;font-size:12px;padding:9px;bottom:22%}
@@ -574,11 +576,11 @@ header{background:#090a0f;top:env(safe-area-inset-top,0px)}
 
 <section class="dia" id="dia" aria-label="Un día en tu negocio">
   <div class="dia-in">
-    <div class="fotos" aria-hidden="true"><div class="ft" data-n="0"></div><div class="ft" data-n="1"></div><div class="ft" data-n="2"></div><div class="ft" data-n="3"></div><div class="ft" data-n="4"></div><div class="ft" data-n="5"></div><div class="ft" data-n="6"></div><div class="ft" data-n="7"></div><div class="ft" data-n="8"></div></div>
+    <div class="fotos" aria-hidden="true"><div class="ft" data-n="0"></div><div class="ft" data-n="1"></div><div class="ft" data-n="2"></div><div class="ft" data-n="3"></div><div class="ft" data-n="4"></div><div class="ft" data-n="5"></div><div class="ft" data-n="6"></div><div class="ft" data-n="7"></div></div>
     <div class="dtx">
-      <div class="dk"><span>Un día en tu negocio</span><b class="lugar" id="lugar">En casa</b></div>
+      <div class="dk"><span>Un día en distintos negocios</span><b class="lugar" id="lugar">En casa</b></div>
       <div class="tit" id="tit"></div>
-      <button class="saltar" id="saltar" type="button">Ver el mismo día con Compila ↓</button>
+      <button class="saltar" id="saltar" type="button" hidden>Ver con Compila ↓</button>
     </div>
     <div class="esc" aria-hidden="true">
       <div class="lk" id="lk">
@@ -735,24 +737,22 @@ const T = (t, n) => `<span class="t ${n ? "n" : ""}">${t}</span>`;
 const WA = '<svg viewBox="0 0 24 24"><path fill="#fff" d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.5-1.2A9 9 0 1 0 12 3Z"/></svg>';
 const N = (ic, t, x, tm = "ahora", big) => ({ic, t, x, tm, big});
 const PASOS = [
-  {h:"07:30", s:"#cdeaff", i:"#111322", w:["#ff8a5c","#7c4dff"], l:"En casa", t:"Todavía no te levantaste.", p:"Y ya te están preguntando precios.", bat:92, mas:5,
-    n:[N("wa","Clientes","¿Cuánto sale el kilo?"), N("wa","María","¿Hoy reparten?","2 min")]},
-  {h:"10:00", s:"#fff0a6", i:"#111322", w:["#ffb547","#ff5c8a"], l:"En el local", t:"Alguien cambió el pedido.", p:"Ahora buscás en qué chat estaba.", bat:71, mas:16,
-    n:[N("wa","Lote 14","Cambio: mejor 3 de pollo"), N("tel","Teléfono","2 llamadas perdidas","4 min")]},
-  {h:"14:00", s:"#ffc774", i:"#111322", w:["#ff9447","#ff4d6d"], l:"En el local", t:"Sumás a mano.", p:"Y lo anotás en un papel para que no se pierda.", bat:46, mas:29,
-    n:[N("nota","Notas","carne 2 · pollo 3 · ¿total?"), N("wa","Pedidos de la semana","¿Llegan a Tigre?","6 min")]},
-  {h:"19:00", s:"#ff8a63", i:"#111322", w:["#ff5c5c","#b23cff"], l:"Cerrando", t:"¿Quién pagó?", p:"Revisás las transferencias una por una.", bat:19, mas:41,
-    n:[N("bk","Banco","Recibiste $24.000. ¿De quién era?"), N("wa","Juan","Te transferí, fijate","3 min")]},
-  {h:"23:30", s:"#14163f", i:"#ffffff", w:["#3a2a8f","#c2185b"], l:"En casa", cansado:1, t:"Cerraste hace horas.", p:"El teléfono sigue sonando. Y mañana, otra vez.", bat:4, mas:58,
-    n:[N("bat2","Batería baja","Queda 4% de batería"), N("wa","Clientes","¿Llego a pedir para mañana?","1 min")]},
-  {h:"07:30", s:"#e4ecff", i:"#111322", w:["#6d8bff","#3ddc97"], l:"Con un café", ok:1, wd:[["12","pedidos nuevos"],["10/12","cobrados"],["4","turnos hoy"]], t:"Ahora, el mismo día con Compila.", p:"Leés el resumen tranquilo. Lo de anoche ya quedó anotado.", bat:96,
-    n:[N("cp","Resumen de hoy","12 pedidos nuevos · 10 cobrados · 4 turnos confirmados","ahora",1)]},
-  {h:"09:00", s:"#d6e0ff", i:"#111322", w:["#6d8bff","#9a7cff"], l:"Llegás al local", ok:1, wd:[["14","a preparar"],["8 kg","a producir"],["3","a comprar"]], t:"Sabés exactamente qué hacer.", p:"La lista del día ya está armada.", bat:90,
-    n:[N("cp","Tu lista del día","Preparar 14 pedidos · Producir 8 kg · Comprar 3 insumos","ahora",1)]},
-  {h:"14:00", s:"#c6d2ff", i:"#111322", w:["#4d63ff","#3ddc97"], l:"Atendiendo", ok:1, wd:[["23","pedidos hoy"],["$412k","vendido"],["0","sin responder"]], t:"Los pedidos entran solos.", p:"Completos y con la forma de pago. No contestás uno por uno.", bat:78,
-    n:[N("cp","Nuevo pedido · pagado","2 kg de carne, 1 maple · Nordelta","ahora",1), N("cp","Nuevo pedido","3 de pollo · Tigre · efectivo","12 min",1)]},
-  {h:"19:00", s:"#6d8bff", i:"#0a0b10", w:["#4d63ff","#3ddc97"], l:"Te vas", ok:1, wd:[["$486k","cobrado"],["3","zonas mañana"],["0","pendientes"]], t:"Te vas tranquilo.", p:"Cobros al día y el reparto de mañana, ya ordenado.", bat:64,
-    n:[N("cp","Cierre del día","Cobrado hoy $486.000 · Reparto de mañana ordenado en 3 zonas","ahora",1)]}
+  {h:"10:00", w:["#ff8a5c","#c2185b"], l:"Peluquería · turnos", t:"Turnos por WhatsApp.", p:"Te escriben mientras atendés, y a la tarde alguien no viene.", bat:88, mas:12,
+    n:[N("wa","Caro","¿Tenés turno mañana a las 5?"), N("wa","Luli","Perdón, hoy no llego 🙏","3 min"), N("tel","Teléfono","Llamada perdida","8 min"), N("wa","Sofi","¿Cuánto sale el alisado?","12 min")]},
+  {h:"10:00", w:["#6d8bff","#3ddc97"], l:"Peluquería · turnos", ok:1, t:"Con Compila, se reservan solos.", p:"Agenda online, seña y recordatorio automático. Nadie se olvida.", bat:91, wd:[["9","turnos hoy"],["3","señas cobradas"],["0","ausentes"]],
+    n:[N("cp","Turno confirmado","Caro · mañana 17:00 · seña pagada","ahora",1), N("cp","Recordatorios enviados","A las 9 clientas de hoy","8:00",1)]},
+  {h:"12:30", w:["#ffb547","#ff4d6d"], l:"Rotisería · pedidos", t:"Mediodía de pedidos.", p:"Cada uno pide distinto, y sumás a mano entre la cocina y el teléfono.", bat:62, mas:27,
+    n:[N("wa","Clientes","2 milanesas con puré y 1 tarta"), N("wa","Juan","Cambio: mejor 3 empanadas","1 min"), N("nota","Notas","mila 2 · tarta 1 · ¿total?","4 min"), N("wa","Ana","¿A qué hora llega?","6 min")]},
+  {h:"12:30", w:["#4d63ff","#3ddc97"], l:"Rotisería · pedidos", ok:1, t:"Los pedidos llegan completos.", p:"Qué quiere, adónde va y cómo paga. La cocina ve la lista sola.", bat:70, wd:[["23","pedidos"],["$412k","vendido"],["0","sin responder"]],
+    n:[N("cp","Nuevo pedido · pagado","2 milanesas con puré · envío 13:15","ahora",1), N("cp","Lista para cocina","8 milanesas · 3 tartas · 12 empanadas","12:00",1)]},
+  {h:"16:00", w:["#ff7a59","#b23cff"], l:"Distribuidora · reparto", t:"Armás el reparto a mano.", p:"Y el teléfono no para: “¿dónde está mi pedido?”", bat:41, mas:18,
+    n:[N("wa","Kiosco Tito","¿Hoy me llega?"), N("tel","Teléfono","3 llamadas perdidas","2 min"), N("wa","Repartidor","¿Voy primero a Tigre o a Pacheco?","5 min"), N("wa","Almacén Rosa","Me faltó una caja","9 min")]},
+  {h:"16:00", w:["#6d8bff","#9a7cff"], l:"Distribuidora · reparto", ok:1, t:"El recorrido se arma solo.", p:"Paradas ordenadas, y cada cliente recibe el aviso de cuándo llega.", bat:58, wd:[["14","paradas"],["2 h 10","recorrido"],["14","avisos"]],
+    n:[N("cp","Ruta lista","14 paradas ordenadas por zona","ahora",1), N("cp","Aviso enviado","Kiosco Tito: llega en 20 min","15:52",1)]},
+  {h:"22:00", w:["#3a2a8f","#c2185b"], l:"Kiosco · caja y stock", cansado:1, t:"Cierre de caja.", p:"No te cierra la cuenta, y recién ahí ves que te quedaste sin stock.", bat:9, mas:22,
+    n:[N("nota","Notas","Caja: faltan $8.500 ¿?"), N("wa","Turno noche","Se terminó la Coca de 1,5","4 min"), N("bk","Banco","Hoy entraron 47 transferencias","9 min"), N("wa","Proveedor","¿Me pasás el pedido de mañana?","15 min")]},
+  {h:"22:00", w:["#4d63ff","#3ddc97"], l:"Kiosco · caja y stock", ok:1, t:"La caja cierra sola.", p:"Ventas, diferencias y lo que hay que reponer, en tu celular.", bat:64, wd:[["$1,4M","vendido"],["$0","diferencia"],["5","a reponer"]],
+    n:[N("cp","Cierre del día","Caja cuadrada · turno noche OK","ahora",1), N("cp","Pedido al proveedor","Listo para enviar: 5 productos","21:58",1)]}
 ];
 const tit = document.getElementById("tit");
 tit.innerHTML = PASOS.map(p => `<div class="c"><h2>${p.t}</h2><p>${p.p}</p></div>`).join("");
@@ -775,10 +775,9 @@ function paso(i) {
   fts.forEach((f, k) => f.classList.toggle("on", k === i));
   lk.style.setProperty("--w1", p.w[0]); lk.style.setProperty("--w2", p.w[1]);
   batN.textContent = p.bat + "%"; batF.style.width = p.bat + "%"; batF.parentElement.parentElement.classList.toggle("baja", p.bat < 20);
-  saltar.hidden = !!p.ok;
   let lista;
   if (p.ok) lista = p.n;
-  else { lista = []; for (let k = i; k >= 0; k--) lista.push(...PASOS[k].n); lista = lista.slice(0, 5); }
+  else lista = p.n;
   lkW.innerHTML = p.wd ? p.wd.map(([a, b]) => `<div><b>${a}</b><small>${b}</small></div>`).join("") : "";
   lkN.innerHTML = lista.map(nota).join("");
   lkMore.textContent = p.ok ? "" : `y ${p.mas} notificaciones más`;
@@ -849,7 +848,7 @@ saltar.addEventListener("click", () => {
     const movil = innerWidth < 760, stH = lapw.parentElement.offsetHeight;
     flies.forEach((f, n) => { const s = +f.dataset.s, t = ease(clamp((p - s) / .24)); let X, Y;
       if (movil) { X = (n % 2 ? 23.5 : -23.5) * innerWidth / 100; Y = 14 + (n >> 1) * stH * .17 - (stH * .78 - f.offsetHeight); }
-      else { X = +f.dataset.x * innerWidth / 100; Y = +f.dataset.y * innerHeight / 100; }
+      else { X = +f.dataset.x * innerWidth / 100; Y = Math.max(+f.dataset.y * innerHeight / 100, 16 - (stH * .76 - f.offsetHeight)); }
       f.style.opacity = clamp(t * 4); f.style.transform = `translate(${t * X}px, ${t * Y}px) scale(${.25 + .75 * t}) rotate(${(1 - t) * (X > 0 ? 8 : -8)}deg)`; });
     // Reloj
     const n = typeof PASOS !== "undefined" ? PASOS.length : 10, pd = prog(dia), i = Math.min(n - 1, Math.floor(pd * n));
