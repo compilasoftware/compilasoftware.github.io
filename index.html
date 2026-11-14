@@ -456,6 +456,29 @@ header{background:#090a0f;top:env(safe-area-inset-top,0px)}
   .d-stack .b{padding:16px;gap:7px}.d-stack .b h3{font-size:24px}.d-stack .b p{font-size:14.5px}
   .b .ui{padding:10px;gap:6px;font-size:13px}.b .ui-web{flex-direction:column;gap:10px}.ui-web .brw{width:100%;max-width:260px;flex:none}.sw{flex-direction:row}.fd{padding:6px 9px}.cal button{padding:6px 0}
 }
+
+/* ===== v10: Un día con una persona ===== */
+.esc{position:relative;height:100%;min-height:0;display:block}
+.ilus{position:absolute;left:0;top:4%;width:92%;aspect-ratio:4/3;--ink:currentColor;--acc:var(--acc-d,#ff5c5c)}
+.il{position:absolute;inset:0;width:100%;height:100%;opacity:0;transform:translateY(18px) scale(.95);transition:opacity .45s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
+.il.on{opacity:1;transform:none}
+.il.on use{animation:flota 3.4s ease-in-out infinite}
+@keyframes flota{50%{transform:translateY(-10px)}}
+.dia .sost{position:absolute;right:0;bottom:3%;height:60%;aspect-ratio:1/2;transform:rotate(5deg);z-index:2}
+.dia .sost.cansado{transform:translateY(6%) rotate(12deg)}
+.dia .sost.calma{transform:rotate(0)}
+.dia .tel{border-radius:30px;padding:7px}
+.dia .scr{border-radius:24px}
+.dia .scr .top{padding:16px 11px 8px;font-size:13px}.dia .scr .top em{font-size:11px;padding:2px 7px}
+.dia .scr .bd{font-size:12.5px;padding:8px;gap:5px}
+.dia .f{padding:7px 9px;gap:6px}.dia .f small{font-size:11px}.dia .t{font-size:11px;padding:2px 6px}.dia .f.h{font-size:10.5px}.dia .m{padding:5px 8px}
+.dia .n1{width:20px;height:20px;font-size:11px}
+@media (max-width:860px){
+  .ilus{width:100%;top:0}
+  .dia .sost{height:56%;bottom:2%}
+  .dia .scr .top{padding:9px 9px 6px;font-size:11.5px}.dia .scr .top em{font-size:10px}
+  .dia .scr .bd{font-size:11px;padding:6px;gap:4px}.dia .f{padding:5px 7px}.dia .f small{font-size:10px}.dia .t{font-size:10px}.dia .m{padding:4px 7px}
+}
 </style>
 </head>
 <body>
@@ -501,12 +524,10 @@ header{background:#090a0f;top:env(safe-area-inset-top,0px)}
       <div class="tit" id="tit"></div>
       <button class="saltar" id="saltar" type="button">Ver el mismo día con Compila ↓</button>
     </div>
-    <div class="esc" aria-hidden="true"><div class="sost" id="sost">
-      <div class="palma"></div>
-      <div class="tel" id="tel"><div class="scr" id="scr"><div class="top"><span id="top">WhatsApp</span><em id="nl"></em></div><div class="bd" id="bd"></div></div></div>
-      <div class="dedos"><i></i><i></i><i></i><i></i></div>
-      <div class="pulgar"></div>
-    </div></div>
+    <div class="esc" aria-hidden="true">
+      <div class="ilus" id="ilus"><svg class="il" viewBox="0 0 1024 768"><use href="img/dia/cama.svg#s"/></svg><svg class="il" viewBox="0 0 1024 768"><use href="img/dia/caos.svg#s"/></svg><svg class="il" viewBox="0 0 1024 768"><use href="img/dia/corre.svg#s"/></svg><svg class="il" viewBox="0 0 1024 768"><use href="img/dia/cansado.svg#s"/></svg><svg class="il" viewBox="0 0 1024 768"><use href="img/dia/noche.svg#s"/></svg><svg class="il" viewBox="0 0 1024 768"><use href="img/dia/cafe.svg#s"/></svg><svg class="il" viewBox="0 0 1024 768"><use href="img/dia/prepara.svg#s"/></svg><svg class="il" viewBox="0 0 1024 768"><use href="img/dia/tranqui.svg#s"/></svg><svg class="il" viewBox="0 0 1024 768"><use href="img/dia/seva.svg#s"/></svg></div>
+      <div class="sost" id="sost"><div class="tel" id="tel"><div class="scr" id="scr"><div class="top"><span id="top">WhatsApp</span><em id="nl"></em></div><div class="bd" id="bd"></div></div></div></div>
+    </div>
   </div>
   <div class="prog" aria-hidden="true"><i id="prog"></i></div>
 </section>
@@ -650,7 +671,7 @@ const F = (a, b, tag = "") => `<div class="f"><span><b>${a}</b>${b ? `<small>${b
 const H = t => `<div class="f h">${t}</div>`;
 const T = (t, n) => `<span class="t ${n ? "n" : ""}">${t}</span>`;
 const PASOS = [
-  {h:"07:30", s:"#cdeaff", i:"#111322", l:"En casa", t:"Todavía no te levantaste.", p:"Y ya te están preguntando precios.", nl:7, m:["¿Cuánto sale el kilo?", "¿Hoy reparten?", "¿Tenés para mañana?"]},
+  {h:"07:30", s:"#cdeaff", i:"#111322", a:"#ff5c5c", l:"En casa", t:"Todavía no te levantaste.", p:"Y ya te están preguntando precios.", nl:7, m:["¿Cuánto sale el kilo?", "¿Hoy reparten?", "¿Tenés para mañana?"]},
   {h:"10:00", s:"#fff0a6", i:"#111322", l:"En el local", t:"Alguien cambió el pedido.", p:"Ahora buscás en qué chat estaba.", nl:19, m:["Cambio: mejor 3 de pollo", "Soy la del lote 14, ¿te llegó?", "¿Me confirmás?"]},
   {h:"14:00", s:"#ffc774", i:"#111322", l:"En el local", t:"Sumás a mano.", p:"Y lo anotás en un papel para que no se pierda.", nl:31, m:["2 carne + 1 pollo = ¿?|p", "¿Llegan a Tigre?"]},
   {h:"19:00", s:"#ff8a63", i:"#111322", l:"Cerrando", t:"¿Quién pagó?", p:"Revisás las transferencias una por una.", nl:44, m:["Te transferí, fijate", "¿Me pasás el alias de nuevo?"]},
@@ -670,6 +691,7 @@ const caps = [...tit.children], scr = document.getElementById("scr"), bd = docum
   reloj = document.getElementById("reloj"), dia = document.getElementById("dia"), lugar = document.getElementById("lugar"),
   nl = document.getElementById("nl"), sost = document.getElementById("sost"), tel = document.getElementById("tel"), saltar = document.getElementById("saltar");
 const aMin = h => { const [a, b] = h.split(":").map(Number); return a * 60 + b; };
+const ils = [...document.querySelectorAll("#ilus .il")];
 let actual = -1, minAct = aMin(PASOS[0].h), animReloj = 0;
 function moverReloj(h) {
   const desde = minAct, hasta = aMin(h), t0 = performance.now(), id = ++animReloj;
@@ -682,6 +704,8 @@ function paso(i) {
   if (i === actual) return;
   const nuevo = i > actual, p = PASOS[i]; actual = i;
   caps.forEach((c, k) => c.classList.toggle("on", k === i));
+  ils.forEach((c, k) => c.classList.toggle("on", k === i));
+  dia.style.setProperty("--acc-d", p.ok ? "#4d63ff" : (p.cansado ? "#ff7a7a" : "#ff5c5c"));
   lugar.textContent = p.l;
   dia.style.color = p.i; dia.style.backgroundColor = p.s;
   sost.classList.toggle("cansado", !!p.cansado); sost.classList.toggle("calma", !!p.ok);
