@@ -261,7 +261,7 @@ header{background:#090a0f;top:env(safe-area-inset-top,0px)}
 @media (max-width:760px){.hd .sub{font-size:16px}}
 
 /* Reloj y proyectos con sticky nativo */
-.dia{height:320vh}
+.dia{height:480vh}
 .dia-in{position:sticky;top:0;height:100vh}
 .prog{position:sticky;bottom:0;top:calc(100vh - 4px);margin-top:-4px}
 .proy{height:300vh;padding:0;overflow:visible}
@@ -548,6 +548,8 @@ header{background:#090a0f;top:env(safe-area-inset-top,0px)}
 @media (max-width:860px){.fotos::after{background:linear-gradient(180deg,rgba(8,9,16,.9) 0%,rgba(8,9,16,.62) 40%,rgba(8,9,16,.35) 100%)}}
 
 /* ===== v13 ===== */
+.lk-n .nt{transform-origin:0 0;will-change:transform,opacity;position:relative;z-index:3}
+.lk-n .nt .ic{transition:none}
 .dia{background:radial-gradient(55% 65% at 76% 55%,color-mix(in srgb,var(--glow,#4d63ff) 30%,transparent),transparent 70%),#0b0c15!important;transition:background .6s}
 .bat i{border-color:currentColor!important}
 .bat u{background:currentColor}
@@ -825,61 +827,97 @@ const H = t => `<div class="f h">${t}</div>`;
 const T = (t, n) => `<span class="t ${n ? "n" : ""}">${t}</span>`;
 const WA = '<svg viewBox="0 0 24 24"><path fill="#fff" d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.5-1.2A9 9 0 1 0 12 3Z"/></svg>';
 const N = (ic, t, x, tm = "ahora", big) => ({ic, t, x, tm, big});
+// Cuatro historias. En cada una, al bajar, cada notificación vuela a su lugar en la pantalla de Compila.
+const R = (a, b, tag, cls) => `<div class="ar"><span><b>${a}</b><small>${b}</small></span><em class="tg ${cls}">${tag}</em></div>`;
+const AH = (rubro, tit, chip, cls) => `<div class="ah"><div><small>${rubro}</small><b>${tit}</b></div><em class="tg ${cls}">${chip}</em></div>`;
 const PASOS = [
-  {h:"10:00", w:["#ff8a5c","#c2185b"], l:"Peluquería · turnos", t:"Turnos por WhatsApp.", p:"Te escriben mientras atendés, y a la tarde alguien no viene.", bat:88, mas:12,
-    n:[N("wa","Caro","¿Tenés turno mañana a las 5?"), N("wa","Luli","Perdón, hoy no llego 🙏","3 min"), N("tel","Teléfono","Llamada perdida","8 min"), N("wa","Sofi","¿Cuánto sale el alisado?","12 min")]},
-  {h:"10:00", w:["#6d8bff","#3ddc97"], l:"Peluquería · turnos", ok:1, ap:'<div class="ah"><div><small>Peluquería</small><b>Agenda de hoy</b></div><em class="tg ok">0 ausentes</em></div><div class="ar"><span><b>10:00 · Caro</b><small>Corte y color</small></span><em class="tg ok">Seña pagada</em></div><div class="ar"><span><b>11:30 · Luli</b><small>Alisado</small></span><em class="tg ok">Confirmado</em></div><div class="ar"><span><b>13:00 · Sofi</b><small>Corte</small></span><em class="tg az">Recordatorio enviado</em></div><div class="ar"><span><b>15:00 · Libre</b><small>Se reserva desde tu link</small></span><em class="tg gr">Disponible</em></div><div class="ar"><span><b>17:00 · Mica</b><small>Color</small></span><em class="tg ok">Seña pagada</em></div><div class="af">Las clientas reservan solas, de día o de noche.</div>', t:"Con Compila, se reservan solos.", p:"Agenda online, seña y recordatorio automático. Nadie se olvida.", bat:91, wd:[["9","turnos hoy"],["3","señas cobradas"],["0","ausentes"]],
-    n:[N("cp","Turno confirmado","Caro · mañana 17:00 · seña pagada","ahora",1), N("cp","Recordatorios enviados","A las 9 clientas de hoy","8:00",1)]},
-  {h:"12:30", w:["#ffb547","#ff4d6d"], l:"Rotisería · pedidos", t:"Mediodía de pedidos.", p:"Cada uno pide distinto, y sumás a mano entre la cocina y el teléfono.", bat:62, mas:27,
-    n:[N("wa","Clientes","2 milanesas con puré y 1 tarta"), N("wa","Juan","Cambio: mejor 3 empanadas","1 min"), N("nota","Notas","mila 2 · tarta 1 · ¿total?","4 min"), N("wa","Ana","¿A qué hora llega?","6 min")]},
-  {h:"12:30", w:["#4d63ff","#3ddc97"], l:"Rotisería · pedidos", ok:1, ap:'<div class="ah"><div><small>Rotisería</small><b>Pedidos del mediodía</b></div><em class="tg ok">$412.000</em></div><div class="tabs"><span class="on">Nuevos 3</span><span>En cocina 8</span><span>Enviados 12</span></div><div class="ar"><span><b>#231 · 2 milanesas con puré</b><small>Envío a Nordelta · 13:15</small></span><em class="tg ok">Pagado</em></div><div class="ar"><span><b>#232 · 3 empanadas y 1 tarta</b><small>Retira en el local · 13:00</small></span><em class="tg ok">Pagado</em></div><div class="ar"><span><b>#233 · Pollo con papas</b><small>Envío a Tigre · 13:30</small></span><em class="tg am">Efectivo</em></div><div class="af">Para cocina: 8 milanesas · 3 tartas · 12 empanadas</div>', t:"Los pedidos llegan completos.", p:"Qué quiere, adónde va y cómo paga. La cocina ve la lista sola.", bat:70, wd:[["23","pedidos"],["$412k","vendido"],["0","sin responder"]],
-    n:[N("cp","Nuevo pedido · pagado","2 milanesas con puré · envío 13:15","ahora",1), N("cp","Lista para cocina","8 milanesas · 3 tartas · 12 empanadas","12:00",1)]},
-  {h:"16:00", w:["#ff7a59","#b23cff"], l:"Distribuidora · reparto", t:"Armás el reparto a mano.", p:"Y el teléfono no para: “¿dónde está mi pedido?”", bat:41, mas:18,
-    n:[N("wa","Kiosco Tito","¿Hoy me llega?"), N("tel","Teléfono","3 llamadas perdidas","2 min"), N("wa","Repartidor","¿Voy primero a Tigre o a Pacheco?","5 min"), N("wa","Almacén Rosa","Me faltó una caja","9 min")]},
-  {h:"16:00", w:["#6d8bff","#9a7cff"], l:"Distribuidora · reparto", ok:1, ap:'<div class="ah"><div><small>Distribuidora</small><b>Ruta de hoy</b></div><em class="tg az">14 paradas</em></div><div class="ar"><span><b>1 · Kiosco Tito</b><small>Llega 15:40</small></span><em class="tg ok">Avisado</em></div><div class="ar"><span><b>2 · Almacén Rosa</b><small>Llega 16:05</small></span><em class="tg ok">Avisado</em></div><div class="ar"><span><b>3 · Despensa Sol</b><small>Llega 16:30</small></span><em class="tg ok">Avisado</em></div><div class="ar"><span><b>4 · Maxikiosco 24</b><small>Llega 16:50</small></span><em class="tg az">En camino</em></div><div class="ar"><span><b>5 · Autoservicio Lili</b><small>Llega 17:10</small></span><em class="tg az">En camino</em></div><div class="af">Recorrido total: 2 h 10 min, ordenado por zona.</div>', t:"El recorrido se arma solo.", p:"Paradas ordenadas, y cada cliente recibe el aviso de cuándo llega.", bat:58, wd:[["14","paradas"],["2 h 10","recorrido"],["14","avisos"]],
-    n:[N("cp","Ruta lista","14 paradas ordenadas por zona","ahora",1), N("cp","Aviso enviado","Kiosco Tito: llega en 20 min","15:52",1)]},
-  {h:"22:00", w:["#3a2a8f","#c2185b"], l:"Kiosco · caja y stock", cansado:1, t:"Cierre de caja.", p:"No te cierra la cuenta, y recién ahí ves que te quedaste sin stock.", bat:9, mas:22,
-    n:[N("nota","Notas","Caja: faltan $8.500 ¿?"), N("wa","Turno noche","Se terminó la Coca de 1,5","4 min"), N("bk","Banco","Hoy entraron 47 transferencias","9 min"), N("wa","Proveedor","¿Me pasás el pedido de mañana?","15 min")]},
-  {h:"22:00", w:["#4d63ff","#3ddc97"], l:"Kiosco · caja y stock", ok:1, ap:'<div class="ah"><div><small>Kiosco</small><b>Cierre de caja</b></div><em class="tg gr">Turno noche</em></div><div class="ar"><span><b>Vendido hoy</b><small>231 tickets</small></span><em class="tg gr">$1.465.400</em></div><div class="ar"><span><b>Efectivo</b><small>Contado por el turno</small></span><em class="tg gr">$612.000</em></div><div class="ar"><span><b>Transferencias</b><small>47 recibidas</small></span><em class="tg gr">$853.400</em></div><div class="ar"><span><b>Diferencia</b><small>Caja cuadrada</small></span><em class="tg ok">$0</em></div><div class="ah2">Para reponer</div><div class="ar"><span><b>Coca-Cola 1,5 L</b><small>Quedan 3</small></span><em class="tg am">12 u.</em></div><div class="ar"><span><b>Agua 500 ml</b><small>Quedan 5</small></span><em class="tg am">24 u.</em></div>', t:"La caja cierra sola.", p:"Ventas, diferencias y lo que hay que reponer, en tu celular.", bat:64, wd:[["$1,4M","vendido"],["$0","diferencia"],["5","a reponer"]],
-    n:[N("cp","Cierre del día","Caja cuadrada · turno noche OK","ahora",1), N("cp","Pedido al proveedor","Listo para enviar: 5 productos","21:58",1)]}
+  {h:"10:00", w:["#ff8a5c","#c2185b"], l:"Peluquería · turnos", bat:88, mas:12,
+    t:"Turnos por WhatsApp.", p:"Te escriben mientras atendés, y a la tarde alguien no viene.",
+    t2:"Con Compila, se reservan solos.", p2:"Cada mensaje se convierte en un turno, con seña y recordatorio.",
+    n:[N("wa","Caro","¿Tenés turno mañana a las 5?"), N("wa","Luli","Perdón, hoy no llego 🙏","3 min"), N("tel","Teléfono","Llamada perdida","8 min"), N("wa","Sofi","¿Cuánto sale el alisado?","12 min")],
+    map:[3,1,2,0],
+    ap: AH("Peluquería","Agenda de hoy","0 ausentes","ok") + R("10:00 · Sofi","Alisado · vio el precio y reservó","Seña pagada","ok") + R("11:30 · Luli","Avisó que no viene · turno liberado","Reprogramado","az")
+      + R("16:00 · Nueva clienta","Reservó sola desde tu link","Confirmado","ok") + R("17:00 · Caro","Corte y color","Seña pagada","ok") + '<div class="af">Recordatorio por WhatsApp enviado a todas las de hoy.</div>'},
+  {h:"12:30", w:["#ffb547","#ff4d6d"], l:"Rotisería · pedidos", bat:62, mas:27,
+    t:"Mediodía de pedidos.", p:"Cada uno pide distinto, y sumás a mano entre la cocina y el teléfono.",
+    t2:"Los pedidos llegan completos.", p2:"Qué quiere, adónde va y cómo paga. Las cuentas se hacen solas.",
+    n:[N("wa","Clientes","2 milanesas con puré y 1 tarta"), N("wa","Juan","Cambio: mejor 3 empanadas","1 min"), N("nota","Notas","mila 2 · tarta 1 · ¿total?","4 min"), N("wa","Ana","¿A qué hora llega?","6 min")],
+    map:[0,1,2,3],
+    ap: AH("Rotisería","Pedidos del mediodía","0 sin responder","ok") + R("#231 · 2 milanesas y 1 tarta","Envío a Nordelta · 13:15","Pagado","ok") + R("#232 · 3 empanadas","Juan cambió el pedido solo","Pagado","ok")
+      + R("Total del mediodía","23 pedidos, sumado solo","$412.000","gr") + R("#233 · Ana","Sale 13:15 · ya le avisamos","Avisada","az") + '<div class="af">Para cocina: 8 milanesas · 3 tartas · 12 empanadas</div>'},
+  {h:"16:00", w:["#ff7a59","#b23cff"], l:"Distribuidora · reparto", bat:41, mas:18,
+    t:"Armás el reparto a mano.", p:"Y el teléfono no para: “¿dónde está mi pedido?”",
+    t2:"El recorrido se arma solo.", p2:"Paradas ordenadas, y cada cliente sabe cuándo llega su pedido.",
+    n:[N("wa","Kiosco Tito","¿Hoy me llega?"), N("tel","Teléfono","3 llamadas perdidas","2 min"), N("wa","Repartidor","¿Voy primero a Tigre o a Pacheco?","5 min"), N("wa","Almacén Rosa","Me faltó una caja","9 min")],
+    map:[0,1,2,3],
+    ap: AH("Distribuidora","Ruta de hoy","14 paradas","az") + R("1 · Kiosco Tito","Llega 15:40","Avisado","ok") + R("Consultas","Cada cliente ve dónde viene su pedido","0 llamadas","ok")
+      + R("Ruta del repartidor","Pacheco y después Tigre, por zona","2 h 10","az") + R("2 · Almacén Rosa","La caja que faltó, sumada al envío","Agregada","am") + '<div class="af">14 avisos de llegada enviados por WhatsApp.</div>'},
+  {h:"22:00", w:["#3a2a8f","#c2185b"], l:"Kiosco · caja y stock", bat:9, mas:22,
+    t:"Cierre de caja.", p:"No te cierra la cuenta, y recién ahí ves que te quedaste sin stock.",
+    t2:"La caja cierra sola.", p2:"Ventas, diferencias y lo que hay que reponer, en tu celular.",
+    n:[N("nota","Notas","Caja: faltan $8.500 ¿?"), N("wa","Turno noche","Se terminó la Coca de 1,5","4 min"), N("bk","Banco","Hoy entraron 47 transferencias","9 min"), N("wa","Proveedor","¿Me pasás el pedido de mañana?","15 min")],
+    map:[0,1,2,3],
+    ap: AH("Kiosco","Cierre de caja","$1.465.400","gr") + R("Diferencia de caja","Cuadrada al cierre","$0","ok") + R("Coca-Cola 1,5 L","Avisó stock bajo a las 18:40","Reponer 12","am")
+      + R("Transferencias","47 conciliadas solas","$853.400","gr") + R("Pedido al proveedor","Armado con lo que se vendió","Listo","az") + '<div class="af">Turno noche cerrado sin diferencias.</div>'}
 ];
 const tit = document.getElementById("tit");
-tit.innerHTML = PASOS.map(p => `<div class="c"><h2>${p.t}</h2><p>${p.p}</p></div>`).join("");
+tit.innerHTML = PASOS.map(p => `<div class="c"><h2>${p.t}</h2><p>${p.p}</p></div><div class="c"><h2>${p.t2}</h2><p>${p.p2}</p></div>`).join("");
 const caps = [...tit.children], reloj = document.getElementById("reloj"), dia = document.getElementById("dia"), lugar = document.getElementById("lugar"),
   lk = document.getElementById("lk"), lkN = document.getElementById("lkN"), lkMore = document.getElementById("lkMore"), batN = document.getElementById("batN"),
-  batF = document.getElementById("batF"), lkW = document.getElementById("lkW"), app = document.getElementById("app"), saltar = document.getElementById("saltar");
+  batF = document.getElementById("batF"), lkW = document.getElementById("lkW"), app = document.getElementById("app"), saltar = document.getElementById("saltar"),
+  lkF = document.getElementById("lkF"), lkSb = lk.querySelector(".lk-sb");
 const ICO = {wa: WA, tel: "✆", bk: "$", nota: "✎", bat2: "!", cp: "c"};
-const nota = n => `<div class="nt${n.big ? " big" : ""}"><span class="ic ${n.ic}">${ICO[n.ic]}</span><div><b>${n.t}<small>${n.tm}</small></b><span>${n.x}</span></div></div>`;
-const aMin = h => { const [a, b] = h.split(":").map(Number); return a * 60 + b; };
-let actual = -1;
+const nota = n => `<div class="nt"><span class="ic ${n.ic}">${ICO[n.ic]}</span><div><b>${n.t}<small>${n.tm}</small></b><span>${n.x}</span></div></div>`;
+const cl = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v)), suave = t => t * t * (3 - 2 * t);
+let actual = -1, cards = [], filas = [], resto = [], viaje = [], visto = 0, capAct = -1;
+app.style.transition = "none"; app.style.transform = "none";
+function medir() {
+  const L = lk.getBoundingClientRect();
+  cards.forEach(c => c.style.transform = "");
+  viaje = cards.map((c, k) => { const a = c.getBoundingClientRect(), f = filas[PASOS[actual].map[k]], b = f.getBoundingClientRect();
+    return {dx: b.left - a.left, dy: b.top - a.top, sx: b.width / a.width, sy: b.height / a.height}; });
+}
 function paso(i) {
   if (i === actual) return;
-  const nuevo = i > actual, p = PASOS[i]; actual = i;
-  caps.forEach((c, k) => c.classList.toggle("on", k === i));
-  lugar.textContent = p.l;
+  const p = PASOS[i]; actual = i; capAct = -1; visto = 0;
+  lugar.textContent = p.l; reloj.textContent = p.h;
   lk.style.setProperty("--w1", p.w[0]); lk.style.setProperty("--w2", p.w[1]);
   batN.textContent = p.bat + "%"; batF.style.width = p.bat + "%"; batF.parentElement.parentElement.classList.toggle("baja", p.bat < 20);
-  let lista;
-  if (p.ok) lista = p.n;
-  else lista = p.n;
-  lkW.innerHTML = p.wd ? p.wd.map(([a, b]) => `<div><b>${a}</b><small>${b}</small></div>`).join("") : "";
-  lkN.innerHTML = lista.map(nota).join("");
-  lkMore.textContent = p.ok ? "" : `y ${p.mas} notificaciones más`;
-  lk.classList.toggle("abierto", !!p.ok); if (p.ok) app.innerHTML = p.ap;
-  dia.style.setProperty("--glow", p.ok ? "#4d63ff" : p.w[1]);
-  if (nuevo && !p.ok) { lk.classList.remove("vibra"); void lk.offsetWidth; lk.classList.add("vibra"); }
+  lkW.innerHTML = ""; lkN.innerHTML = p.n.map(nota).join(""); lkMore.textContent = `y ${p.mas} notificaciones más`;
+  app.innerHTML = p.ap;
+  cards = [...lkN.children]; filas = [...app.querySelectorAll(".ar")];
+  resto = [...app.children].filter(e => !filas.includes(e) || !p.map.includes(filas.indexOf(e)));
+  medir();
 }
+addEventListener("resize", () => { if (actual >= 0) medir(); });
+// Avance dentro de cada historia: 0 a 0,36 llegan los mensajes; 0,36 a 0,8 vuelan a su lugar; después queda el sistema
 function relojScroll(pd) {
-  const n = PASOS.length, f = Math.min(n - .001, pd * n), i = Math.floor(f), fr = f - i, a = PASOS[i], b = PASOS[i + 1];
-  let m = aMin(a.h);
-  if (b && !!a.ok === !!b.ok) { let mb = aMin(b.h); if (mb < m) mb += 1440; const k = Math.max(0, (fr - .45) / .55); m = m + (mb - m) * k; }
-  m = Math.round(m) % 1440; const t = String(Math.floor(m / 60)).padStart(2, "0") + ":" + String(m % 60).padStart(2, "0");
-  if (reloj.textContent !== t) reloj.textContent = t;
+  const n = PASOS.length, f = Math.min(n - .0001, pd * n), i = Math.floor(f), sp = f - i;
+  if (i !== actual) paso(i);
+  const p = PASOS[i];
+  // mensajes que van llegando, con vibración
+  let llegan = 0;
+  cards.forEach((c, k) => { const v = cl((sp - .03 - k * .07) / .05); if (v > .5) llegan = k + 1; c.dataset.v = v; });
+  if (llegan > visto) { visto = llegan; lk.classList.remove("vibra"); void lk.offsetWidth; lk.classList.add("vibra"); }
+  if (llegan < visto) visto = llegan;
+  const m = cl((sp - .36) / .44);
+  cards.forEach((c, k) => {
+    const v = +c.dataset.v, e = suave(cl((m - k * .09) / .64)), t = viaje[k];
+    c.style.transform = `translate(${t.dx * e}px, ${t.dy * e}px) scale(${1 + (t.sx - 1) * e})`;
+    c.style.opacity = v * (1 - cl((e - .9) / .1));
+    [...c.children].forEach(x => x.style.opacity = 1 - cl((e - .62) / .2));
+    c.style.background = `rgba(255,255,255,${.2 + .8 * cl(e / .35)})`; c.style.color = e > .18 ? "#111322" : "";
+    c.style.boxShadow = e > .05 && e < 1 ? "0 18px 40px -12px rgba(10,12,30,.45)" : "";
+  });
+  filas.forEach((f, r) => { const k = p.map.indexOf(r); const e = k < 0 ? 1 : suave(cl((m - k * .09) / .64)); f.style.opacity = k < 0 ? cl((m - .3) / .3) : cl((e - .8) / .2); });
+  app.style.opacity = cl((m - .12) / .4);
+  [...app.children].forEach(e => { if (!filas.includes(e)) e.style.opacity = cl((m - .18) / .3); });
+  [lkF, reloj, lkMore].forEach(e => e.style.opacity = 1 - cl(m / .3));
+  lkSb.style.color = m > .3 ? "#111322" : "";
+  const cap = i * 2 + (m > .5 ? 1 : 0);
+  if (cap !== capAct) { capAct = cap; caps.forEach((c, k) => c.classList.toggle("on", k === cap)); dia.style.setProperty("--glow", m > .5 ? "#4d63ff" : p.w[1]); }
 }
-saltar.addEventListener("click", () => {
-  const d = dia.offsetHeight - innerHeight, k = PASOS.findIndex(p => p.ok);
-  scrollTo({top: dia.offsetTop + d * (k + .2) / PASOS.length, behavior: "smooth"});
-});
+saltar.addEventListener("click", () => {});
 </script>
 <script>
 /* Movimiento: el scroll es el nativo del navegador; solo leemos dónde está y movemos con transform */
