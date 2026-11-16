@@ -1,0 +1,1037 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DLM Muebles a medida · Cocinas, vestidores y muebles en Buenos Aires</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Diseño a medida y fabricación propia en nuestro taller de Buenos Aires. Diseñá tu cocina en 3D, caminala por dentro y pedí la visita.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f2ee;--ink:#151413;--dim:#6f6b64;--line:#dfdbd3;--card:#fbfaf7;--red:#c23a2c;--hd:60px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:var(--hd)}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:"Inter Tight",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+button,input{font:inherit;color:inherit}
+a{color:inherit}
+.k{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.06em;color:var(--red);text-transform:uppercase}
+.wrap{max-width:1280px;margin:0 auto;padding:0 40px}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:#fff;text-decoration:none;border:0;border-radius:4px;padding:14px 20px;font-size:16px;font-weight:500;cursor:pointer}
+.btn svg{width:18px;height:18px;fill:#25d366}
+.lnk{font-size:16px;text-underline-offset:5px}
+
+/* ---------- encabezado ---------- */
+header{position:fixed;inset:0 0 auto 0;height:var(--hd);display:flex;align-items:center;justify-content:space-between;gap:20px;padding:0 28px;background:rgba(244,242,238,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:20}
+.logo{display:flex;align-items:baseline;gap:10px;text-decoration:none;color:var(--ink)}
+.logo b{font-size:22px;letter-spacing:-.04em;font-weight:700}
+.logo span{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--dim)}
+header nav{display:flex;gap:26px;margin-left:auto}
+header nav a{text-decoration:none;font-size:15px}
+header nav a:hover{text-decoration:underline;text-underline-offset:5px}
+.wa{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:#fff;text-decoration:none;font-family:"JetBrains Mono",monospace;font-size:13px;padding:9px 14px;border-radius:4px;white-space:nowrap}
+.wa svg{width:16px;height:16px;fill:#25d366}
+
+/* ---------- inicio ---------- */
+.hero{padding:calc(var(--hd) + 9vh) 0 7vh;border-bottom:1px solid var(--line)}
+.hg{display:grid;grid-template-columns:1.25fr .75fr;gap:60px;align-items:end}
+.hero h1{font-size:clamp(52px,7.4vw,112px);line-height:.94;letter-spacing:-.055em;font-weight:500;margin:18px 0 0}
+.hero p{font-size:clamp(17px,1.4vw,20px);color:var(--dim);max-width:30em;margin:26px 0 0;line-height:1.45}
+.ctas{display:flex;align-items:center;gap:26px;margin-top:34px;flex-wrap:wrap}
+.hf{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+.hf li{display:grid;grid-template-columns:44px 1fr;gap:4px 10px;padding:16px 0;border-bottom:1px solid var(--line)}
+.hf i{font-style:normal;font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--red);padding-top:4px;grid-row:span 2}
+.hf b{font-size:18px;font-weight:600;letter-spacing:-.02em}
+.hf span{font-size:15px;color:var(--dim)}
+
+/* ---------- cotizador ---------- */
+.app{display:grid;grid-template-columns:minmax(380px,460px) 1fr;height:calc(100svh - var(--hd));border-bottom:1px solid var(--line)}
+.app .panel{order:-1}
+.panel{overflow:auto;border-right:1px solid var(--line);display:flex;flex-direction:column;background:var(--bg)}
+.pin{padding:28px 32px 24px;flex:1}
+.ti{font-size:clamp(28px,2.6vw,36px);line-height:1.03;letter-spacing:-.045em;font-weight:600;margin:10px 0 0}
+.lead{color:var(--dim);margin:10px 0 0;font-size:15.5px;line-height:1.45}
+.steps{display:flex;gap:2px;margin:22px 0 20px;border-bottom:1px solid var(--line)}
+.steps button{flex:1;background:none;border:0;padding:0 0 10px;font-size:13px;color:var(--dim);cursor:pointer;text-align:left;border-bottom:2px solid transparent;margin-bottom:-1px;min-width:0}
+.steps button i{font-style:normal;font-family:"JetBrains Mono",monospace;font-size:11px;display:block;margin-bottom:2px}
+.steps button.on{color:var(--ink);border-color:var(--ink)}
+.steps button.ok{color:var(--ink)}
+.st{display:none}.st.on{display:block;animation:in .35s ease}
+@keyframes in{from{opacity:0;transform:translateY(6px)}}
+.st h2{font-size:22px;letter-spacing:-.03em;font-weight:600;margin:0 0 14px}
+.st h3{font-size:14px;font-weight:600;margin:20px 0 10px}
+.opts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.opts.two{grid-template-columns:1fr 1fr}
+.op{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:12px;text-align:left;cursor:pointer;transition:border-color .2s,box-shadow .2s}
+.op b{display:block;font-size:15px;font-weight:600}
+.op small{display:block;color:var(--dim);font-size:12.5px;margin-top:2px;line-height:1.3}
+.op svg{display:block;width:100%;height:42px;margin-bottom:8px}
+.op.on{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.sw{display:flex;gap:4px;margin-top:8px}.sw i{width:16px;height:16px;border-radius:50%;border:1px solid rgba(0,0,0,.12)}
+.meds{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.meds label{font-size:12.5px;color:var(--dim)}
+.num{display:flex;align-items:center;border:1px solid var(--line);background:var(--card);border-radius:6px;margin-top:5px}
+.num input{width:100%;border:0;background:none;padding:10px 4px 10px 10px;font-size:17px;font-family:"JetBrains Mono",monospace;outline:none;min-width:0}
+.num span{padding-right:10px;color:var(--dim);font-size:13px}
+.num:focus-within{border-color:var(--ink)}
+.chk{display:flex;flex-direction:column;gap:2px;margin-top:16px}
+.chk label{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);font-size:15px;cursor:pointer}
+.chk input{width:18px;height:18px;accent-color:var(--ink)}
+.foto{display:flex;align-items:center;gap:14px;border:1px dashed #bdb7ac;border-radius:8px;padding:14px;cursor:pointer;background:var(--card)}
+.foto input{display:none}
+.foto .fi{width:64px;height:64px;border-radius:6px;background:#ebe7df center/cover no-repeat;flex:none;display:grid;place-items:center}
+.foto .fi svg{width:26px;height:26px;stroke:var(--dim);fill:none;stroke-width:1.6}
+.foto b{display:block;font-size:15px}.foto small{display:block;color:var(--dim);font-size:13px;margin-top:2px;line-height:1.35}
+.pal{display:flex;gap:6px;margin-top:8px}.pal i{width:22px;height:22px;border-radius:4px;border:1px solid rgba(0,0,0,.1)}
+.sug{display:none;margin-top:10px;font-size:14px;background:#efe9df;border-radius:6px;padding:10px 12px;align-items:center;justify-content:space-between;gap:10px}
+.sug.on{display:flex}.sug button{border:0;background:var(--ink);color:#fff;border-radius:4px;padding:7px 11px;font-size:13px;cursor:pointer;white-space:nowrap}
+.cols{display:flex;gap:8px;flex-wrap:wrap}
+.cols button{width:38px;height:38px;border-radius:50%;border:1px solid rgba(0,0,0,.14);cursor:pointer;padding:0}
+.cols button.on{box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--ink)}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chips button{display:flex;align-items:center;gap:7px;background:var(--card);border:1px solid var(--line);border-radius:30px;padding:6px 12px 6px 6px;font-size:14px;cursor:pointer}
+.chips button i{width:20px;height:20px;border-radius:50%;background-size:cover}
+.chips button.on{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.zonas{display:flex;flex-wrap:wrap;gap:6px}
+.zonas button{background:var(--card);border:1px solid var(--line);border-radius:30px;padding:7px 13px;font-size:14px;cursor:pointer}
+.zonas button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.txt{width:100%;border:1px solid var(--line);background:var(--card);border-radius:6px;padding:11px 12px;font-size:16px;outline:none}
+.txt:focus{border-color:var(--ink)}
+.res{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:12px 14px;margin-top:16px;font-size:14px;line-height:1.55;color:#3d3a35}
+.res b{color:var(--ink)}
+.tipos{display:flex;gap:6px;overflow-x:auto;margin:14px -32px 0;padding:0 32px 2px;scrollbar-width:none}.tipos::-webkit-scrollbar{display:none}
+.tipos button{flex:none;background:none;border:1px solid var(--line);border-radius:30px;padding:8px 14px;font-size:14px;cursor:pointer;white-space:nowrap}
+.tipos button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.ti{margin-top:16px}
+.nota{color:var(--dim);font-size:14px;margin:10px 0 0;line-height:1.45}
+.foot{position:sticky;bottom:0;background:var(--bg);border-top:1px solid var(--line);padding:16px 32px 18px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.pr small{display:block;font-size:12px;color:var(--dim)}
+.pr b{font-size:20px;letter-spacing:-.03em;font-weight:600;white-space:nowrap}
+.pr em{font-style:normal;font-size:13px;color:var(--dim);margin:0 4px}
+.nx{background:var(--ink);color:#fff;border:0;border-radius:4px;padding:13px 18px;font-size:15px;font-weight:500;cursor:pointer;white-space:nowrap}
+.nx.wa2{background:#1fa855}
+.nx[disabled]{opacity:.4;cursor:default}
+.view{position:relative;overflow:hidden;background:var(--bg)}
+.view canvas{display:block;width:100%;height:100%;touch-action:none;outline:none}
+.vt{position:absolute;left:16px;top:16px;display:flex;gap:8px;z-index:3}
+.seg{display:flex;background:rgba(255,255,255,.88);backdrop-filter:blur(6px);border:1px solid var(--line);border-radius:40px;padding:3px}
+.seg button{border:0;background:none;padding:8px 14px;border-radius:30px;font-size:14px;cursor:pointer;color:var(--dim)}
+.seg button.on{background:var(--ink);color:#fff}
+.ib{border:1px solid var(--line);background:rgba(255,255,255,.88);backdrop-filter:blur(6px);border-radius:40px;padding:8px 14px;font-size:14px;cursor:pointer}
+.ib.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.hint{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);background:rgba(21,20,19,.78);color:#fff;font-size:13px;padding:8px 14px;border-radius:30px;white-space:nowrap;pointer-events:none;transition:opacity .4s;z-index:3}
+.entrar{position:absolute;right:16px;bottom:16px;z-index:3;display:flex;align-items:center;gap:8px;background:var(--ink);color:#fff;border:0;border-radius:40px;padding:12px 18px 12px 14px;font-size:15px;font-weight:500;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,.18)}
+.entrar svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:1.8}
+.stats{position:absolute;right:16px;top:16px;z-index:3;display:flex;gap:16px;background:rgba(255,255,255,.88);backdrop-filter:blur(6px);border:1px solid var(--line);border-radius:8px;padding:9px 14px}
+.stats div{font-size:11px;color:var(--dim);line-height:1.2}.stats b{display:block;font-family:"JetBrains Mono",monospace;font-size:16px;color:var(--ink);font-weight:500}
+.load{position:absolute;inset:0;display:grid;place-items:center;color:var(--dim);font-family:"JetBrains Mono",monospace;font-size:13px}
+
+/* ---------- secciones ---------- */
+.sec{padding:120px 0;border-bottom:1px solid var(--line)}
+.sh{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:46px}
+.sh h2,.big2{font-size:clamp(38px,4.6vw,66px);line-height:1;letter-spacing:-.05em;font-weight:500;margin:14px 0 0}
+.sh p{color:var(--dim);font-size:17px;line-height:1.5;margin:0;max-width:30em}
+.amb{border-top:1px solid var(--ink)}
+.amb a{display:grid;grid-template-columns:1.1fr 1.4fr auto;gap:30px;align-items:center;padding:24px 0;border-bottom:1px solid var(--line);text-decoration:none;transition:padding .25s}
+.amb a:hover{padding-left:12px}
+.amb b{font-size:clamp(24px,2.6vw,34px);font-weight:500;letter-spacing:-.04em}
+.amb span{color:var(--dim);font-size:16px}
+.amb em{font-style:normal;font-family:"JetBrains Mono",monospace;font-size:13px;color:var(--red);white-space:nowrap}
+.fil{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:26px}
+.fil button{background:none;border:1px solid var(--line);border-radius:30px;padding:8px 15px;font-size:14px;cursor:pointer}
+.fil button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.tg{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.tj{margin:0}
+.tj .im{position:relative;aspect-ratio:4/3;overflow:hidden;border-radius:4px;background:#e5e1d9}
+.tj img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s}
+.tj:hover img{transform:scale(1.04)}
+.tj .ej{position:absolute;left:10px;bottom:10px;font-family:"JetBrains Mono",monospace;font-size:11px;background:rgba(255,255,255,.85);padding:3px 7px;border-radius:3px}
+.tj figcaption{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding-top:12px}
+.tj figcaption b{font-size:17px;font-weight:500;letter-spacing:-.02em}
+.tj figcaption a{font-size:14px;white-space:nowrap;text-underline-offset:4px}
+.tj.no{display:none}
+.mas{margin-top:30px;font-size:15px;color:var(--dim)}
+.nos{background:var(--ink);color:#f4f2ee;border:0}
+.nos .k{color:#e0796d}
+.ng{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+.nos p{color:#c9c5bd;font-size:18px;line-height:1.55;margin:0 0 18px}
+.nos .desde{display:flex;align-items:center;gap:16px;margin-top:34px;font-family:"JetBrains Mono",monospace;font-size:13px;color:#a7a39b}
+.nos .desde i{flex:1;height:1px;background:#e0796d}
+.pasos{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--ink)}
+.pasos li{padding:22px 22px 0 0;border-right:1px solid var(--line);margin-right:22px}
+.pasos li:last-child{border:0;margin:0}
+.pasos i{font-style:normal;font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--red)}
+.pasos b{display:block;font-size:20px;font-weight:600;letter-spacing:-.03em;margin:10px 0 8px}
+.pasos span{color:var(--dim);font-size:15px;line-height:1.45}
+.mayor{background:#e9e5dd}
+.mg{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.mg p{color:var(--dim);font-size:17px;line-height:1.5;margin:0 0 22px}
+.cto{padding:130px 0 90px}
+.cto h2{font-size:clamp(46px,7vw,104px);line-height:.95;letter-spacing:-.055em;font-weight:500;margin:16px 0 34px}
+.cto .zn{margin-top:28px;color:var(--dim);font-size:15px}
+footer{padding:28px 0 40px;font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--dim)}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+
+@media (max-width:1000px){header nav{display:none}}
+@media (max-width:860px){
+  :root{--hd:56px}
+  header{padding:0 16px}.logo span{display:none}
+  .wrap{padding:0 18px}
+  .hero{padding:calc(var(--hd) + 44px) 0 44px}
+  .hg{grid-template-columns:1fr;gap:34px}
+  .app{display:block;height:auto;border:0}
+  .view{position:sticky;top:var(--hd);height:50svh;z-index:5;border-bottom:1px solid var(--line)}
+  .panel{border:0;overflow:visible;min-height:60svh}
+  .pin{padding:22px 16px 110px}
+  .ti{font-size:26px}.tipos{margin:12px -16px 0;padding:0 16px 2px}
+  .steps{margin:16px 0 18px}.steps button{font-size:12px}
+  .foot{position:fixed;left:0;right:0;bottom:0;padding:12px 16px calc(12px + env(safe-area-inset-bottom));z-index:15;transform:translateY(110%);transition:transform .3s}
+  .foot.vis{transform:none}
+  .pr b{font-size:16px}.pr em{margin:0 2px}.nx{padding:12px 14px;font-size:14px}
+  .stats{display:none}
+  .vt{left:10px;top:10px}.seg button{padding:7px 11px;font-size:13px}.ib{padding:7px 11px;font-size:13px}
+  .entrar{right:10px;bottom:10px;padding:10px 14px 10px 12px;font-size:14px}
+  .hint{bottom:auto;top:56px;font-size:12px}
+  .sec{padding:80px 0}
+  .sh,.ng,.mg{grid-template-columns:1fr;gap:18px}
+  .amb a{grid-template-columns:1fr;gap:6px;padding:20px 0}
+  .tg{grid-template-columns:1fr;gap:26px}
+  .pasos{grid-template-columns:1fr}.pasos li{border-right:0;border-bottom:1px solid var(--line);margin:0;padding:18px 0}
+  .cto{padding:90px 0 60px}
+}
+</style>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><symbol id="wa" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.8-.1 1.4z"/></symbol></svg>
+<header>
+  <a class="logo" href="#inicio"><b>DLM</b><span>Muebles a medida</span></a>
+  <nav><a href="#disena">Diseñá en 3D</a><a href="#trabajos">Trabajos</a><a href="#nosotros">Nosotros</a><a href="#contacto">Contacto</a></nav>
+  <a class="wa" href="https://wa.me/5491131327062?text=Hola%20DLM%2C%20quiero%20hablar%20de%20mi%20espacio." target="_blank" rel="noopener"><svg><use href="#wa"/></svg>11 3132-7062</a>
+</header>
+
+<section class="hero" id="inicio">
+  <div class="wrap hg">
+    <div>
+      <div class="k">Muebles a medida · Buenos Aires</div>
+      <h1>Espacios que hablan de vos.</h1>
+      <p>Diseño a medida y fabricación propia en nuestro taller, desde 2021. Armá tu mueble en 3D y miralo dentro de tu casa antes de pedir la visita.</p>
+      <div class="ctas"><a class="btn" href="#disena">Diseñá tu mueble en 3D</a><a class="lnk" href="#trabajos">Ver trabajos</a></div>
+    </div>
+    <ol class="hf">
+      <li><i>01</i><b>La pensamos juntos</b><span>Distribución, materiales y detalles, hasta que te cierre.</span></li>
+      <li><i>02</i><b>La fabricamos en nuestro taller</b><span>Melamina o madera maciza, pieza por pieza.</span></li>
+      <li><i>03</i><b>La instalamos</b><span>Nuestro equipo la lleva y la deja lista para usar.</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="app" id="disena">
+  <div class="view" id="view">
+    <div class="load" id="load">Armando tu cocina…</div>
+    <div class="vt">
+      <div class="seg" id="modo"><button class="on" data-m="afuera">Vista general</button><button data-m="adentro">Adentro</button></div>
+      <button class="ib" id="abrir">Abrir puertas</button>
+    </div>
+    <div class="stats" id="stats"></div>
+    <div class="hint" id="hint">Arrastrá para girar · tocá una puerta para abrirla</div>
+    <button class="entrar" id="entrar"><svg viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><span>Entrar a la cocina</span></button>
+  </div>
+
+  <aside class="panel">
+    <div class="pin">
+      <div class="k">Cotizador 3D</div>
+      <div class="tipos" id="tipos"></div>
+      <div class="ti" id="ti">Diseñá tu cocina y entrá a verla.</div>
+      <nav class="steps" id="steps"></nav>
+      <div id="pasos"></div>
+    </div>
+    <div class="foot" id="foot">
+      <div class="pr"><small id="prL">Precio orientativo</small><b id="pr">—</b></div>
+      <button class="nx" id="nx">Siguiente</button>
+    </div>
+  </aside>
+</section>
+
+<section class="sec" id="ambientes">
+  <div class="wrap">
+    <div class="sh"><div><div class="k">Qué hacemos</div><h2>Un mueble a medida para cada ambiente.</h2></div></div>
+    <div class="amb" id="amb"></div>
+  </div>
+</section>
+
+<section class="sec" id="trabajos">
+  <div class="wrap">
+    <div class="sh"><div><div class="k">Nuestros trabajos</div><h2>Diseño a medida. Materiales que perduran.</h2></div><p>Tocá “Quiero algo así” y lo sumamos a tu consulta como referencia.</p></div>
+    <div class="fil" id="fil"></div>
+    <div class="tg" id="tg"></div>
+    <p class="mas">Más obras en <a href="https://instagram.com/delasmanosmuebles" target="_blank" rel="noopener">@delasmanosmuebles</a></p>
+  </div>
+</section>
+
+<section class="sec nos" id="nosotros">
+  <div class="wrap ng">
+    <div><div class="k">Nosotros</div><h2 class="big2">Fabricación propia, diseño personalizado.</h2></div>
+    <div>
+      <p>DLM es una fábrica de muebles a medida de Buenos Aires. Desde 2021 diseñamos y fabricamos en nuestro taller cocinas, vestidores y todo el mobiliario para tus espacios, para particulares y también por mayor.</p>
+      <p>Trabajamos melamina y madera maciza: amamos la historia que cuenta cada tabla.</p>
+      <div class="desde"><span>2021</span><i></i><span>Hoy</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="como">
+  <div class="wrap">
+    <div class="sh"><div><div class="k">Cómo trabajamos</div><h2>De la primera idea a la instalación.</h2></div><p>Del primer mensaje a la instalación, hablás siempre con nosotros.</p></div>
+    <ol class="pasos">
+      <li><i>01 · Por WhatsApp</i><b>Nos contás tu idea</b><span>Fotos y medidas del espacio, un plano o una imagen de referencia.</span></li>
+      <li><i>02 · Diseño</i><b>La pensamos juntos</b><span>Distribución, materiales y detalles, hasta que te cierre.</span></li>
+      <li><i>03 · Taller propio</i><b>La fabricamos</b><span>En nuestro taller, en melamina o madera maciza.</span></li>
+      <li><i>04 · Nuestro equipo</i><b>La instalamos</b><span>La llevamos y la instalamos cuidando cada detalle.</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec mayor" id="mayor">
+  <div class="wrap mg">
+    <div><div class="k">Arquitectos, estudios y obras</div><h2 class="big2">Fabricación por mayor.</h2></div>
+    <div><p>Fabricamos para estudios, desarrolladores y obras, con el mismo taller y el mismo cuidado que en un proyecto particular. Mandanos el plano y vemos cómo resolverlo.</p>
+      <a class="btn" href="https://wa.me/5491131327062?text=Hola%20DLM%2C%20quiero%20consultar%20por%20fabricaci%C3%B3n%20para%20una%20obra.%20Les%20paso%20el%20plano%3A" target="_blank" rel="noopener"><svg><use href="#wa"/></svg>Consultar por obras</a></div>
+  </div>
+</section>
+
+<section class="cto" id="contacto">
+  <div class="wrap">
+    <div class="k">Contacto</div>
+    <h2>Hablemos de tu espacio.</h2>
+    <a class="btn" href="https://wa.me/5491131327062?text=Hola%20DLM%2C%20quiero%20hablar%20de%20mi%20espacio." target="_blank" rel="noopener"><svg><use href="#wa"/></svg>Escribinos al 11 3132-7062</a>
+    <p class="zn">Instalamos en CABA, Zona Norte, Zona Oeste y Zona Sur · <a href="https://instagram.com/delasmanosmuebles" target="_blank" rel="noopener">@delasmanosmuebles</a></p>
+  </div>
+</section>
+<footer><div class="wrap"><span>© 2026 DLM Muebles a medida · Buenos Aires</span><span>Desde 2021</span></div></footer>
+
+<script>
+// Secciones de contenido (texto de la web actual de DLM)
+const WA = t => "https://wa.me/5491131327062?text=" + encodeURIComponent(t);
+const AMB = [["Cocinas", "Bajo mesada, alacenas, islas y torres de hornos, con herrajes de cierre suave.", "Diseñala en 3D ↑", "#disena", "cocina"],
+  ["Placards y vestidores", "Interiores pensados para tu ropa: barrales, cajoneras y puertas batientes o corredizas.", "Diseñalo en 3D ↑", "#disena", "vestidor"],
+  ["Living y comedor", "Racks, bibliotecas y mesas en melamina o madera maciza.", "Diseñalo en 3D ↑", "#disena", "living"],
+  ["Dormitorios", "Respaldos, mesas de luz y muebles a medida para cada edad.", "Diseñalo en 3D ↑", "#disena", "dormitorio"],
+  ["Bodegas y macizos", "Trabajos en madera maciza: bodegas, mesas y piezas únicas.", "Consultar →"]];
+document.getElementById("amb").innerHTML = AMB.map(([t, d, l, h, ab]) => `<a href="${h || WA(`Hola DLM, quiero consultar por ${t.toLowerCase()} a medida.`)}"${h ? ` data-abrir="${ab}"` : ' target="_blank" rel="noopener"'}><b>${t}</b><span>${d}</span><em>${l}</em></a>`).join("");
+const IMG = "https://tupaginaya.net.ar/static/dlm-ka3jn9/img/stock/";
+const TRAB = [["Cocina en madera clara y granito negro", "Cocinas", "cocina-1"], ["Isla con banquetas", "Cocinas", "cocina-2"], ["Vestidor off white", "Vestidores y placares", "vestidor-1"],
+  ["Placard gris y madera", "Vestidores y placares", "placard-1"], ["Rack colgante", "Living y comedor", "living-1"], ["Comedor en madera maciza", "Living y comedor", "comedor-1"],
+  ["Dormitorio juvenil", "Dormitorios", "dormitorio-1"], ["Bodega", "Bodegas y macizos", "bodega-1"]];
+const cats = ["Todos", ...new Set(TRAB.map(t => t[1]))];
+document.getElementById("fil").innerHTML = cats.map((c, i) => `<button${i ? "" : ' class="on"'}>${c}</button>`).join("");
+document.getElementById("tg").innerHTML = TRAB.map(([t, c, f]) => `<figure class="tj" data-c="${c}"><div class="im"><img src="${IMG}${f}-1400.webp" alt="${t}" loading="lazy"><span class="ej">Foto de ejemplo</span></div><figcaption><b>${t}</b><a href="${WA(`Hola DLM, vi "${t}" en la web y quiero algo así.`)}" target="_blank" rel="noopener">Quiero algo así</a></figcaption></figure>`).join("");
+document.getElementById("fil").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; [...b.parentNode.children].forEach(x => x.classList.toggle("on", x === b));
+  document.querySelectorAll(".tj").forEach(f => f.classList.toggle("no", b.textContent !== "Todos" && f.dataset.c !== b.textContent)); });
+</script>
+
+<script type="module">
+import * as THREE from "three";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+
+// ---------- estado ----------
+const st = {
+  tipo: "cocina", integrada: 1, pared: 0, piso: 0, foto: false, zona: "", nombre: "",
+  // cocina
+  forma: "L", conIsla: 1, A: 3.8, B: 2.4, I: 1.8, alacena: true, heladera: true, torre: false, barra: true, estilo: 0, mesada: 0,
+  // vestidor y placard
+  vForma: "placard", vPuertas: "corredizas", vA: 2.4, vB: 1.8, vH: 2.5, vBarral: true, vDoble: false, vCajonera: true, vZapatero: false, vEstantes: true,
+  // dormitorio
+  cama: "queen", dA: 3.4, dRespaldo: true, dMesas: true, dPlacard: true, dPl: 2.0, dEscritorio: false, dRepisa: false,
+  // living
+  lM: "colgante", lA: 2.4, lH: 2.3, lPanel: true,
+  // otro mueble
+  oM: "rack", oA: 1.8, oH: .5, oP: .4,
+  acabado: 0,
+};
+const LIM = { A: [1.8, 7], B: [1.4, 5], I: [1, 3], vA: [1, 6], vB: [1, 4], vH: [1.8, 2.6], dA: [2.6, 6], dPl: [1, 3.5], lA: [1.2, 5], lH: [1.6, 2.6], oA: [.3, 3.5], oH: [.3, 2.6], oP: [.25, 1.2] };
+
+const ESTILOS = [
+  { n: "Madera clara y negro", d: "Bajo mesada en madera clara, isla negra", f: "maderaClara", i: "negro", a: "maderaClara", t: "barra", m: 0, sw: ["#c9a679", "#222", "#222"] },
+  { n: "Negro y madera maciza", d: "Bajo mesada negro, isla de madera", f: "negro", i: "maciza", a: "negro", t: "ninguno", m: 3, sw: ["#232323", "#8a5a33", "#6b4325"] },
+  { n: "Off white", d: "Frentes claros con tiradores largos", f: "off", i: "off", a: "off", t: "largo", m: 1, sw: ["#ebe6dc", "#e3ddd1", "#b08d57"] },
+  { n: "Gris y madera", d: "Gris con madera clara y cuarzo", f: "gris", i: "maderaClara", a: "maderaClara", t: "barra", m: 1, sw: ["#85878a", "#c9a679", "#f1efea"] },
+];
+const MESADAS = [
+  { n: "Granito negro", d: "No se marca", k: "granito", extra: 0, sw: ["#1d1d1f"] },
+  { n: "Cuarzo blanco", d: "Liso, resiste manchas", k: "cuarzo", extra: 250000, sw: ["#f1efea"] },
+  { n: "Sinterizado", d: "Blanco con veta de mármol", k: "marmol", extra: 400000, sw: ["#eeeae4", "#9a968f"] },
+  { n: "Madera maciza", d: "Una tabla entera", k: "maciza", extra: 300000, sw: ["#8a5a33"] },
+];
+const ACABADOS = [
+  { n: "Madera clara", d: "Melamina símil roble", k: "maderaClara", t: "barra", sw: ["#c9a679"], f: 1 },
+  { n: "Negro mate", d: "Sin tiradores, con uñero", k: "negro", t: "ninguno", sw: ["#232323"], f: 1 },
+  { n: "Off white", d: "Claro, con tiradores largos", k: "off", t: "largo", sw: ["#ebe6dc", "#b08d57"], f: 1 },
+  { n: "Gris grafito", d: "Gris con tiradores negros", k: "gris", t: "barra", sw: ["#85878a"], f: 1 },
+  { n: "Madera maciza", d: "Una tabla de las que amamos", k: "maciza", t: "barra", sw: ["#8a5a33"], f: 1.25 },
+];
+const PAREDES = [["Blanco", "#f1eee8"], ["Hueso", "#e8dfd0"], ["Gris claro", "#d8d8d4"], ["Verde salvia", "#c7cfbd"], ["Terracota", "#dcc0aa"], ["Azul grisáceo", "#c9d0d6"]];
+const PISOS = [["Madera clara", "pisoClaro", "#c9a77f"], ["Madera oscura", "pisoOscuro", "#7a5536"], ["Porcelanato gris", "pisoGris", "#a6a49f"], ["Porcelanato claro", "pisoBeige", "#dcd4c7"], ["Cemento alisado", "pisoCemento", "#b2aea7"]];
+const CAMAS = { "1p": ["1 plaza", .9, 1.9], "2p": ["2 plazas", 1.4, 1.9], queen: ["Queen", 1.6, 2], king: ["King", 1.8, 2] };
+const OTROS = { rack: ["Rack de TV", "Colgante o apoyado", [1.8, .5, .4]], biblioteca: ["Biblioteca", "Estantes a medida", [2, 2.2, .35]], escritorio: ["Escritorio", "Con cajones", [1.2, .75, .6]],
+  mesa: ["Mesa de comedor", "Melamina o maciza", [1.8, .75, .9]], mesaluz: ["Mesa de luz", "Con cajón", [.5, .5, .4]], bano: ["Mueble de baño", "Con cajones y bacha", [.8, .55, .45]] };
+
+// ---------- texturas hechas a mano ----------
+function rnd(seed) { let s = seed; return () => (s = (s * 16807) % 2147483647) / 2147483647; }
+function canvasTex(w, h, draw, rep = [1, 1]) {
+  const c = document.createElement("canvas"); c.width = w; c.height = h; draw(c.getContext("2d"), w, h);
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(...rep); t.anisotropy = 8; return t;
+}
+function vetas(g, w, h, base, oscuro, seed, n = 140) {
+  const r = rnd(seed); g.fillStyle = base; g.fillRect(0, 0, w, h);
+  for (let i = 0; i < n; i++) {
+    const x = r() * w, a = .04 + r() * .12, lw = .5 + r() * 2.5; g.strokeStyle = oscuro; g.globalAlpha = a; g.lineWidth = lw; g.beginPath();
+    let xx = x; g.moveTo(xx, 0); for (let y = 0; y <= h; y += 16) { xx += (r() - .5) * 2.2; g.lineTo(xx, y); } g.stroke();
+  }
+  g.globalAlpha = 1;
+}
+function tablas(g, w, h, t0, t1, mul, veta, seed) {
+  const r = rnd(seed), cols = 6, cw = w / cols;
+  for (let c = 0; c < cols; c++) {
+    let y = -r() * 400;
+    while (y < h) { const L = 260 + r() * 380, tone = t0 + r() * (t1 - t0) | 0; g.save(); g.beginPath(); g.rect(c * cw, y, cw, L); g.clip();
+      vetas(g, w, h, `rgb(${tone},${tone * mul[0] | 0},${tone * mul[1] | 0})`, veta, (r() * 1e6) | 0, 50); g.restore();
+      g.fillStyle = "rgba(40,28,15,.35)"; g.fillRect(c * cw, y, cw, 2); y += L; }
+    g.fillStyle = "rgba(40,28,15,.35)"; g.fillRect(c * cw, 0, 2, h);
+  }
+}
+function baldosas(g, w, h, base, n, junta, seed) {
+  const r = rnd(seed); g.fillStyle = base; g.fillRect(0, 0, w, h);
+  for (let i = 0; i < 9000; i++) { g.fillStyle = `rgba(${r() > .5 ? "255,255,255" : "0,0,0"},${r() * .05})`; g.fillRect(r() * w, r() * h, 2 + r() * 6, 2 + r() * 6); }
+  const s = w / n; g.fillStyle = junta; for (let k = 0; k <= n; k++) { g.fillRect(k * s - 1, 0, 2, h); g.fillRect(0, k * s - 1, w, 2); }
+}
+const TX = {};
+TX.maderaClara = canvasTex(256, 512, (g, w, h) => vetas(g, w, h, "#c8a37a", "#8a6440", 7));
+TX.maciza = canvasTex(256, 512, (g, w, h) => vetas(g, w, h, "#8d5c35", "#4a2c14", 11, 180));
+TX.granito = canvasTex(512, 512, (g, w, h) => { const r = rnd(3); g.fillStyle = "#1c1c1e"; g.fillRect(0, 0, w, h); for (let i = 0; i < 5000; i++) { g.fillStyle = `rgba(${200 + r() * 55 | 0},${200 + r() * 55 | 0},${200 + r() * 55 | 0},${r() * .35})`; g.fillRect(r() * w, r() * h, 1 + r() * 2, 1 + r() * 2); } });
+TX.cuarzo = canvasTex(512, 512, (g, w, h) => { const r = rnd(5); g.fillStyle = "#f2f0eb"; g.fillRect(0, 0, w, h); for (let i = 0; i < 2500; i++) { g.fillStyle = `rgba(120,115,108,${r() * .18})`; g.fillRect(r() * w, r() * h, 1 + r() * 2, 1 + r() * 2); } });
+TX.marmol = canvasTex(1024, 512, (g, w, h) => { const r = rnd(9); g.fillStyle = "#eeebe5"; g.fillRect(0, 0, w, h); for (let i = 0; i < 9; i++) { g.strokeStyle = `rgba(110,105,98,${.15 + r() * .3})`; g.lineWidth = .6 + r() * 2.2; g.beginPath(); let x = r() * w, y = 0; g.moveTo(x, y); for (let k = 0; k < 12; k++) { x += (r() - .3) * 120; y += h / 10; g.quadraticCurveTo(x + (r() - .5) * 90, y - 20, x, y); } g.stroke(); } });
+TX.pisoClaro = canvasTex(1024, 1024, (g, w, h) => tablas(g, w, h, 178, 206, [.78, .56], "#6d4a2a", 21));
+TX.pisoOscuro = canvasTex(1024, 1024, (g, w, h) => tablas(g, w, h, 105, 135, [.72, .52], "#2c1a0c", 23));
+TX.pisoGris = canvasTex(1024, 1024, (g, w, h) => baldosas(g, w, h, "#a7a5a0", 2, "rgba(70,68,64,.5)", 31));
+TX.pisoBeige = canvasTex(1024, 1024, (g, w, h) => baldosas(g, w, h, "#ddd5c8", 2, "rgba(120,110,95,.45)", 33));
+TX.pisoCemento = canvasTex(1024, 1024, (g, w, h) => { const r = rnd(41); g.fillStyle = "#b3afa8"; g.fillRect(0, 0, w, h); g.filter = "blur(18px)"; for (let i = 0; i < 160; i++) { g.fillStyle = `rgba(${r() > .5 ? "255,255,255" : "60,58,54"},${r() * .08})`; g.beginPath(); g.arc(r() * w, r() * h, 30 + r() * 90, 0, 7); g.fill(); } g.filter = "none"; });
+TX.azulejo = canvasTex(512, 512, (g, w, h) => baldosas(g, w, h, "#eceae6", 6, "rgba(150,145,138,.6)", 51), [3, 2]);
+TX.cielo = canvasTex(512, 512, (g, w, h) => {
+  const gr = g.createLinearGradient(0, 0, 0, h); gr.addColorStop(0, "#bcd6ec"); gr.addColorStop(.62, "#eef3f4"); gr.addColorStop(.63, "#9fb28c"); gr.addColorStop(1, "#7f946d"); g.fillStyle = gr; g.fillRect(0, 0, w, h);
+  const r = rnd(4); g.filter = "blur(14px)"; for (let i = 0; i < 22; i++) { g.fillStyle = `rgba(${110 + r() * 30 | 0},${135 + r() * 25 | 0},${100 + r() * 20 | 0},.55)`; g.beginPath(); g.ellipse(r() * w, h * (.55 + r() * .08), 40 + r() * 70, 30 + r() * 50, 0, 0, Math.PI * 2); g.fill(); } g.filter = "none";
+});
+
+const M = (o) => new THREE.MeshStandardMaterial(Object.assign({ roughness: .6, metalness: 0 }, o));
+const MAT = {
+  maderaClara: M({ map: TX.maderaClara, roughness: .55 }), maciza: M({ map: TX.maciza, roughness: .5 }),
+  negro: M({ color: "#222222", roughness: .45 }), off: M({ color: "#ebe6dc", roughness: .5 }), gris: M({ color: "#85878a", roughness: .5 }),
+  granito: M({ map: TX.granito, roughness: .25 }), cuarzo: M({ map: TX.cuarzo, roughness: .3 }), marmol: M({ map: TX.marmol, roughness: .25 }),
+  interior: M({ color: "#efebe4", roughness: .7 }), zocalo: M({ color: "#2a2928", roughness: .8 }),
+  pared: M({ color: PAREDES[0][1], roughness: .95 }), azulejo: M({ map: TX.azulejo, roughness: .35 }), piso: M({ map: TX.pisoClaro, roughness: .6 }), techo: M({ color: "#f7f5f1", roughness: 1 }),
+  acero: M({ color: "#c9cbce", metalness: .85, roughness: .32 }), tirador: M({ color: "#1b1b1b", metalness: .5, roughness: .35 }), bronce: M({ color: "#b08d57", metalness: .8, roughness: .35 }),
+  vidrioN: M({ color: "#0d0d0f", roughness: .08, metalness: .2 }), bacha: M({ color: "#9a9da1", metalness: .9, roughness: .25 }), marco: M({ color: "#2b2b2b", roughness: .5 }),
+  vidrio: new THREE.MeshBasicMaterial({ color: "#dbe9f2", transparent: true, opacity: .12, depthWrite: false }), cielo: new THREE.MeshBasicMaterial({ map: TX.cielo }),
+  espejo: M({ color: "#dfe7ea", metalness: .15, roughness: .08 }), loza: M({ color: "#f6f6f4", roughness: .2 }), vidrioD: new THREE.MeshStandardMaterial({ color: "#e8f0f2", transparent: true, opacity: .25, roughness: .05 }),
+  lampara: new THREE.MeshStandardMaterial({ color: "#1d1d1d", roughness: .5, side: THREE.DoubleSide }), luz: new THREE.MeshBasicMaterial({ color: "#fff3d6" }),
+  suelo: M({ color: "#e9e6e0", roughness: 1 }), tela: M({ color: "#cdc4b5", roughness: 1 }), tela2: M({ color: "#b9ae9c", roughness: 1 }),
+  alfombra: M({ color: "#ddd5c6", roughness: 1 }), tv: M({ color: "#0e0e10", roughness: .2, metalness: .3 }), hoja: M({ color: "#5d7a4a", roughness: .9 }), maceta: M({ color: "#c9b8a2", roughness: .9 }),
+  colchon: M({ color: "#f3f1ec", roughness: 1 }), manta: M({ color: "#9aa3a0", roughness: 1 }), almohada: M({ color: "#ffffff", roughness: 1 }),
+};
+const ROPA = ["#7d8a96", "#c9c2b6", "#3d4450", "#a7836a", "#e3dfd6", "#5b6b5a", "#b4b9c0", "#6e5a4b"].map(c => M({ color: c, roughness: 1 }));
+const LIBROS = ["#7a2f2a", "#2d3a4a", "#c9b38a", "#3f4a3a", "#e5ddd0", "#8a6b4a", "#1f1f1f"].map(c => M({ color: c, roughness: .9 }));
+
+// ---------- escena ----------
+const view = document.getElementById("view");
+const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 1.75));
+renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+view.prepend(renderer.domElement);
+const scene = new THREE.Scene(); scene.background = new THREE.Color("#f4f2ee");
+const camera = new THREE.PerspectiveCamera(38, 1, .05, 90);
+scene.add(new THREE.HemisphereLight("#fff8ee", "#b9a58c", 1.25));
+const sol = new THREE.DirectionalLight("#fff0d8", 2.6); sol.castShadow = true;
+const movil = innerWidth < 860;
+sol.shadow.mapSize.set(movil ? 1024 : 2048, movil ? 1024 : 2048); sol.shadow.bias = -.0004; sol.shadow.normalBias = .02;
+scene.add(sol, sol.target);
+const relleno = new THREE.PointLight("#ffe7c4", 14, 10, 1.4), relleno2 = new THREE.PointLight("#ffe7c4", 10, 10, 1.4); scene.add(relleno, relleno2);
+const suelo = new THREE.Mesh(new THREE.PlaneGeometry(80, 80), MAT.suelo); suelo.rotation.x = -Math.PI / 2; suelo.position.y = -.012; suelo.receiveShadow = true; scene.add(suelo);
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true; controls.dampingFactor = .08; controls.enablePan = false; controls.minDistance = 2.2; controls.maxDistance = 18; controls.maxPolarAngle = 1.38; controls.rotateSpeed = .7;
+
+let mundo = new THREE.Group(); scene.add(mundo);
+let paredes = [], abribles = [], obst = [], techo = null, cotas = null, piso = null, divisor = null, R = { W: 4, D: 4, H: 2.6, LD: 0 }, ESC = {};
+const H = 2.6;
+
+const caja = (w, h, d, mat, x = 0, y = 0, z = 0, p) => { const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat); m.position.set(x, y, z); (p || mundo).add(m); return m; };
+const cil = (rt, rb, h, mat, x, y, z, p, seg = 20) => { const m = new THREE.Mesh(new THREE.CylinderGeometry(rt, rb, h, seg), mat); m.position.set(x, y, z); (p || mundo).add(m); return m; };
+const grupo = (x, z, rot = 0, p) => { const g = new THREE.Group(); g.position.set(x, 0, z); g.rotation.y = rot; (p || mundo).add(g); return g; };
+function pared(len, alto, huecos = [], mat = MAT.pared) {
+  const s = new THREE.Shape(); s.moveTo(0, 0); s.lineTo(len, 0); s.lineTo(len, alto); s.lineTo(0, alto); s.lineTo(0, 0);
+  huecos.forEach(([x, y, w, h]) => { const p = new THREE.Path(); p.moveTo(x, y); p.lineTo(x, y + h); p.lineTo(x + w, y + h); p.lineTo(x + w, y); p.lineTo(x, y); s.holes.push(p); });
+  const g = new THREE.ExtrudeGeometry(s, { depth: .12, bevelEnabled: false }); g.translate(0, 0, -.12);
+  return new THREE.Mesh(g, mat);
+}
+function ubicar(o, rot, x, z) { o.rotation.y = rot; o.position.set(x, 0, z); mundo.add(o); return o; }
+function ventana(pg, x, y, w, h, normal, centro) {
+  const g = new THREE.Group(); pg.add(g); const xc = x + w / 2, yc = y + h / 2;
+  caja(w + .06, .05, .14, MAT.marco, xc, y - .02 + (y < .05 ? .02 : 0), -.06, g); caja(w + .06, .05, .14, MAT.marco, xc, y + h + .02, -.06, g);
+  caja(.05, h, .14, MAT.marco, x - .02, yc, -.06, g); caja(.05, h, .14, MAT.marco, x + w + .02, yc, -.06, g); caja(.03, h, .06, MAT.marco, xc, yc, -.06, g);
+  const v = new THREE.Mesh(new THREE.PlaneGeometry(w, h), MAT.vidrio); v.position.set(xc, yc, -.06); v.userData.sinSombra = 1; g.add(v);
+  const af = new THREE.Mesh(new THREE.PlaneGeometry(w + 9, 6), MAT.cielo); af.position.set(xc, 2, -2.8); af.userData.sinSombra = 1; g.add(af);
+  paredes.push([af, normal, centro]);
+}
+function tirador(est, g, x, y, z, vertical, largo) {
+  if (est.t === "ninguno") return;
+  const mat = est.t === "largo" ? MAT.bronce : MAT.tirador, L = est.t === "largo" ? (largo || .5) : .16;
+  return vertical ? caja(.014, L, .022, mat, x, y, z + .02, g) : caja(L, .014, .022, mat, x, y, z + .02, g);
+}
+function registrar(o, tipo, extra = {}) { o.userData.act = Object.assign({ tipo, t: 0, abierto: false, bx: o.position.x, bz: o.position.z }, extra); o.traverse(c => c.userData.dueño = o); abribles.push(o); }
+// estructura de un mueble: costados, piso, techo y fondo
+function casco(g, x0, w, y0, h, prof) {
+  const t = .018;
+  caja(t, h, prof, MAT.interior, x0 + t / 2, y0 + h / 2, prof / 2, g); caja(t, h, prof, MAT.interior, x0 + w - t / 2, y0 + h / 2, prof / 2, g);
+  caja(w, t, prof, MAT.interior, x0 + w / 2, y0 + t / 2, prof / 2, g); caja(w, t, prof, MAT.interior, x0 + w / 2, y0 + h - t / 2, prof / 2, g);
+  caja(w, h, t, MAT.interior, x0 + w / 2, y0 + h / 2, t / 2, g);
+}
+function puertas(g, x0, w, y0, h, prof, frente, est, alta) {
+  const gap = .004, hojas = w > .75 ? 2 : 1, hw = w / hojas;
+  for (let k = 0; k < hojas; k++) {
+    const izq = hojas === 2 ? k === 0 : (Math.round(x0 * 10) % 2 === 0);
+    const piv = new THREE.Group(); piv.position.set(izq ? x0 + k * hw + gap : x0 + (k + 1) * hw - gap, 0, prof + .009); g.add(piv);
+    const dw = hw - gap * 2, s = izq ? 1 : -1;
+    caja(dw, h - gap * 2, .018, frente, s * dw / 2, y0 + h / 2, 0, piv);
+    const ty = alta ? y0 + 1.05 : (y0 > 1 ? y0 + .1 : y0 + h - .1) - (est.t === "largo" && !alta ? (y0 > 1 ? -.2 : .2) : 0);
+    tirador(est, piv, s * (dw - .05), ty, 0, true, est.t === "largo" ? (alta ? .6 : .32) : .16);
+    registrar(piv, izq ? "izq" : "der");
+  }
+}
+function cajon(g, x0, w, y, hh, prof, frente, est) {
+  const cj = new THREE.Group(); g.add(cj);
+  caja(w - .008, hh, .018, frente, x0 + w / 2, y + hh / 2, prof + .009, cj);
+  caja(w - .07, Math.max(.04, hh - .06), prof - .06, MAT.interior, x0 + w / 2, y + hh / 2 - .01, prof / 2 + .01, cj);
+  tirador(est, cj, x0 + w / 2, y + hh - .05, prof + .018, false);
+  registrar(cj, "cajon", { d: Math.min(.4, prof - .05) });
+}
+function mueble(g, x0, w, y0, h, prof, frente, tipo, est) {
+  casco(g, x0, w, y0, h, prof);
+  if (tipo === "cajones") { const hs = [.22, .26, h - .48 - .012]; let y = y0 + h; hs.forEach(hh => { y -= hh + .004; cajon(g, x0, w, y, hh, prof, frente, est); }); }
+  else { caja(w - .036, .018, prof - .05, MAT.interior, x0 + w / 2, y0 + h * .52, prof / 2, g); puertas(g, x0, w, y0, h, prof, frente, est); }
+}
+
+// ---------- contexto de la casa ----------
+function sillon(g) { caja(2.1, .42, .9, MAT.tela, 0, .21, 0, g); caja(2.1, .45, .22, MAT.tela, 0, .62, -.34, g); caja(.18, .58, .9, MAT.tela, -1.05, .29, 0, g); caja(.18, .58, .9, MAT.tela, 1.05, .29, 0, g); [-.5, .5].forEach(d => caja(.92, .12, .62, MAT.tela2, d, .48, .08, g)); }
+function cama(g, an, la, respaldoSimple = true) {
+  caja(an + .04, .28, la, MAT.tela2, 0, .14, la / 2, g); caja(an - .02, .22, la - .06, MAT.colchon, 0, .39, la / 2 + .02, g);
+  caja(an + .04, .07, la * .64, MAT.manta, 0, .49, la - la * .32, g);
+  const np = an > 1.1 ? 2 : 1; for (let k = 0; k < np; k++) caja(an / np - .12, .12, .36, MAT.almohada, -an / 2 + (k + .5) * an / np, .55, .3, g);
+  if (respaldoSimple) caja(an + .06, .95, .08, MAT.tela2, 0, .475, .02, g);
+}
+function planta(x, z, s = 1) { cil(.2 * s, .15 * s, .42 * s, MAT.maceta, x, .21 * s, z); for (let k = 0; k < 7; k++) { const h = new THREE.Mesh(new THREE.IcosahedronGeometry((.16 + (k % 3) * .04) * s, 0), MAT.hoja); h.position.set(x + Math.sin(k * 2.1) * .14 * s, (.62 + k * .1) * s, z + Math.cos(k * 1.7) * .14 * s); mundo.add(h); } }
+function lamparaPie(x, z) { cil(.15, .15, .02, MAT.tirador, x, .01, z); cil(.012, .012, 1.55, MAT.tirador, x, .78, z); const pl = new THREE.Mesh(new THREE.CylinderGeometry(.16, .2, .26, 28, 1, true), MAT.tela); pl.position.set(x, 1.62, z); mundo.add(pl); }
+function alfombra(x, z, w, d) { const a = new THREE.Mesh(new THREE.PlaneGeometry(w, d), MAT.alfombra); a.rotation.x = -Math.PI / 2; a.position.set(x, .004, z); mundo.add(a); }
+function comedor(mx, mz, L) {
+  caja(L, .04, .9, MAT.maciza, mx, .75, mz); [[-1, -1], [1, -1], [-1, 1], [1, 1]].forEach(([a, b]) => caja(.05, .73, .05, MAT.tirador, mx + a * (L / 2 - .1), .365, mz + b * .35));
+  const sillas = Math.max(1, Math.round(L / .6));
+  for (let k = 0; k < sillas; k++) [-1, 1].forEach(s => { const sx = mx - L / 2 + (k + .5) * L / sillas, sz = mz + s * .62;
+    caja(.42, .03, .42, MAT.maderaClara, sx, .46, sz); caja(.42, .42, .03, MAT.maderaClara, sx, .68, sz + s * .2);
+    [[-1, -1], [1, -1], [-1, 1], [1, 1]].forEach(([a, b]) => caja(.025, .45, .025, MAT.tirador, sx + a * .18, .225, sz + b * .18)); });
+  cil(.004, .004, .7, MAT.tirador, mx, H - .35, mz); const pan = new THREE.Mesh(new THREE.CylinderGeometry(.12, .3, .16, 32, 1, true), MAT.lampara); pan.position.set(mx, H - .78, mz); mundo.add(pan);
+  obst.push([mx - L / 2 - .25, mz - .75, mx + L / 2 + .25, mz + .75]);
+}
+// ambiente de al lado (para que se vea que está dentro de una casa)
+function zonaLiving(W, D, LD, conComedor) {
+  if (conComedor) comedor(W / 2, D + 1.25, Math.min(1.7, W - 1.4));
+  const lz = D + LD * .64, sx = Math.min(W - .55, 3.3);
+  caja(.36, .32, 1.9, MAT.maderaClara, .19, .52, lz); caja(.03, .62, 1.12, MAT.tv, .05, 1.28, lz);
+  alfombra(sx - 1.05, lz, 1.8, 2.4); caja(.5, .3, .9, MAT.maciza, sx - 1.35, .15, lz);
+  sillon(grupo(sx, lz, -Math.PI / 2));
+  obst.push([0, lz - 1, .5, lz + 1], [sx - 1.65, lz - 1.15, W, lz + 1.15]);
+  planta(W - .38, D + LD - .38); lamparaPie(.45, D + LD - .4);
+}
+function zonaComedor(W, D, LD) { comedor(W / 2, D + LD * .45, Math.min(1.8, W - 1.4)); caja(1.6, .8, .42, MAT.maciza, W / 2, .4, D + LD - .21); planta(.4, D + LD - .4); obst.push([W / 2 - .85, D + LD - .5, W / 2 + .85, D + LD]); }
+function zonaDormitorio(W, D, LD) { const an = 1.6, g = grupo(W / 2, D + LD, Math.PI); cama(g, an, 2); [-1, 1].forEach(s => caja(.45, .5, .4, MAT.maderaClara, W / 2 + s * (an / 2 + .3), .25, D + LD - .25)); alfombra(W / 2, D + LD - 1.2, 2.4, 1.8); obst.push([W / 2 - 1.1, D + LD - 2.1, W / 2 + 1.1, D + LD]); }
+
+// casa: piso, paredes con ventanas, ambiente de al lado, techo y luces
+function casa({ W, D, LD, vent, integrada, adj, matPared }) {
+  const T = D + LD;
+  R = { W, D, H, LD };
+  piso = new THREE.Mesh(new THREE.PlaneGeometry(W, T), MAT.piso); piso.rotation.x = -Math.PI / 2; piso.position.set(W / 2, 0, T / 2); mundo.add(piso);
+  MAT.piso.map.repeat.set(W / 1.6, T / 1.6);
+  const nF = new THREE.Vector3(0, 0, 1), nI = new THREE.Vector3(1, 0, 0), nD = new THREE.Vector3(-1, 0, 0), nFr = new THREE.Vector3(0, 0, -1);
+  const cF = new THREE.Vector3(W / 2, H / 2, 0), cI = new THREE.Vector3(0, H / 2, T / 2), cD = new THREE.Vector3(W, H / 2, T / 2), cFr = new THREE.Vector3(W / 2, H / 2, T);
+  const hF = [], hI = [], hD = [], hFr = [];
+  if (vent.pared === "fondo") hF.push([vent.a, vent.y, vent.w, vent.h]);
+  if (vent.pared === "izq") hI.push([T - (vent.a + vent.w), vent.y, vent.w, vent.h]);
+  if (vent.pared === "der") hD.push([vent.a, vent.y, vent.w, vent.h]);
+  const lw = Math.min(1.5, LD - 2.2); if (LD > 3.4 && vent.pared !== "der") hD.push([D + .9, .95, lw, 1.2]);
+  if (LD > 0) hFr.push([.7, 0, Math.min(2.4, W - 1.6), 2.2]); else hFr.push([Math.max(.3, W - 1.3), 0, .9, 2.05]);
+  const mp = matPared || MAT.pared;
+  const pf = ubicar(pared(W, H, hF, mp), 0, 0, 0), pi = ubicar(pared(T, H, hI, LD ? MAT.pared : mp), Math.PI / 2, 0, T), pd = ubicar(pared(T, H, hD, LD ? MAT.pared : mp), -Math.PI / 2, W, 0), pfr = ubicar(pared(W, H, hFr), Math.PI, W, T);
+  hF.forEach(h => ventana(pf, ...h, nF, cF)); hI.forEach(h => ventana(pi, ...h, nI, cI)); hD.forEach(h => ventana(pd, ...h, nD, cD)); if (LD > 0) hFr.forEach(h => ventana(pfr, ...h, nFr, cFr));
+  paredes.push([pf, nF, cF], [pi, nI, cI], [pd, nD, cD], [pfr, nFr, cFr]);
+  divisor = null;
+  if (LD > 0 && !integrada) { const px = Math.max(.3, W - 1.4); divisor = ubicar(pared(W, H, [[px, 0, .9, 2.05]], mp), Math.PI, W, D); obst.push([0, D - .1, W - px - .9 + 0, D + .1].map((v, i) => i === 2 ? W - (px + .9) : v), [W - px, D - .1, W, D + .1]); }
+  if (LD > 0) { if (adj === "living") zonaLiving(W, D, LD, integrada); if (adj === "comedor") zonaComedor(W, D, LD); if (adj === "dormitorio") zonaDormitorio(W, D, LD); }
+  techo = new THREE.Mesh(new THREE.PlaneGeometry(W, T), MAT.techo); techo.rotation.x = Math.PI / 2; techo.position.set(W / 2, H, T / 2); techo.visible = modo === "adentro"; mundo.add(techo);
+  // el sol entra por la ventana principal
+  const vc = vent.a + vent.w / 2;
+  if (vent.pared === "fondo") { sol.position.set(vc + 1.2, 5.2, -4.2); sol.target.position.set(vc - .3, 0, 1.6); }
+  if (vent.pared === "der") { sol.position.set(W + 4.2, 5.2, vc + 1.2); sol.target.position.set(W - 1.6, 0, vc - .3); }
+  if (vent.pared === "izq") { sol.position.set(-4.2, 5.2, vc + 1.2); sol.target.position.set(1.6, 0, vc - .3); }
+  if (vent.pared === "ninguna") { sol.position.set(W + 3, 6, -3); sol.target.position.set(W / 2, 0, D / 2); }
+  const sc = sol.shadow.camera; sc.left = -9; sc.right = 9; sc.top = 9; sc.bottom = -9; sc.near = 1; sc.far = 24; sc.updateProjectionMatrix();
+  relleno.position.set(W / 2, H - .3, D * .6); relleno2.position.set(W / 2, H - .3, D + LD * .55);
+}
+
+// ---------- cocina ----------
+function corrida({ len, rot, x, z, est, mesada, frente, items = [], alacena = true, ventanaPos = null, campana = null, isla = false }) {
+  const g = new THREE.Group(); ubicar(g, rot, x, z);
+  const P = .58, Hb = .76, zo = .1;
+  let fin = len; const altos = [];
+  items.forEach(it => { if (it === "heladera") { fin -= .76; altos.push(["heladera", fin, .76]); } if (it === "torre") { fin -= .62; altos.push(["torre", fin, .62]); } });
+  const base = Math.max(.6, fin), nm = Math.max(1, Math.round(base / .6)), w = base / nm;
+  const pos = []; for (let i = 0; i < nm; i++) pos.push(i * w);
+  const iBacha = ventanaPos != null ? Math.min(nm - 1, Math.max(0, Math.round(ventanaPos * base / w - .5))) : -1;
+  const iAnafe = campana != null ? Math.min(nm - 1, Math.max(0, Math.round(campana * base / w - .5))) : -1;
+  pos.forEach((x0, i) => { caja(w, zo, P - .06, MAT.zocalo, x0 + w / 2, zo / 2, (P - .06) / 2, g); mueble(g, x0, w, zo, Hb, P, frente, i === iAnafe ? "cajones" : i === iBacha ? "puertas" : (i % 3 === 1 ? "cajones" : "puertas"), est); });
+  if (!isla) caja(base, .035, .62, mesada, base / 2, zo + Hb + .0175, .31, g);
+  if (iBacha >= 0) { const cx = iBacha * w + w / 2; caja(.56, .01, .4, MAT.bacha, cx, zo + Hb + .036, .31, g);
+    caja(.025, .32, .025, MAT.acero, cx, zo + Hb + .19, .08, g); const pico = new THREE.Mesh(new THREE.TorusGeometry(.1, .012, 8, 20, Math.PI), MAT.acero); pico.position.set(cx, zo + Hb + .35, .18); pico.rotation.y = Math.PI / 2; g.add(pico); }
+  if (iAnafe >= 0) { const cx = iAnafe * w + w / 2; caja(.58, .008, .5, MAT.vidrioN, cx, zo + Hb + .039, .3, g);
+    [[-.13, .19], [.13, .19], [-.13, .41], [.13, .41]].forEach(([dx, dz]) => { const r = new THREE.Mesh(new THREE.RingGeometry(.06, .075, 32), M({ color: "#5a5a5a", roughness: .4 })); r.rotation.x = -Math.PI / 2; r.position.set(cx + dx, zo + Hb + .045, dz); g.add(r); }); }
+  altos.forEach(([k, x0, ww]) => {
+    if (k === "heladera") { caja(ww - .02, 1.86, .66, MAT.acero, x0 + ww / 2, .93, .34, g); caja(.02, .5, .03, MAT.tirador, x0 + .08, 1.25, .68, g); caja(ww - .03, .006, .005, MAT.zocalo, x0 + ww / 2, 1.2, .675, g);
+      if (alacena) mueble(g, x0, ww, 1.98, .42, .6, frente, "puertas", est); }
+    else { mueble(g, x0, ww, zo, .62, P, frente, "cajones", est); caja(ww - .02, 2.18 - .72 - .02, P, frente, x0 + ww / 2, .72 + (2.18 - .72) / 2, P / 2, g);
+      caja(ww - .1, .55, .01, MAT.vidrioN, x0 + ww / 2, 1.02, P + .006, g); caja(ww - .1, .38, .01, MAT.vidrioN, x0 + ww / 2, 1.68, P + .006, g); caja(.34, .012, .02, MAT.acero, x0 + ww / 2, 1.33, P + .02, g); }
+  });
+  if (alacena && !isla) {
+    const hueco = iBacha >= 0 ? [iBacha * w + w / 2 - .65, iBacha * w + w / 2 + .65] : null;
+    pos.forEach((x0, i) => { const c = x0 + w / 2; if (hueco && c > hueco[0] && c < hueco[1]) return;
+      if (i === iAnafe) { caja(w * .95, .14, .48, MAT.acero, c, 1.62, .26, g); caja(.3, H - 1.69, .26, MAT.acero, c, 1.69 + (H - 1.69) / 2, .15, g); return; }
+      mueble(g, x0, w, 1.45, .72, .35, frente, "puertas", est); });
+  }
+  return { base, w, iBacha, g };
+}
+function escCocina() {
+  const est = ESTILOS[st.estilo], mes = MAT[MESADAS[st.mesada].k], fr = MAT[est.f], fi = MAT[est.i];
+  const A = st.A, B = st.forma === "recta" ? 0 : st.B, enL = st.forma !== "recta";
+  const W = st.forma === "recta" ? A + 1.2 : A, x0 = st.forma === "recta" ? .6 : 0;
+  const D = Math.max(st.conIsla ? 4.2 : 3.2, B + (st.conIsla ? 1.8 : 1.1)), LD = 4.6;
+  const items = []; if (st.torre) items.push("torre"); if (st.heladera) items.push("heladera");
+  const iA = corrida({ len: A, rot: 0, x: x0, z: 0, est, mesada: mes, frente: fr, items, alacena: st.alacena, ventanaPos: enL ? .62 : .66, campana: enL ? null : .22 });
+  obst.push([x0, 0, x0 + A, .7]);
+  let lenB = 0;
+  if (enL) { lenB = B - .6; corrida({ len: lenB, rot: Math.PI / 2, x: 0, z: B, est, mesada: mes, frente: fr, alacena: st.alacena, campana: .5 }); obst.push([0, 0, .7, B]); }
+  if (st.forma === "U") { const z0 = st.heladera ? .7 : .6; corrida({ len: B - z0, rot: -Math.PI / 2, x: W, z: z0, est, mesada: mes, frente: fr, alacena: st.alacena }); obst.push([W - .7, 0, W, B]); lenB += B - z0; }
+  let lenI = 0;
+  if (st.conIsla) {
+    const I = st.I; lenI = I; const ci = enL ? .6 + (W - .6 - (st.forma === "U" ? .6 : 0)) / 2 : W / 2, zi = 2.05;
+    const ig = grupo(ci, zi); const sub = new THREE.Group(); sub.rotation.y = Math.PI; sub.position.set(I / 2, 0, .3); ig.add(sub);
+    const save = mundo; mundo = sub; corrida({ len: I, rot: 0, x: 0, z: 0, est, mesada: mes, frente: fi, isla: true, alacena: false }); mundo = save;
+    caja(I, .86, .02, fi, 0, .43, .31, ig);
+    const ext = st.barra ? .32 : 0; caja(I + .06, .04, .66 + ext, mes, 0, .88, ext / 2, ig);
+    if (st.barra) { const nb = Math.max(2, Math.round(I / .6)); for (let k = 0; k < nb; k++) { const bx = -I / 2 + (k + .5) * I / nb;
+      cil(.17, .17, .045, MAT.maderaClara, bx, .66, .62, ig, 28); cil(.018, .025, .64, MAT.tirador, bx, .32, .62, ig, 10); cil(.16, .18, .015, MAT.tirador, bx, .008, .62, ig, 24);
+      const ar = new THREE.Mesh(new THREE.TorusGeometry(.13, .008, 6, 28), MAT.tirador); ar.rotation.x = Math.PI / 2; ar.position.set(bx, .26, .62); ig.add(ar); } }
+    [-I / 4, I / 4].forEach(lx => { cil(.004, .004, .9, MAT.tirador, lx, H - .45, ext / 2, ig, 4);
+      const pan = new THREE.Mesh(new THREE.ConeGeometry(.17, .2, 28, 1, true), MAT.lampara); pan.position.set(lx, H - .98, ext / 2); ig.add(pan);
+      const fo = new THREE.Mesh(new THREE.SphereGeometry(.05, 12, 8), MAT.luz); fo.position.set(lx, H - 1.06, ext / 2); fo.userData.sinSombra = 1; ig.add(fo); });
+    obst.push([ci - I / 2 - .05, zi - .35, ci + I / 2 + .05, zi + .35 + ext]);
+  }
+  const bachaX = x0 + iA.iBacha * iA.w + iA.w / 2;
+  casa({ W, D, LD, vent: { pared: "fondo", a: bachaX - .55, y: 1.08, w: 1.1, h: 1.12 }, integrada: st.integrada, adj: "living" });
+  cota(x0, -.45, x0 + A, -.45, A, "A"); if (enL) cota(-.45, 0, -.45, B, B, "B", true);
+  const bajo = iA.base + lenB, alac = st.alacena ? bajo : 0, f = [1, 1.12, 1.05, 1][st.estilo];
+  const mid = (bajo * 1550000 + alac * 850000 + lenI * 1750000 + (st.torre ? 900000 : 0) + MESADAS[st.mesada].extra * (bajo + lenI)) * f;
+  return { precio: mid, stats: [[bajo, "m bajo mesada"], ...(st.alacena ? [[alac, "m alacena"]] : []), ...(st.conIsla ? [[lenI, "m isla"]] : [])],
+    dentro: st.integrada ? [[W * .8, D + .25], [W * .38, 1.2, .5]] : [[W - .45, D - .4], [W * .38, 1.2, .5]] };
+}
+
+// ---------- vestidor y placard ----------
+function ropero(g, len, h, prof, est, opc) {
+  const frente = MAT[est.k], n = Math.max(1, Math.round(len / .8)), w = len / n, zo = .08;
+  caja(len, zo, prof - .04, MAT.zocalo, len / 2, zo / 2, (prof - .04) / 2, g);
+  const tipos = []; if (opc.barral) tipos.push("barral"); if (opc.cajonera) tipos.push("cajonera"); if (opc.doble) tipos.push("doble"); if (opc.estantes) tipos.push("estantes"); if (opc.zapatero) tipos.push("zapatero"); if (!tipos.length) tipos.push("estantes");
+  const hh = h - zo, r = rnd(Math.round(len * 100));
+  const colgar = (x0, y, alto) => { cil(.012, .012, w - .04, MAT.acero, x0 + w / 2, y, prof / 2, g).rotation.z = Math.PI / 2;
+    for (let k = 0; k < Math.floor((w - .1) / .07); k++) caja(.035, alto, prof - .14, ROPA[(r() * ROPA.length) | 0], x0 + .07 + k * .07, y - alto / 2 - .03, prof / 2, g); };
+  const estantes = (x0, y0, y1) => { for (let y = y0; y < y1 - .2; y += .36) { caja(w - .036, .018, prof - .03, MAT.interior, x0 + w / 2, y, prof / 2, g); if (r() > .35) for (let k = 0; k < 3; k++) caja(.26, .05, .26, ROPA[(r() * ROPA.length) | 0], x0 + w / 2 + (r() - .5) * (w - .4), y + .035 + k * .05, prof / 2, g); } };
+  for (let i = 0; i < n; i++) {
+    const x0 = i * w, t = tipos[i % tipos.length];
+    casco(g, x0, w, zo, hh, prof);
+    if (t === "barral") colgar(x0, zo + hh - .3, 1.05);
+    if (t === "doble") { colgar(x0, zo + hh - .3, .75); colgar(x0, zo + 1.1, .7); }
+    if (t === "cajonera") { for (let k = 0; k < 4; k++) cajon(g, x0, w, zo + .02 + k * .2, .19, prof, frente, est); caja(w - .036, .018, prof - .03, MAT.interior, x0 + w / 2, zo + .85, prof / 2, g); colgar(x0, zo + hh - .3, .75); }
+    if (t === "estantes") estantes(x0, zo + .4, zo + hh);
+    if (t === "zapatero") { for (let k = 0; k < 3; k++) { const s = caja(w - .04, .015, prof - .08, MAT.interior, x0 + w / 2, zo + .14 + k * .24, prof / 2, g); s.rotation.x = -.25; for (let z = 0; z < Math.floor((w - .1) / .16); z++) caja(.1, .08, .26, LIBROS[(r() * 7) | 0], x0 + .1 + z * .16, zo + .2 + k * .24, prof / 2, g); } estantes(x0, zo + .95, zo + hh); }
+  }
+  if (opc.puertas === "batientes") for (let i = 0; i < n; i++) puertas(g, i * w, w, zo, hh, prof, frente, est, true);
+  if (opc.puertas === "corredizas") {
+    const np = Math.max(2, Math.round(len / 1)), pw = len / np;
+    for (let i = 0; i < np; i++) { const pg = new THREE.Group(); pg.position.set(i * pw + pw / 2, 0, prof + (i % 2 ? .05 : .02)); g.add(pg);
+      caja(pw + .02, hh - .01, .02, frente, 0, zo + hh / 2, 0, pg); tirador(est, pg, (i % 2 ? -1 : 1) * (pw / 2 - .05), zo + 1.05, .0, true, .6);
+      registrar(pg, "corre", { dx: (i === np - 1 ? -1 : 1) * pw * .92 }); }
+    caja(len, .03, .08, MAT.tirador, len / 2, zo + hh + .015, prof + .04, g);
+  }
+}
+function escVestidor() {
+  const est = ACABADOS[st.acabado], f = st.vForma, A = st.vA, B = f === "placard" ? 0 : st.vB, h = Math.min(st.vH, H), prof = f === "placard" ? .6 : .55;
+  const opc = { barral: st.vBarral, doble: st.vDoble, cajonera: st.vCajonera, zapatero: st.vZapatero, estantes: st.vEstantes, puertas: st.vPuertas };
+  let W, D, x0 = 0, len = A, adj;
+  if (f === "placard") { W = Math.max(A + 1.2, 3.4); D = 3.8; x0 = (W - A) / 2; adj = "living"; }
+  else { W = f === "U" ? A : Math.max(A, 2.4); D = Math.max(2.6, B + 1.4); adj = "dormitorio"; }
+  ropero(grupo(x0, 0), A, h, prof, est, opc); obst.push([x0, 0, x0 + A, prof + .1]);
+  if (f !== "placard") { const lb = B - prof; ropero(grupo(0, B, Math.PI / 2), lb, h, prof, est, opc); obst.push([0, 0, prof + .1, B]); len += lb;
+    if (f === "U") { ropero(grupo(W, prof, -Math.PI / 2), lb, h, prof, est, opc); obst.push([W - prof - .1, 0, W, B]); len += lb; }
+    // puff y espejo en el vestidor
+    cil(.3, .3, .42, MAT.tela2, W / 2, .21, Math.min(D - .8, B + .3), null, 28);
+  } else {
+    // dormitorio con cama contra la pared izquierda
+    const g = grupo(0, D * .62, Math.PI / 2); cama(g, 1.6, 2); [-1, 1].forEach(s => caja(.45, .5, .4, MAT.maderaClara, .22, .25, D * .62 + s * 1.1)); alfombra(1.2, D * .62, 2.4, 2.2); obst.push([0, D * .62 - 1, 2.05, D * .62 + 1]);
+  }
+  casa({ W, D, LD: f === "placard" ? 4.2 : 3.4, vent: f === "placard" ? { pared: "der", a: D * .35, y: .95, w: 1.3, h: 1.25 } : { pared: "ninguna", a: 0, y: 0, w: 0, h: 0 }, integrada: 0, adj });
+  if (f !== "placard") { /* vestidor sin ventana: luz desde el techo */ relleno.intensity = 20; }
+  cota(x0, -.45, x0 + A, -.45, A, "A"); if (f !== "placard") cota(-.45, 0, -.45, B, B, "B", true);
+  const m2 = len * h, mid = (m2 * 580000 * { corredizas: 1, batientes: .95, abierto: .8 }[st.vPuertas] + (st.vCajonera ? 320000 : 0) + (st.vZapatero ? 160000 : 0)) * est.f;
+  return { precio: mid, stats: [[len, "m de largo"], [h, "m de alto"], [m2, "m² de frente"]], dentro: f === "placard" ? [[W - .6, D - .5], [x0 + A / 2, 1.3, 0]] : [[W / 2 + .2, D + .6], [W / 2, 1.3, 0]] };
+}
+
+// ---------- dormitorio ----------
+function escDormitorio() {
+  const est = ACABADOS[st.acabado], fr = MAT[est.k], A = st.dA, [nc, an, la] = CAMAS[st.cama], W = A, D = Math.max(3.8, la + 1.9);
+  const bx = st.dPlacard ? Math.min(W / 2, W - st.dPl * 0 - 1.1 - an / 2) : W / 2, cx = W / 2 + (st.dPlacard ? .3 : 0);
+  // respaldo a medida con mesas de luz flotantes
+  const g = grupo(cx, 0); cama(g, an, la, !st.dRespaldo); obst.push([cx - an / 2 - .1, 0, cx + an / 2 + .1, la + .1]);
+  let p = 0;
+  if (st.dRespaldo) { const rw = Math.min(W - (st.dPlacard ? .7 : .2), an + 1.6); caja(rw, 1.15, .04, fr, cx, .575 + .05, .02); for (let k = 0; k < Math.round(rw / .12); k++) caja(.008, 1.1, .01, MAT.zocalo, cx - rw / 2 + .12 * (k + .5), .63, .042); p += rw * 420000; }
+  if (st.dMesas) [-1, 1].forEach(s => { const mx = cx + s * (an / 2 + .32), mg = grupo(mx - .25, .05); casco(mg, 0, .5, .4, .2, .38); cajon(mg, 0, .5, .41, .18, .38, fr, est); caja(.16, .2, .16, MAT.luz, .25, .72, .2, mg).userData.sinSombra = 1; p += 260000; });
+  if (st.dPlacard) { const L = Math.min(st.dPl, D - .4); const pz = Math.max(.2, D - L - .3); ropero(grupo(0, pz + L, Math.PI / 2), L, 2.5, .6, est, { barral: true, cajonera: true, estantes: true, puertas: "corredizas" }); obst.push([0, pz, .7, pz + L]); p += L * 2.5 * 580000; }
+  if (st.dEscritorio) { const ez = D - 1.0; caja(.6, .03, 1.2, fr, W - .3, .75, ez); casco(grupo(W, ez - .6, -Math.PI / 2), 0, .45, .05, .7, .58); caja(.04, .3, .55, MAT.tv, W - .3, .95, ez); cil(.24, .24, .05, MAT.tela2, W - .85, .48, ez, null, 24); obst.push([W - 1.1, ez - .7, W, ez + .7]); p += 480000; }
+  if (st.dRepisa) { caja(.25, .03, 1.2, fr, W - .125, 1.6, D - 1.0); for (let k = 0; k < 8; k++) caja(.18, .2 + (k % 3) * .03, .03, LIBROS[k % 7], W - .1, 1.72, D - 1.4 + k * .05); p += 150000; }
+  alfombra(cx, la * .7, an + 1.2, 1.9); planta(.4, D - .4, .8);
+  casa({ W, D, LD: 4.2, vent: { pared: "der", a: .7, y: .95, w: 1.3, h: 1.25 }, integrada: 0, adj: "living" });
+  cota(0, -.45, W, -.45, W, "A");
+  return { precio: p * est.f || null, stats: [[an, "m de cama"], [W, "m de pared"]], dentro: [[W / 2 - .2, D - .35], [cx, 1, .3]] };
+}
+
+// ---------- living ----------
+function escLiving() {
+  const est = ACABADOS[st.acabado], fr = MAT[est.k], A = st.lA, W = Math.max(A + 1.6, 4), D = 4.6, x0 = (W - A) / 2, g = grupo(x0, 0);
+  let p = 0;
+  if (st.lM === "biblioteca") {
+    const h = Math.min(st.lH, H), n = Math.max(2, Math.round(A / .8)), w = A / n, prof = .35, r = rnd(7);
+    for (let i = 0; i < n; i++) { const xi = i * w; casco(g, xi, w, .08, h - .08, prof); mueble(g, xi, w, .08, .62, prof, fr, i % 2 ? "puertas" : "cajones", est);
+      for (let y = .9; y < h - .3; y += .38) { caja(w - .036, .02, prof - .03, MAT.interior, xi + w / 2, y, prof / 2, g);
+        let x = xi + .04; while (x < xi + w - .1) { if (r() > .82) { x += .1; continue; } const bw = .025 + r() * .025, bh = .2 + r() * .1; caja(bw, bh, .2, LIBROS[(r() * 7) | 0], x + bw / 2, y + .01 + bh / 2, prof / 2, g); x += bw + .003; } } }
+    caja(A, .08, prof - .04, MAT.zocalo, A / 2, .04, (prof - .04) / 2, g);
+    p = A * h * 430000; obst.push([x0, 0, x0 + A, .45]);
+  } else {
+    const colg = st.lM === "colgante", y0 = colg ? .3 : .1, hh = colg ? .38 : .5, prof = .42, n = Math.max(2, Math.round(A / .6)), w = A / n;
+    if (!colg) caja(A, .1, prof - .04, MAT.zocalo, A / 2, .05, (prof - .04) / 2, g);
+    for (let i = 0; i < n; i++) { if (colg || i % 2) { casco(g, i * w, w, y0, hh, prof); cajon(g, i * w, w, y0 + .005, hh - .01, prof, fr, est); } else mueble(g, i * w, w, y0, hh, prof, fr, "puertas", est); }
+    if (st.lPanel) { const pw = Math.min(A, 2.2); for (let k = 0; k < Math.round(pw / .06); k++) caja(.04, H - .02, .025, MAT.maderaClara, A / 2 - pw / 2 + .03 + k * .06, H / 2, .0125, g); p += pw * 380000; }
+    caja(1.3, .75, .04, MAT.tv, A / 2, colg ? 1.3 : 1.15, .06, g);
+    p += A * (colg ? 700000 : 620000); obst.push([x0, 0, x0 + A, .5]);
+  }
+  const sz = D - 1.25; sillon(grupo(W / 2, sz, Math.PI)); alfombra(W / 2, sz - 1.1, 2.6, 1.9); caja(.9, .32, .5, MAT.maciza, W / 2, .16, sz - 1.2);
+  planta(W - .4, .45); lamparaPie(.45, D - .5); obst.push([W / 2 - 1.15, sz - 1.5, W / 2 + 1.15, sz + .5]);
+  casa({ W, D, LD: 3.6, vent: { pared: "der", a: 1.2, y: .4, w: 1.8, h: 1.8 }, integrada: st.integrada, adj: "comedor" });
+  cota(x0, -.45, x0 + A, -.45, A, "A");
+  return { precio: p * est.f, stats: [[A, "m de ancho"], ...(st.lM === "biblioteca" ? [[st.lH, "m de alto"]] : [])], dentro: [[W * .75, D - .4], [W / 2, 1.1, 0]] };
+}
+
+// ---------- otro mueble ----------
+function escOtro() {
+  const est = ACABADOS[st.acabado], fr = MAT[est.k], A = st.oA, Hh = st.oH, P = st.oP, m = st.oM;
+  let W = 4, D = 4.2, ctx = "living", foco = [W / 2, .8, 0], matPared = null;
+  if (m === "bano") { W = 2.4; D = 2.6; ctx = "bano"; matPared = MAT.azulejo; }
+  if (m === "escritorio" || m === "mesaluz") ctx = "dormitorio";
+  const x0 = (W - A) / 2;
+  if (m === "rack") { const g = grupo(x0, 0), n = Math.max(1, Math.round(A / .6)), w = A / n; for (let i = 0; i < n; i++) { if (i % 2) { casco(g, i * w, w, .1, Hh - .1, P); cajon(g, i * w, w, .105, Hh - .11, P, fr, est); } else mueble(g, i * w, w, .1, Hh - .1, P, fr, "puertas", est); }
+    caja(A, .1, P - .04, MAT.zocalo, A / 2, .05, (P - .04) / 2, g); caja(1.2, .7, .04, MAT.tv, A / 2, Hh + .55, .05, g); }
+  if (m === "biblioteca") { const g = grupo(x0, 0), n = Math.max(1, Math.round(A / .8)), w = A / n, r = rnd(3); for (let i = 0; i < n; i++) { casco(g, i * w, w, .05, Hh - .05, P);
+      for (let y = .4; y < Hh - .25; y += .36) { caja(w - .036, .02, P - .03, MAT.interior, i * w + w / 2, y, P / 2, g); let x = i * w + .04; while (x < i * w + w - .1) { const bw = .025 + r() * .025, bh = .2 + r() * .1; if (r() > .2) caja(bw, bh, .2, LIBROS[(r() * 7) | 0], x + bw / 2, y + .01 + bh / 2, P / 2, g); x += bw + .004; } } } }
+  if (m === "escritorio") { caja(A, .03, P, fr, W / 2, Hh, P / 2); const g = grupo(W / 2 + A / 2 - .45, 0); casco(g, 0, .45, .05, Hh - .08, P - .02); for (let k = 0; k < 3; k++) cajon(g, 0, .45, .07 + k * (Hh - .12) / 3, (Hh - .12) / 3 - .01, P - .02, fr, est);
+    caja(.02, Hh - .05, P, fr, W / 2 - A / 2 + .01, (Hh - .05) / 2, P / 2); caja(.5, .32, .02, MAT.tv, W / 2 - .2, Hh + .2, .12).rotation.x = -.1; cil(.24, .24, .05, MAT.tela2, W / 2 - .2, .48, P + .35, null, 24); }
+  if (m === "mesa") { const mz = 1.6; comedor(W / 2, mz, A); obst.length = 0; foco = [W / 2, .6, mz]; }
+  if (m === "mesaluz") { const g = grupo(W / 2 - .85 - A, .05); casco(g, 0, A, Math.max(.1, Hh - .25), .25, P); cajon(g, 0, A, Math.max(.1, Hh - .25) + .01, .23, P, fr, est); for (const [a, b] of [[.03, .03], [A - .03, .03], [.03, P - .03], [A - .03, P - .03]]) caja(.025, Hh - .25, .025, MAT.tirador, a, (Hh - .25) / 2, b, g);
+    caja(.16, .22, .16, MAT.luz, A / 2, Hh + .11, P / 2, g).userData.sinSombra = 1; const cg = grupo(W / 2, 0); cama(cg, 1.6, 2); obst.push([W / 2 - .9, 0, W / 2 + .9, 2.1]); foco = [W / 2 - .85 - A / 2, .5, 0]; }
+  if (m === "bano") { const g = grupo(x0, 0), y0 = .3; casco(g, 0, A, y0, Hh - .05, P); const nc = Math.max(1, Math.round(A / .5)); for (let k = 0; k < nc; k++) cajon(g, k * A / nc, A / nc, y0 + .005, Hh - .06, P, fr, est);
+    caja(A + .02, .03, P + .02, MAT.cuarzo, A / 2, y0 + Hh - .03, P / 2, g); caja(.42, .12, .32, MAT.loza, A / 2, y0 + Hh + .04, P / 2, g); caja(.025, .2, .025, MAT.acero, A / 2, y0 + Hh + .1, .06, g);
+    caja(Math.min(A, .9), .8, .02, MAT.espejo, A / 2, 1.65, .02, g);
+    cil(.19, .16, .4, MAT.loza, .45, .2, 1.55, null, 24); caja(.18, .38, .36, MAT.loza, .12, .58, 1.55); obst.push([0, 1.2, .7, 1.9]); caja(.02, 1.9, 1.1, MAT.vidrioD, W - .9, .95, D - .6); }
+  if (ctx === "living" && m !== "mesa") { sillon(grupo(W / 2, D - 1.2, Math.PI)); alfombra(W / 2, D - 2.2, 2.4, 1.6); planta(W - .4, .45); obst.push([W / 2 - 1.15, D - 1.7, W / 2 + 1.15, D - .7]); }
+  if (ctx === "living" && m === "mesa") { sillon(grupo(W / 2, D - .6, Math.PI)); planta(W - .4, .45); }
+  if (ctx === "dormitorio" && m === "escritorio") { const cg = grupo(.2, D - 1.2, Math.PI / 2); cama(cg, .9, 1.9); planta(W - .4, D - .4, .8); }
+  if (m !== "mesa" && m !== "escritorio" && m !== "mesaluz") obst.push([x0, 0, x0 + A, P + .1]);
+  casa({ W, D, LD: ctx === "bano" ? 3 : 3.8, vent: ctx === "bano" ? { pared: "der", a: .6, y: 1.5, w: .8, h: .6 } : { pared: "der", a: 1.2, y: .9, w: 1.4, h: 1.3 }, integrada: 0, adj: ctx === "bano" ? "dormitorio" : ctx === "living" ? "comedor" : "living", matPared });
+  cota(x0, -.45, x0 + A, -.45, A, "A");
+  return { precio: null, stats: [[A, "m de ancho"], [Hh, "m de alto"], [P, "m de prof."]], dentro: [[W * .72, D - .4], foco] };
+}
+
+// ---------- construir según el tipo ----------
+function construir() {
+  mundo.traverse(o => { if (o.geometry) o.geometry.dispose(); }); scene.remove(mundo); mundo = new THREE.Group(); scene.add(mundo);
+  paredes = []; abribles = []; obst = []; relleno.intensity = 14;
+  MAT.pared.color.set(st.pared < 0 ? st.paredFoto : PAREDES[st.pared][1]); MAT.piso.map = TX[PISOS[st.piso][1]]; MAT.piso.needsUpdate = true;
+  cotas = new THREE.Group(); cotas.visible = modo !== "adentro";
+  ESC = { cocina: escCocina, vestidor: escVestidor, dormitorio: escDormitorio, living: escLiving, otro: escOtro }[st.tipo]();
+  mundo.add(cotas);
+  mundo.traverse(o => { if (o.isMesh && !o.userData.sinSombra) { o.castShadow = true; o.receiveShadow = true; } });
+  piso.castShadow = false;
+  const r = v => "$ " + (Math.round(v / 10000) * 10000).toLocaleString("es-AR"), c2 = v => v.toFixed(2).replace(".", ",");
+  document.getElementById("prL").textContent = ESC.precio ? "Precio orientativo" : "Este mueble se presupuesta a medida";
+  document.getElementById("pr").innerHTML = ESC.precio ? `${r(ESC.precio * .9)}<em>a</em>${r(ESC.precio * 1.1)}` : "Te pasamos el precio";
+  document.getElementById("stats").innerHTML = ESC.stats.map(([v, l]) => `<div><b>${c2(v)}</b>${l}</div>`).join("");
+  resumen();
+}
+
+function cota(x1, z1, x2, z2, v, letra, vert) {
+  const mat = new THREE.LineBasicMaterial({ color: "#c23a2c" });
+  const pts = [new THREE.Vector3(x1, .01, z1), new THREE.Vector3(x2, .01, z2)];
+  const t = vert ? [new THREE.Vector3(.12, 0, 0), new THREE.Vector3(-.12, 0, 0)] : [new THREE.Vector3(0, 0, .12), new THREE.Vector3(0, 0, -.12)];
+  cotas.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), mat));
+  pts.forEach(p => cotas.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([p.clone().add(t[0]), p.clone().add(t[1])]), mat)));
+  const c = document.createElement("canvas"); c.width = 320; c.height = 80; const g = c.getContext("2d");
+  g.fillStyle = "#c23a2c"; g.font = "500 40px JetBrains Mono, monospace"; g.textAlign = "center"; g.textBaseline = "middle"; g.fillText(`${letra} · ${v.toFixed(2).replace(".", ",")} m`, 160, 40);
+  const tx = new THREE.CanvasTexture(c); tx.colorSpace = THREE.SRGBColorSpace;
+  const s = new THREE.Sprite(new THREE.SpriteMaterial({ map: tx, depthTest: false, transparent: true })); s.scale.set(.9, .225, 1); s.position.set((x1 + x2) / 2 + (vert ? -.4 : 0), .12, (z1 + z2) / 2 + (vert ? 0 : -.25)); cotas.add(s);
+}
+
+// ---------- cámara ----------
+let modo = "afuera", trans = null, yaw = 0, pitch = 0;
+function vistaGeneral(inst) {
+  const { W, D, LD } = R, T = D + LD, k = st.tipo === "cocina" ? .42 : .3, tgt = new THREE.Vector3(W / 2, .5, T * k), dist = Math.max(W * 1.2, st.tipo === "cocina" ? T : D + LD * .55) * 1.15 + 2.5;
+  const pos = new THREE.Vector3(W / 2 + dist * .6, dist * .78, T * k + dist * .72);
+  ir(pos, tgt, 38, inst, () => { controls.enabled = true; controls.target.copy(tgt); controls.update(); });
+}
+function vistaAdentro() {
+  const [[px, pz], [tx, ty, tz]] = ESC.dentro, pos = new THREE.Vector3(px, 1.62, pz), tgt = new THREE.Vector3(tx, ty, tz);
+  ir(pos, tgt, 68, false, () => { const d = tgt.clone().sub(pos).normalize(); yaw = Math.atan2(-d.x, -d.z); pitch = Math.asin(d.y); });
+}
+function ir(pos, tgt, fov, inst, fin) {
+  controls.enabled = false;
+  const dir0 = new THREE.Vector3(); camera.getWorldDirection(dir0);
+  const t0 = camera.position.clone().add(dir0.multiplyScalar(camera.position.distanceTo(tgt)));
+  if (inst) { camera.position.copy(pos); camera.fov = fov; camera.updateProjectionMatrix(); camera.lookAt(tgt); fin && fin(); return; }
+  trans = { p0: camera.position.clone(), p1: pos, t0, t1: tgt, f0: camera.fov, f1: fov, k: 0, fin };
+}
+const ENTRAR = { cocina: "Entrar a la cocina", vestidor: "Entrar a verlo", dormitorio: "Entrar al dormitorio", living: "Entrar al living", otro: "Verlo en tu casa" };
+function setModo(m) {
+  if (m === modo) return; modo = m;
+  document.querySelectorAll("#modo button").forEach(b => b.classList.toggle("on", b.dataset.m === m));
+  etiquetaEntrar();
+  techo.visible = m === "adentro"; cotas.visible = m !== "adentro";
+  hint(m === "adentro" ? (matchMedia("(pointer:coarse)").matches ? "Deslizá para mirar · tocá el piso para caminar" : "Arrastrá para mirar · hacé clic en el piso para caminar") : "Arrastrá para girar · tocá una puerta para abrirla");
+  m === "adentro" ? vistaAdentro() : vistaGeneral();
+}
+function etiquetaEntrar() { document.querySelector("#entrar span").textContent = modo === "adentro" ? "Salir a la vista general" : ENTRAR[st.tipo]; }
+let hT; function hint(t) { const h = document.getElementById("hint"); h.textContent = t; h.style.opacity = 1; clearTimeout(hT); hT = setTimeout(() => h.style.opacity = 0, 4200); }
+
+// ---------- interacción ----------
+const ray = new THREE.Raycaster(), mp = new THREE.Vector2();
+let down = null, caminar = null;
+const el = renderer.domElement;
+el.addEventListener("pointerdown", e => { down = { x: e.clientX, y: e.clientY, yaw, pitch, mov: 0 }; if (modo === "adentro") el.setPointerCapture(e.pointerId); });
+el.addEventListener("pointermove", e => {
+  if (!down) return; const dx = e.clientX - down.x, dy = e.clientY - down.y; down.mov = Math.max(down.mov, Math.hypot(dx, dy));
+  if (modo === "adentro" && !trans) { const k = e.pointerType === "touch" ? .005 : .0035; yaw = down.yaw + dx * k; pitch = Math.max(-1.1, Math.min(1.1, down.pitch + dy * k)); }
+});
+el.addEventListener("pointerup", e => {
+  if (!down) return; const tap = down.mov < 7; down = null; if (!tap || trans) return;
+  const r = el.getBoundingClientRect(); mp.set((e.clientX - r.left) / r.width * 2 - 1, -(e.clientY - r.top) / r.height * 2 + 1);
+  ray.setFromCamera(mp, camera);
+  const hits = ray.intersectObjects(mundo.children, true).filter(h => visibleArriba(h.object) && h.object.material !== MAT.vidrio && h.object.material !== MAT.cielo);
+  if (!hits.length) return;
+  const h = hits[0], d = h.object.userData.dueño;
+  if (d) { d.userData.act.abierto = !d.userData.act.abierto; return; }
+  if (modo === "adentro" && h.object === piso) caminarA(h.point);
+});
+function visibleArriba(o) { for (let p = o; p; p = p.parent) if (!p.visible) return false; return true; }
+function caminarA(p) {
+  const { W, D, LD } = R, separado = !!divisor, enLado = separado && camera.position.z > D;
+  let x = Math.min(W - .35, Math.max(.35, p.x)), z = Math.min(separado && !enLado ? D - .35 : D + LD - .35, Math.max(enLado ? D + .35 : .35, p.z));
+  obst.forEach(([a, b, c, d]) => { if (x > a - .3 && x < c + .3 && z > b - .3 && z < d + .3) { const op = [[x - (a - .3), "x", a - .3], [(c + .3) - x, "x", c + .3], [z - (b - .3), "z", b - .3], [(d + .3) - z, "z", d + .3]].sort((u, v) => u[0] - v[0])[0]; if (op[1] === "x") x = op[2]; else z = op[2]; } });
+  caminar = { de: camera.position.clone(), a: new THREE.Vector3(x, 1.62, z), k: 0 };
+}
+
+// ---------- loop (solo mientras se ve) ----------
+function tam() { const r = view.getBoundingClientRect(); renderer.setSize(r.width, r.height, false); camera.aspect = r.width / r.height; camera.updateProjectionMatrix(); }
+addEventListener("resize", tam);
+const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+let last = performance.now(), activo = true;
+new IntersectionObserver(es => es.forEach(e => { activo = e.isIntersecting; document.getElementById("foot").classList.toggle("vis", e.isIntersecting); }), { threshold: .05 }).observe(document.getElementById("disena"));
+renderer.setAnimationLoop(now => {
+  const dt = Math.min(.05, (now - last) / 1000); last = now; if (!activo) return;
+  if (trans) { trans.k = Math.min(1, trans.k + dt / 1.3); const e = ease(trans.k);
+    camera.position.lerpVectors(trans.p0, trans.p1, e); camera.fov = trans.f0 + (trans.f1 - trans.f0) * e; camera.updateProjectionMatrix();
+    camera.lookAt(new THREE.Vector3().lerpVectors(trans.t0, trans.t1, e));
+    if (trans.k >= 1) { const f = trans.fin; trans = null; f && f(); } }
+  else if (modo === "adentro") {
+    if (caminar) { caminar.k = Math.min(1, caminar.k + dt / .9); camera.position.lerpVectors(caminar.de, caminar.a, ease(caminar.k)); if (caminar.k >= 1) caminar = null; }
+    camera.rotation.order = "YXZ"; camera.rotation.set(pitch, yaw, 0);
+  } else controls.update();
+  paredes.forEach(([m, nn, c]) => m.visible = modo === "adentro" || camera.position.clone().sub(c).dot(nn) > 0);
+  if (divisor) divisor.scale.y = modo === "adentro" || camera.position.z < R.D ? 1 : .42;
+  abribles.forEach(o => { const a = o.userData.act; const obj = a.abierto ? 1 : 0; if (a.t !== obj) { a.t += Math.sign(obj - a.t) * dt / .45; a.t = Math.max(0, Math.min(1, a.t)); }
+    const e = ease(a.t); if (a.tipo === "cajon") o.position.z = a.bz + (a.d || .4) * e; else if (a.tipo === "corre") o.position.x = a.bx + a.dx * e; else o.rotation.y = (a.tipo === "izq" ? -1 : 1) * 1.7 * e; });
+  renderer.render(scene, camera);
+});
+
+// ---------- foto del lugar ----------
+const hex = c => "#" + c.slice(0, 3).map(v => Math.round(v).toString(16).padStart(2, "0")).join("");
+const rgbDe = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+const dist = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]);
+const lum = c => (c[0] * .299 + c[1] * .587 + c[2] * .114) / 255;
+function grupos(px, k = 4) {
+  let cs = px.filter((_, i) => i % Math.max(1, Math.floor(px.length / k)) === 0).slice(0, k).map(p => p.slice());
+  for (let it = 0; it < 10; it++) {
+    const s = cs.map(() => [0, 0, 0, 0]);
+    px.forEach(p => { let bi = 0, bd = 1e9; cs.forEach((c, i) => { const d = dist(p, c); if (d < bd) { bd = d; bi = i; } }); s[bi][0] += p[0]; s[bi][1] += p[1]; s[bi][2] += p[2]; s[bi][3]++; });
+    cs = s.map((v, i) => v[3] ? [v[0] / v[3], v[1] / v[3], v[2] / v[3], v[3]] : [...cs[i].slice(0, 3), 0]);
+  }
+  return cs.sort((a, b) => b[3] - a[3]);
+}
+function leerFoto(file) {
+  const img = new Image(), url = URL.createObjectURL(file);
+  img.onload = () => {
+    const S = 72, c = document.createElement("canvas"); c.width = S; c.height = S; const g = c.getContext("2d"); g.drawImage(img, 0, 0, S, S);
+    const d = g.getImageData(0, 0, S, S).data, arriba = [], abajo = [], todo = [];
+    for (let y = 0; y < S; y++) for (let x = 0; x < S; x++) { const i = (y * S + x) * 4, p = [d[i], d[i + 1], d[i + 2]]; todo.push(p); if (y < S * .45) arriba.push(p); if (y > S * .72) abajo.push(p); }
+    const pared = grupos(arriba).sort((a, b) => b[3] * (.4 + lum(b)) - a[3] * (.4 + lum(a)))[0], gB = grupos(abajo)[0], pal = grupos(todo, 5);
+    let pc = pared.slice(0, 3); if (lum(pc) < .6) pc = pc.map(v => v + (255 - v) * .45);
+    st.paredFoto = hex(pc); st.pared = -1;
+    st.piso = PISOS.map((p, i) => [dist(rgbDe(p[2]), gB), i]).sort((a, b) => a[0] - b[0])[0][1];
+    const cerca = lista => lista.map((e, i) => [e.sw.reduce((t, s) => t + Math.min(...pal.map(p => dist(rgbDe(s), p))), 0) / e.sw.length, i]).sort((a, b) => a[0] - b[0])[0][1];
+    st.sugEstilo = cerca(ESTILOS); st.sugAcabado = cerca(ACABADOS);
+    st.foto = true; st.fotoURL = url; st.pal = pal.map(hex); st.sugVisto = false;
+    pintarPasos(); rehacer();
+  };
+  img.src = url;
+}
+
+// ---------- panel: pasos según el tipo ----------
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const fmt = v => String(v).replace(".", ",");
+const SW = sw => `<span class="sw">${sw.map(c => `<i style="background:${c}"></i>`).join("")}</span>`;
+const OP = (k, items, cls = "") => `<div class="opts ${cls || (items.length % 3 === 0 && items.length < 4 ? "" : "two")}" data-k="${k}">${items.map(([v, b, s, x]) => `<button class="op${String(st[k]) === String(v) ? " on" : ""}" data-v="${v}">${x || ""}<b>${b}</b><small>${s}</small></button>`).join("")}</div>`;
+const NUM = (k, l) => `<label>${l}<div class="num"><input data-n="${k}" inputmode="decimal" value="${fmt(st[k])}"><span>m</span></div></label>`;
+const CHK = (k, l) => `<label><input type="checkbox" data-c="${k}"${st[k] ? " checked" : ""}>${l}</label>`;
+const SVG = { recta: '<svg viewBox="0 0 60 30"><rect x="6" y="4" width="48" height="7" fill="#151413"/><rect x="6" y="4" width="48" height="24" fill="none" stroke="#c9c4ba"/></svg>',
+  L: '<svg viewBox="0 0 60 30"><path d="M6 4h48v7H13v17H6z" fill="#151413"/><rect x="6" y="4" width="48" height="24" fill="none" stroke="#c9c4ba"/></svg>',
+  U: '<svg viewBox="0 0 60 30"><path d="M6 4h48v24h-7V11H13v17H6z" fill="#151413"/><rect x="6" y="4" width="48" height="24" fill="none" stroke="#c9c4ba"/></svg>' };
+const ACAB = () => `<h2>¿Qué terminación?</h2>${OP("acabado", ACABADOS.map((a, i) => [i, a.n, a.d + SW(a.sw)]), "two")}`;
+function pasoCasa() {
+  const sug = st.foto && !st.sugVisto ? (st.tipo === "cocina" ? ["estilo", st.sugEstilo, ESTILOS[st.sugEstilo].n] : ["acabado", st.sugAcabado, ACABADOS[st.sugAcabado].n]) : null;
+  const integ = st.tipo === "cocina" ? OP("integrada", [[1, "Integrada al living", "Cocina abierta al comedor"], [0, "Cocina cerrada", "Separada, con puerta"]], "two")
+    : st.tipo === "living" ? OP("integrada", [[1, "Integrado al comedor", "Un solo ambiente"], [0, "Living separado", "Con pared y puerta"]], "two") : "";
+  return `<h2>¿Cómo es tu casa?</h2>${integ}
+  <h3>Subí una foto del lugar <span style="font-weight:400;color:var(--dim)">(opcional)</span></h3>
+  <label class="foto"><input type="file" accept="image/*" id="fotoIn"><span class="fi" style="${st.foto ? `background-image:url(${st.fotoURL})` : ""}">${st.foto ? "" : '<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M21 17l-5-5-8 8"/></svg>'}</span>
+  <span><b>${st.foto ? "Listo, usamos los colores de tu foto" : "Tomamos los colores de tu casa"}</b><small>${st.foto ? "Paredes y piso ya están aplicados. Podés cambiarlos abajo." : "Usamos la foto para las paredes, el piso y sugerirte una terminación."}</small>${st.foto ? `<span class="pal">${st.pal.map(c => `<i style="background:${c}"></i>`).join("")}</span>` : ""}</span></label>
+  ${sug ? `<div class="sug on"><span>Con tu casa combina <b>${sug[2]}</b>.</span><button data-sug="${sug[0]}" data-v="${sug[1]}">Probar</button></div>` : ""}
+  <h3>Paredes</h3><div class="cols">${PAREDES.map(([n, c], i) => `<button data-pared="${i}" class="${st.pared === i ? "on" : ""}" title="${n}" aria-label="${n}" style="background:${c}"></button>`).join("")}</div>
+  <h3>Piso</h3><div class="chips">${PISOS.map(([n, k, c], i) => `<button data-piso="${i}" class="${st.piso === i ? "on" : ""}"><i style="background:${c}"></i>${n}</button>`).join("")}</div>`;
+}
+function pasoVisita() {
+  return `<h2>Pedí la visita para medir.</h2><h3 style="margin-top:0">Zona de la obra</h3>
+  <div class="zonas">${["CABA", "Zona Norte", "Zona Oeste", "Zona Sur", "Otra"].map(z => `<button data-zona="${z}" class="${st.zona === z ? "on" : ""}">${z}</button>`).join("")}</div>
+  <h3>Tu nombre</h3><input class="txt" id="nom" autocomplete="name" placeholder="Nombre y apellido" value="${st.nombre}"><div class="res" id="res"></div>`;
+}
+const TIPOS = {
+  cocina: { n: "Cocina", ti: "Diseñá tu cocina y entrá a verla.", pasos: [["Tu casa", pasoCasa],
+    ["Forma", () => `<h2>¿Cómo va tu cocina?</h2>${OP("forma", [["recta", "Recta", "Una pared", SVG.recta], ["L", "En L", "Dos paredes", SVG.L], ["U", "En U", "Tres paredes", SVG.U]], " ")}<h3>¿Con isla?</h3>${OP("conIsla", [[0, "Sin isla", "Todo contra la pared"], [1, "Con isla", "Un mueble en el medio"]], "two")}`],
+    ["Medidas", () => `<h2>¿Cuánto miden las paredes?</h2><div class="meds">${NUM("A", "Pared A")}${st.forma !== "recta" ? NUM("B", "Pared B") : ""}${st.conIsla ? NUM("I", "Isla") : ""}</div><p class="nota">No hace falta que sea exacto: después vamos a medir.</p>
+      <div class="chk">${CHK("alacena", "Alacenas arriba")}${CHK("heladera", "Hueco para la heladera")}${CHK("torre", "Torre de hornos")}${st.conIsla ? CHK("barra", "Isla con barra y banquetas") : ""}</div>`],
+    ["Estilo", () => `<h2>¿Qué estilo te gusta?</h2>${OP("estilo", ESTILOS.map((e, i) => [i, e.n, e.d + SW(e.sw)]), "two")}`],
+    ["Mesada", () => `<h2>¿Qué mesada?</h2>${OP("mesada", MESADAS.map((e, i) => [i, e.n, e.d + SW(e.sw)]), "two")}`], ["Visita", pasoVisita]] },
+  vestidor: { n: "Vestidor y placard", ti: "Diseñá tu placard o vestidor y abrilo.", pasos: [["Tu casa", pasoCasa],
+    ["Tipo", () => `<h2>¿Qué querés armar?</h2>${OP("vForma", [["placard", "Placard", "En una pared", SVG.recta], ["L", "Vestidor en L", "Dos paredes", SVG.L], ["U", "Vestidor en U", "Tres paredes", SVG.U]], " ")}<h3>Puertas</h3>${OP("vPuertas", [["corredizas", "Corredizas", "Ocupan menos lugar"], ["batientes", "Batientes", "Abren todo el frente"], ["abierto", "Sin puertas", "Vestidor abierto"]], " ")}`],
+    ["Medidas", () => `<h2>¿Qué medidas tiene?</h2><div class="meds">${NUM("vA", "Pared A")}${st.vForma !== "placard" ? NUM("vB", "Pared B") : ""}${NUM("vH", "Alto")}</div><p class="nota">Ancho de la pared y alto hasta el techo. Después medimos en el lugar.</p>`],
+    ["Interior", () => `<h2>¿Qué va adentro?</h2><div class="chk" style="margin-top:0">${CHK("vBarral", "Barral para colgar")}${CHK("vDoble", "Doble barral para camisas")}${CHK("vCajonera", "Cajonera")}${CHK("vEstantes", "Estantes")}${CHK("vZapatero", "Zapatero")}</div><p class="nota">Tocá las puertas y los cajones en el 3D para ver el interior.</p>`],
+    ["Terminación", ACAB], ["Visita", pasoVisita]] },
+  dormitorio: { n: "Dormitorio", ti: "Diseñá tu dormitorio y entrá a verlo.", pasos: [["Tu casa", pasoCasa],
+    ["Cama", () => `<h2>¿Qué cama tenés?</h2>${OP("cama", Object.entries(CAMAS).map(([k, [n, a, l]]) => [k, n, `${fmt(a)} × ${fmt(l)} m`]), "two")}<div class="meds" style="margin-top:18px">${NUM("dA", "Ancho de la pared")}</div>`],
+    ["Muebles", () => `<h2>¿Qué muebles querés?</h2><div class="chk" style="margin-top:0">${CHK("dRespaldo", "Respaldo a medida")}${CHK("dMesas", "Mesas de luz flotantes")}${CHK("dPlacard", "Placard")}${CHK("dEscritorio", "Escritorio")}${CHK("dRepisa", "Repisa")}</div>${st.dPlacard ? `<div class="meds" style="margin-top:16px">${NUM("dPl", "Ancho del placard")}</div>` : ""}`],
+    ["Terminación", ACAB], ["Visita", pasoVisita]] },
+  living: { n: "Living", ti: "Diseñá tu living y entrá a verlo.", pasos: [["Tu casa", pasoCasa],
+    ["Mueble", () => `<h2>¿Qué mueble querés?</h2>${OP("lM", [["colgante", "Rack colgante", "Flotando en la pared"], ["apoyado", "Rack apoyado", "Con zócalo"], ["biblioteca", "Biblioteca", "Toda la pared"]], " ")}${st.lM !== "biblioteca" ? `<div class="chk">${CHK("lPanel", "Panel de listones detrás de la tele")}</div>` : ""}`],
+    ["Medidas", () => `<h2>¿Qué medidas tiene?</h2><div class="meds">${NUM("lA", "Ancho")}${st.lM === "biblioteca" ? NUM("lH", "Alto") : ""}</div><p class="nota">No hace falta que sea exacto: después vamos a medir.</p>`],
+    ["Terminación", ACAB], ["Visita", pasoVisita]] },
+  otro: { n: "Otro mueble", ti: "Diseñá tu mueble y miralo en tu casa.", pasos: [["Tu casa", pasoCasa],
+    ["Mueble", () => `<h2>¿Qué mueble necesitás?</h2>${OP("oM", Object.entries(OTROS).map(([k, [n, d]]) => [k, n, d]), "two")}`],
+    ["Medidas", () => `<h2>¿Qué medidas tiene?</h2><div class="meds">${NUM("oA", "Ancho")}${NUM("oH", "Alto")}${NUM("oP", "Profundidad")}</div><p class="nota">¿Otro mueble que no está en la lista? Escribinos por WhatsApp y lo diseñamos con vos.</p>`],
+    ["Terminación", ACAB], ["Visita", pasoVisita]] },
+};
+let paso = 0;
+function pintarTipos() { $("#tipos").innerHTML = Object.entries(TIPOS).map(([k, t]) => `<button data-tipo="${k}" class="${st.tipo === k ? "on" : ""}">${t.n}</button>`).join(""); }
+function pintarPasos() {
+  const t = TIPOS[st.tipo]; paso = Math.min(paso, t.pasos.length - 1);
+  $("#ti").textContent = t.ti;
+  $("#steps").innerHTML = t.pasos.map(([n], i) => `<button data-s="${i}" class="${i === paso ? "on" : i < paso ? "ok" : ""}"><i>0${i + 1}</i>${n}</button>`).join("");
+  $("#pasos").innerHTML = `<div class="st on">${t.pasos[paso][1]()}</div>`;
+  resumen();
+}
+let tReb; function rehacer(cam) { clearTimeout(tReb); tReb = setTimeout(() => { construir(); if (cam && modo === "afuera") vistaGeneral(); if (modo === "adentro") vistaAdentro(); }, 120); }
+function setTipo(k) { if (st.tipo === k) return; st.tipo = k; paso = 0; pintarTipos(); pintarPasos(); etiquetaEntrar(); construir(); modo === "adentro" ? vistaAdentro() : vistaGeneral(); }
+$("#tipos").addEventListener("click", e => { const b = e.target.closest("button"); if (b) setTipo(b.dataset.tipo); });
+$("#steps").addEventListener("click", e => { const b = e.target.closest("button"); if (b) irPaso(+b.dataset.s); });
+$("#pasos").addEventListener("click", e => {
+  const op = e.target.closest(".op"), o = op && op.closest(".opts");
+  if (o) { const k = o.dataset.k, v = op.dataset.v; st[k] = typeof st[k] === "number" ? +v : v;
+    if (k === "estilo") st.mesada = ESTILOS[st.estilo].m;
+    if (k === "oM") [st.oA, st.oH, st.oP] = OTROS[v][2];
+    pintarPasos(); rehacer(["forma", "conIsla", "integrada", "vForma", "oM", "lM", "cama"].includes(k)); return; }
+  const b = e.target.closest("button"); if (!b) return;
+  if (b.dataset.pared) { st.pared = +b.dataset.pared; pintarPasos(); rehacer(); }
+  if (b.dataset.piso) { st.piso = +b.dataset.piso; pintarPasos(); rehacer(); }
+  if (b.dataset.sug) { st[b.dataset.sug] = +b.dataset.v; if (b.dataset.sug === "estilo") st.mesada = ESTILOS[st.estilo].m; st.sugVisto = true; pintarPasos(); rehacer(); }
+  if (b.dataset.zona) { st.zona = b.dataset.zona; pintarPasos(); }
+});
+$("#pasos").addEventListener("input", e => {
+  const n = e.target.dataset.n; if (n) { const v = parseFloat(e.target.value.replace(",", ".")); if (!isFinite(v)) return; st[n] = Math.min(LIM[n][1], Math.max(LIM[n][0], v)); rehacer(true); }
+  if (e.target.id === "nom") { st.nombre = e.target.value.trim(); resumen(); }
+});
+$("#pasos").addEventListener("change", e => {
+  const c = e.target.dataset.c; if (c) { st[c] = e.target.checked; pintarPasos(); rehacer(); }
+  if (e.target.id === "fotoIn" && e.target.files[0]) leerFoto(e.target.files[0]);
+});
+function irPaso(i) { paso = i; pintarPasos(); if (innerWidth < 860) { const v = $("#view").getBoundingClientRect(); scrollTo({ top: $("#steps").getBoundingClientRect().top + scrollY - v.bottom - 12, behavior: "smooth" }); } }
+function lineas() {
+  const c = v => v.toFixed(2).replace(".", ","), ac = ACABADOS[st.acabado].n, casaL = `Paredes de la casa: ${st.pared < 0 ? "como en mi foto" : PAREDES[st.pared][0]} · Piso: ${PISOS[st.piso][0]}`;
+  const T = {
+    cocina: () => [`Cocina ${{ recta: "recta", L: "en L", U: "en U" }[st.forma]}${st.conIsla ? ` con isla de ${c(st.I)} m${st.barra ? " y barra" : ""}` : ""}, ${st.integrada ? "integrada al living" : "cerrada"}`,
+      `Paredes: A ${c(st.A)} m${st.forma !== "recta" ? ` · B ${c(st.B)} m` : ""}`, `Alacenas: ${st.alacena ? "sí" : "no"} · Heladera: ${st.heladera ? "sí" : "no"} · Torre de hornos: ${st.torre ? "sí" : "no"}`,
+      `Estilo: ${ESTILOS[st.estilo].n}`, `Mesada: ${MESADAS[st.mesada].n}`],
+    vestidor: () => [`${st.vForma === "placard" ? "Placard" : `Vestidor en ${st.vForma}`} con puertas ${{ corredizas: "corredizas", batientes: "batientes", abierto: "— sin puertas" }[st.vPuertas]}`.replace("puertas —", ""),
+      `Medidas: A ${c(st.vA)} m${st.vForma !== "placard" ? ` · B ${c(st.vB)} m` : ""} · alto ${c(st.vH)} m`, `Interior: ${[st.vBarral && "barral", st.vDoble && "doble barral", st.vCajonera && "cajonera", st.vEstantes && "estantes", st.vZapatero && "zapatero"].filter(Boolean).join(", ") || "a definir"}`, `Terminación: ${ac}`],
+    dormitorio: () => [`Dormitorio con cama ${CAMAS[st.cama][0]}, pared de ${c(st.dA)} m`, `Muebles: ${[st.dRespaldo && "respaldo", st.dMesas && "mesas de luz flotantes", st.dPlacard && `placard de ${c(st.dPl)} m`, st.dEscritorio && "escritorio", st.dRepisa && "repisa"].filter(Boolean).join(", ") || "a definir"}`, `Terminación: ${ac}`],
+    living: () => [`${{ colgante: "Rack colgante", apoyado: "Rack apoyado", biblioteca: "Biblioteca" }[st.lM]} de ${c(st.lA)} m${st.lM === "biblioteca" ? ` × ${c(st.lH)} m de alto` : st.lPanel ? " con panel de listones" : ""}`, `Terminación: ${ac}`],
+    otro: () => [`${OTROS[st.oM][0]}: ${c(st.oA)} × ${c(st.oH)} × ${c(st.oP)} m (ancho, alto, profundidad)`, `Terminación: ${ac}`],
+  }[st.tipo]();
+  return [...T, casaL, ESC.precio ? `Precio orientativo: ${$("#pr").textContent.replace("a$", " a $")}` : "", st.foto ? "Tengo fotos del lugar para mandarles." : "", st.zona ? `Zona: ${st.zona}` : "", st.nombre ? `Soy ${st.nombre}.` : ""].filter(Boolean);
+}
+const texto = () => [`Hola DLM! Armé ${{ cocina: "mi cocina", vestidor: "mi " + (st.vForma === "placard" ? "placard" : "vestidor"), dormitorio: "mi dormitorio", living: "mi living", otro: "un mueble" }[st.tipo]} en la web y quiero pedir la visita para medir.`, "", ...lineas()].join("\n");
+function resumen() {
+  const res = $("#res"); if (res) res.innerHTML = lineas().map(l => l.replace(/^([^:]+):/, "<b>$1:</b>")).join("<br>");
+  const nx = $("#nx"), t = TIPOS[st.tipo], ult = t.pasos.length - 1;
+  if (paso < ult) { nx.textContent = innerWidth < 860 ? "Siguiente →" : "Siguiente: " + t.pasos[paso + 1][0].toLowerCase(); nx.classList.remove("wa2"); nx.disabled = false; }
+  else { nx.textContent = "Pedir la visita"; nx.classList.add("wa2"); nx.disabled = !st.nombre; }
+}
+$("#nx").addEventListener("click", () => { const ult = TIPOS[st.tipo].pasos.length - 1; if (paso < ult) irPaso(paso + 1); else window.open("https://wa.me/5491131327062?text=" + encodeURIComponent(texto()), "_blank", "noopener"); });
+$$("#modo button").forEach(b => b.addEventListener("click", () => setModo(b.dataset.m)));
+$("#entrar").addEventListener("click", () => setModo(modo === "adentro" ? "afuera" : "adentro"));
+$("#abrir").addEventListener("click", () => { const ab = !$("#abrir").classList.contains("on"); $("#abrir").classList.toggle("on", ab); $("#abrir").textContent = ab ? "Cerrar puertas" : "Abrir puertas"; abribles.forEach((o, i) => setTimeout(() => o.userData.act.abierto = ab, i * 15)); });
+// los ambientes de "Qué hacemos" abren el cotizador en ese tipo
+document.addEventListener("click", e => { const a = e.target.closest("[data-abrir]"); if (!a) return; e.preventDefault(); setTipo(a.dataset.abrir); $("#disena").scrollIntoView({ behavior: "smooth" }); });
+
+pintarTipos(); ESC = { dentro: [[3, 5], [2, 1, 0]] }; tam(); construir(); pintarPasos(); vistaGeneral(true); $("#load").remove(); etiquetaEntrar();
+window.dlm = { st, setModo, setTipo, construir: () => construir(), abrir: v => abribles.forEach(o => o.userData.act.abierto = v), irPaso, R: () => R, leerFoto, pintarPasos };
+
+</script>
+</body>
+</html>
