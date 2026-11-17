@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Alfa Carbon · Escobillas y carbones eléctricos desde 1949</title>
+<meta name="description" content="Fábrica de escobillas y carbones eléctricos en Villa Martelli desde 1949. Electrografito, metalografito y piezas a medida, con despacho a todo el país.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&display=swap">
+<style>
+:root{
+  --graf:#1c1e21; --graf2:#25282c; --graf3:#30343a; --linea:#3b4047;
+  --plano:#e4e6e8; --plano2:#d6d9dc; --tinta:#1c1e21; --gris:#8b9097; --gris2:#5d636b;
+  --cobre:#c27a43; --cobre2:#e7a36b; --chispa:#fff0c4; --verde:#3fbf7f;
+  --f:"Archivo",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--graf);color:#eef0f2;font-family:var(--f);font-size:17px;line-height:1.55;overflow-x:hidden}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--cobre2);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1200px;margin:0 auto;padding:0 28px}
+h1,h2,h3{font-stretch:118%;font-weight:800;line-height:1.02;letter-spacing:-.01em}
+h2{font-size:clamp(32px,4.2vw,54px)}
+.lead{font-size:clamp(18px,1.6vw,21px);color:#c3c7cc;max-width:58ch}
+.btn{display:inline-flex;align-items:center;gap:10px;height:52px;padding:0 24px;border-radius:999px;font-weight:650;font-size:16px;text-decoration:none;border:0;cursor:pointer;font-family:var(--f);transition:background .2s,transform .2s}
+.btn:active{transform:scale(.98)}
+.btn-cobre{background:var(--cobre);color:#fff}
+.btn-cobre:hover{background:#d0864d}
+.btn-borde{background:transparent;color:inherit;box-shadow:inset 0 0 0 1.5px currentColor}
+.wa-ico{width:19px;height:19px;flex:none}
+
+/* boceto */
+.boceto{background:#101113;color:#a7acb2;font-size:13px;text-align:center;padding:7px 16px}
+.boceto b{color:#eef0f2;font-weight:600}
+
+/* nav */
+nav{position:sticky;top:0;z-index:20;background:rgba(28,30,33,.86);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #2c3035}
+nav .wrap{display:flex;align-items:center;gap:28px;height:68px}
+.logo{display:flex;align-items:center;gap:11px;text-decoration:none;font-stretch:125%;font-weight:850;font-size:19px;letter-spacing:.01em}
+.logo i{width:15px;height:24px;border-radius:2px;background:linear-gradient(90deg,#2b2e33,#4a4f56 45%,#2b2e33);box-shadow:inset 0 3px 0 var(--cobre)}
+.nav-links{display:flex;gap:26px;margin-left:auto;font-size:15px;color:#c3c7cc}
+.nav-links a{text-decoration:none}
+.nav-links a:hover{color:#fff}
+nav .btn{height:42px;padding:0 18px;font-size:15px}
+@media(max-width:860px){.nav-links{display:none}nav .btn{margin-left:auto}}
+
+/* hero */
+.hero{position:relative;min-height:calc(100vh - 100px);display:grid;grid-template-columns:1.05fr 1fr;align-items:center;gap:20px;padding:56px 0 72px}
+.hero h1{font-size:clamp(40px,4.9vw,70px);margin-bottom:26px}
+.hero .lead{margin-bottom:34px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px}
+.hero-meta{display:flex;gap:34px;margin-top:46px;color:var(--gris);font-size:15px}
+.hero-meta b{display:block;color:#eef0f2;font-stretch:118%;font-size:26px;font-weight:800;line-height:1.1}
+#motor{width:100%;aspect-ratio:1/1.05;display:block}
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;min-height:0;padding:36px 0 56px}
+  .hero-art{order:-1;max-width:420px;margin:0 auto -10px;width:100%}
+}
+
+/* buscador */
+.buscador{background:var(--plano);color:var(--tinta);padding:110px 0;
+  background-image:linear-gradient(var(--plano2) 1px,transparent 1px),linear-gradient(90deg,var(--plano2) 1px,transparent 1px);background-size:32px 32px;background-position:-1px -1px}
+.buscador .lead{color:var(--gris2)}
+.bus-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:56px;margin-top:52px;align-items:start}
+.campo{display:flex;align-items:center;background:#fff;border-radius:14px;box-shadow:0 0 0 1.5px #c3c7cc;padding:6px 6px 6px 20px;transition:box-shadow .2s}
+.campo:focus-within{box-shadow:0 0 0 2px var(--tinta)}
+.campo input{flex:1;min-width:0;border:0;outline:0;background:none;font-family:var(--f);font-size:22px;font-stretch:110%;font-weight:600;color:var(--tinta);height:56px}
+.campo input::placeholder{color:#a3a8ae;font-weight:400}
+.campo .btn{height:52px;background:var(--tinta);color:#fff}
+.ejemplos{margin-top:14px;font-size:15px;color:var(--gris2);display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.ejemplos button{font-family:var(--f);font-size:14px;background:#fff;border:1px solid #c3c7cc;border-radius:999px;padding:5px 13px;cursor:pointer;color:var(--tinta)}
+.ejemplos button:hover{border-color:var(--tinta)}
+.resultado{margin-top:30px;background:#fff;border-radius:18px;padding:26px;box-shadow:0 1px 0 #c3c7cc,0 18px 40px -24px rgba(28,30,33,.35);min-height:178px}
+.res-top{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}
+.res-cod{font-size:14px;color:var(--gris2)}
+.res-medida{font-stretch:118%;font-weight:800;font-size:34px;line-height:1.1;margin:2px 0 8px}
+.res-precio{text-align:right;white-space:nowrap}
+.res-precio b{display:block;font-stretch:118%;font-size:30px;font-weight:800}
+.res-precio span{font-size:13px;color:var(--gris2)}
+.estado{display:inline-flex;align-items:center;gap:7px;font-size:14px;font-weight:600}
+.estado:before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
+.estado.ok{color:#228a57}.estado.fab{color:#a8642f}
+.res-txt{color:var(--gris2);font-size:15px;margin-top:10px;max-width:46ch}
+.res-acc{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.res-acc .btn{height:46px;font-size:15px}
+.res-acc .btn-borde{color:var(--tinta)}
+.plano{background:#fff;border-radius:18px;box-shadow:0 1px 0 #c3c7cc;position:relative;overflow:hidden}
+.plano svg{display:block;width:100%;height:auto}
+.plano-pie{display:flex;justify-content:space-between;border-top:1px solid #e1e3e6;padding:12px 20px;font-size:13px;color:var(--gris2)}
+.bus-grid>*{min-width:0}
+.logo{white-space:nowrap}
+@media(max-width:900px){.bus-grid{grid-template-columns:1fr;gap:28px}.plano{order:-1}}
+@media(max-width:600px){.logo{font-size:16px}nav .btn{height:38px;padding:0 14px;font-size:14px}.campo input{font-size:19px}.campo .btn{padding:0 16px}}
+
+/* linea */
+.seccion{padding:120px 0}
+.linea-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0 64px;margin-top:56px;border-top:1px solid var(--linea)}
+.prod{display:grid;grid-template-columns:64px 1fr;gap:18px;padding:26px 0;border-bottom:1px solid var(--linea)}
+.prod svg{width:56px;height:56px}
+.prod h3{font-size:21px;font-stretch:112%;margin-bottom:6px;font-weight:750}
+.prod p{color:#aab0b6;font-size:16px}
+@media(max-width:800px){.linea-grid{grid-template-columns:1fr}}
+
+/* proceso */
+.proceso{background:var(--graf2)}
+.proc-head{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:end}
+.carrera{margin-top:70px}
+.carril{margin-bottom:34px}
+.carril-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:12px}
+.carril-top h3{font-size:20px;font-stretch:110%;font-weight:700}
+.carril-top span{color:var(--gris);font-size:15px}
+.pista{height:18px;border-radius:9px;background:#1a1c1f;overflow:hidden;position:relative}
+.pista i{position:absolute;inset:0 auto 0 0;width:0;border-radius:9px}
+.pista.alfa i{background:linear-gradient(90deg,var(--cobre),var(--cobre2));box-shadow:0 0 18px rgba(231,163,107,.5)}
+.pista.std i{background:#4d535b}
+.carrera-nota{color:var(--gris);font-size:14px;margin-top:-10px}
+.datos{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:80px}
+.dato{border-top:2px solid var(--cobre);padding-top:20px}
+.dato b{display:block;font-stretch:120%;font-size:clamp(40px,4.4vw,58px);font-weight:850;line-height:1}
+.dato p{color:#b3b8be;margin-top:12px;font-size:16px;max-width:30ch}
+@media(max-width:860px){.proc-head{grid-template-columns:1fr;gap:20px}.datos{grid-template-columns:1fr}}
+
+/* historia */
+.hist{display:grid;grid-template-columns:.9fr 1.1fr;gap:72px}
+.hist-sticky{position:sticky;top:120px;align-self:start}
+.hist-sticky blockquote{margin-top:34px;font-size:22px;line-height:1.45;color:#d5d8dc;font-stretch:96%;border-left:3px solid var(--cobre);padding-left:22px}
+.hist-sticky cite{display:block;margin-top:12px;font-style:normal;color:var(--gris);font-size:14px}
+.hito{display:grid;grid-template-columns:120px 1fr;gap:26px;padding:34px 0;border-bottom:1px solid var(--linea)}
+.hito:first-child{padding-top:0}
+.hito .anio{font-stretch:125%;font-weight:850;font-size:34px;color:var(--cobre2);line-height:1}
+.hito h3{font-size:24px;font-stretch:112%;margin-bottom:10px;font-weight:750}
+.hito p{color:#b3b8be}
+.mapa{margin-top:20px;background:var(--graf2);border-radius:16px;padding:18px}
+.mapa svg{width:100%;height:auto;display:block}
+@media(max-width:900px){.hist{grid-template-columns:1fr;gap:40px}.hist-sticky{position:static}.hito{grid-template-columns:1fr;gap:8px}}
+
+/* industrias */
+.ind{background:var(--plano);color:var(--tinta)}
+.ind .lead{color:var(--gris2)}
+.ind-lista{display:flex;flex-wrap:wrap;gap:12px;margin-top:44px}
+.ind-lista span{font-stretch:110%;font-weight:650;font-size:clamp(18px,2vw,24px);padding:12px 22px;border-radius:999px;background:#fff;box-shadow:inset 0 0 0 1.5px var(--plano2)}
+
+/* vendedor */
+.vend{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.tel{background:#0d0e10;border-radius:38px;padding:12px;max-width:380px;margin:0 auto;box-shadow:0 40px 80px -30px #000,inset 0 0 0 1.5px #3a3e44}
+.tel-in{background:#e9e3da;border-radius:28px;overflow:hidden;min-height:540px;display:flex;flex-direction:column}
+.tel-bar{background:#1f2c33;color:#fff;padding:14px 16px;display:flex;align-items:center;gap:11px;font-size:15px}
+.tel-bar .av{width:34px;height:34px;border-radius:50%;background:var(--graf3);display:grid;place-items:center}
+.tel-bar .av i{width:9px;height:15px;border-radius:1px;background:#6b7178;box-shadow:inset 0 2px 0 var(--cobre)}
+.tel-bar small{display:block;color:#9fb3bd;font-size:12px}
+.chat{padding:14px 12px;display:flex;flex-direction:column;gap:8px;flex:1}
+.msg{max-width:84%;padding:8px 11px 6px;border-radius:10px;font-size:14.5px;line-height:1.4;color:#1c1e21;opacity:0;transform:translateY(8px);transition:opacity .35s,transform .35s}
+.msg.on{opacity:1;transform:none}
+.msg.in{background:#fff;align-self:flex-start;border-top-left-radius:2px}
+.msg.out{background:#d9fdd3;align-self:flex-end;border-top-right-radius:2px}
+.msg small{display:block;text-align:right;color:#8a9399;font-size:11px;margin-top:2px}
+.ficha{background:#f4f5f6;border-radius:7px;padding:8px 10px;margin:6px 0 2px;font-size:13.5px}
+.ficha b{font-weight:700}
+.vend ul{list-style:none;margin-top:34px}
+.vend li{padding:16px 0 16px 30px;border-bottom:1px solid var(--linea);position:relative;color:#c9cdd1}
+.vend li:before{content:"";position:absolute;left:0;top:25px;width:14px;height:2px;background:var(--cobre2)}
+.vend li b{color:#fff;font-weight:650}
+@media(max-width:900px){.vend{grid-template-columns:1fr;gap:44px}}
+
+/* contacto */
+.contacto{background:var(--graf2)}
+.ct-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;margin-top:50px}
+.form{display:grid;gap:14px}
+.form label{font-size:14px;color:#b3b8be;display:grid;gap:6px}
+.form input,.form textarea,.form select{font-family:var(--f);font-size:17px;color:#fff;background:#1a1c1f;border:1.5px solid #383c42;border-radius:12px;padding:13px 15px;outline:0}
+.form input:focus,.form textarea:focus,.form select:focus{border-color:var(--cobre2)}
+.form textarea{min-height:110px;resize:vertical}
+.fila2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.ct-datos{display:grid;gap:26px;align-content:start}
+.ct-datos div{border-bottom:1px solid var(--linea);padding-bottom:20px}
+.ct-datos small{color:var(--gris);font-size:14px}
+.ct-datos p{font-size:21px;font-stretch:108%;font-weight:600;margin-top:2px}
+.ct-datos a{text-decoration:none}
+.ct-datos a:hover{color:var(--cobre2)}
+@media(max-width:860px){.ct-grid{grid-template-columns:1fr;gap:44px}.fila2{grid-template-columns:1fr}}
+
+footer{padding:44px 0 90px;color:var(--gris);font-size:14px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px}
+.wa-flot{position:fixed;right:18px;bottom:18px;z-index:30;width:58px;height:58px;border-radius:50%;background:#25d366;display:grid;place-items:center;box-shadow:0 10px 30px -8px rgba(0,0,0,.6)}
+.wa-flot svg{width:30px;height:30px}
+@media(max-width:600px){.wrap{padding:0 18px}.seccion,.buscador{padding:84px 0}.hero-meta{gap:22px}.res-top{flex-direction:column}.res-precio{text-align:left}}
+</style>
+</head>
+<body>
+
+<div class="boceto">Boceto de <b>Compila</b> para Alfa Carbon. Los datos son los de alfacarbon.com.</div>
+
+<nav>
+  <div class="wrap">
+    <a class="logo" href="#"><i></i>ALFA CARBON</a>
+    <div class="nav-links">
+      <a href="#buscador">Buscador</a>
+      <a href="#linea">Productos</a>
+      <a href="#proceso">Tecnología</a>
+      <a href="#historia">Historia</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+    <a class="btn btn-cobre" href="#contacto">Pedir cotización</a>
+  </div>
+</nav>
+
+<header class="wrap hero">
+  <div>
+    <h1>La pieza más chica del motor. La fabricamos desde 1949.</h1>
+    <p class="lead">Escobillas y carbones eléctricos hechos en Villa Martelli: electrografito, metalografito y piezas a medida. Despachamos a todo el país.</p>
+    <div class="hero-actions">
+      <a class="btn btn-cobre" href="#buscador">Buscar mi escobilla</a>
+      <a class="btn btn-borde" href="https://wa.me/5491123009847" target="_blank" rel="noopener">
+        <svg class="wa-ico" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1a17 17 0 0 1-1.7-.6c-3-1.3-5-4.4-5.2-4.6-.1-.2-1.2-1.6-1.2-3.1s.8-2.2 1.1-2.5c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.3.5-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.3.1.2.1.7-.1 1.4Z"/></svg>
+        Escribirnos por WhatsApp</a>
+    </div>
+    <div class="hero-meta">
+      <div><b>1949</b>primera fábrica de Latinoamérica</div>
+      <div><b>4</b>generaciones de la familia Malinsky</div>
+    </div>
+  </div>
+  <div class="hero-art"><canvas id="motor" aria-label="Escobilla de carbón apoyada sobre el colector de un motor que gira"></canvas></div>
+</header>
+
+<section class="buscador" id="buscador">
+  <div class="wrap">
+    <h2>Escribí la medida. Te decimos si la tenemos.</h2>
+    <p class="lead" style="margin-top:18px">Espesor × ancho × alto en milímetros, o el código de la pieza. Si no está en stock, la fabricamos sobre plano o sobre muestra.</p>
+    <div class="bus-grid">
+      <div>
+        <form class="campo" id="bform" autocomplete="off">
+          <input id="bq" inputmode="text" placeholder="Ej: 5 x 8 x 12" aria-label="Medida o código de la escobilla">
+          <button class="btn" type="submit">Buscar</button>
+        </form>
+        <div class="ejemplos">Probá con
+          <button type="button" data-q="5 x 8 x 12">5 x 8 x 12</button>
+          <button type="button" data-q="103010638">103010638</button>
+          <button type="button" data-q="10 x 20 x 32">10 x 20 x 32</button>
+        </div>
+        <div class="resultado" id="res" aria-live="polite"></div>
+      </div>
+      <div class="plano">
+        <svg id="dib" viewBox="0 0 560 440" role="img" aria-label="Plano de la escobilla con sus medidas"></svg>
+        <div class="plano-pie"><span id="dib-pie">Escobilla de carbón</span><span>Medidas en mm</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="seccion" id="linea">
+  <div class="wrap">
+    <h2>Lo que sale de la planta.</h2>
+    <p class="lead" style="margin-top:18px">Producción integrada, desde la materia prima hasta la pieza terminada. Un solo estándar de calidad para todo.</p>
+    <div class="linea-grid" id="lineas"></div>
+  </div>
+</section>
+
+<section class="seccion proceso" id="proceso">
+  <div class="wrap">
+    <div class="proc-head">
+      <h2>No compramos grafito. Lo hacemos.</h2>
+      <p class="lead">Somos uno de los doce fabricantes del mundo con electrografitación propia. Controlamos la estructura del grafito desde el horno, y cada lote pasa por nuestro laboratorio antes de salir.</p>
+    </div>
+    <div class="carrera" id="carrera">
+      <div class="carril">
+        <div class="carril-top"><h3>Electrografitación Alfa Carbon</h3><span>12 a 18 horas</span></div>
+        <div class="pista alfa"><i data-w="2.4"></i></div>
+      </div>
+      <div class="carril">
+        <div class="carril-top"><h3>Método Atchison, el estándar de la industria</h3><span>3 a 6 semanas</span></div>
+        <div class="pista std"><i data-w="100"></i></div>
+      </div>
+      <p class="carrera-nota">Ciclo de horno de cada método, en la misma escala.</p>
+    </div>
+    <div class="datos">
+      <div class="dato"><b>12</b><p>fabricantes en el mundo con grafitización propia. Somos uno.</p></div>
+      <div class="dato"><b>1°</b><p>y único en Argentina con placas de electrografito libre de azufre, para química, nuclear y alimentos.</p></div>
+      <div class="dato"><b>VPI</b><p>Impregnación al vacío y a presión con resinas o metales, para más conductividad y menos desgaste.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="seccion" id="historia">
+  <div class="wrap hist">
+    <div class="hist-sticky">
+      <h2>Una historia escrita en grafito.</h2>
+      <blockquote>Lo que vendemos no es una pieza de carbón. Es la confianza de saber que esa pieza está fabricada por la misma casa que la fabricaba para tu padre y tu abuelo.<cite>Casa Malinsky, cuarta generación</cite></blockquote>
+    </div>
+    <div>
+      <div class="hito"><div class="anio">1949</div><div><h3>El fundador</h3><p>Svatopluk A. Malinsky trae el oficio de Centro Europa. En un galpón de Villa Martelli funda Carbones Eléctricos Alfa Omega, la primera fábrica de electrografíticos de América Latina. Hasta entonces, el país importaba todos sus carbones.</p></div></div>
+      <div class="hito"><div class="anio">1974</div><div><h3>Sudáfrica</h3><p>La segunda generación abre una planta en Sudáfrica para abastecer a los mercados africanos y europeos. Dos plantas, dos equipos de ingeniería, una sola fórmula.</p></div></div>
+      <div class="hito"><div class="anio">1990s</div><div><h3>Centro Europa</h3><p>Se suma una operación en Centro Europa y se cierra el círculo que empezó con el viaje del fundador, cincuenta años antes.</p>
+        <div class="mapa"><svg viewBox="0 0 420 96" aria-label="Plantas en Buenos Aires, Sudáfrica y Centro Europa">
+          <path d="M30 48H390" stroke="#c27a43" stroke-width="1.5" stroke-dasharray="4 5"/>
+          <g fill="#e7a36b"><circle cx="30" cy="48" r="7"/><circle cx="210" cy="48" r="7"/><circle cx="390" cy="48" r="7"/></g>
+          <g fill="#eef0f2" font-family="Archivo" font-weight="700" font-size="14"><text x="30" y="24" text-anchor="start">Buenos Aires</text><text x="210" y="24" text-anchor="middle">Sudáfrica</text><text x="390" y="24" text-anchor="end">Centro Europa</text></g>
+          <g fill="#8b9097" font-family="Archivo" font-size="13"><text x="30" y="80">1949</text><text x="210" y="80" text-anchor="middle">1974</text><text x="390" y="80" text-anchor="end">1990s</text></g>
+        </svg></div></div></div>
+      <div class="hito"><div class="anio">Hoy</div><div><h3>La cuarta generación</h3><p>La familia sigue al frente, en la misma dirección de siempre: C. F. Melo 4842. Algunos clientes de hoy son los mismos de los años cincuenta. Otros heredaron la relación de sus propios fundadores.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="seccion ind">
+  <div class="wrap">
+    <h2>Donde hay un motor, hay una escobilla.</h2>
+    <p class="lead" style="margin-top:18px">Del pequeño taller a la planta industrial. Atiende un especialista, no un call center.</p>
+    <div class="ind-lista">
+      <span>Máquina herramienta</span><span>Electrodomésticos y lavarropas</span><span>Motores eléctricos</span><span>Generadores y alternadores</span><span>Ferroviaria</span><span>Nuclear</span><span>Química y petroquímica</span><span>Electroerosión</span><span>Cerámica, vidrio y cuarzo</span><span>Metales no ferrosos</span>
+    </div>
+  </div>
+</section>
+
+<section class="seccion">
+  <div class="wrap vend">
+    <div class="tel" aria-label="Ejemplo de una consulta por WhatsApp">
+      <div class="tel-in">
+        <div class="tel-bar"><div class="av"><i></i></div><div>Alfa Carbon · Ventas<small>en línea</small></div></div>
+        <div class="chat" id="chat">
+          <div class="msg in">Buenas noches. ¿Tienen escobillas 5x8x12 para un torno? Necesito 40.<small>22:14</small></div>
+          <div class="msg out">¡Hola! Sí, la tenemos en stock:<div class="ficha"><b>Cód. 103010638</b><br>Escobilla carbón grafito 5 × 8 × 12<br>USD 1,92 c/u · 40 u. = <b>USD 76,80</b></div>¿Le armo el presupuesto con envío?<small>22:14</small></div>
+          <div class="msg in">Sí, a Avellaneda. Metalúrgica del Sur.<small>22:15</small></div>
+          <div class="msg out">Listo. Mañana a las 8 un vendedor le confirma el despacho y le manda la factura. ¡Gracias!<small>22:15</small></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h2>Te respondemos aunque sean las diez de la noche.</h2>
+      <p class="lead" style="margin-top:20px">Nuestro WhatsApp de ventas conoce el catálogo y el stock. Responde al momento, arma el presupuesto y le deja el pedido listo a un vendedor.</p>
+      <ul>
+        <li><b>Medida o código,</b> y te dice si hay stock y el precio.</li>
+        <li><b>Presupuesto al instante,</b> con la cantidad que necesitás.</li>
+        <li><b>Una persona confirma</b> cada pedido antes de despacharlo.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="seccion contacto" id="contacto">
+  <div class="wrap">
+    <h2>Pedí tu cotización.</h2>
+    <p class="lead" style="margin-top:18px">Contanos qué necesitás. Si tenés una muestra o un plano, mandá la foto por WhatsApp.</p>
+    <div class="ct-grid">
+      <form class="form" id="cform">
+        <div class="fila2">
+          <label>Nombre<input name="n" required></label>
+          <label>Empresa<input name="e"></label>
+        </div>
+        <div class="fila2">
+          <label>Pieza
+            <select name="p"><option>Escobillas de carbón</option><option>Sellos de carbón</option><option>Portaescobillas</option><option>Anillos rozantes</option><option>Placas de grafito</option><option>Otra / a medida</option></select></label>
+          <label>Cantidad<input name="c" inputmode="numeric"></label>
+        </div>
+        <label>Medida, código o aplicación<textarea name="m" placeholder="Ej: 10 x 20 x 32, para un motor de 5 HP"></textarea></label>
+        <button class="btn btn-cobre" type="submit" style="justify-self:start">
+          <svg class="wa-ico" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1a17 17 0 0 1-1.7-.6c-3-1.3-5-4.4-5.2-4.6-.1-.2-1.2-1.6-1.2-3.1s.8-2.2 1.1-2.5c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.3.5-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.3.1.2.1.7-.1 1.4Z"/></svg>
+          Enviar por WhatsApp</button>
+      </form>
+      <div class="ct-datos">
+        <div><small>WhatsApp y teléfono de ventas</small><p><a href="https://wa.me/5491123009847" target="_blank" rel="noopener">+54 9 11 2300-9847</a></p></div>
+        <div><small>Email</small><p><a href="mailto:info@alfacarbon.com">info@alfacarbon.com</a></p></div>
+        <div><small>Fábrica</small><p>Carlos Francisco de Melo 4842, Villa Martelli</p></div>
+        <div><small>Horario</small><p>Lunes a viernes, de 8 a 17 h</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap"><span>© 1949–2026 Alfa Carbon S.A. Cuatro generaciones fabricando carbones eléctricos en Buenos Aires.</span><span>Boceto: Compila</span></div></footer>
+
+<a class="wa-flot" href="https://wa.me/5491123009847" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1a17 17 0 0 1-1.7-.6c-3-1.3-5-4.4-5.2-4.6-.1-.2-1.2-1.6-1.2-3.1s.8-2.2 1.1-2.5c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.3.5-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.3.1.2.1.7-.1 1.4Z"/></svg></a>
+
+<script>
+const WA='5491123009847';
+
+/* ---------- MOTOR (hero) ---------- */
+const cv=document.getElementById('motor'),cx=cv.getContext('2d');
+let W,H,dpr;
+function size(){dpr=Math.min(2,devicePixelRatio||1);const r=cv.getBoundingClientRect();W=r.width;H=r.height;cv.width=W*dpr;cv.height=H*dpr;cx.setTransform(dpr,0,0,dpr,0,0)}
+addEventListener('resize',size);size();
+// grano del grafito, generado una vez
+const grain=document.createElement('canvas');grain.width=grain.height=160;{const g=grain.getContext('2d');const im=g.createImageData(160,160);for(let i=0;i<im.data.length;i+=4){const v=40+Math.random()*38;im.data[i]=im.data[i+1]=im.data[i+2]=v;im.data[i+3]=255}g.putImageData(im,0,0)}
+let ang=0,last=performance.now(),sparks=[],scrollV=0,lastY=scrollY;
+addEventListener('scroll',()=>{scrollV+=Math.abs(scrollY-lastY);lastY=scrollY},{passive:true});
+function draw(now){
+  const dt=Math.min(.05,(now-last)/1000);last=now;
+  const boost=Math.min(14,scrollV*.02);scrollV*=.85;
+  const vel=.55+boost;ang+=vel*dt;
+  cx.clearRect(0,0,W,H);
+  const C=Math.min(W,H/1.05);const ox=W*.46,oy=H*.6,R=C*.31;
+  // sombra suelo
+  const sg=cx.createRadialGradient(ox,oy+R*1.05,0,ox,oy+R*1.05,R*1.3);sg.addColorStop(0,'rgba(0,0,0,.28)');sg.addColorStop(1,'rgba(0,0,0,0)');cx.fillStyle=sg;cx.fillRect(0,0,W,H);
+  // eje y rotor exterior
+  cx.save();cx.translate(ox,oy);
+  const rg=cx.createRadialGradient(-R*.3,-R*.3,R*.1,0,0,R*1.12);rg.addColorStop(0,'#3a3e44');rg.addColorStop(1,'#141517');
+  cx.fillStyle=rg;cx.beginPath();cx.arc(0,0,R*1.1,0,7);cx.fill();
+  // delgas de cobre
+  const N=28;
+  for(let i=0;i<N;i++){const a0=ang+i*2*Math.PI/N,a1=a0+2*Math.PI/N*.86;
+    const mid=(a0+a1)/2;const lit=.5+.5*Math.cos(mid+2.3);
+    const g=cx.createLinearGradient(Math.cos(mid)*R*.55,Math.sin(mid)*R*.55,Math.cos(mid)*R,Math.sin(mid)*R);
+    g.addColorStop(0,`hsl(26,45%,${16+lit*14}%)`);g.addColorStop(1,`hsl(27,58%,${30+lit*34}%)`);
+    cx.fillStyle=g;cx.beginPath();cx.arc(0,0,R,a0,a1);cx.arc(0,0,R*.55,a1,a0,true);cx.closePath();cx.fill();}
+  // pista de desgaste
+  cx.strokeStyle='rgba(20,20,22,.35)';cx.lineWidth=R*.07;cx.beginPath();cx.arc(0,0,R*.8,0,7);cx.stroke();
+  // centro
+  const cg=cx.createRadialGradient(-R*.06,-R*.06,0,0,0,R*.5);cg.addColorStop(0,'#5a6068');cg.addColorStop(1,'#1d1f22');
+  cx.fillStyle=cg;cx.beginPath();cx.arc(0,0,R*.5,0,7);cx.fill();
+  cx.fillStyle='#0e0f10';cx.beginPath();cx.arc(0,0,R*.16,0,7);cx.fill();
+  cx.strokeStyle='#4a4f56';cx.lineWidth=2;cx.beginPath();cx.arc(0,0,R*.16,0,7);cx.stroke();
+  cx.restore();
+  // escobilla
+  const bw=R*.36,bh=R*.78,top=oy-R-bh+R*.03,bx=ox-bw/2;
+  // portaescobilla (latón)
+  const hx=bx-R*.06,hw=bw+R*.12,hy=top+bh*.18,hh=bh*.6;
+  const lg=cx.createLinearGradient(hx,0,hx+hw,0);lg.addColorStop(0,'#5c4a2b');lg.addColorStop(.35,'#b39457');lg.addColorStop(.6,'#8a7040');lg.addColorStop(1,'#4b3c22');
+  // cuerpo de carbón
+  cx.save();cx.beginPath();cx.roundRect(bx,top,bw,bh,[R*.03,R*.03,2,2]);cx.clip();
+  cx.fillStyle=cx.createPattern(grain,'repeat');cx.fillRect(bx,top,bw,bh);
+  const sh=cx.createLinearGradient(bx,0,bx+bw,0);sh.addColorStop(0,'rgba(0,0,0,.55)');sh.addColorStop(.4,'rgba(255,255,255,.08)');sh.addColorStop(1,'rgba(0,0,0,.6)');cx.fillStyle=sh;cx.fillRect(bx,top,bw,bh);
+  cx.restore();
+  cx.fillStyle=lg;cx.fillRect(hx,hy,hw,hh);
+  cx.fillStyle='rgba(0,0,0,.35)';cx.fillRect(hx,hy+hh*.48,hw,2);
+  // tornillo del porta
+  cx.fillStyle='#2a2c30';cx.beginPath();cx.arc(hx+hw+R*.05,hy+hh*.5,R*.05,0,7);cx.fill();cx.fillStyle=lg;cx.fillRect(hx+hw,hy+hh*.42,R*.05,hh*.16);
+  // resorte
+  const sy0=top-R*.32,sy1=top;cx.strokeStyle='#9aa0a7';cx.lineWidth=R*.022;cx.beginPath();
+  for(let k=0;k<=40;k++){const t=k/40;const yy=sy0+(sy1-sy0)*t;const xx=ox+Math.sin(t*Math.PI*12)*bw*.32;k?cx.lineTo(xx,yy):cx.moveTo(xx,yy)}cx.stroke();
+  // cable de cobre trenzado
+  const p0=[bx+bw*.75,top+R*.02],p1=[ox+R*1.05,top-R*.15],p2=[ox+R*.95,oy-R*.15],p3=[ox+R*1.35,oy-R*.42];
+  cx.lineCap='round';
+  cx.strokeStyle='#6d3f1d';cx.lineWidth=R*.075;cx.beginPath();cx.moveTo(...p0);cx.bezierCurveTo(...p1,...p2,...p3);cx.stroke();
+  cx.strokeStyle='#e7a36b';cx.lineWidth=R*.05;cx.setLineDash([R*.035,R*.025]);cx.beginPath();cx.moveTo(...p0);cx.bezierCurveTo(...p1,...p2,...p3);cx.stroke();cx.setLineDash([]);
+  cx.fillStyle='#c27a43';cx.beginPath();cx.arc(...p3,R*.06,0,7);cx.fill();
+  // chispas en el contacto
+  const cy=oy-R+R*.02;
+  if(Math.random()<.18+boost*.06)for(let k=0;k<2+boost*.4;k++)sparks.push({x:ox+(Math.random()-.5)*bw*.8,y:cy,vx:(1.2+Math.random()*2.6)*C*.004*(1+boost*.1),vy:-(Math.random()*1.4)*C*.004,l:1});
+  cx.globalCompositeOperation='lighter';
+  sparks=sparks.filter(s=>{s.x+=s.vx*60*dt;s.y+=s.vy*60*dt;s.vy+=.06*C*.004*60*dt;s.l-=dt*2.4;if(s.l<=0)return false;
+    cx.strokeStyle=`rgba(255,${200+s.l*40|0},${120+s.l*80|0},${s.l})`;cx.lineWidth=1.6;cx.beginPath();cx.moveTo(s.x,s.y);cx.lineTo(s.x-s.vx*2,s.y-s.vy*2);cx.stroke();return true});
+  const gl=cx.createRadialGradient(ox,cy,0,ox,cy,bw*.9);gl.addColorStop(0,`rgba(255,220,160,${.18+boost*.03})`);gl.addColorStop(1,'rgba(255,200,140,0)');cx.fillStyle=gl;cx.fillRect(ox-bw,cy-bw,bw*2,bw*2);
+  cx.globalCompositeOperation='source-over';
+  requestAnimationFrame(draw);
+}
+requestAnimationFrame(draw);
+
+/* ---------- BUSCADOR ---------- */
+const CAT=[{cod:'103010638',t:5,a:8,h:12,cat:'Escobilla para máquina herramienta',mat:'Carbón grafito',precio:'1,92'}];
+const res=document.getElementById('res'),dib=document.getElementById('dib'),pie=document.getElementById('dib-pie');
+const waIco='<svg class="wa-ico" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1a17 17 0 0 1-1.7-.6c-3-1.3-5-4.4-5.2-4.6-.1-.2-1.2-1.6-1.2-3.1s.8-2.2 1.1-2.5c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.3.5-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.3.1.2.1.7-.1 1.4Z"/></svg>';
+const fmt=n=>String(+n.toFixed(1)).replace('.',',');
+function plano(t,a,h){
+  // proyección isométrica con cotas
+  const m=Math.max(t,a,h),s=200/m*.92;
+  const T=t*s,A=a*s,Hh=h*s,c=Math.cos(Math.PI/6),sn=.5;
+  const ox=280-(A-T)*c/2,oy=250+ (Hh)/2 - (A+T)*sn/2+30;
+  const P=(x,y,z)=>[ox+(x-z)*c,oy+(x+z)*sn-y]; // x=ancho, z=espesor, y=alto
+  const pts=a=>a.map(p=>P(...p).map(v=>v.toFixed(1)).join(',')).join(' ');
+  const top=pts([[0,Hh,0],[A,Hh,0],[A,Hh,T],[0,Hh,T]]),fr=pts([[0,0,T],[A,0,T],[A,Hh,T],[0,Hh,T]]),sd=pts([[A,0,0],[A,0,T],[A,Hh,T],[A,Hh,0]]);
+  const L=(p,q,lab,off)=>{const[a1,b1]=P(...p),[a2,b2]=P(...q);const mx=(a1+a2)/2+off[0],my=(b1+b2)/2+off[1];
+    return `<line x1="${a1+off[0]*.55}" y1="${b1+off[1]*.55}" x2="${a2+off[0]*.55}" y2="${b2+off[1]*.55}" stroke="#1c1e21" stroke-width="1" marker-start="url(#fl)" marker-end="url(#fl)"/>
+    <line x1="${a1}" y1="${b1}" x2="${a1+off[0]*.7}" y2="${b1+off[1]*.7}" stroke="#9aa0a7" stroke-width=".8"/><line x1="${a2}" y1="${b2}" x2="${a2+off[0]*.7}" y2="${b2+off[1]*.7}" stroke="#9aa0a7" stroke-width=".8"/>
+    <text x="${mx}" y="${my}" font-family="Archivo" font-weight="700" font-stretch="115%" font-size="17" fill="#1c1e21" text-anchor="middle" dominant-baseline="middle">${lab}</text>`};
+  const [wx,wy]=P(A*.7,Hh,T*.5);
+  dib.innerHTML=`<defs><marker id="fl" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 2 L10 5 L0 8z" fill="#1c1e21"/></marker>
+    <pattern id="gr" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="4" height="4" fill="#3a3d42"/><circle cx="1" cy="1" r=".6" fill="#55595f"/><circle cx="3" cy="3" r=".5" fill="#2e3034"/></pattern></defs>
+    <path d="M${wx} ${wy} C ${wx+40} ${wy-70}, ${wx+120} ${wy-40}, ${wx+150} ${wy-110}" fill="none" stroke="#6d3f1d" stroke-width="7" stroke-linecap="round"/>
+    <path d="M${wx} ${wy} C ${wx+40} ${wy-70}, ${wx+120} ${wy-40}, ${wx+150} ${wy-110}" fill="none" stroke="#e7a36b" stroke-width="4" stroke-dasharray="4 3" stroke-linecap="round"/>
+    <circle cx="${wx+150}" cy="${wy-110}" r="7" fill="#c27a43"/>
+    <polygon points="${sd}" fill="url(#gr)"/><polygon points="${sd}" fill="rgba(0,0,0,.35)"/>
+    <polygon points="${fr}" fill="url(#gr)"/>
+    <polygon points="${top}" fill="url(#gr)"/><polygon points="${top}" fill="rgba(255,255,255,.12)"/>
+    <g fill="none" stroke="#1c1e21" stroke-width="1.2"><polygon points="${sd}"/><polygon points="${fr}"/><polygon points="${top}"/></g>
+    ${L([0,0,T],[A,0,T],fmt(a),[-14,26])}
+    ${L([0,Hh,0],[0,Hh,T],fmt(t),[-26,-14])}
+    ${L([A,0,0],[A,Hh,0],fmt(h),[34,0])}`;
+  pie.textContent=`Escobilla ${fmt(t)} × ${fmt(a)} × ${fmt(h)}`;
+}
+function render(q){
+  q=(q||'').trim();
+  if(!q){res.innerHTML='<p class="res-txt" style="margin:0">Escribí una medida o un código para ver la pieza.</p>';plano(5,8,12);return}
+  const n=q.replace(/,/g,'.').match(/(\d+(?:\.\d+)?)\s*[x×*\/ ]\s*(\d+(?:\.\d+)?)\s*[x×*\/ ]\s*(\d+(?:\.\d+)?)/i);
+  let hit=null,t,a,h;
+  if(n){[t,a,h]=n.slice(1,4).map(Number);hit=CAT.find(p=>p.t===t&&p.a===a&&p.h===h)}
+  else{const d=q.replace(/\D/g,'');if(d.length>=4)hit=CAT.find(p=>p.cod===d||p.cod.endsWith(d));if(hit)({t,a,h}=hit)}
+  if(!hit&&!n){res.innerHTML='<p class="res-txt" style="margin:0">Escribila como espesor × ancho × alto, por ejemplo 5 x 8 x 12, o poné el código.</p>';return}
+  if(t>200||a>200||h>200){res.innerHTML='<p class="res-txt" style="margin:0">Revisá la medida: va en milímetros.</p>';return}
+  plano(t,a,h);
+  const med=`${fmt(t)} × ${fmt(a)} × ${fmt(h)} mm`;
+  if(hit){
+    const txt=encodeURIComponent(`Hola! Quiero pedir la escobilla cód. ${hit.cod} (${med}). Cantidad: `);
+    res.innerHTML=`<div class="res-top"><div><div class="res-cod">Cód. ${hit.cod} · ${hit.cat}</div><div class="res-medida">${med}</div><span class="estado ok">En stock, despacho inmediato</span></div>
+      <div class="res-precio"><b>USD ${hit.precio}</b><span>por unidad</span></div></div>
+      <p class="res-txt">${hit.mat}. El precio se confirma al cotizar el pedido.</p>
+      <div class="res-acc"><a class="btn btn-cobre" target="_blank" rel="noopener" href="https://wa.me/${WA}?text=${txt}">${waIco}Pedir por WhatsApp</a></div>`;
+  }else{
+    const txt=encodeURIComponent(`Hola! Necesito una escobilla de ${med}. Cantidad: `);
+    res.innerHTML=`<div class="res-top"><div><div class="res-cod">Sin código en el catálogo online</div><div class="res-medida">${med}</div><span class="estado fab">La fabricamos a medida</span></div>
+      <div class="res-precio"><b>A cotizar</b><span>según material y cantidad</span></div></div>
+      <p class="res-txt">Mandanos la medida, el motor o una foto de la pieza usada y te pasamos precio y plazo.</p>
+      <div class="res-acc"><a class="btn btn-cobre" target="_blank" rel="noopener" href="https://wa.me/${WA}?text=${txt}">${waIco}Cotizar por WhatsApp</a></div>`;
+  }
+}
+document.getElementById('bform').addEventListener('submit',e=>{e.preventDefault();render(bq.value)});
+const bq=document.getElementById('bq');
+bq.addEventListener('input',()=>{if(/\d+\D+\d+\D+\d+/.test(bq.value)||/^\d{6,}$/.test(bq.value.trim()))render(bq.value)});
+document.querySelectorAll('.ejemplos button').forEach(b=>b.onclick=()=>{bq.value=b.dataset.q;render(b.dataset.q)});
+render('');
+
+/* ---------- LINEA ---------- */
+const LIN=[
+ ['Escobillas de carbón','Para motores, alternadores y generadores. Grafito, carbón-grafito, electrografito y metalografito.','<rect x="18" y="10" width="20" height="34" rx="2" fill="#3a3d42" stroke="#8b9097"/><path d="M34 12c8-6 12 2 16-6" stroke="#e7a36b" stroke-width="3" fill="none"/><path d="M14 48h28" stroke="#8b9097" stroke-width="2"/>'],
+ ['Sellos de carbón','Sellos de contacto para bombas y compresores, con alta temperatura y presión.','<circle cx="28" cy="28" r="18" fill="none" stroke="#8b9097" stroke-width="7"/><circle cx="28" cy="28" r="18" fill="none" stroke="#3a3d42" stroke-width="3"/>'],
+ ['Balancines de carbón','Para distribuir corriente en sistemas rotativos industriales.','<path d="M8 32 28 22 48 32" stroke="#8b9097" stroke-width="5" fill="none" stroke-linecap="round"/><circle cx="28" cy="22" r="4" fill="#e7a36b"/>'],
+ ['Portaescobillas','Porta-carbones y soportes de precisión para todo tipo de motor y generador.','<rect x="14" y="16" width="28" height="24" rx="2" fill="none" stroke="#b39457" stroke-width="3"/><rect x="21" y="8" width="14" height="38" rx="1" fill="#3a3d42" stroke="#8b9097"/>'],
+ ['Resortes para escobillas','De compresión y tensión, calibrados para una presión de contacto constante.','<path d="M28 6c10 0 10 6 0 6s-10 6 0 6 10 6 0 6-10 6 0 6 10 6 0 6-10 6 0 6 10 6 0 6" stroke="#8b9097" stroke-width="2.5" fill="none"/>'],
+ ['Anillos rozantes','Para transmitir corriente o señal en partes que giran.','<ellipse cx="28" cy="14" rx="16" ry="5" fill="none" stroke="#e7a36b" stroke-width="3"/><ellipse cx="28" cy="28" rx="16" ry="5" fill="none" stroke="#e7a36b" stroke-width="3"/><ellipse cx="28" cy="42" rx="16" ry="5" fill="none" stroke="#e7a36b" stroke-width="3"/>'],
+ ['Placas de grafito técnico','Grafito especial libre de azufre, para aplicaciones críticas.','<path d="M10 20 34 10 48 22 24 32z" fill="#3a3d42" stroke="#8b9097"/><path d="M10 20v10l14 12V32M24 42l24-10V22" fill="none" stroke="#8b9097"/>'],
+ ['Grafito impregnado','Componentes impregnados al vacío con resinas o metales, para sellar y conducir mejor.','<rect x="12" y="12" width="32" height="32" rx="4" fill="#3a3d42" stroke="#8b9097"/><circle cx="22" cy="22" r="2" fill="#e7a36b"/><circle cx="33" cy="27" r="2" fill="#e7a36b"/><circle cx="24" cy="35" r="2" fill="#e7a36b"/>']
+];
+document.getElementById('lineas').innerHTML=LIN.map(([h,p,s])=>`<div class="prod"><svg viewBox="0 0 56 56" aria-hidden="true">${s}</svg><div><h3>${h}</h3><p>${p}</p></div></div>`).join('');
+
+/* ---------- CARRERA (una sola vez al verla) ---------- */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;io.disconnect();
+  // el tiempo corre igual para los dos: el horno de Alfa termina enseguida, el otro sigue
+  const bars=[...document.querySelectorAll('.pista i')];const t0=performance.now(),D=3200;
+  (function step(n){const k=Math.min(1,(n-t0)/D);bars.forEach(b=>b.style.width=Math.min(+b.dataset.w,100*k)+'%');if(k<1)requestAnimationFrame(step)})(t0);
+}),{threshold:.5});
+io.observe(document.getElementById('carrera'));
+
+/* ---------- CHAT ---------- */
+const msgs=[...document.querySelectorAll('#chat .msg')];
+const io2=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;io2.disconnect();msgs.forEach((m,i)=>setTimeout(()=>m.classList.add('on'),300+i*900))}),{threshold:.4});
+io2.observe(document.getElementById('chat'));
+
+/* ---------- FORM ---------- */
+document.getElementById('cform').addEventListener('submit',e=>{e.preventDefault();const f=new FormData(e.target);
+  const t=`Hola! Soy ${f.get('n')}${f.get('e')?' de '+f.get('e'):''}. Necesito cotizar: ${f.get('p')}${f.get('c')?', cantidad '+f.get('c'):''}. ${f.get('m')||''}`;
+  open(`https://wa.me/${WA}?text=${encodeURIComponent(t)}`,'_blank')});
+</script>
+</body>
+</html>
