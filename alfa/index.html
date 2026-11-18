@@ -44,7 +44,9 @@ nav .wrap{display:flex;align-items:center;gap:28px;height:68px}
 .nav-links{display:flex;gap:26px;margin-left:auto;font-size:15px;color:#c3c7cc}
 .nav-links a{text-decoration:none}
 .nav-links a:hover{color:#fff}
-nav .btn{height:42px;padding:0 18px;font-size:15px}
+nav .btn{height:42px;padding:0 18px;font-size:15px;white-space:nowrap}
+.solo-cel{display:none}
+@media(max-width:600px){.solo-pc{display:none}.solo-cel{display:inline}}
 @media(max-width:860px){.nav-links{display:none}nav .btn{margin-left:auto}}
 
 /* hero */
@@ -203,7 +205,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px}
       <a href="#historia">Historia</a>
       <a href="#contacto">Contacto</a>
     </div>
-    <a class="btn btn-cobre" href="#contacto">Pedir cotización</a>
+    <a class="btn btn-cobre" href="#contacto"><span class="solo-pc">Pedir cotización</span><span class="solo-cel">Cotizar</span></a>
   </div>
 </nav>
 
@@ -320,10 +322,10 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px}
       <div class="tel-in">
         <div class="tel-bar"><div class="av"><i></i></div><div>Alfa Carbon · Ventas<small>en línea</small></div></div>
         <div class="chat" id="chat">
-          <div class="msg in">Buenas noches. ¿Tienen escobillas 5x8x12 para un torno? Necesito 40.<small>22:14</small></div>
-          <div class="msg out">¡Hola! Sí, la tenemos en stock:<div class="ficha"><b>Cód. 103010638</b><br>Escobilla carbón grafito 5 × 8 × 12<br>USD 1,92 c/u · 40 u. = <b>USD 76,80</b></div>¿Le armo el presupuesto con envío?<small>22:14</small></div>
-          <div class="msg in">Sí, a Avellaneda. Metalúrgica del Sur.<small>22:15</small></div>
-          <div class="msg out">Listo. Mañana a las 8 un vendedor le confirma el despacho y le manda la factura. ¡Gracias!<small>22:15</small></div>
+          <div class="msg in">Buenas noches. Necesito escobillas de 5 × 8 × 12 para amoladoras. Serían unas 200. ¿Tienen?<small>22:14</small></div>
+          <div class="msg out">¡Hola! Sí, la tenemos en stock:<div class="ficha"><b>Cód. 103010638</b><br>Escobilla carbón grafito 5 × 8 × 12<br>USD 1,92 c/u · 200 u. = <b>USD 384,00</b></div>¿Le armo el presupuesto con envío?<small>22:14</small></div>
+          <div class="msg in">Sí, a Avellaneda. Metalúrgica del Sur.<small>22:16</small></div>
+          <div class="msg out">Listo. Mañana a primera hora un vendedor le confirma el pedido. ¡Gracias!<small>22:16</small></div>
         </div>
       </div>
     </div>
@@ -498,9 +500,9 @@ function render(q){
       <div class="res-acc"><a class="btn btn-cobre" target="_blank" rel="noopener" href="https://wa.me/${WA}?text=${txt}">${waIco}Pedir por WhatsApp</a></div>`;
   }else{
     const txt=encodeURIComponent(`Hola! Necesito una escobilla de ${med}. Cantidad: `);
-    res.innerHTML=`<div class="res-top"><div><div class="res-cod">Sin código en el catálogo online</div><div class="res-medida">${med}</div><span class="estado fab">La fabricamos a medida</span></div>
+    res.innerHTML=`<div class="res-top"><div><div class="res-cod">Sin código en el catálogo online</div><div class="res-medida">${med}</div><span class="estado fab">Consultanos disponibilidad</span></div>
       <div class="res-precio"><b>A cotizar</b><span>según material y cantidad</span></div></div>
-      <p class="res-txt">Mandanos la medida, el motor o una foto de la pieza usada y te pasamos precio y plazo.</p>
+      <p class="res-txt">Mandanos la medida, el motor o una foto de la pieza usada y te confirmamos si la tenemos o si se puede fabricar, con precio y plazo.</p>
       <div class="res-acc"><a class="btn btn-cobre" target="_blank" rel="noopener" href="https://wa.me/${WA}?text=${txt}">${waIco}Cotizar por WhatsApp</a></div>`;
   }
 }
