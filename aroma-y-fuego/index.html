@@ -1,0 +1,787 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#3a1c10">
+<title>Aroma y Fuego, cotizador de catering</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%233a1c10'/%3E%3Cpath d='M32 10c3 9 13 13 13 26a13 13 0 0 1-26 0c0-7 4-10 6-15 1 4 3 6 5 7 0-7-1-12 2-18z' fill='%23e9a23b'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800;900&family=Geist+Mono:wght@400;500;600&display=swap">
+<style>
+/* Aroma y Fuego: catering de Morón. Perniles, bife de chorizo, bondiola, cazuelas y lunch armado en bandejas.
+   Paleta: bandeja de aluminio (fondo), caoba de la madera ahumada (tinta), glaseado del pernil (acción),
+   miel (resaltado), chimichurri (seña paga / confirmado). Lo memorable: la comanda con el precio en vivo. */
+:root{
+  --tray:#e8eae7;--tray-d:#d9dcd8;--paper:#fff;--ink:#3a1c10;--ink-2:#5a3220;--dim:#6f5d53;--line:#d6d2cc;--soft:#f3f1ee;
+  --glaze:#a4501a;--glaze-d:#86400f;--glaze-s:#f8e6d6;--honey:#e9a23b;--honey-s:#fbefd9;
+  --chimi:#3d6a2c;--chimi-s:#e1eed8;--warn:#9a3a1d;--warn-s:#f7e0d6;
+  --ui:"Geist",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"Geist Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--tray);color:var(--ink);font-family:var(--ui);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+body{overflow-x:hidden}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2.5px solid var(--glaze);outline-offset:2px}
+[hidden]{display:none!important}
+.wrap{max-width:1140px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-left))}
+.num{font-family:var(--mono);font-feature-settings:"tnum";letter-spacing:-.02em}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* barra de boceto */
+.demo{position:sticky;top:0;z-index:60;background:var(--ink);color:#f1e2d6;font-size:12.5px;display:flex;align-items:center;gap:10px;justify-content:space-between;padding:7px max(12px,env(safe-area-inset-left))}
+.demo span{opacity:.9;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.demo b{color:#fff}
+.seg{display:flex;background:#5a3220;border-radius:99px;padding:3px;flex:none}
+.seg button{border:0;background:transparent;color:#f1e2d6;font-size:12.5px;font-weight:600;padding:6px 12px;border-radius:99px;display:flex;align-items:center}
+.seg button.on{background:#fff;color:var(--ink)}
+.seg .dot{min-width:17px;height:17px;border-radius:9px;background:var(--honey);color:var(--ink);font-size:11px;line-height:17px;margin-left:6px;padding:0 4px;text-align:center}
+
+/* header */
+.top .wrap{display:flex;align-items:center;gap:12px;height:68px}
+.wm{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit;min-width:0}
+.wm svg{flex:none}
+.wm b{font-weight:800;font-size:19px;letter-spacing:-.035em;line-height:1;white-space:nowrap}
+.wm small{display:block;font-size:12.5px;color:var(--dim);font-weight:500;letter-spacing:0;margin-top:3px}
+.hrs{margin-left:auto;font-size:13px;color:var(--dim);text-align:right;line-height:1.3;display:none}
+.ig{margin-left:auto;display:inline-flex;align-items:center;gap:7px;text-decoration:none;color:var(--ink);font-weight:600;font-size:14px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px 11px}
+
+/* botones */
+.btn{border:0;border-radius:14px;padding:14px 18px;font-weight:600;font-size:15.5px;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:transform .15s,background .2s}
+.btn:active{transform:scale(.97)}
+.btn.p{background:var(--glaze);color:#fff}
+.btn.p:hover{background:var(--glaze-d)}
+.btn.g{background:#fff;color:var(--ink);border:1px solid var(--line)}
+.btn.ok{background:var(--chimi);color:#fff}
+.btn.sm{padding:9px 13px;font-size:14px;border-radius:11px}
+.btn[disabled]{opacity:.38;pointer-events:none}
+
+/* hero */
+.hero{padding:18px 0 64px}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1fr);gap:30px;align-items:start}
+.hero h1{font-weight:800;font-size:clamp(38px,10.4vw,74px);line-height:.96;letter-spacing:-.055em;margin:10px 0 18px;text-wrap:balance}
+.lead{font-size:18px;color:var(--ink-2);max-width:36ch;margin:0 0 24px}
+.carta{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 22px;padding:0;list-style:none}
+.carta li{background:#fff;border:1px solid var(--line);border-radius:99px;padding:6px 12px;font-size:14px;font-weight:500}
+.meta{display:grid;gap:8px;font-size:14.5px;color:var(--dim)}
+.meta span{display:flex;gap:9px;align-items:flex-start}
+.meta svg{color:var(--glaze);flex:none;margin-top:3px}
+
+/* cotizador */
+.quote{background:var(--paper);border-radius:26px;box-shadow:0 40px 80px -46px rgba(58,28,16,.55),0 0 0 1px var(--line);overflow:hidden;scroll-margin-top:60px}
+.qbody{padding:20px 18px 18px}
+.qhd{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:16px}
+.qhd b{font-size:19px;font-weight:700;letter-spacing:-.025em}
+.qhd small{display:block;font-size:13px;color:var(--dim);font-weight:400;letter-spacing:0}
+.dots{display:flex;gap:5px;flex:none}
+.dots i{width:20px;height:5px;border-radius:9px;background:var(--tray-d);transition:background .3s}
+.dots i.on{background:var(--glaze)}
+.stp{display:none;animation:in .3s ease}
+.stp.on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(6px)}}
+.q{font-size:17px;font-weight:700;letter-spacing:-.02em;margin:0 0 4px}
+.qs{font-size:14px;color:var(--dim);margin:0 0 12px}
+.lbl{display:block;font-size:13.5px;font-weight:600;color:var(--dim);margin:16px 0 7px}
+.field{width:100%;border:1.5px solid var(--line);border-radius:13px;padding:12px 13px;background:#fff;font-size:16px}
+.field:focus{border-color:var(--glaze);outline:none}
+select.field{appearance:none;-webkit-appearance:none;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%233a1c10' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 14px center;padding-right:36px}
+.menus{display:grid;gap:8px}
+.mo{border:1.5px solid var(--line);background:#fff;border-radius:16px;display:flex;gap:12px;align-items:center;text-align:left;padding:12px 13px;transition:border-color .2s,background .2s;width:100%}
+.mo .ic{width:42px;height:42px;border-radius:12px;background:var(--honey-s);display:grid;place-items:center;flex:none;color:var(--glaze)}
+.mo.on{border-color:var(--glaze);background:#fdf6f0}
+.mo.on .ic{background:var(--glaze);color:#fff}
+.mo .tx{min-width:0;flex:1}
+.mo b{display:block;font-size:15.5px;line-height:1.25}
+.mo small{display:block;color:var(--dim);font-size:13px;line-height:1.35;margin-top:2px}
+.mo .pr{font-size:13px;color:var(--ink-2);white-space:nowrap;text-align:right;flex:none}
+.mo .pr em{display:block;font-style:normal;font-family:var(--ui);font-size:11px;color:var(--dim)}
+.ppl{display:flex;align-items:center;gap:10px;margin:4px 0 10px}
+.ppl button{width:50px;height:50px;border-radius:15px;border:1.5px solid var(--line);background:#fff;font-size:24px;font-weight:500;line-height:1;flex:none}
+.ppl .v{flex:1;text-align:center}
+.ppl .v b{font-family:var(--mono);font-size:44px;font-weight:600;letter-spacing:-.05em;line-height:1;display:block}
+.ppl .v small{font-size:13px;color:var(--dim)}
+input[type=range]{width:100%;accent-color:var(--glaze);margin:4px 0 2px}
+.quick{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.quick button{border:1.5px solid var(--line);background:#fff;border-radius:10px;padding:6px 11px;font-size:14px;font-family:var(--mono)}
+.quick button.on{border-color:var(--glaze);background:#fdf6f0}
+.armado{margin-top:14px;background:var(--soft);border-radius:14px;padding:11px 13px;font-size:14px;color:var(--ink-2)}
+.armado b{color:var(--ink)}
+.extras{display:grid;gap:7px}
+.chk{display:flex;gap:10px;align-items:center;border:1.5px solid var(--line);border-radius:13px;padding:10px 12px;font-size:14.5px;background:#fff;cursor:pointer}
+.chk input{width:18px;height:18px;accent-color:var(--glaze);flex:none;margin:0}
+.chk span{flex:1}
+.chk em{font-style:normal;font-size:12.5px;color:var(--dim)}
+.days{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;margin:0 -18px;padding:9px 18px 4px}
+.days::-webkit-scrollbar{display:none}
+.day{flex:none;width:58px;border:1.5px solid var(--line);border-radius:14px;background:#fff;padding:8px 0;text-align:center;line-height:1.15;position:relative}
+.day small{display:block;font-size:11.5px;color:var(--dim)}
+.day b{font-family:var(--mono);font-size:19px;font-weight:600}
+.day.on{background:var(--glaze);border-color:var(--glaze);color:#fff}
+.day.on small{color:#fbe1cc}
+.day.x{background:var(--soft);border-color:transparent;color:#b3a69c;pointer-events:none}
+.day .tag{position:absolute;top:-8px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;font-size:9.5px;font-weight:600;border-radius:6px;padding:0 5px;white-space:nowrap}
+.slots{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}
+.slot{border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:10px 0;font-size:14.5px;font-weight:500;font-family:var(--mono)}
+.slot.on{background:var(--glaze);color:#fff;border-color:var(--glaze)}
+.note{font-size:12.5px;color:var(--dim);margin:8px 0 0}
+.nxt{display:flex;gap:8px;margin-top:18px}
+.nxt .btn{flex:1}
+.nxt .btn.g{flex:none}
+.err{font-size:13.5px;color:var(--warn);margin:8px 0 0;min-height:0}
+.pay{display:grid;gap:8px}
+.pm{border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:12px 13px;display:flex;gap:11px;align-items:center;text-align:left;width:100%}
+.pm.on{border-color:var(--glaze);background:#fdf6f0}
+.pm .rd{width:18px;height:18px;border-radius:50%;border:2px solid var(--line);flex:none}
+.pm.on .rd{border:5px solid var(--glaze)}
+.pm b{display:block;font-size:15px}
+.pm small{display:block;font-size:13px;color:var(--dim)}
+.senabox{display:flex;justify-content:space-between;align-items:flex-end;background:var(--honey-s);border-radius:14px;padding:13px 14px;margin-bottom:12px}
+.senabox span{font-size:14px;color:var(--ink-2)}
+.senabox b{font-family:var(--mono);font-size:26px;font-weight:600;letter-spacing:-.04em;line-height:1}
+.done{text-align:center;padding:4px 2px}
+.ck{width:64px;height:64px;border-radius:50%;background:var(--chimi);display:grid;place-items:center;margin:4px auto 12px;animation:pop .5s cubic-bezier(.2,1.6,.4,1)}
+@keyframes pop{from{transform:scale(.3)}}
+.done h3{font-size:24px;font-weight:800;letter-spacing:-.035em;margin:0 0 4px}
+.done p{color:var(--dim);margin:0 0 14px;font-size:14.5px}
+.wamini{background:#e4f3e6;border-radius:14px;padding:11px 13px;text-align:left;font-size:14px;margin-bottom:12px}
+.wamini small{display:block;font-size:11.5px;font-weight:600;color:var(--chimi);margin-bottom:3px}
+
+/* comanda: precio en vivo */
+.comanda{background:var(--ink);color:#f6e7da;padding:18px 18px 18px;position:relative}
+.comanda::before{content:"";position:absolute;left:0;right:0;top:-1px;height:10px;background:radial-gradient(circle at 7px -1px,var(--paper) 6px,transparent 6.5px) repeat-x;background-size:14px 10px}
+.cm-row{display:flex;justify-content:space-between;gap:12px;font-size:14px;padding:3px 0}
+.cm-row span{color:#d4bba9;min-width:0}
+.cm-row b{font-family:var(--mono);font-weight:500;white-space:nowrap}
+.cm-tot{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;border-top:1px dashed #7a5240;margin-top:10px;padding-top:12px}
+.cm-tot span{font-size:13px;color:#d4bba9;line-height:1.3}
+.cm-tot b{font-family:var(--mono);font-size:clamp(32px,9vw,42px);font-weight:600;letter-spacing:-.05em;line-height:1;color:#fff;transition:color .3s}
+.cm-tot b.bump{color:var(--honey)}
+.cm-empty{font-size:14px;color:#d4bba9;margin:0}
+.cm-sena{font-size:13px;color:#d4bba9;margin-top:6px;display:flex;justify-content:space-between}
+.cm-sena b{font-family:var(--mono);color:var(--honey);font-weight:500}
+
+/* secciones */
+section.blk{padding:64px 0}
+h2{font-weight:800;font-size:clamp(30px,7.4vw,52px);line-height:1;letter-spacing:-.05em;margin:0 0 14px;text-wrap:balance}
+.sub{color:var(--ink-2);margin:0 0 30px;max-width:54ch;font-size:17px}
+.dark{background:var(--ink);color:#f6e7da}
+.dark .sub{color:#d9c1b0}
+
+/* antes / después */
+.ad{display:grid;gap:16px}
+.card{background:#fff;border-radius:22px;padding:18px;border:1px solid var(--line)}
+.dark .card{background:#4a2617;border-color:#5f3523;color:#f6e7da}
+.card h3{font-size:17px;font-weight:700;letter-spacing:-.02em;margin:0 0 12px}
+.chat{background:#efe7dc;border-radius:16px;padding:12px;display:grid;gap:8px}
+.bub{max-width:88%;border-radius:14px;padding:8px 11px;font-size:14px;line-height:1.4;color:#2a1a12}
+.bub.in{background:#fff;justify-self:start;border-top-left-radius:4px}
+.bub.out{background:#d9f5c9;justify-self:end;border-top-right-radius:4px}
+.bub small{display:block;font-size:11px;color:#7d6c60;margin-top:2px;text-align:right}
+.campos{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.campos li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;align-items:baseline;font-size:14.5px;padding:10px 12px;border-radius:12px;background:#5a3220}
+.campos li b{font-weight:600;color:#fff}
+.campos li span{color:#d9c1b0;grid-column:2}
+.campos li i{font-style:normal;font-family:var(--mono);font-size:12px;color:var(--honey);grid-row:span 2;align-self:center;width:22px;height:22px;border-radius:7px;background:#3a1c10;display:grid;place-items:center}
+.gains{display:grid;gap:12px;margin-top:22px}
+.gain{display:flex;gap:12px;align-items:flex-start}
+.gain svg{flex:none;color:var(--honey);margin-top:2px}
+.gain b{display:block;color:#fff;font-size:15.5px}
+.gain span{font-size:14.5px;color:#d9c1b0}
+
+/* zona / horarios */
+.info{display:grid;gap:14px}
+.info .card p{margin:0;color:var(--ink-2);font-size:15px}
+.hrs-t{width:100%;border-collapse:collapse;font-size:15px}
+.hrs-t td{padding:7px 0;border-bottom:1px solid var(--soft)}
+.hrs-t td:last-child{text-align:right;font-family:var(--mono)}
+
+footer{padding:34px 0 50px;border-top:1px solid var(--line);font-size:14px;color:var(--dim)}
+footer .wrap{display:grid;gap:16px}
+footer a{color:var(--glaze)}
+.credit{font-size:13px;background:#fff;border-radius:14px;padding:12px 14px;border:1px solid var(--line)}
+
+/* ================= PANEL ================= */
+.panel{background:#f4f3f1;min-height:100vh}
+.ptop{background:#fff;border-bottom:1px solid var(--line)}
+.ptop .wrap{display:flex;align-items:center;gap:12px;height:62px}
+.ptop .who{margin-left:auto;font-size:13.5px;color:var(--dim)}
+.phead{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;padding:26px 0 16px;flex-wrap:wrap}
+.phead h2{font-size:clamp(28px,6vw,40px);margin:0}
+.phead p{margin:4px 0 0;color:var(--dim);font-size:14.5px}
+.mnav{display:flex;gap:6px}
+.mnav button{width:42px;height:42px;border-radius:12px;border:1px solid var(--line);background:#fff;display:grid;place-items:center}
+.kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:16px}
+.kp{background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px}
+.kp small{display:block;font-size:12.5px;color:var(--dim);line-height:1.25}
+.kp b{display:block;font-family:var(--mono);font-size:18px;font-weight:600;letter-spacing:-.04em;margin-top:4px;line-height:1.1;overflow-wrap:anywhere}
+.pgrid{display:grid;gap:16px;padding-bottom:60px}
+.cal{background:#fff;border:1px solid var(--line);border-radius:20px;padding:12px}
+.wk{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.wk.h div{font-size:11.5px;color:var(--dim);text-align:center;padding:4px 0 6px;font-weight:600}
+.cd{aspect-ratio:1/1.05;border-radius:11px;border:1px solid transparent;background:var(--soft);padding:5px 4px;display:flex;flex-direction:column;align-items:flex-start;gap:3px;text-align:left;min-width:0;position:relative}
+.cd .n{font-family:var(--mono);font-size:13px;font-weight:600;line-height:1}
+.cd.out{background:transparent;pointer-events:none}
+.cd.out .n{color:#c3bab3}
+.cd.today{border-color:var(--ink)}
+.cd.sel{background:var(--ink);color:#fff}
+.cd .ev{display:flex;gap:2px;flex-wrap:wrap}
+.cd .ev i{width:7px;height:7px;border-radius:50%;background:var(--chimi)}
+.cd .ev i.pen{background:var(--honey)}
+.cd .ev i.new{background:var(--glaze);box-shadow:0 0 0 2px #fff}
+.cd.sel .ev i.new{box-shadow:0 0 0 2px var(--ink)}
+.cd .lab{display:none;font-size:11px;line-height:1.2;width:100%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;color:var(--ink-2)}
+.cd.sel .lab{color:#e9d6c8}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--dim);margin-top:10px;padding:0 4px}
+.legend span{display:flex;align-items:center;gap:6px}
+.legend i{width:8px;height:8px;border-radius:50%;display:inline-block}
+.dlist{display:grid;gap:10px;align-content:start}
+.dlist h3{font-size:18px;font-weight:700;letter-spacing:-.025em;margin:0}
+.dlist .dsub{font-size:14px;color:var(--dim);margin:2px 0 4px}
+.ord{background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px;animation:in .3s ease}
+.ord.nw{border-color:var(--glaze);box-shadow:0 0 0 3px var(--glaze-s)}
+.ord .r1{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.ord .r1 b{font-size:16px;display:block}
+.ord .r1 small{font-size:13px;color:var(--dim)}
+.pill{font-size:12px;font-weight:600;border-radius:99px;padding:3px 9px;white-space:nowrap;flex:none}
+.pill.ok{background:var(--chimi-s);color:var(--chimi)}
+.pill.pen{background:var(--honey-s);color:#8a5a10}
+.pill.nw{background:var(--glaze);color:#fff;margin-right:4px}
+.ord .det{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 12px;margin:12px 0 0;font-size:13.5px}
+.ord .det div span{display:block;color:var(--dim);font-size:12px}
+.ord .det div b{font-weight:500}
+.ord .money{display:flex;justify-content:space-between;gap:10px;margin-top:12px;padding-top:10px;border-top:1px dashed var(--line);font-size:13.5px;align-items:center;flex-wrap:wrap}
+.ord .money b{font-family:var(--mono);font-weight:600}
+.empty{background:#fff;border:1px dashed var(--line);border-radius:18px;padding:22px;text-align:center;color:var(--dim);font-size:14.5px}
+
+@media (min-width:760px){
+  .hrs{display:block}
+  .ig{margin-left:14px}
+  .hero{padding:34px 0 80px}
+  .hero .wrap{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:56px}
+  .hero .intro{padding-top:28px}
+  .qbody{padding:24px 24px 22px}
+  .comanda{padding:20px 24px 22px}
+  .days{margin:0 -24px;padding:9px 24px 4px}
+  .slots{grid-template-columns:repeat(4,1fr)}
+  .ad{grid-template-columns:1fr 1fr;gap:20px}
+  .gains{grid-template-columns:repeat(3,1fr);gap:20px;margin-top:28px}
+  .info{grid-template-columns:1fr 1fr}
+  footer .wrap{grid-template-columns:1fr 1fr;align-items:start}
+  .pgrid{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);align-items:start}
+  .cal{padding:16px}
+  .wk{gap:6px}
+  .cd{aspect-ratio:1/.86;padding:7px}
+  .cd .lab{display:block}
+  .kp b{font-size:26px}
+  .kp{padding:14px 16px}
+}
+@media (max-width:520px){.ig span{display:none}.ig{padding:9px}}
+@media (max-width:380px){.kp b{font-size:16px}.kp{padding:10px}.mo .pr{display:none}}
+</style>
+</head>
+<body>
+
+<div class="demo" role="region" aria-label="Aviso de boceto">
+  <span><b>Boceto para Aroma y Fuego</b> hecho por Compila</span>
+  <div class="seg" role="tablist" aria-label="Cambiar de vista">
+    <button id="vCli" class="on" role="tab" aria-selected="true">Cliente</button>
+    <button id="vPan" role="tab" aria-selected="false">Panel<span class="dot" id="dotNew" hidden>0</span></button>
+  </div>
+</div>
+
+<!-- ===================== VISTA CLIENTE ===================== -->
+<main id="cli">
+  <header class="top">
+    <div class="wrap">
+      <a class="wm" href="#" aria-label="Aroma y Fuego">
+        <svg width="34" height="34" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#3a1c10"/><path d="M32 10c3 9 13 13 13 26a13 13 0 0 1-26 0c0-7 4-10 6-15 1 4 3 6 5 7 0-7-1-12 2-18z" fill="#e9a23b"/></svg>
+        <span><b>Aroma y Fuego</b><small>Catering en Morón</small></span>
+      </a>
+      <span class="hrs">Lunes a viernes de 8 a 17<br>Sábados de 10 a 17</span>
+      <a class="ig" href="https://www.instagram.com/aroma_y_fuego/" rel="noopener" target="_blank" aria-label="Instagram @aroma_y_fuego"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg><span>@aroma_y_fuego</span></a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap">
+      <div class="intro">
+        <h1>Armá tu evento y dejá la fecha agendada.</h1>
+        <p class="lead">Elegí el menú, decinos cuántos van a ser y mirá el precio al toque. Con la seña, el día queda reservado.</p>
+        <ul class="carta" aria-label="Lo que preparan">
+          <li>Perniles</li><li>Bife de chorizo</li><li>Bondiola</li><li>Cazuelas</li><li>Bocados fríos y calientes</li><li>Mesa dulce</li>
+        </ul>
+        <div class="meta">
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 7h18v12H3zM3 7l3-4h12l3 4"/></svg>Todo armado en bandejas, listo para servir</span>
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Entregas en Morón y alrededores</span>
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Pedidos con 48 horas de anticipación</span>
+        </div>
+      </div>
+
+      <div class="quote" id="cotizar" aria-label="Cotizador">
+        <div class="qbody">
+          <div class="qhd"><div><b>Cotizá tu evento</b><small id="stepName">Paso 1 de 5: el menú</small></div><div class="dots" id="dots"><i class="on"></i><i></i><i></i><i></i><i></i></div></div>
+
+          <!-- 1 menú -->
+          <div class="stp on" id="st1">
+            <p class="q">¿Qué querés servir?</p>
+            <p class="qs">Podés sumar extras en el paso siguiente.</p>
+            <div class="menus" id="menus"></div>
+            <div class="nxt"><button class="btn p" id="go1" disabled>Seguir</button></div>
+          </div>
+
+          <!-- 2 personas -->
+          <div class="stp" id="st2">
+            <p class="q">¿Cuántos van a ser?</p>
+            <div class="ppl">
+              <button id="pMinus" aria-label="Restar 5 personas">−</button>
+              <div class="v"><b id="pVal">30</b><small>personas</small></div>
+              <button id="pPlus" aria-label="Sumar 5 personas">+</button>
+            </div>
+            <input type="range" id="pRange" min="10" max="120" step="5" value="30" aria-label="Cantidad de personas">
+            <div class="quick" id="quick"></div>
+            <div class="armado" id="armado"></div>
+            <span class="lbl">Extras para sumar</span>
+            <div class="extras">
+              <label class="chk"><input type="checkbox" id="xDulce"><span>Mesa dulce</span><em>precio a confirmar</em></label>
+              <label class="chk"><input type="checkbox" id="xCaz"><span>Cazuelas</span><em>precio a confirmar</em></label>
+            </div>
+            <div class="nxt"><button class="btn g" data-back="1">Volver</button><button class="btn p" id="go2">Elegir fecha</button></div>
+          </div>
+
+          <!-- 3 fecha y zona -->
+          <div class="stp" id="st3">
+            <p class="q">¿Cuándo y dónde es?</p>
+            <p class="qs">Los días que ya están completos no se pueden elegir.</p>
+            <div class="days" id="days"></div>
+            <span class="lbl">Horario de entrega</span>
+            <div class="slots" id="slots"></div>
+            <label class="lbl" for="zona">Zona de entrega</label>
+            <select class="field" id="zona"></select>
+            <p class="note">Envíos y franjas de ejemplo, dentro de su horario de atención.</p>
+            <p class="err" id="err3" hidden></p>
+            <div class="nxt"><button class="btn g" data-back="2">Volver</button><button class="btn p" id="go3">Seguir</button></div>
+          </div>
+
+          <!-- 4 datos -->
+          <div class="stp" id="st4">
+            <p class="q">¿A nombre de quién?</p>
+            <p class="qs">Con esto ya tienen todo para preparar tu pedido.</p>
+            <label class="lbl" for="nom">Nombre</label>
+            <input class="field" id="nom" autocomplete="name" placeholder="Tu nombre">
+            <label class="lbl" for="tel">WhatsApp</label>
+            <input class="field" id="tel" inputmode="tel" autocomplete="tel" placeholder="11 2345-6789">
+            <label class="lbl" for="dir">Dirección de entrega <span style="font-weight:400">(opcional)</span></label>
+            <input class="field" id="dir" autocomplete="street-address" placeholder="Calle y altura">
+            <label class="lbl" for="obs">Algo más que tengan que saber <span style="font-weight:400">(opcional)</span></label>
+            <input class="field" id="obs" placeholder="Ej: cumple de 15, hay 3 celíacos">
+            <p class="err" id="err4" hidden></p>
+            <div class="nxt"><button class="btn g" data-back="3">Volver</button><button class="btn p" id="go4">Ir a la seña</button></div>
+          </div>
+
+          <!-- 5 seña -->
+          <div class="stp" id="st5">
+            <p class="q">Dejá la seña y la fecha es tuya</p>
+            <p class="qs">El resto lo pagás el día de la entrega.</p>
+            <div class="senabox"><span>Seña del 30 %</span><b id="senaBig">$0</b></div>
+            <div class="pay" id="pay">
+              <button class="pm on" data-m="Mercado Pago"><span class="rd"></span><span><b>Mercado Pago</b><small>Tarjeta, débito o dinero en cuenta</small></span></button>
+              <button class="pm" data-m="Transferencia"><span class="rd"></span><span><b>Transferencia</b><small>Te mostramos el alias y subís el comprobante</small></span></button>
+            </div>
+            <p class="note">Es un boceto: no se cobra nada ni se manda ningún mensaje.</p>
+            <div class="nxt"><button class="btn g" data-back="4">Volver</button><button class="btn ok" id="go5">Pagar seña</button></div>
+          </div>
+
+          <!-- listo -->
+          <div class="stp" id="st6">
+            <div class="done">
+              <div class="ck"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+              <h3>Fecha agendada</h3>
+              <p id="doneTx"></p>
+              <div class="wamini"><small>Te llega por WhatsApp</small><span id="doneWa"></span></div>
+              <div class="nxt" style="margin-top:0"><button class="btn g" id="again">Cotizar otro</button><button class="btn p" id="seePanel">Ver cómo les llega</button></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="comanda" aria-live="polite">
+          <div id="cmBody"><p class="cm-empty">Elegí un menú para ver el precio.</p></div>
+          <div class="cm-tot"><span>Total estimado<br><span id="cmNote">sin envío</span></span><b id="cmTot">$0</b></div>
+          <div class="cm-sena"><span>Seña para reservar</span><b id="cmSena">$0</b></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="blk dark">
+    <div class="wrap">
+      <h2>Los datos llegan solos, sin pedirlos uno por uno</h2>
+      <p class="sub">Hoy la respuesta automática de WhatsApp le pide cinco cosas a cada cliente y después hay que juntarlas a mano. Con el cotizador, el cliente las completa mientras elige y ustedes reciben el pedido entero, con la seña adentro.</p>
+      <div class="ad">
+        <div class="card">
+          <h3>Hoy, por WhatsApp <span style="font-weight:400;font-size:13px;color:#d9c1b0">(charla de ejemplo)</span></h3>
+          <div class="chat">
+            <div class="bub in">Hola, quería precio de un pernil para el cumple de mi viejo<small>10:42</small></div>
+            <div class="bub out">Gracias por escribirnos. Para cotizar pasanos: nombre, tipo de servicio, fecha del evento, cantidad de personas y zona de entrega.<small>10:42</small></div>
+            <div class="bub in">Ah ok. Soy Marta, sábado 12<small>11:15</small></div>
+            <div class="bub in">Somos como 30, en Castelar<small>11:16</small></div>
+            <div class="bub out">¿Pernil solo o con lunch? ¿Qué sábado?<small>13:02</small></div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Con el cotizador</h3>
+          <ul class="campos">
+            <li><i>1</i><b>Tipo de servicio</b><span>Lo elige tocando un menú</span></li>
+            <li><i>2</i><b>Cantidad de personas</b><span>Lo marca y ve el precio al toque</span></li>
+            <li><i>3</i><b>Fecha del evento</b><span>Solo puede elegir días libres</span></li>
+            <li><i>4</i><b>Zona de entrega</b><span>Sale de una lista, con el envío incluido</span></li>
+            <li><i>5</i><b>Nombre</b><span>Y su WhatsApp, para confirmarle</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="gains">
+        <div class="gain"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><div><b>Menos idas y vueltas</b><span>El precio ya lo vio antes de escribir, así que les llega alguien decidido.</span></div></div>
+        <div class="gain"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><div><b>Fecha reservada con seña</b><span>Nadie ocupa un sábado sin pagar y no se pisan dos eventos el mismo día.</span></div></div>
+        <div class="gain"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><div><b>Funciona fuera de horario</b><span>Un domingo a la noche también se puede cotizar y reservar. El lunes ya lo tienen en la agenda.</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="blk">
+    <div class="wrap">
+      <h2>Cuándo atienden</h2>
+      <p class="sub">Los pedidos se toman con 48 horas de anticipación.</p>
+      <div class="info">
+        <div class="card">
+          <table class="hrs-t"><tbody>
+            <tr><td>Lunes a viernes</td><td>8 a 17</td></tr>
+            <tr><td>Sábados</td><td>10 a 17</td></tr>
+            <tr><td>Domingos</td><td>cerrado</td></tr>
+          </tbody></table>
+        </div>
+        <div class="card"><p>Catering en Morón: perniles con salsas y figacitas, bife de chorizo, bondiola, cazuelas, lunch con bocados fríos y calientes y mesa dulce. Todo armado en bandejas.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div><b style="color:var(--ink)">Aroma y Fuego</b>, servicio de catering en Morón<br>Instagram <a href="https://www.instagram.com/aroma_y_fuego/" rel="noopener" target="_blank">@aroma_y_fuego</a></div>
+      <div class="credit">Boceto hecho por <a href="https://compilasoftware.com" rel="noopener" target="_blank">Compila Software</a> con los datos públicos de Aroma y Fuego. Los precios de pernil y lunch vegetariano son los de sus publicaciones en Mercado Libre y pueden estar desactualizados; los marcados como ejemplo, los envíos y los pedidos del panel son de muestra. No se cobra ni se envía nada a nadie.</div>
+    </div>
+  </footer>
+</main>
+
+<!-- ===================== PANEL ===================== -->
+<main id="pan" class="panel" hidden>
+  <header class="ptop">
+    <div class="wrap">
+      <span class="wm"><svg width="30" height="30" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#3a1c10"/><path d="M32 10c3 9 13 13 13 26a13 13 0 0 1-26 0c0-7 4-10 6-15 1 4 3 6 5 7 0-7-1-12 2-18z" fill="#e9a23b"/></svg><b>Agenda</b></span>
+      <span class="who">Panel de Aroma y Fuego</span>
+    </div>
+  </header>
+  <div class="wrap">
+    <div class="phead">
+      <div><h2 id="mTitle">Mes</h2><p id="mSub"></p></div>
+      <div class="mnav"><button id="mPrev" aria-label="Mes anterior"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><button id="mNext" aria-label="Mes siguiente"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button></div>
+    </div>
+    <div class="kpis">
+      <div class="kp"><small>Eventos del mes</small><b id="kEv">0</b></div>
+      <div class="kp"><small>Señas cobradas</small><b id="kSe">$0</b></div>
+      <div class="kp"><small>Saldo a cobrar</small><b id="kSa">$0</b></div>
+    </div>
+    <div class="pgrid">
+      <div class="cal">
+        <div class="wk h"><div>Lun</div><div>Mar</div><div>Mié</div><div>Jue</div><div>Vie</div><div>Sáb</div><div>Dom</div></div>
+        <div class="wk" id="grid"></div>
+        <div class="legend"><span><i style="background:var(--chimi)"></i>Seña cobrada</span><span><i style="background:var(--honey)"></i>Seña pendiente</span><span><i style="background:var(--glaze)"></i>Recién reservado</span></div>
+      </div>
+      <div class="dlist" id="dlist"></div>
+    </div>
+  </div>
+</main>
+
+<script>
+(function(){
+"use strict";
+var $=function(id){return document.getElementById(id)};
+var fmt=function(n){return "$"+Math.round(n).toLocaleString("es-AR")};
+var DOW=["Dom","Lun","Mar","Mié","Jue","Vie","Sáb"];
+var DOWL=["domingo","lunes","martes","miércoles","jueves","viernes","sábado"];
+var MES=["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+var SENA=0.3;
+
+var IC={
+  pernil:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.5 3.5c3 1.2 5 4 5 7.2 0 5-5.2 9.8-11 9.8-3 0-5-1.4-5-3.8 0-2.6 2.4-3.4 3.4-5.6 1.4-3 2.6-8.8 7.6-7.6z"/><path d="M4.5 16.7 2.5 19"/><path d="M11 11c1.4.5 2.4 1.6 2.8 3"/></svg>',
+  lunch:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="8" width="19" height="10" rx="2"/><circle cx="7.5" cy="13" r="1.8"/><circle cx="12" cy="13" r="1.8"/><circle cx="16.5" cy="13" r="1.8"/><path d="M5 8V6.5h14V8"/></svg>',
+  veg:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19C5 10 11 5 20 4c0 9-5 15-14 15z"/><path d="M5 19l8-8"/></svg>',
+  combo:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="12" width="19" height="7" rx="2"/><path d="M8 12c0-3 1.8-6 4-6s4 3 4 6"/><path d="M12 6V4"/></svg>',
+  carne:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14c0-5 4-9 9-9 4 0 7 2.4 7 6 0 5-5 8-10 8-3.6 0-6-1.8-6-5z"/><ellipse cx="13" cy="11" rx="2.6" ry="2"/></svg>'
+};
+
+/* Precios: "ml" = publicado por ellos en Mercado Libre; "ej" = ejemplo para la demo */
+var MENUS=[
+  {id:"pernil",ic:"pernil",n:"Pernil de cerdo",d:"Cocido, con 3 salsas y figacitas de manteca",packs:[{p:20,v:82000},{p:30,v:86000},{p:50,v:140000,ej:1}],from:"desde $82.000",src:"precio de Mercado Libre"},
+  {id:"lunch",ic:"lunch",n:"Lunch",d:"Empanaditas, sacramentos, salchichitas, albondiguitas y pizzetas",per10:65000,ej:1,from:"$65.000 x 10",src:"precio de ejemplo"},
+  {id:"veg",ic:"veg",n:"Lunch vegetariano",d:"Bocados fríos y calientes sin carne",per10:60000,from:"$60.000 x 10",src:"precio de Mercado Libre"},
+  {id:"combo",ic:"combo",n:"Pernil + lunch",d:"El pernil para el plato fuerte y bocados para recibir",combo:1,from:"se arma solo",src:"suma de los dos"},
+  {id:"bife",ic:"carne",n:"Bife de chorizo braseado",d:"Armado en bandejas",pp:6500,ej:1,from:"$6.500 x persona",src:"precio de ejemplo"},
+  {id:"bond",ic:"carne",n:"Bondiola",d:"Armada en bandejas",pp:5200,ej:1,from:"$5.200 x persona",src:"precio de ejemplo"}
+];
+var ZONAS=[
+  {n:"Morón",v:0},{n:"Castelar",v:8000},{n:"Haedo",v:8000},{n:"El Palomar",v:8000},
+  {n:"Ituzaingó",v:12000},{n:"Hurlingham",v:12000},{n:"Ramos Mejía",v:12000},{n:"Otra zona",v:null}
+];
+var SL_WEEK=["9 a 11","11 a 13","13 a 15","15 a 17"],SL_SAT=["10 a 12","12 a 14","14 a 17"];
+
+function pernilPlan(n){
+  var packs=MENUS[0].packs,out=[],left=n,guard=0;
+  while(left>0&&guard++<10){
+    if(left>50){out.push(packs[2]);left-=50;continue}
+    for(var i=0;i<packs.length;i++){if(packs[i].p>=left){out.push(packs[i]);left=0;break}}
+  }
+  return out;
+}
+function lines(menu,n){
+  var L=[];
+  if(!menu)return L;
+  if(menu.packs||menu.combo){
+    var plan=pernilPlan(n),c={};
+    plan.forEach(function(p){c[p.p]=c[p.p]||{q:0,v:p.v,ej:p.ej};c[p.p].q++});
+    Object.keys(c).sort(function(a,b){return b-a}).forEach(function(k){
+      var it=c[k];L.push({t:(it.q>1?it.q+" × ":"")+"Pernil para "+k+(it.ej?" (ejemplo)":""),v:it.v*it.q,figa:k*3*it.q});
+    });
+  }
+  if(menu.per10||menu.combo){
+    var m=menu.combo?MENUS[1]:menu,b=Math.ceil(n/10);
+    L.push({t:b+" bandeja"+(b>1?"s":"")+" de "+(m.id==="veg"?"lunch vegetariano":"lunch")+(m.ej?" (ejemplo)":""),v:b*m.per10});
+  }
+  if(menu.pp){L.push({t:menu.n+" × "+n+" (ejemplo)",v:menu.pp*n})}
+  return L;
+}
+
+/* ---------- estado ---------- */
+var S={menu:null,n:30,day:null,slot:null,zona:0,pay:"Mercado Pago",step:1};
+var today=new Date();today.setHours(0,0,0,0);
+function addDays(d,k){var x=new Date(d);x.setDate(x.getDate()+k);return x}
+function key(d){return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()}
+
+/* ---------- pedidos de ejemplo para el panel ---------- */
+var NOMBRES=["Marta G.","Lucas F.","Mariela O.","Silvina R.","Pablo M.","Hernán D.","Romina A.","Laura K.","Gabriela T.","Diego S.","Natalia P.","Sergio L.","Camila E.","Andrea B.","Jorge V.","Vanina C."];
+var MOTIVOS=["Cumple de 50","Bautismo","Fin de año de la oficina","Cumple de 15","Comunión","Despedida","Aniversario","Reunión de egresados"];
+var orders=[];
+(function seed(){
+  var r=7,rnd=function(){r=(r*9301+49297)%233280;return r/233280};
+  for(var mo=-1;mo<=2;mo++){
+    var first=new Date(today.getFullYear(),today.getMonth()+mo,1),dim=new Date(first.getFullYear(),first.getMonth()+1,0).getDate();
+    for(var d=1;d<=dim;d++){
+      var dt=new Date(first.getFullYear(),first.getMonth(),d),dw=dt.getDay();
+      if(dw===0)continue;
+      var pr=dw===6?0.97:(dw===5?0.6:0.3),cnt=0;
+      while(rnd()<pr&&cnt<(dw===6?3:2)){
+        var mi=[0,0,1,2,3,3,4,5][Math.floor(rnd()*8)],menu=MENUS[mi],n=[20,25,30,30,40,50,60,80][Math.floor(rnd()*8)];
+        var tot=lines(menu,n).reduce(function(a,l){return a+l.v},0),z=ZONAS[Math.floor(rnd()*7)];
+        tot+=z.v||0;
+        var paid=dt<addDays(today,3)?true:rnd()<0.6;
+        orders.push({d:dt,name:NOMBRES[Math.floor(rnd()*NOMBRES.length)],why:MOTIVOS[Math.floor(rnd()*MOTIVOS.length)],menu:menu.n,n:n,zona:z.n,slot:(dw===6?SL_SAT:SL_WEEK)[Math.floor(rnd()*(dw===6?3:4))],tot:tot,sena:Math.round(tot*SENA/100)*100,paid:paid});
+        cnt++;pr*=0.5;
+      }
+    }
+  }
+})();
+function ordersOn(d){var k=key(d);return orders.filter(function(o){return key(o.d)===k})}
+
+/* ---------- paso 1: menús ---------- */
+var menusEl=$("menus");
+MENUS.forEach(function(m){
+  var b=document.createElement("button");b.className="mo";b.type="button";b.dataset.id=m.id;
+  b.innerHTML='<span class="ic">'+IC[m.ic]+'</span><span class="tx"><b>'+m.n+'</b><small>'+m.d+'</small></span><span class="pr num">'+m.from+'<em>'+m.src+'</em></span>';
+  b.addEventListener("click",function(){
+    S.menu=m;[].forEach.call(menusEl.children,function(x){x.classList.toggle("on",x===b)});
+    $("go1").disabled=false;render();
+  });
+  menusEl.appendChild(b);
+});
+
+/* ---------- paso 2: personas ---------- */
+var QUICK=[20,30,50,80];
+QUICK.forEach(function(q){var b=document.createElement("button");b.type="button";b.textContent=q;b.addEventListener("click",function(){setN(q)});$("quick").appendChild(b)});
+function setN(n){S.n=Math.max(10,Math.min(120,n));render()}
+$("pMinus").addEventListener("click",function(){setN(S.n-5)});
+$("pPlus").addEventListener("click",function(){setN(S.n+5)});
+$("pRange").addEventListener("input",function(e){setN(+e.target.value)});
+$("xDulce").addEventListener("change",render);$("xCaz").addEventListener("change",render);
+
+/* ---------- paso 3: fecha, franja, zona ---------- */
+var daysEl=$("days");
+for(var i=2;i<=24;i++){
+  (function(d){
+    var b=document.createElement("button");b.type="button";b.className="day";
+    var busy=ordersOn(d).length,closed=d.getDay()===0,full=!closed&&busy>=3;
+    b.innerHTML=(closed?'<span class="tag">cerrado</span>':full?'<span class="tag">completo</span>':'')+'<small>'+DOW[d.getDay()]+'</small><b>'+d.getDate()+'</b><small>'+MES[d.getMonth()].slice(0,3)+'</small>';
+    if(closed||full)b.classList.add("x");
+    b.setAttribute("aria-label",DOWL[d.getDay()]+" "+d.getDate()+" de "+MES[d.getMonth()]+(closed?", cerrado":full?", completo":""));
+    b.addEventListener("click",function(){S.day=d;S.slot=null;[].forEach.call(daysEl.children,function(x){x.classList.toggle("on",x===b)});drawSlots();render()});
+    daysEl.appendChild(b);
+  })(addDays(today,i));
+}
+function drawSlots(){
+  var el=$("slots");el.innerHTML="";
+  var list=!S.day?SL_WEEK:(S.day.getDay()===6?SL_SAT:SL_WEEK);
+  list.forEach(function(s){
+    var b=document.createElement("button");b.type="button";b.className="slot"+(S.slot===s?" on":"");b.textContent=s+" hs";
+    b.addEventListener("click",function(){S.slot=s;drawSlots()});
+    el.appendChild(b);
+  });
+}
+drawSlots();
+ZONAS.forEach(function(z,i){var o=document.createElement("option");o.value=i;o.textContent=z.n+(z.v===null?", envío a confirmar":z.v===0?", envío sin cargo":", envío "+fmt(z.v));$("zona").appendChild(o)});
+$("zona").addEventListener("change",function(e){S.zona=+e.target.value;render()});
+
+/* ---------- comanda ---------- */
+function totals(){
+  var L=lines(S.menu,S.n),sub=L.reduce(function(a,l){return a+l.v},0),z=ZONAS[S.zona],env=z.v||0;
+  return {L:L,sub:sub,env:env,tot:sub+env,sena:Math.round((sub+env)*SENA/100)*100,zonaTbd:z.v===null};
+}
+var lastTot=0;
+function render(){
+  $("pVal").textContent=S.n;$("pRange").value=S.n;
+  [].forEach.call($("quick").children,function(b){b.classList.toggle("on",+b.textContent===S.n)});
+  var t=totals(),h="";
+  if(!S.menu){h='<p class="cm-empty">Elegí un menú para ver el precio.</p>'}
+  else{
+    t.L.forEach(function(l){h+='<div class="cm-row"><span>'+l.t+'</span><b>'+fmt(l.v)+'</b></div>'});
+    if($("xDulce").checked)h+='<div class="cm-row"><span>Mesa dulce</span><b>a confirmar</b></div>';
+    if($("xCaz").checked)h+='<div class="cm-row"><span>Cazuelas</span><b>a confirmar</b></div>';
+    if(S.step>=3){h+='<div class="cm-row"><span>Envío a '+ZONAS[S.zona].n+'</span><b>'+(t.zonaTbd?"a confirmar":t.env?fmt(t.env):"sin cargo")+'</b></div>'}
+  }
+  $("cmBody").innerHTML=h;
+  var tb=$("cmTot");tb.textContent=fmt(t.tot);
+  if(t.tot!==lastTot){tb.classList.add("bump");setTimeout(function(){tb.classList.remove("bump")},300);lastTot=t.tot}
+  $("cmSena").textContent=fmt(t.sena);$("senaBig").textContent=fmt(t.sena);
+  $("cmNote").textContent=S.step>=3?(t.zonaTbd?"envío a confirmar":"con envío"):"sin envío";
+  /* armado */
+  if(S.menu){
+    var a="";
+    if(S.menu.packs||S.menu.combo){var f=t.L.filter(function(l){return l.figa}).reduce(function(x,l){return x+l.figa},0);a+="Para "+S.n+" personas te armamos <b>"+t.L.filter(function(l){return l.figa}).map(function(l){return l.t.replace(" (ejemplo)","").toLowerCase()}).join(" y ")+"</b>, con unas "+f+" figacitas y 3 salsas."}
+    if(S.menu.per10)a+="Va en <b>"+Math.ceil(S.n/10)+" bandejas</b> de bocados, una cada 10 personas.";
+    if(S.menu.combo)a+=" Más <b>"+Math.ceil(S.n/10)+" bandejas de lunch</b> para recibir.";
+    if(S.menu.pp)a+="Armado en bandejas para <b>"+S.n+" personas</b>.";
+    a+='<span style="display:flex;justify-content:space-between;margin-top:8px;padding-top:8px;border-top:1px solid var(--line)"><span>Total estimado</span><b class="num">'+fmt(t.sub)+'</b></span>';
+    $("armado").innerHTML=a;
+  }
+}
+
+/* ---------- navegación de pasos ---------- */
+var NAMES=["el menú","las personas","fecha y zona","tus datos","la seña"];
+function go(n){
+  S.step=n;
+  for(var i=1;i<=6;i++)$("st"+i).classList.toggle("on",i===n);
+  [].forEach.call($("dots").children,function(d,i){d.classList.toggle("on",i<n)});
+  $("stepName").textContent=n<=5?"Paso "+n+" de 5: "+NAMES[n-1]:"Listo";
+  render();
+  var q=$("cotizar"),r=q.getBoundingClientRect();
+  if(r.top<0)q.scrollIntoView({behavior:"smooth",block:"start"});
+}
+[].forEach.call(document.querySelectorAll("[data-back]"),function(b){b.addEventListener("click",function(){go(+b.dataset.back)})});
+$("go1").addEventListener("click",function(){go(2)});
+$("go2").addEventListener("click",function(){go(3)});
+$("go3").addEventListener("click",function(){
+  var e=$("err3");
+  if(!S.day){e.textContent="Elegí el día del evento.";e.hidden=false;return}
+  if(!S.slot){e.textContent="Elegí en qué horario querés recibirlo.";e.hidden=false;return}
+  e.hidden=true;go(4);
+});
+$("go4").addEventListener("click",function(){
+  var e=$("err4");
+  if($("nom").value.trim().length<2){e.textContent="Escribí tu nombre para saber a quién entregarle.";e.hidden=false;$("nom").focus();return}
+  if($("tel").value.replace(/\D/g,"").length<8){e.textContent="Dejá un WhatsApp con código de área, así te confirman.";e.hidden=false;$("tel").focus();return}
+  e.hidden=true;go(5);
+});
+[].forEach.call(document.querySelectorAll(".pm"),function(b){b.addEventListener("click",function(){S.pay=b.dataset.m;[].forEach.call(document.querySelectorAll(".pm"),function(x){x.classList.toggle("on",x===b)})})});
+
+var newCount=0,lastNew=null;
+$("go5").addEventListener("click",function(){
+  var t=totals(),nom=$("nom").value.trim(),d=S.day;
+  var dl=DOWL[d.getDay()]+" "+d.getDate()+" de "+MES[d.getMonth()];
+  var o={d:d,name:nom,why:$("obs").value.trim()||"Reserva desde el cotizador",menu:S.menu.n,n:S.n,zona:ZONAS[S.zona].n,slot:S.slot,tot:t.tot,sena:t.sena,paid:true,nw:true};
+  orders.push(o);lastNew=o;newCount++;
+  $("dotNew").textContent=newCount;$("dotNew").hidden=false;
+  $("doneTx").textContent=nom.split(" ")[0]+", tu evento del "+dl+" quedó reservado. Seña de "+fmt(t.sena)+" pagada con "+S.pay+".";
+  $("doneWa").textContent="Aroma y Fuego: reservamos "+S.menu.n.toLowerCase()+" para "+S.n+" personas el "+dl+", entrega de "+S.slot+" hs en "+ZONAS[S.zona].n+". Saldo a pagar en la entrega: "+fmt(t.tot-t.sena)+".";
+  go(6);
+});
+$("again").addEventListener("click",function(){
+  S.menu=null;S.day=null;S.slot=null;$("go1").disabled=true;
+  [].forEach.call(menusEl.children,function(x){x.classList.remove("on")});
+  [].forEach.call(daysEl.children,function(x){x.classList.remove("on")});
+  ["nom","tel","dir","obs"].forEach(function(id){$(id).value=""});
+  $("xDulce").checked=false;$("xCaz").checked=false;drawSlots();go(1);
+});
+$("seePanel").addEventListener("click",function(){
+  if(lastNew){view.y=lastNew.d.getFullYear();view.m=lastNew.d.getMonth();view.sel=lastNew.d}
+  show("pan");
+});
+
+/* ---------- panel ---------- */
+var view={y:today.getFullYear(),m:today.getMonth(),sel:today};
+function drawPanel(){
+  var first=new Date(view.y,view.m,1),dim=new Date(view.y,view.m+1,0).getDate();
+  $("mTitle").textContent=MES[view.m].charAt(0).toUpperCase()+MES[view.m].slice(1)+" "+view.y;
+  var mo=orders.filter(function(o){return o.d.getFullYear()===view.y&&o.d.getMonth()===view.m});
+  var se=mo.filter(function(o){return o.paid}).reduce(function(a,o){return a+o.sena},0);
+  var tot=mo.reduce(function(a,o){return a+o.tot},0);
+  $("kEv").textContent=mo.length;$("kSe").textContent=fmt(se);$("kSa").textContent=fmt(tot-se);
+  var sat=mo.filter(function(o){return o.d.getDay()===6}).length;
+  $("mSub").textContent=mo.length+" eventos, "+sat+" de ellos en sábado. Tocá un día para ver los pedidos.";
+  var g=$("grid");g.innerHTML="";
+  var lead=(first.getDay()+6)%7;
+  for(var i=0;i<lead;i++){var e=document.createElement("div");e.className="cd out";g.appendChild(e)}
+  for(var d=1;d<=dim;d++){
+    (function(dt){
+      var os=ordersOn(dt),b=document.createElement("button");b.type="button";b.className="cd";
+      if(key(dt)===key(today))b.classList.add("today");
+      if(view.sel&&key(dt)===key(view.sel))b.classList.add("sel");
+      var dots=os.map(function(o){return '<i class="'+(o.nw?"new":o.paid?"":"pen")+'"></i>'}).join("");
+      b.innerHTML='<span class="n">'+dt.getDate()+'</span><span class="ev">'+dots+'</span>'+(os.length?'<span class="lab">'+os[0].name+(os.length>1?" +"+(os.length-1):"")+'</span>':"");
+      b.setAttribute("aria-label",dt.getDate()+" de "+MES[dt.getMonth()]+", "+os.length+" evento"+(os.length===1?"":"s"));
+      b.addEventListener("click",function(){view.sel=dt;drawPanel()});
+      g.appendChild(b);
+    })(new Date(view.y,view.m,d));
+  }
+  drawDay();
+}
+function drawDay(){
+  var el=$("dlist"),d=view.sel;
+  if(!d||d.getMonth()!==view.m||d.getFullYear()!==view.y){el.innerHTML='<div class="empty">Tocá un día del calendario para ver sus pedidos.</div>';return}
+  var os=ordersOn(d),h='<div><h3>'+DOWL[d.getDay()].charAt(0).toUpperCase()+DOWL[d.getDay()].slice(1)+' '+d.getDate()+' de '+MES[d.getMonth()]+'</h3><p class="dsub">'+(os.length?os.length+" pedido"+(os.length>1?"s":"")+" para entregar":"Sin pedidos. El día está libre en el cotizador.")+'</p></div>';
+  os.forEach(function(o,idx){
+    h+='<div class="ord'+(o.nw?" nw":"")+'"><div class="r1"><div><b>'+esc(o.name)+'</b><small>'+esc(o.why)+'</small></div><span>'+(o.nw?'<span class="pill nw">Nuevo</span>':'')+'<span class="pill '+(o.paid?"ok":"pen")+'">'+(o.paid?"Seña cobrada":"Seña pendiente")+'</span></span></div>'+
+      '<div class="det"><div><span>Menú</span><b>'+o.menu+'</b></div><div><span>Personas</span><b class="num">'+o.n+'</b></div><div><span>Entrega</span><b>'+o.slot+' hs</b></div><div><span>Zona</span><b>'+o.zona+'</b></div></div>'+
+      '<div class="money"><span>Total <b>'+fmt(o.tot)+'</b>, seña <b>'+fmt(o.sena)+'</b></span>'+(o.paid?'<span>Saldo <b>'+fmt(o.tot-o.sena)+'</b></span>':'<button class="btn sm g" data-pay="'+idx+'">Marcar seña cobrada</button>')+'</div></div>';
+  });
+  el.innerHTML=h;
+  [].forEach.call(el.querySelectorAll("[data-pay]"),function(b){b.addEventListener("click",function(){os[+b.dataset.pay].paid=true;drawPanel()})});
+}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+$("mPrev").addEventListener("click",function(){view.m--;if(view.m<0){view.m=11;view.y--}drawPanel()});
+$("mNext").addEventListener("click",function(){view.m++;if(view.m>11){view.m=0;view.y++}drawPanel()});
+
+/* ---------- vistas ---------- */
+function show(v){
+  var p=v==="pan";
+  $("cli").hidden=p;$("pan").hidden=!p;
+  $("vCli").classList.toggle("on",!p);$("vPan").classList.toggle("on",p);
+  $("vCli").setAttribute("aria-selected",!p);$("vPan").setAttribute("aria-selected",p);
+  if(p){drawPanel();newCount=0;$("dotNew").hidden=true}
+  window.scrollTo(0,0);
+}
+$("vCli").addEventListener("click",function(){show("cli")});
+$("vPan").addEventListener("click",function(){show("pan")});
+
+render();
+})();
+</script>
+</body>
+</html>
