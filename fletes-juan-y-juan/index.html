@@ -11,7 +11,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800;900&family=Geist+Mono:wght@400;500;600&display=swap">
 <style>
 /* Juan y Juan: azul de caja de camión + amarillo de faja de carga, sobre gris chapa.
-   Una sola página, sin vistas: arriba lo que ve el cliente (cotizador en el hero), abajo lo que ve Juan (su día en el celu).
+   Una sola página, sin vistas: arriba lo que ve el cliente (cotizador en el hero), abajo lo que ve Juan (su día en el celu y sus clientes).
+   Ajuste 20/11: el trato es de Juan. Nada sale solo: los pedidos quedan por confirmar y cada mensaje lo manda él.
    Lo memorable: el precio sale en una "patente" y la lista de tareas de Juan se va tachando. Nada pegado al scroll. */
 :root{
   --chapa:#eef1f5;--paper:#fff;--navy:#13233b;--navy2:#1c3150;--navy3:#28426a;
@@ -132,6 +133,7 @@ p{text-wrap:pretty}
 .ok-card h3{margin:0;font-size:22px;letter-spacing:-.02em}
 .ok-card p{margin:0;color:var(--steel)}
 .ok-badge{width:44px;height:44px;border-radius:50%;background:var(--okS);color:var(--ok);display:grid;place-items:center}
+.cot-n{margin:0;font-size:13px;color:var(--steel);text-align:center}
 .ghost{border:1.5px solid var(--line);background:var(--paper);border-radius:12px;padding:11px 14px;font-weight:600;font-size:14.5px}
 
 /* secciones */
@@ -241,6 +243,73 @@ footer{padding:26px 0 40px;font-size:13px;color:var(--steel)}
 footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 footer a{color:var(--ink);font-weight:600}
 
+/* ficha del trabajo */
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.p-pend{background:#fdf0dc;color:var(--warn)}
+.trip.pend{border-color:#f0c98a;border-style:dashed}
+.dsw .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--warn);margin-left:6px;vertical-align:middle}
+.det-h{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+.cli-link{display:grid;grid-template-columns:32px minmax(0,1fr) auto;gap:10px;align-items:center;border:1.5px solid var(--line);background:var(--chapa);border-radius:12px;padding:8px 10px;text-align:left;width:100%}
+.cli-link b{display:block;font-size:14px;line-height:1.2}
+.cli-link small{display:block;font-size:12px;color:var(--steel)}
+.av.sm{width:32px;height:32px;font-size:12px}
+.kv{display:grid;grid-template-columns:auto minmax(0,1fr);gap:3px 12px;margin:0;font-size:13px}
+.kv dt{color:var(--steel)}
+.kv dd{margin:0;font-weight:600;text-align:right}
+.mini{border:1.5px solid var(--ink);background:var(--faja);border-radius:8px;padding:3px 9px;font-size:12px;font-weight:700}
+.ok-t{color:var(--ok);font-weight:650;font-size:12.5px}
+.tl{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;font-size:11px;color:var(--steel)}
+.tl li{border-top:3px solid var(--line);padding-top:4px;line-height:1.25;min-width:0}
+.tl li.on{border-color:var(--ok);color:var(--ink)}
+.tl li b{display:block;font-weight:650}
+.tl li i{font-style:normal;font-family:var(--mono);font-size:10.5px;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* mensaje armado */
+.compose{background:#f0f2f5;border-top:1px solid #d1d7db;padding:12px;display:grid;gap:8px}
+.cmp-h b{font-size:14px;display:block}
+.cmp-h small{font-size:12.5px;color:#54656f}
+.compose textarea{width:100%;border:1.5px solid #d1d7db;border-radius:12px;padding:10px 12px;font:inherit;font-size:16px;line-height:1.4;resize:vertical;background:#fff;min-height:110px;color:#111b21}
+.cmp-b{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
+.wa-send{border:0;background:var(--wa);color:#fff;font-weight:700;border-radius:12px;padding:11px 14px;font-size:14.5px;display:inline-flex;gap:8px;align-items:center}
+.msg.me .tm::after{content:" ✓✓";color:#53bdeb}
+.note p{margin:10px 0 0;font-size:14px}
+
+/* tus clientes */
+.cli-grid{display:grid;gap:18px;align-items:start}
+.cli-grid>*{min-width:0}
+@media (min-width:900px){.cli-grid{grid-template-columns:minmax(0,360px) minmax(0,1fr);gap:28px}}
+.srch{display:flex;align-items:center;gap:8px;border:1.5px solid var(--line);background:var(--paper);border-radius:14px;padding:0 12px;margin-bottom:10px;color:var(--steel);position:relative}
+.srch input{border:0;outline:0;flex:1;min-width:0;padding:12px 0;font-size:16px;background:none;color:var(--ink)}
+.srch:focus-within{border-color:var(--navy)}
+.cli-list{background:var(--paper);border-radius:18px;box-shadow:var(--sh);overflow:auto;max-height:440px}
+.cl{display:grid;grid-template-columns:36px minmax(0,1fr) auto;gap:10px;align-items:center;width:100%;text-align:left;border:0;border-top:1px solid var(--line);background:none;padding:11px 14px}
+.cl:first-child{border-top:0}
+.cl b{display:block;font-size:15px;font-weight:650;line-height:1.25}
+.cl small{display:block;font-size:12.5px;color:var(--steel)}
+.cl .n{font-size:12.5px;font-weight:600;color:var(--steel);white-space:nowrap}
+.cl.on{background:var(--fajaS)}
+.cli-card{background:var(--paper);border-radius:24px;box-shadow:var(--sh);padding:20px;display:grid;gap:14px}
+.cc-h{display:grid;grid-template-columns:48px minmax(0,1fr) auto;gap:12px;align-items:center}
+.cc-h .av{width:48px;height:48px;font-size:17px}
+.cc-h h3{margin:0;font-size:21px;letter-spacing:-.02em;line-height:1.15}
+.cc-h small{color:var(--steel);font-size:13.5px}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.stats div{background:var(--chapa);border-radius:12px;padding:10px;min-width:0}
+.stats b{display:block;font-family:var(--mono);font-size:16px;font-weight:600;letter-spacing:-.03em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.stats span{font-size:12px;color:var(--steel);line-height:1.2;display:block}
+.nota{background:var(--fajaS);border-radius:12px;padding:10px 12px;font-size:14.5px}
+.nota b{display:block;font-size:12px;color:#8a5a00;font-weight:650}
+.rev{font-size:13.5px;color:var(--steel)}
+.hl h4{margin:0 0 4px;font-size:15px}
+.job{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;align-items:center;padding:10px 0;border:0;border-top:1px solid var(--line);text-align:left;width:100%;background:none;color:inherit}
+.job b{font-size:14.5px;font-weight:650;line-height:1.25}
+.job small{font-size:12.5px;color:var(--steel)}
+.job .num{font-weight:600;font-size:14px;text-align:right}
+.job>:nth-child(2),.job>:nth-child(4){justify-self:end}
+button.job b{text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
+.empty-h{font-size:14px;color:var(--steel);margin:6px 0 0}
+@media (max-width:480px){.cli-card{padding:16px}.stats div{padding:8px}.stats b{font-size:14px;letter-spacing:-.04em}.cmp-b button{flex:1 1 auto;justify-content:center}}
+
 /* toast */
 .toast{position:fixed;left:50%;bottom:18px;transform:translate(-50%,140%);background:var(--ink);color:#fff;border-radius:14px;padding:12px 16px;font-size:14px;display:flex;gap:10px;align-items:center;box-shadow:0 18px 40px -16px rgba(0,0,0,.6);z-index:90;transition:transform .3s ease;width:max-content;max-width:calc(100vw - 32px)}
 .toast.show{transform:translate(-50%,0)}
@@ -249,7 +318,7 @@ footer a{color:var(--ink);font-weight:600}
 </head>
 <body>
 
-<div class="demo"><div class="wrap"><span><b>Boceto de Compila</b> para Fletes Juan y Juan. Precios y viajes de ejemplo.</span><a href="#tu-dia">Ver tu agenda</a></div></div>
+<div class="demo"><div class="wrap"><span><b>Boceto de Compila</b> para Fletes Juan y Juan. Precios, viajes y clientes de ejemplo.</span><a href="#tu-dia">Ver tu agenda</a></div></div>
 
 <header class="top">
   <div class="wrap">
@@ -272,7 +341,7 @@ footer a{color:var(--ink);font-weight:600}
   <div class="wrap">
     <div class="pitch">
       <h1>Sabé cuánto sale tu flete antes de llamar.</h1>
-      <p>Mudanzas, fletes y repartos puerta a puerta, desde Solano y Quilmes a cualquier destino del país. Elegí, mirá el precio y reservá el día.</p>
+      <p>Mudanzas, fletes y repartos puerta a puerta, desde Solano y Quilmes a cualquier destino del país. Elegí, mirá un precio estimado y pedí el día.</p>
       <ul class="facts">
         <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 10.5 12 4l9 6.5V20H3z"/><path d="M9 20v-6h6v6"/></svg><span><b>Mudanzas</b> de casas, locales y oficinas</span></li>
         <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg><span><b>Desarmado, armado</b> de muebles y subidas</span></li>
@@ -333,14 +402,15 @@ footer a{color:var(--ink);font-weight:600}
             <input class="inp" id="tel" placeholder="Tu WhatsApp" inputmode="tel" autocomplete="tel">
           </div>
           <p class="err" id="err" hidden></p>
-          <button class="cta" type="button" id="reservar">Reservar el viaje</button>
+          <button class="cta" type="button" id="reservar">Pedir el viaje</button>
+          <p class="cot-n">Juan te escribe por WhatsApp para confirmarte el precio y el horario.</p>
         </div>
       </div>
       <div class="ok-card" id="cotOk" hidden>
         <div class="ok-badge"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg></div>
-        <h3 id="okT">Viaje reservado</h3>
+        <h3 id="okT">Pedido enviado</h3>
         <p id="okP"></p>
-        <p>Te llegó la confirmación por WhatsApp. El día del viaje te avisamos cuando salimos para tu casa.</p>
+        <p>Juan te escribe por WhatsApp para confirmarte el precio y el horario. Hasta que él lo confirma, el viaje queda pedido.</p>
         <div style="display:flex;gap:10px;flex-wrap:wrap"><a class="cta" href="#tu-dia" style="text-decoration:none;text-align:center;width:auto;flex:1 1 200px">Ver cómo le llega a Juan</a><button class="ghost" type="button" id="otra">Cotizar otro</button></div>
       </div>
     </div>
@@ -351,8 +421,8 @@ footer a{color:var(--ink);font-weight:600}
 <section class="blk" id="tareas">
   <div class="wrap tasks-grid">
     <div class="sh">
-      <h2>Hoy hacés todo vos. Esto te saca varias cosas de encima.</h2>
-      <p>Me contaste que la agenda, los llamados, las preguntas, las cotizaciones, las publicaciones y las calificaciones pasan todas por vos. Tocá cada una para ver qué cambia.</p>
+      <h2>Contestar sigue siendo tuyo. Esto te ordena lo de atrás.</h2>
+      <p>Me contaste que lo que te trae trabajo es contestar vos, y eso no cambia. Lo que suma es tener cada pedido, cada viaje y cada cliente ordenados. Tocá cada tarea para ver qué cambia.</p>
     </div>
     <div class="tasks" id="tasks"></div>
   </div>
@@ -363,7 +433,7 @@ footer a{color:var(--ink);font-weight:600}
   <div class="wrap">
     <div class="sh">
       <h2>Tu día de viajes, en el celu.</h2>
-      <p>Los viajes que reservan por la web caen solos acá. Tocá uno y marcá cómo va: al cliente le llega el aviso sin que escribas nada.</p>
+      <p>Lo que piden por la web te llega como pedido y queda por confirmar hasta que vos digas. Tocá un viaje para ver su ficha.</p>
     </div>
     <div class="dia-grid">
       <div class="phone">
@@ -377,36 +447,42 @@ footer a{color:var(--ink);font-weight:600}
       </div>
       <div class="side">
         <div class="chat" aria-live="polite">
-          <div class="chat-h"><div class="av" id="chAv">M</div><div><b id="chN">Marta</b><small>Lo que le llega al cliente</small></div></div>
+          <div class="chat-h"><div class="av" id="chAv">M</div><div><b id="chN">Marta</b><small>Tu WhatsApp. Lo mandás vos.</small></div></div>
           <div class="msgs" id="msgs"></div>
+          <div class="compose" id="cmp" hidden>
+            <div class="cmp-h"><b id="cmpT">Mensaje armado</b><small>Te queda escrito. Cambialo como quieras antes de mandarlo.</small></div>
+            <label for="cmpTx" class="sr">Mensaje</label>
+            <textarea id="cmpTx" rows="4"></textarea>
+            <div class="cmp-b"><button type="button" class="ghost" id="cmpX">Ahora no</button><button type="button" class="wa-send" id="cmpOk"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 20.5 21 12 3 3.5v6.6L15 12 3 13.9z"/></svg>Mandar desde mi WhatsApp</button></div>
+          </div>
         </div>
         <div class="note">
-          <b>Así sale cada aviso, sin que lo escribas:</b>
+          <b>Nada sale solo. Cada mensaje lo mandás vos:</b>
           <ol>
-            <li>Cuando reservan: <b>“Tu viaje quedó confirmado”</b>, con día y hora.</li>
-            <li>Cuando tocás “Salimos”: <b>“Ya salimos para tu casa”</b>.</li>
-            <li>Cuando tocás “Listo”: <b>“Terminamos”</b> y, un rato después, el pedido de reseña en Google.</li>
+            <li>Tocás <b>Confirmar</b> y te queda armado con día, hora y precio.</li>
+            <li>Tocás <b>Salimos</b> y te queda el “ya salimos para allá”.</li>
+            <li>Tocás <b>Listo</b> y te queda el agradecimiento, con tu link de reseñas.</li>
           </ol>
+          <p>Lo cambiás antes de mandarlo, y sale de tu WhatsApp como siempre.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Preguntas -->
-<section class="blk" id="preguntas">
-  <div class="wrap faq-grid">
-    <div>
-      <div class="sh" style="margin-bottom:20px">
-        <h2>Las preguntas de siempre, contestadas solas.</h2>
-        <p>Las respuestas las escribís una vez y quedan en la web y en el WhatsApp. Probá tocando una.</p>
-      </div>
-      <div class="qs" id="qs"></div>
-      <p class="faq-note">Si alguien pregunta algo que no está en la lista, <b>te llega a vos</b> como siempre. Lo repetido sale solo.</p>
+<!-- Tus clientes -->
+<section class="blk" id="clientes">
+  <div class="wrap">
+    <div class="sh">
+      <h2>Cada cliente, con su historia.</h2>
+      <p>Cuando alguien te vuelve a escribir, ya sabés quién es: qué le hiciste, cuánto le cobraste, cuándo y lo que anotaste. Cada trabajo que cerrás se guarda en su ficha.</p>
     </div>
-    <div class="chat">
-      <div class="chat-h"><div class="av">JJ</div><div><b>Fletes Juan y Juan</b><small>Respuesta automática</small></div></div>
-      <div class="msgs" id="faqMsgs"></div>
+    <div class="cli-grid">
+      <div>
+        <label class="srch"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span class="sr">Buscar cliente</span><input id="cliQ" type="search" placeholder="Nombre, barrio o teléfono" autocomplete="off"></label>
+        <div class="cli-list" id="cliList"></div>
+      </div>
+      <div class="cli-card" id="cliCard"></div>
     </div>
   </div>
 </section>
@@ -416,12 +492,13 @@ footer a{color:var(--ink);font-weight:600}
     <div class="end-card">
       <div>
         <h2>Algo un poco mejor, sin complicarte.</h2>
-        <p>No hay que instalar nada ni aprender un programa. Lo abrís desde el celu como cualquier página, y empezamos por lo que más trabajo te saque.</p>
+        <p>Vos seguís contestando y cerrando cada trabajo. El sistema se acuerda de todo. No hay que instalar nada: lo abrís desde el celu como cualquier página.</p>
       </div>
       <ul>
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>El cliente cotiza y reserva solo, a cualquier hora.</li>
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>Vos ves el día ordenado y tocás un botón por viaje.</li>
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>Los avisos y el pedido de reseña salen solos.</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>El cliente ve un estimado y te pide el día.</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>Nada se confirma sin que vos digas que sí.</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>Cada mensaje sale de tu WhatsApp, escrito como vos quieras.</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>Cada cliente y cada trabajo quedan con su historial.</li>
         <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>Tu web sigue en pie: esto se suma a lo que ya tenés.</li>
       </ul>
     </div>
@@ -533,159 +610,224 @@ $("ayP").addEventListener("click",function(){if(st.ay<4){st.ay++;render();bump()
 $("armado").addEventListener("change",function(e){st.armado=e.target.checked;price();bump()});
 $("escalera").addEventListener("change",function(e){st.escalera=e.target.checked;price();bump()});
 
+/* ---------- clientes (de ejemplo) ---------- */
+var CLI={
+  marta:{n:"Marta Gómez",z:"San Francisco Solano",tel:"11 2345-0101",nota:"3er piso por escalera. Avisarle al portero el día antes.",rev:true,hist:[["14/03/2026","Flete de placard","Solano a Quilmes",36000],["02/08/2025","Mudanza monoambiente","Bernal a Solano",58000]]},
+  diego:{n:"Diego Ferreyra",z:"Quilmes Oeste",tel:"11 2345-0102",nota:"Pide factura. Para cosas chicas tiene camioneta propia.",hist:[["20/09/2026","Flete de lavarropas","Quilmes Oeste a Bernal",29000]]},
+  silvia:{n:"Silvia Ríos",z:"Quilmes",tel:"11 2345-0103",nota:"Tiene un local de ropa. Prefiere mudar el domingo o después del cierre.",rev:true,hist:[["05/10/2026","Traslado de exhibidores","Quilmes a Bernal",74000],["18/06/2026","Mudanza comercial chica","Quilmes a Quilmes",82000],["11/01/2026","Flete de mercadería","Avellaneda a Quilmes",41000]]},
+  ramiro:{n:"Ramiro Sosa",z:"San Francisco Solano",tel:"11 2345-0104",nota:"",hist:[]},
+  laura:{n:"Laura Benítez",z:"Bernal",tel:"11 2345-0105",nota:"Ascensor chico: el sillón va por escalera.",hist:[["27/04/2026","Flete de sillón","Bernal a Lanús",33000]]},
+  hernan:{n:"Hernán Ruiz",z:"Lanús",tel:"11 2345-0106",nota:"Lo recomendó Silvia Ríos.",hist:[]},
+  graciela:{n:"Graciela Paz",z:"San Francisco Solano",tel:"11 2345-0107",nota:"Lleva plantas grandes. Pidió el mismo chofer de la vez pasada.",rev:true,hist:[["09/12/2025","Mudanza 2 ambientes","Solano a Quilmes",96000],["15/02/2025","Flete de heladera","Solano a Ezpeleta",27000]]},
+  norma:{n:"Norma Acosta",z:"Ezpeleta",tel:"11 2345-0108",nota:"Clienta de siempre. Paga en efectivo.",rev:true,hist:[["30/10/2026","Flete de muebles","Ezpeleta a Berazategui",45000],["14/07/2026","Flete de cama","Ezpeleta a Quilmes",26000],["03/03/2026","Mudanza 3 ambientes","Quilmes a Ezpeleta",128000],["19/11/2025","Flete de heladera","Ezpeleta a Bernal",24000]]},
+  pablo:{n:"Pablo Medina",z:"Berazategui",tel:"11 2345-0109",nota:"",hist:[["22/08/2026","Reparto de muebles","Berazategui a La Plata",61000]]}
+};
+var cliSel="marta";
+
 /* ---------- agenda ---------- */
+/* s: -1 por confirmar, 0 confirmado, 1 en camino, 3 listo */
 var TRIPS=[
-  {d:0,h:"8:30",c:"Marta",n:"Mudanza 2 ambientes",r:"Solano a Bernal",s:3,amb:"2 ayudantes, camión"},
-  {d:0,h:"11:30",c:"Diego",n:"Flete de heladera y lavarropas",r:"Quilmes Oeste a Ezpeleta",s:1,amb:"1 ayudante, camioneta"},
-  {d:0,h:"15:00",c:"Silvia",n:"Mudanza comercial",r:"Quilmes a Avellaneda",s:0,amb:"2 ayudantes, camión"},
-  {d:0,h:"19:00",c:"Ramiro",n:"Reparto de muebles",r:"Solano a Florencio Varela",s:0,amb:"Sin ayudante, camioneta"},
-  {d:1,h:"9:00",c:"Laura",n:"Mudanza 3 ambientes",r:"Bernal a Capital Federal",s:0,amb:"2 ayudantes, camión"},
-  {d:1,h:"16:00",c:"Hernán",n:"Flete de sillones",r:"Lanús a Solano",s:0,amb:"1 ayudante, camioneta"},
-  {d:2,h:"8:00",c:"Graciela",n:"Viaje a Mar del Plata",r:"Solano a Mar del Plata",s:0,amb:"2 ayudantes, camión"}
+  {d:0,h:"8:30",k:"marta",n:"Mudanza 2 ambientes",r:"Solano a Bernal",s:3,amb:"2 ayudantes, camión",p:96000,pf:92000,pag:true,ped:"hace 4 días",tl:{c:"hace 4 días",s:"8:05",l:"10:40"}},
+  {d:0,h:"11:30",k:"diego",n:"Flete de heladera y lavarropas",r:"Quilmes Oeste a Ezpeleta",s:1,amb:"1 ayudante, camioneta",p:44000,pf:44000,pag:false,ped:"hace 3 días",tl:{c:"hace 3 días",s:"11:02"}},
+  {d:0,h:"15:00",k:"silvia",n:"Mudanza comercial",r:"Quilmes a Avellaneda",s:0,amb:"2 ayudantes, camión",p:131000,pf:125000,pag:false,ped:"anteayer",tl:{c:"anteayer"}},
+  {d:0,h:"19:00",k:"ramiro",n:"Reparto de muebles",r:"Solano a Florencio Varela",s:-1,amb:"Sin ayudante, camioneta",p:39000,pf:0,pag:false,ped:"hace 20 min",tl:{}},
+  {d:1,h:"9:00",k:"laura",n:"Mudanza 3 ambientes",r:"Bernal a Capital Federal",s:0,amb:"2 ayudantes, camión",p:168000,pf:160000,pag:false,ped:"hace 5 días",tl:{c:"hace 5 días"}},
+  {d:1,h:"16:00",k:"hernan",n:"Flete de sillones",r:"Lanús a Solano",s:-1,amb:"1 ayudante, camioneta",p:52000,pf:0,pag:false,ped:"hoy, 9:15",tl:{}},
+  {d:2,h:"8:00",k:"graciela",n:"Viaje a Mar del Plata",r:"Solano a Mar del Plata",s:0,amb:"2 ayudantes, camión",p:690000,pf:650000,pag:false,ped:"hace 6 días",tl:{c:"hace 6 días"}}
 ];
-var ST=[["Confirmado","p-conf"],["En camino","p-cam"],["En camino","p-cam"],["Listo","p-ok"]];
-/* s: 0 confirmado, 1 salimos, 3 listo */
-var agDay=0,selTrip=-1;
+var STS={"-1":["Por confirmar","p-pend"],"0":["Confirmado","p-conf"],"1":["En camino","p-cam"],"3":["Listo","p-ok"]};
+var agDay=0,selTrip=-1,cmp=null;
 var CHATS={};
 
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+function first(k){return CLI[k].n.split(" ")[0]}
+function ini(k){var p=CLI[k].n.split(" ");return (p[0].charAt(0)+(p[1]?p[1].charAt(0):"")).toUpperCase()}
 function nowStr(){var d=new Date();return d.getHours()+":"+String(d.getMinutes()).padStart(2,"0")}
 function dayLabel(i){var d=addD(i);return DOWL[d.getDay()]+" "+d.getDate()+" de "+MES[d.getMonth()]}
-function msgConf(t){return "Hola "+t.c+", soy Juan de Fletes Juan y Juan. Tu viaje quedó confirmado para el "+dayLabel(t.d)+" a las "+t.h+" ("+t.r+"). Si cambia algo, respondé este mensaje."}
-function msgSal(t){return "Hola "+t.c+", ya salimos para tu casa. Llegamos en unos 25 minutos."}
-function msgListo(t){return "Listo, "+t.c+". Terminamos el viaje. ¡Gracias por elegirnos!"}
-function msgRes(t){return t.c+", ¿nos dejás tu opinión en Google? Nos ayuda un montón a que más gente nos encuentre: <a href='#tu-dia'>g.page/fletes-juan-y-juan/review</a>"}
+function dayShort(i){return i===0?"Hoy":i===1?"Mañana":DOW[addD(i).getDay()]+" "+addD(i).getDate()}
+function msgConf(t){return "Hola "+first(t.k)+", soy Juan. Te confirmo el viaje: "+dayLabel(t.d)+" a las "+t.h+", "+t.r+". Te queda en "+fmt(t.pf||t.p)+". Cualquier cosa me escribís."}
+function msgSal(t){return "Hola "+first(t.k)+", ya salimos para allá. Llegamos en unos 25 minutos."}
+function msgListo(t){return "Listo, "+first(t.k)+". ¡Gracias por elegirnos! Si te quedó todo bien, ¿nos dejás una reseña en Google? [tu link de reseñas]"}
 
 function chatFor(i){
-  var t=TRIPS[i];if(CHATS[i])return CHATS[i];
-  var m=[{k:"conf",tx:msgConf(t),tm:"ayer"}];
-  if(t.s>=1)m.push({k:"sal",tx:msgSal(t),tm:"8:05"});
-  if(t.s>=3){m.push({k:"listo",tx:msgListo(t),tm:"10:40"});m.push({k:"res",tx:msgRes(t),tm:"11:40"})}
+  if(CHATS[i])return CHATS[i];
+  var t=TRIPS[i],m=[{k:"web",tx:"Pedido desde la web: "+t.n+", "+t.r+". Estimado "+fmt(t.p)+"."}];
+  if(t.s===-1)m.push({k:"cli",tx:"Hola Juan, te hice el pedido por la página. ¿Se puede?",tm:t.ped});
+  if(t.s>=0){m.push({k:"me",tx:msgConf(t),tm:t.tl.c});m.push({k:"cli",tx:"Perfecto, gracias!",tm:t.tl.c})}
+  if(t.s>=1)m.push({k:"me",tx:msgSal(t),tm:t.tl.s});
+  if(t.s>=3)m.push({k:"me",tx:msgListo(t),tm:t.tl.l});
   CHATS[i]=m;return m;
 }
-var TAGS={conf:["Confirmado","#e4e9f0","#13233b"],sal:["Salimos","#fff5d6","#8a5a00"],listo:["Listo","#e0f3e8","#178a4c"],res:["Pedido de reseña","#ede7fb","#5b3fb5"]};
 function drawChat(i){
-  var t=TRIPS[i],box=$("msgs");$("chN").textContent=t.c;$("chAv").textContent=t.c.charAt(0);
+  var t=TRIPS[i],box=$("msgs");$("chN").textContent=CLI[t.k].n;$("chAv").textContent=ini(t.k);
   box.innerHTML="";
   chatFor(i).forEach(function(m){
     var el=document.createElement("div");
-    if(m.k==="sys"){el.className="msg sys";el.textContent=m.tx}
-    else{var g=TAGS[m.k];el.className="msg";el.innerHTML="<span class='tag' style='background:"+g[1]+";color:"+g[2]+"'>"+g[0]+"</span><br>"+m.tx+"<span class='tm'>"+m.tm+"</span>"}
+    if(m.k==="web"){el.className="msg sys";el.textContent=m.tx}
+    else{el.className="msg"+(m.k==="me"?" me":"");el.innerHTML=esc(m.tx).replace(/\n/g,"<br>")+"<span class='tm'>"+esc(m.tm||"")+"</span>"}
     box.appendChild(el);
   });
   box.scrollTop=box.scrollHeight;
+  renderCmp();
 }
 function renderAg(){
   var sw=$("dsw");sw.innerHTML="";
-  for(var i=0;i<5;i++){(function(i){var b=document.createElement("button");b.type="button";var d=addD(i);
-    b.textContent=i===0?"Hoy":i===1?"Mañana":DOW[d.getDay()]+" "+d.getDate();b.className=agDay===i?"on":"";
-    b.addEventListener("click",function(){agDay=i;selTrip=-1;renderAg()});sw.appendChild(b)})(i)}
-  $("agT").textContent=agDay===0?"Hoy":agDay===1?"Mañana":DOW[addD(agDay).getDay()]+" "+addD(agDay).getDate();
+  for(var i=0;i<5;i++){(function(i){var b=document.createElement("button");b.type="button";
+    var pend=TRIPS.some(function(t){return t.d===i&&t.s===-1});
+    b.innerHTML=dayShort(i)+(pend?"<span class='dot' aria-label='con pedidos por confirmar'></span>":"");b.className=agDay===i?"on":"";
+    b.addEventListener("click",function(){agDay=i;selTrip=-1;cmp=null;renderAg();renderCmp()});sw.appendChild(b)})(i)}
+  $("agT").textContent=dayShort(agDay);
   var dl=dayLabel(agDay);$("agFecha").textContent=dl.charAt(0).toUpperCase()+dl.slice(1);
   var list=TRIPS.map(function(t,i){return [t,i]}).filter(function(x){return x[0].d===agDay})
     .sort(function(a,b){return toMin(a[0].h)-toMin(b[0].h)});
-  $("agCnt").textContent=list.length+(list.length===1?" viaje":" viajes");
+  var pend=list.filter(function(x){return x[0].s===-1}).length;
+  $("agCnt").textContent=list.length+(list.length===1?" viaje":" viajes")+(pend?", "+pend+" a confirmar":"");
   var box=$("trips");box.innerHTML="";
-  if(!list.length)box.innerHTML="<div class='empty'>No hay viajes este día. Cuando alguien reserve por la web, aparece acá.</div>";
+  if(!list.length)box.innerHTML="<div class='empty'>No hay viajes este día. Cuando alguien pida uno por la web, te aparece acá para confirmar.</div>";
   list.forEach(function(x){var t=x[0],i=x[1];var b=document.createElement("button");b.type="button";
-    b.className="trip"+(selTrip===i?" pick":"")+(t.fresh?" new":"");t.fresh=false;
-    b.innerHTML="<span class='t'>"+t.h+"</span><span style='min-width:0'><b>"+t.n+"</b><small>"+t.c+", "+t.r+"</small></span><span class='pill "+ST[t.s][1]+"'>"+ST[t.s][0]+"</span>";
-    b.addEventListener("click",function(){selTrip=i;renderAg();drawChat(i)});box.appendChild(b)});
+    b.className="trip"+(selTrip===i?" pick":"")+(t.fresh?" new":"")+(t.s===-1?" pend":"");t.fresh=false;
+    b.innerHTML="<span class='t'>"+t.h+"</span><span style='min-width:0'><b>"+esc(t.n)+"</b><small>"+esc(first(t.k))+", "+esc(t.r)+"</small></span><span class='pill "+STS[t.s][1]+"'>"+STS[t.s][0]+"</span>";
+    b.addEventListener("click",function(){selTrip=i;if(cmp&&cmp.i!==i)cmp=null;renderAg();drawChat(i)});box.appendChild(b)});
   renderDet();
 }
 function toMin(h){var p=h.split(":");return +p[0]*60+ +p[1]}
 function renderDet(){
   var det=$("det");if(selTrip<0||TRIPS[selTrip].d!==agDay){det.hidden=true;return}
-  var t=TRIPS[selTrip];det.hidden=false;
-  var canSal=t.s===0&&agDay===0,canListo=t.s===1;
-  det.innerHTML="<h4>"+t.h+", "+t.n+"</h4><div class='meta'><span>"+t.c+", "+t.r+"</span><span>"+t.amb+"</span></div>"+
+  var t=TRIPS[selTrip],cl=CLI[t.k],i=selTrip;det.hidden=false;
+  var prev=cl.hist.length;
+  var canConf=t.s===-1,canSal=t.s===0&&agDay===0,canListo=t.s===1;
+  var cobro=t.s===3?(t.pag?"<span class='ok-t'>Cobrado</span>":"<button type='button' class='mini' id='bCob'>Marcar cobrado</button>"):"Al terminar";
+  var steps=[["Pidió",t.ped],["Confirmaste",t.tl.c],["Salieron",t.tl.s],["Terminado",t.tl.l]];
+  function fb(id,lbl,isDone,can,sub){return "<button type='button' id='"+id+"' class='"+(isDone?"done":can?"next":"wait")+"' "+(can?"":"disabled")+">"+lbl+"<i>"+sub+"</i></button>"}
+  det.innerHTML="<div class='det-h'><h4>"+t.h+", "+esc(t.n)+"</h4><span class='pill "+STS[t.s][1]+"'>"+STS[t.s][0]+"</span></div>"+
+    "<button type='button' class='cli-link' id='goCli'><span class='av sm'>"+ini(t.k)+"</span><span style='min-width:0'><b>"+esc(cl.n)+"</b><small>"+(prev?prev+" trabajo"+(prev>1?"s":"")+" antes. Ver su historial":"Cliente nuevo. Ver su ficha")+"</small></span><svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.4' aria-hidden='true'><path d='m9 6 6 6-6 6'/></svg></button>"+
+    "<dl class='kv'><dt>Recorrido</dt><dd>"+esc(t.r)+"</dd><dt>Equipo</dt><dd>"+esc(t.amb)+"</dd><dt>Estimado de la web</dt><dd class='num'>"+fmt(t.p)+"</dd><dt>Precio cerrado</dt><dd class='num'>"+(t.s>=0?fmt(t.pf):"Lo ponés vos")+"</dd><dt>Cobro</dt><dd>"+cobro+"</dd></dl>"+
+    "<ol class='tl'>"+steps.map(function(s){return "<li class='"+(s[1]?"on":"")+"'><b>"+s[0]+"</b><i>"+(s[1]?esc(s[1]):"…")+"</i></li>"}).join("")+"</ol>"+
     "<div class='flow'>"+
-    "<button type='button' class='done' disabled>Confirmado<i>automático</i></button>"+
-    "<button type='button' id='bSal' class='"+(t.s>=1?"done":canSal?"next":"wait")+"' "+(canSal?"":"disabled")+">Salimos<i>"+(t.s>=1?"avisado":"tocá al salir")+"</i></button>"+
-    "<button type='button' id='bListo' class='"+(t.s>=3?"done":canListo?"next":"wait")+"' "+(canListo?"":"disabled")+">Listo<i>"+(t.s>=3?"reseña pedida":"tocá al terminar")+"</i></button>"+
-    "</div><p class='hint'>"+(t.s===0&&agDay!==0?"Los botones se activan el día del viaje.":t.s===3?"Viaje cerrado. El cliente ya tiene el link para dejar su reseña.":"Cada botón le manda el aviso al cliente por WhatsApp.")+"</p>";
-  var bs=$("bSal"),bl=$("bListo");
-  if(canSal)bs.addEventListener("click",function(){t.s=1;chatFor(selTrip).push({k:"sal",tx:msgSal(t),tm:nowStr()});renderAg();drawChat(selTrip);toast("Aviso enviado a "+t.c+": ya salimos")});
-  if(canListo)bl.addEventListener("click",function(){t.s=3;var i=selTrip;chatFor(i).push({k:"listo",tx:msgListo(t),tm:nowStr()});renderAg();drawChat(i);toast("Aviso enviado a "+t.c+": terminamos");
-    setTimeout(function(){chatFor(i).push({k:"sys",tx:"Una hora después, sale solo:"});chatFor(i).push({k:"res",tx:msgRes(t),tm:"+1 h"});if(selTrip===i)drawChat(i);toast("Pedido de reseña enviado a "+t.c)},1400)});
+      fb("bConf","Confirmar",t.s>=0,canConf,t.s>=0?"mandado":"tocá para armar")+
+      fb("bSal","Salimos",t.s>=1,canSal,t.s>=1?"mandado":"tocá al salir")+
+      fb("bListo","Listo",t.s>=3,canListo,t.s>=3?"mandado":"tocá al terminar")+
+    "</div><p class='hint'>"+(t.s===-1?"Nadie lo confirma por vos. Tocá Confirmar y te queda el mensaje armado para mandarlo.":t.s===0&&agDay!==0?"Salimos y Listo se activan el día del viaje.":t.s===3?"Trabajo cerrado. Queda guardado en la ficha de "+esc(first(t.k))+".":"Cada botón te arma el mensaje. Lo mandás vos, desde tu WhatsApp.")+"</p>";
+  $("goCli").addEventListener("click",function(){cliSel=t.k;$("cliQ").value="";renderCli();$("clientes").scrollIntoView({behavior:"smooth",block:"start"})});
+  if(canConf)$("bConf").addEventListener("click",function(){openCmp(i,"conf")});
+  if(canSal)$("bSal").addEventListener("click",function(){openCmp(i,"sal")});
+  if(canListo)$("bListo").addEventListener("click",function(){openCmp(i,"listo")});
+  var bc=$("bCob");if(bc)bc.addEventListener("click",function(){t.pag=true;renderAg();renderCli();toast("Anotado: "+first(t.k)+" pagó "+fmt(t.pf))});
 }
 
-/* ---------- reservar ---------- */
+/* ---------- mensaje armado: lo manda Juan ---------- */
+var CMPT={conf:"Confirmarle a ",sal:"Avisarle a ",listo:"Cerrar con "};
+function openCmp(i,kind){
+  var t=TRIPS[i];cmp={i:i,kind:kind};
+  if(kind==="conf"&&!t.pf)t.pf=t.p;
+  $("cmpTx").value=kind==="conf"?msgConf(t):kind==="sal"?msgSal(t):msgListo(t);
+  drawChat(i);
+  if(window.innerWidth<900)$("cmp").scrollIntoView({behavior:"smooth",block:"center"});
+}
+function renderCmp(){
+  var c=$("cmp");if(!cmp||cmp.i!==selTrip){c.hidden=true;return}
+  c.hidden=false;$("cmpT").textContent=CMPT[cmp.kind]+first(TRIPS[cmp.i].k);
+}
+$("cmpX").addEventListener("click",function(){cmp=null;renderCmp()});
+$("cmpOk").addEventListener("click",function(){
+  if(!cmp)return;var i=cmp.i,t=TRIPS[i],tx=$("cmpTx").value.trim();if(!tx){$("cmpTx").focus();return}
+  var now=nowStr();chatFor(i).push({k:"me",tx:tx,tm:now});
+  if(cmp.kind==="conf"){t.s=0;t.tl.c=now}
+  else if(cmp.kind==="sal"){t.s=1;t.tl.s=now}
+  else{t.s=3;t.tl.l=now}
+  cmp=null;renderAg();drawChat(i);renderCli();
+  toast("Mandado desde tu WhatsApp a "+first(t.k));
+});
+
+/* ---------- tus clientes ---------- */
+function tripsOf(k){return TRIPS.map(function(t,i){return [t,i]}).filter(function(x){return x[0].k===k})}
+function nJobs(k){return CLI[k].hist.length+tripsOf(k).filter(function(x){return x[0].s>=0}).length}
+function renderCli(){
+  var q=$("cliQ").value.trim().toLowerCase(),qd=q.replace(/[^0-9]/g,"");
+  var list=$("cliList");list.innerHTML="";
+  var keys=Object.keys(CLI).filter(function(k){var c=CLI[k];
+    return !q||c.n.toLowerCase().indexOf(q)>=0||c.z.toLowerCase().indexOf(q)>=0||(qd.length>=3&&c.tel.replace(/[^0-9]/g,"").indexOf(qd)>=0)});
+  if(!keys.length)list.innerHTML="<div class='empty'>No hay ningún cliente con “"+esc(q)+"”.</div>";
+  keys.forEach(function(k){var c=CLI[k],n=nJobs(k),pend=tripsOf(k).some(function(x){return x[0].s===-1});
+    var b=document.createElement("button");b.type="button";b.className="cl"+(cliSel===k?" on":"");
+    b.innerHTML="<span class='av'>"+ini(k)+"</span><span style='min-width:0'><b>"+esc(c.n)+"</b><small>"+esc(c.z)+"</small></span><span class='n'>"+(pend&&!n?"<span class='pill p-pend'>Nuevo</span>":n+" trabajo"+(n===1?"":"s"))+"</span>";
+    b.addEventListener("click",function(){cliSel=k;renderCli();if(window.innerWidth<900)$("cliCard").scrollIntoView({behavior:"smooth",block:"start"})});
+    list.appendChild(b)});
+  var c=CLI[cliSel],cur=tripsOf(cliSel);
+  var tot=c.hist.reduce(function(a,h){return a+h[3]},0)+cur.reduce(function(a,x){return a+(x[0].pag?x[0].pf:0)},0);
+  var last=cur.some(function(x){return x[0].s===3})?"Hoy":c.hist.length?c.hist[0][0].slice(0,6)+c.hist[0][0].slice(8):"Todavía no";
+  var rows=cur.map(function(x){var t=x[0];return "<button type='button' class='job' data-i='"+x[1]+"'><b>"+esc(t.n)+"</b><span class='pill "+STS[t.s][1]+"'>"+STS[t.s][0]+"</span><small>"+dayShort(t.d)+", "+t.h+". "+esc(t.r)+"</small><span class='num'>"+fmt(t.s>=0?t.pf:t.p)+(t.s>=0?"":" est.")+"</span></button>"}).join("")+
+    c.hist.map(function(h){return "<div class='job'><b>"+esc(h[1])+"</b><span class='num'>"+fmt(h[3])+"</span><small>"+h[0]+". "+esc(h[2])+"</small><span class='ok-t'>Cobrado</span></div>"}).join("");
+  $("cliCard").innerHTML="<div class='cc-h'><span class='av'>"+ini(cliSel)+"</span><div style='min-width:0'><h3>"+esc(c.n)+"</h3><small>"+esc(c.z)+" · <span class='num'>"+c.tel+"</span></small></div><span class='ej'>Ejemplo</span></div>"+
+    "<div class='stats'><div><b>"+nJobs(cliSel)+"</b><span>trabajos</span></div><div><b>"+fmt(tot)+"</b><span>cobrado en total</span></div><div><b>"+last+"</b><span>último viaje</span></div></div>"+
+    "<div class='nota'><b>Tus notas</b>"+(c.nota?esc(c.nota):"Sin notas todavía. Las escribís vos y las ves solo vos.")+"</div>"+
+    "<div class='rev'>"+(c.rev||cur.some(function(x){return x[0].s===3})?"<span class='ok-t'>Ya le pediste la reseña</span>":"<span>Todavía no le pediste reseña</span>")+"</div>"+
+    "<div class='hl'><h4>Historial de trabajos</h4>"+(rows||"<p class='empty-h'>Todavía no hizo ningún viaje con vos.</p>")+"</div>";
+  Array.prototype.forEach.call($("cliCard").querySelectorAll("button.job"),function(b){
+    b.addEventListener("click",function(){var i=+b.getAttribute("data-i");agDay=TRIPS[i].d;selTrip=i;cmp=null;renderAg();drawChat(i);$("tu-dia").scrollIntoView({behavior:"smooth",block:"start"})})});
+}
+$("cliQ").addEventListener("input",renderCli);
+
+/* ---------- pedir el viaje ---------- */
 $("reservar").addEventListener("click",function(){
   var n=$("nom").value.trim(),tel=$("tel").value.replace(/[^0-9]/g,"");
   var e=$("err");
-  if(n.length<2){e.textContent="Escribí tu nombre para reservar.";e.hidden=false;$("nom").focus();return}
+  if(n.length<2){e.textContent="Escribí tu nombre para pedir el viaje.";e.hidden=false;$("nom").focus();return}
   if(tel.length<8){e.textContent="Poné un WhatsApp con código de área, por ejemplo 11 2345 6789.";e.hidden=false;$("tel").focus();return}
   e.hidden=true;
   var p=calc(),fr=FRANJAS.filter(function(f){return f[0]===st.franja})[0];
   var h=st.franja==="m"?"10:00":st.franja==="t"?"14:00":"18:30";
   var tipo=TIPOS.filter(function(x){return x.id===st.tipo})[0];
   var r=st.tipo==="interior"?ZONAS[st.desde][0]+" a "+INTERIOR[st.interior][0]:ZONAS[st.desde][0]+" a "+ZONAS[st.hasta][0];
-  var nm=n.split(" ")[0];nm=nm.charAt(0).toUpperCase()+nm.slice(1);
-  var trip={d:st.day,h:h,c:nm,n:(st.tipo==="casa"||st.tipo==="local"?tipo.n+" "+p.opt[1].toLowerCase():tipo.n),r:r,s:0,amb:(st.ay?st.ay+" ayudante"+(st.ay>1?"s":""):"Sin ayudante")+", "+(p.veh==="camion"?"camión":"camioneta"),fresh:true};
+  var full=n.split(/\s+/).map(function(w){return w.charAt(0).toUpperCase()+w.slice(1)}).join(" ");
+  var key="web"+Date.now();
+  CLI[key]={n:full,z:ZONAS[st.desde][0],tel:tel.length>=10?tel.slice(-10,-8)+" "+tel.slice(-8,-4)+"-"+tel.slice(-4):tel,nota:"Llegó por la web.",hist:[]};
+  var trip={d:st.day,h:h,k:key,n:(st.tipo==="casa"||st.tipo==="local"?tipo.n+" "+p.opt[1].toLowerCase():tipo.n),r:r,s:-1,amb:(st.ay?st.ay+" ayudante"+(st.ay>1?"s":""):"Sin ayudante")+", "+(p.veh==="camion"?"camión":"camioneta"),p:p.total,pf:0,pag:false,ped:"recién",tl:{},fresh:true};
   TRIPS.push(trip);var idx=TRIPS.length-1;
-  CHATS[idx]=[{k:"conf",tx:msgConf(trip),tm:nowStr()}];
-  $("okT").textContent="Listo, "+nm+". Tu viaje está reservado.";
-  $("okP").innerHTML="<b>"+trip.n+"</b>, "+r+".<br>"+dayLabel(st.day).replace(/^./,function(c){return c.toUpperCase()})+", a la "+fr[1].toLowerCase()+" ("+fr[2]+" h). Estimado <b class='num'>"+fmt(p.total)+"</b>.";
+  var nm=first(key);
+  $("okT").textContent="Listo, "+nm+". Tu pedido le llegó a Juan.";
+  $("okP").innerHTML="<b>"+esc(trip.n)+"</b>, "+esc(r)+".<br>"+dayLabel(st.day).replace(/^./,function(c){return c.toUpperCase()})+", a la "+fr[1].toLowerCase()+" ("+fr[2]+" h). Estimado <b class='num'>"+fmt(p.total)+"</b>.";
   $("cotForm").hidden=true;$("cotOk").hidden=false;
-  if(st.day<5){agDay=st.day;selTrip=idx}
-  renderAg();if(st.day<5)drawChat(idx);
-  toast("Confirmación enviada por WhatsApp a "+nm);
-  markTask("cot");markTask("agenda");
+  if(st.day<5){agDay=st.day;selTrip=idx;cmp=null}
+  cliSel=key;renderAg();if(st.day<5)drawChat(idx);renderCli();
+  toast("Pedido nuevo para Juan: queda por confirmar");
+  markTask("cot");markTask("agenda");markTask("hist");
 });
 $("otra").addEventListener("click",function(){$("cotOk").hidden=true;$("cotForm").hidden=false;$("nom").value="";$("tel").value=""});
 $("waTop").addEventListener("click",function(){toast("En la web real abre su WhatsApp. En el boceto, probá el cotizador.")});
 
 /* ---------- tareas de Juan ---------- */
 var TASKS=[
-  {id:"cot",b:"Cotizar cada viaje",s:"El cliente arma el viaje y ve el precio en la web. A vos te llega <em>con todo cargado</em>: barrios, ambientes, ayudantes y día."},
-  {id:"agenda",b:"Llevar la agenda",s:"Cada reserva cae sola en tu día, con hora y dirección. <em>Los días llenos dejan de ofrecerse.</em>"},
-  {id:"llam",b:"Los llamados con clientes",s:"“¿A qué hora vienen?” “¿Ya salieron?” El aviso de <em>confirmado, salimos y listo</em> sale solo."},
-  {id:"preg",b:"Responder las preguntas",s:"Precio, horarios, armado de muebles, viajes al interior: <em>las de siempre se contestan solas</em>."},
-  {id:"cal",b:"Las calificaciones",s:"Al terminar cada viaje, el cliente recibe <em>el link para dejarte la reseña</em>. Ya tenés 658: esto suma más."},
-  {id:"pub",b:"Las publicaciones",s:"Esta sigue siendo tuya. La diferencia es que <em>te queda más tiempo</em> para hacerlas.",keep:true}
+  {id:"trato",b:"Hablar con tus clientes",s:"Esto sigue siendo tuyo. <em>Nadie contesta por vos.</em> Lo que cambia es que, cuando contestás, tenés todo a mano.",keep:true},
+  {id:"cot",b:"Cotizar cada viaje",s:"El cliente arma el viaje y ve un estimado. A vos te llega el pedido <em>con todo cargado</em>, y el precio final lo cerrás vos."},
+  {id:"agenda",b:"Llevar la agenda",s:"Lo que confirmás cae en tu día, con hora y dirección. <em>Nada entra sin que vos digas que sí.</em>"},
+  {id:"hist",b:"Acordarte de cada cliente",s:"Cada cliente queda con <em>su historial</em>: qué le hiciste, cuánto le cobraste, cuándo y tus notas."},
+  {id:"avisos",b:"Escribir los avisos",s:"Confirmado, salimos y listo: <em>el mensaje te queda armado</em> y lo mandás vos desde tu WhatsApp."},
+  {id:"cal",b:"Pedir las reseñas",s:"El link va en el mensaje de cierre. <em>Ya tenés 658</em>: así suman más sin que te acuerdes de pedirlas."},
+  {id:"pub",b:"Las publicaciones",s:"También siguen siendo tuyas. La diferencia es que <em>te queda más tiempo</em> para hacerlas.",keep:true}
 ];
 var done={};
 function renderTasks(){
   var box=$("tasks");box.innerHTML="";
+  var tot=TASKS.filter(function(t){return !t.keep}).length;
   TASKS.forEach(function(t){var b=document.createElement("button");b.type="button";
     b.className="task"+(done[t.id]?" done":"")+(t.keep?" keep":"");b.setAttribute("aria-pressed",done[t.id]?"true":"false");
     b.innerHTML="<span class='bx'><svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='#13233b' stroke-width='3.4' aria-hidden='true'><path d='m5 12 5 5 9-10'/></svg></span><b>"+t.b+"</b><span>"+t.s+"</span>";
     if(!t.keep)b.addEventListener("click",function(){done[t.id]=!done[t.id];renderTasks()});
-    else b.addEventListener("click",function(){toast("Esta la seguís haciendo vos, con más tiempo libre.")});
+    else b.addEventListener("click",function(){toast("Esta la seguís haciendo vos, como hasta ahora.")});
     box.appendChild(b)});
   var n=Object.keys(done).filter(function(k){return done[k]}).length;
   var f=document.createElement("div");f.className="tasks-f";
-  f.innerHTML="<span><b class='num'>"+n+" de 5</b> tareas pasan al sistema</span><span>Tocá cada una</span>";
+  f.innerHTML="<span><b class='num'>"+n+" de "+tot+"</b> te las ordena el sistema</span><span>Tocá cada una</span>";
   box.appendChild(f);
 }
 function markTask(id){done[id]=true;renderTasks()}
-
-/* ---------- preguntas ---------- */
-var FAQ=[
-  ["¿Cuánto sale una mudanza?","Depende de los ambientes, la distancia y cuántos ayudantes necesitás. En la web lo armás en un minuto y te muestra el precio al toque: <a href='#cotizar'>cotizá acá</a>."],
-  ["¿Qué días trabajan?","Todos los días, de 8 a 22. También sábados y domingos."],
-  ["¿Desarman y arman los muebles?","Sí. Desarmamos, armamos y hacemos subidas. Marcalo en el cotizador así lo tenemos en cuenta."],
-  ["¿Hacen viajes al interior?","Sí, hacemos viajes puerta a puerta a cualquier destino del país. Elegí “Viaje al interior” en el cotizador."],
-  ["¿Qué zonas cubren?","Salimos desde San Francisco Solano y Quilmes, y vamos a toda la zona sur, Capital y al interior."],
-  ["¿Cómo se paga?","En efectivo, el día del viaje. Si querés sumar transferencia, se configura en el sistema."],
-  ["¿Con cuánta anticipación reservo?","Lo antes que puedas, sobre todo para fin de mes. En el cotizador ves qué días quedan libres."]
-];
-function renderFaq(){
-  var qs=$("qs"),box=$("faqMsgs");
-  FAQ.forEach(function(f,i){var b=document.createElement("button");b.type="button";b.className="q";b.textContent=f[0];
-    b.addEventListener("click",function(){
-      Array.prototype.forEach.call(qs.children,function(c){c.classList.remove("on")});b.classList.add("on");
-      box.innerHTML="";var me=document.createElement("div");me.className="msg me";me.innerHTML=f[0]+"<span class='tm'>"+nowStr()+"</span>";box.appendChild(me);
-      setTimeout(function(){var a=document.createElement("div");a.className="msg";a.innerHTML=f[1]+"<span class='tm'>"+nowStr()+"</span>";box.appendChild(a)},450);
-    });qs.appendChild(b)});
-  box.innerHTML="<div class='msg sys'>Tocá una pregunta para ver la respuesta automática.</div>";
-}
 
 /* ---------- toast ---------- */
 var tt;function toast(s){$("toastT").textContent=s;var t=$("toast");t.classList.add("show");clearTimeout(tt);tt=setTimeout(function(){t.classList.remove("show")},2800)}
 
 $("clk").textContent=nowStr();
-render();renderAg();selTrip=1;renderAg();drawChat(1);renderTasks();renderFaq();
+render();selTrip=3;renderAg();drawChat(3);renderTasks();renderCli();
 })();
 </script>
 </body>
