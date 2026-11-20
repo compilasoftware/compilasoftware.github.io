@@ -1,0 +1,692 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#13233b">
+<title>Fletes Juan y Juan · Cotizá y reservá</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2313233b'/%3E%3Cpath d='M12 40V20h24v20M36 27h9l7 8v5H36' fill='none' stroke='%23ffc83d' stroke-width='4' stroke-linejoin='round'/%3E%3Ccircle cx='21' cy='43' r='4' fill='%23ffc83d'/%3E%3Ccircle cx='44' cy='43' r='4' fill='%23ffc83d'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800;900&family=Geist+Mono:wght@400;500;600&display=swap">
+<style>
+/* Juan y Juan: azul de caja de camión + amarillo de faja de carga, sobre gris chapa.
+   Una sola página, sin vistas: arriba lo que ve el cliente (cotizador en el hero), abajo lo que ve Juan (su día en el celu).
+   Lo memorable: el precio sale en una "patente" y la lista de tareas de Juan se va tachando. Nada pegado al scroll. */
+:root{
+  --chapa:#eef1f5;--paper:#fff;--navy:#13233b;--navy2:#1c3150;--navy3:#28426a;
+  --ink:#13233b;--steel:#5a6a80;--line:#d8dee7;--soft:#e4e9f0;
+  --faja:#ffc83d;--faja2:#ffe08a;--fajaS:#fff5d6;
+  --ok:#178a4c;--okS:#e0f3e8;--wa:#1fa855;--wabg:#e9e2d8;--wame:#d9fdd3;--warn:#b45309;
+  --ui:"Geist",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"Geist Mono",ui-monospace,monospace;
+  --sh:0 22px 50px -28px rgba(19,35,59,.55);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html,body{margin:0;background:var(--chapa);color:var(--ink);font-family:var(--ui);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+body{overflow-x:hidden}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer;-webkit-tap-highlight-color:transparent}
+:focus-visible{outline:2.5px solid var(--faja);outline-offset:2px}
+[hidden]{display:none!important}
+.wrap{max-width:1160px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-left))}
+.num{font-family:var(--mono);font-feature-settings:"tnum";letter-spacing:-.02em}
+h1,h2,h3{text-wrap:balance}
+p{text-wrap:pretty}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}html{scroll-behavior:auto}}
+
+/* barra de boceto */
+.demo{background:#0a1526;color:#c8d2e2;font-size:12.5px;padding:8px 0}
+.demo .wrap{display:flex;gap:10px;align-items:center;justify-content:space-between}
+.demo b{color:#fff;font-weight:600}
+.demo a{color:var(--faja);text-decoration:none;font-weight:600;white-space:nowrap}
+
+/* encabezado */
+.top{background:var(--navy);color:#fff}
+.top .wrap{display:flex;align-items:center;gap:12px;height:66px}
+.wm{display:flex;align-items:center;gap:11px;color:#fff;text-decoration:none;min-width:0}
+.wm svg{flex:none}
+.wm b{font-weight:800;font-size:19px;letter-spacing:-.02em;line-height:1.05;display:block}
+.wm small{display:block;font-size:12.5px;color:#9fb0c9;font-weight:500}
+.hdr-r{margin-left:auto;display:flex;align-items:center;gap:14px}
+.hrs{font-size:13px;color:#9fb0c9;display:none}
+.hrs b{color:#fff;font-weight:600}
+.wa-btn{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--navy3);background:var(--navy2);color:#fff;border-radius:12px;padding:9px 13px;font-size:14px;font-weight:600}
+.wa-btn svg{color:var(--wa)}
+@media (min-width:820px){.hrs{display:block}}
+@media (max-width:420px){.wa-btn span{display:none}.wa-btn{padding:10px}}
+
+/* HERO = cotizador */
+.hero{background:var(--navy);color:#fff;padding:26px 0 64px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:10px;background:repeating-linear-gradient(-45deg,var(--faja) 0 16px,var(--navy) 16px 32px);opacity:.9}
+.hero .wrap{display:grid;gap:30px;align-items:start}
+@media (min-width:980px){.hero .wrap{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:48px}.hero{padding:56px 0 84px}}
+.pitch h1{font-size:clamp(36px,8vw,64px);line-height:.98;letter-spacing:-.045em;font-weight:900;margin:6px 0 16px;max-width:12ch}
+.pitch p{color:#b8c6da;font-size:17.5px;margin:0 0 22px;max-width:40ch}
+.facts{list-style:none;margin:0;padding:0;display:grid;gap:10px;max-width:420px}
+.facts li{display:flex;gap:12px;align-items:center;font-size:15px;color:#dbe3ef;border-top:1px solid var(--navy3);padding-top:10px}
+.facts svg{flex:none;color:var(--faja)}
+.facts b{color:#fff;font-weight:650}
+.g-rev{display:inline-flex;align-items:center;gap:10px;margin-top:22px;background:var(--navy2);border:1px solid var(--navy3);border-radius:14px;padding:10px 14px;font-size:14px}
+.g-rev .num{font-size:20px;font-weight:600;color:#fff}
+
+/* tarjeta cotizador */
+.cot{background:var(--paper);color:var(--ink);border-radius:24px;box-shadow:0 30px 70px -30px rgba(0,0,0,.6);overflow:hidden;min-width:0}
+.cot-h{padding:18px 20px 0;display:flex;justify-content:space-between;gap:10px;align-items:center}
+.cot-h h2{margin:0;font-size:20px;letter-spacing:-.02em;font-weight:750}
+.ej{font-size:12px;font-weight:600;color:var(--warn);background:#fdf0dc;border-radius:99px;padding:4px 10px;white-space:nowrap}
+.cot-b{padding:16px 20px 6px;display:grid;gap:18px;grid-template-columns:minmax(0,1fr)}
+.cot-b>*,.hero .wrap>*,.dia-grid>*,.faq-grid>*,.tasks-grid>*{min-width:0}
+@media (max-width:979px){.hero .wrap{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:899px){.dia-grid,.faq-grid{grid-template-columns:minmax(0,1fr)}}
+.fl{display:block;font-size:13.5px;color:var(--steel);font-weight:550;margin:0 0 8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1.5px solid var(--line);background:var(--paper);border-radius:12px;padding:9px 13px;font-size:14.5px;font-weight:600;color:var(--ink);transition:border-color .15s,background .15s;text-align:left}
+.chip small{display:block;font-weight:500;color:var(--steel);font-size:12px}
+.chip.on{border-color:var(--navy);background:var(--navy);color:#fff}
+.chip.on small{color:#b8c6da}
+.chip:disabled{opacity:.42;cursor:not-allowed;text-decoration:line-through}
+.route{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
+@media (max-width:420px){.route{grid-template-columns:minmax(0,1fr)}}
+.sel{position:relative}
+.sel select,.inp{width:100%;appearance:none;-webkit-appearance:none;border:1.5px solid var(--line);border-radius:12px;padding:11px 36px 11px 12px;font-size:15.5px;font-weight:600;background:var(--paper);min-width:0}
+.inp{padding-right:12px}
+.sel::after{content:"";position:absolute;right:14px;top:50%;width:8px;height:8px;border-right:2px solid var(--steel);border-bottom:2px solid var(--steel);transform:translateY(-70%) rotate(45deg);pointer-events:none}
+.sel span{position:absolute;left:12px;top:-8px;background:var(--paper);padding:0 4px;font-size:11.5px;color:var(--steel);font-weight:600}
+.row2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+@media (max-width:420px){.row2{grid-template-columns:minmax(0,1fr)}}
+.stp{display:flex;align-items:center;border:1.5px solid var(--line);border-radius:12px;overflow:hidden;width:max-content}
+.stp button{border:0;background:var(--chapa);width:44px;height:44px;font-size:20px;font-weight:600}
+.stp output{min-width:64px;text-align:center;font-weight:650;font-size:15px}
+.tog{display:flex;align-items:center;gap:10px;font-size:14.5px;font-weight:550;padding:6px 0;cursor:pointer}
+.tog input{width:20px;height:20px;accent-color:var(--navy);margin:0;flex:none}
+.days{display:flex;gap:7px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin;-webkit-overflow-scrolling:touch}
+.day{flex:none;border:1.5px solid var(--line);background:var(--paper);border-radius:12px;width:58px;padding:7px 0;text-align:center;line-height:1.15}
+.day small{display:block;font-size:11.5px;color:var(--steel);font-weight:550}
+.day b{font-family:var(--mono);font-size:18px;font-weight:600}
+.day i{display:block;font-style:normal;font-size:10.5px;color:var(--ok);font-weight:600;margin-top:2px}
+.day.full i{color:var(--warn)}
+.day.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.day.on small,.day.on i{color:var(--faja2)}
+.day:disabled{opacity:.5;cursor:not-allowed}
+
+/* precio = patente */
+.cot-f{margin-top:12px;background:var(--chapa);border-top:1px solid var(--line);padding:16px 20px 20px;display:grid;gap:14px}
+.plate-row{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.plate{border:2.5px solid var(--ink);border-radius:10px;background:#fff;overflow:hidden;min-width:200px;box-shadow:0 3px 0 var(--ink)}
+.plate .band{background:#1f4fb4;color:#fff;font-size:11px;font-weight:600;letter-spacing:.02em;padding:2px 10px;display:flex;justify-content:space-between;gap:10px}
+.plate .v{font-family:var(--mono);font-size:32px;font-weight:600;letter-spacing:.02em;padding:2px 14px 4px;text-align:center;line-height:1.2;transition:transform .2s}
+.plate .v.bump{transform:scale(1.04)}
+.brk{font-size:13px;color:var(--steel);min-width:0;flex:1 1 160px}
+.brk div{display:flex;justify-content:space-between;gap:8px;border-bottom:1px dashed var(--line);padding:2px 0}
+.brk div:last-child{border:0}
+.brk .num{color:var(--ink)}
+.veh{font-size:13.5px;color:var(--ink);display:flex;gap:8px;align-items:center}
+.veh svg{flex:none;color:var(--navy)}
+.cta{border:0;background:var(--faja);color:var(--ink);font-weight:750;font-size:16.5px;border-radius:14px;padding:15px 18px;width:100%;box-shadow:0 3px 0 #c9971a}
+.cta:active{transform:translateY(2px);box-shadow:0 1px 0 #c9971a}
+.who{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
+@media (max-width:420px){.who{grid-template-columns:minmax(0,1fr)}}
+.err{color:#b42318;font-size:13.5px;margin:0}
+.ok-card{padding:22px 20px;display:grid;gap:12px}
+.ok-card h3{margin:0;font-size:22px;letter-spacing:-.02em}
+.ok-card p{margin:0;color:var(--steel)}
+.ok-badge{width:44px;height:44px;border-radius:50%;background:var(--okS);color:var(--ok);display:grid;place-items:center}
+.ghost{border:1.5px solid var(--line);background:var(--paper);border-radius:12px;padding:11px 14px;font-weight:600;font-size:14.5px}
+
+/* secciones */
+section.blk{padding:72px 0}
+.sh{max-width:640px;margin-bottom:30px}
+.sh h2{font-size:clamp(28px,5vw,42px);line-height:1.05;letter-spacing:-.035em;margin:0 0 12px;font-weight:850}
+.sh p{margin:0;color:var(--steel);font-size:17px;max-width:54ch}
+
+/* lista de tareas de Juan */
+.tasks{background:var(--paper);border-radius:24px;box-shadow:var(--sh);overflow:hidden}
+.task{display:grid;grid-template-columns:34px minmax(0,1fr);gap:4px 14px;padding:18px 20px;border-top:1px solid var(--line);width:100%;text-align:left;border-left:0;border-right:0;border-bottom:0;background:none}
+.task:first-child{border-top:0}
+.task .bx{width:26px;height:26px;border:2px solid var(--ink);border-radius:7px;display:grid;place-items:center;grid-row:span 2;margin-top:2px;transition:background .15s}
+.task .bx svg{opacity:0;transition:opacity .15s}
+.task b{font-size:18px;font-weight:700;letter-spacing:-.015em;position:relative;justify-self:start}
+.task b::after{content:"";position:absolute;left:-2px;right:-2px;top:55%;height:2.5px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .35s ease}
+.task span{color:var(--steel);font-size:15px}
+.task span em{font-style:normal;color:var(--ink);font-weight:600}
+.task.done .bx{background:var(--faja);border-color:var(--ink)}
+.task.done .bx svg{opacity:1}
+.task.done b{color:var(--steel)}
+.task.done b::after{transform:scaleX(1)}
+.task.keep .bx{border-style:dashed}
+.tasks-f{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;padding:14px 20px;background:var(--chapa);border-top:1px solid var(--line);font-size:14px;color:var(--steel)}
+.tasks-f b{color:var(--ink)}
+@media (min-width:860px){.tasks-grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:48px;align-items:start}.tasks-grid .sh{position:static}}
+
+/* tu día */
+.dia{background:var(--navy);color:#fff}
+.dia .sh p{color:#b8c6da}
+.dia-grid{display:grid;gap:26px;align-items:start}
+@media (min-width:900px){.dia-grid{grid-template-columns:minmax(0,400px) minmax(0,1fr);gap:40px}}
+.phone{background:#0a1526;border-radius:40px;padding:12px;box-shadow:0 40px 80px -40px #000;max-width:400px;width:100%;margin:0 auto}
+.scr{background:var(--chapa);color:var(--ink);border-radius:30px;overflow:hidden;min-height:620px;display:flex;flex-direction:column;position:relative}
+.sbar{display:flex;justify-content:space-between;padding:10px 22px 4px;font-size:12.5px;font-weight:600}
+.app-h{padding:8px 16px 12px;display:flex;justify-content:space-between;align-items:flex-end;gap:8px}
+.app-h h3{margin:0;font-size:24px;letter-spacing:-.03em;font-weight:800}
+.app-h small{color:var(--steel);font-size:13px;display:block}
+.app-h .cnt{font-size:12.5px;font-weight:600;background:var(--paper);border:1px solid var(--line);border-radius:99px;padding:5px 10px;white-space:nowrap}
+.dsw{display:flex;gap:6px;padding:0 16px 12px;overflow-x:auto}
+.dsw button{flex:none;border:1.5px solid var(--line);background:var(--paper);border-radius:99px;padding:6px 12px;font-size:13px;font-weight:600}
+.dsw button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.trips{padding:0 12px 16px;display:grid;gap:8px;flex:1;align-content:start}
+.trip{display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:10px;align-items:center;background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:12px;text-align:left;width:100%}
+.trip .t{font-family:var(--mono);font-weight:600;font-size:15px}
+.trip b{display:block;font-size:14.5px;font-weight:650;line-height:1.25}
+.trip small{display:block;font-size:12.5px;color:var(--steel);line-height:1.3;margin-top:2px}
+@media (max-width:480px){.phone{padding:6px;border-radius:32px}.scr{border-radius:27px;min-height:0}.trip{grid-template-columns:44px minmax(0,1fr) auto;gap:8px;padding:11px 10px}.trip .t{font-size:14px}}
+.trip.pick{border-color:var(--ink);box-shadow:0 0 0 1.5px var(--ink)}
+.trip.new{animation:newT 1.6s ease}
+@keyframes newT{0%,40%{background:var(--fajaS)}100%{background:var(--paper)}}
+.pill{font-size:11.5px;font-weight:650;border-radius:99px;padding:4px 9px;white-space:nowrap}
+.p-conf{background:var(--soft);color:var(--navy)}
+.p-cam{background:var(--fajaS);color:#8a5a00}
+.p-ok{background:var(--okS);color:var(--ok)}
+.empty{padding:30px 16px;text-align:center;color:var(--steel);font-size:14px}
+.det{background:var(--paper);border-top:1px solid var(--line);padding:14px 16px 18px;display:grid;gap:10px}
+.det h4{margin:0;font-size:16px;letter-spacing:-.01em}
+.det .meta{font-size:13px;color:var(--steel);display:grid;gap:2px}
+.flow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.flow button{border:1.5px solid var(--line);background:var(--paper);border-radius:12px;padding:9px 4px;font-size:12.5px;font-weight:650;line-height:1.2}
+.flow button i{display:block;font-style:normal;font-family:var(--mono);font-size:11px;color:var(--steel);font-weight:500}
+.flow button.done{background:var(--okS);border-color:#bfe3cd;color:var(--ok)}
+.flow button.next{background:var(--faja);border-color:var(--ink);box-shadow:0 2px 0 var(--ink)}
+.flow button:disabled{cursor:default}
+.flow button.wait{opacity:.5}
+.det .hint{font-size:12.5px;color:var(--steel);margin:0}
+
+/* chat de whatsapp del cliente */
+.side{display:grid;gap:18px;min-width:0}
+.chat{background:var(--wabg);border-radius:22px;overflow:hidden;color:#111b21;box-shadow:var(--sh)}
+.chat-h{background:#075e54;color:#fff;display:flex;gap:10px;align-items:center;padding:11px 14px}
+.av{width:36px;height:36px;border-radius:50%;background:var(--faja);color:var(--ink);display:grid;place-items:center;font-weight:800;font-size:14px;flex:none}
+.chat-h b{display:block;font-size:15px;line-height:1.2}
+.chat-h small{font-size:12px;opacity:.8}
+.msgs{padding:14px 12px 16px;display:flex;flex-direction:column;gap:8px;min-height:250px;max-height:420px;overflow-y:auto}
+.msg{background:#fff;border-radius:4px 12px 12px 12px;padding:8px 10px 6px;max-width:88%;font-size:14.5px;line-height:1.4;box-shadow:0 1px 0 rgba(0,0,0,.08);align-self:flex-start;animation:pop .3s ease}
+.msg .tm{display:block;text-align:right;font-size:11px;color:#667781;margin-top:2px;font-family:var(--mono)}
+.msg .tag{display:inline-block;font-size:11px;font-weight:700;border-radius:6px;padding:1px 6px;margin-bottom:4px}
+.msg a{color:#027eb5;font-weight:600;word-break:break-all}
+.msg.sys{align-self:center;background:#fdf4c5;font-size:12.5px;border-radius:8px;color:#54656f;text-align:center;max-width:95%}
+@keyframes pop{from{transform:translateY(6px);opacity:0}to{transform:none;opacity:1}}
+.note{background:var(--navy2);border:1px solid var(--navy3);border-radius:18px;padding:16px 18px;font-size:15px;color:#dbe3ef}
+.note b{color:#fff}
+.note ol{margin:8px 0 0;padding-left:20px;display:grid;gap:4px}
+
+/* preguntas */
+.faq-grid{display:grid;gap:22px;align-items:start}
+@media (min-width:900px){.faq-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px}}
+.qs{display:flex;flex-wrap:wrap;gap:8px}
+.q{border:1.5px solid var(--line);background:var(--paper);border-radius:99px;padding:10px 15px;font-size:14.5px;font-weight:600;text-align:left}
+.q.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.faq-note{margin-top:18px;font-size:14.5px;color:var(--steel);max-width:46ch}
+.faq-note b{color:var(--ink)}
+.msg.me{align-self:flex-end;background:var(--wame);border-radius:12px 4px 12px 12px}
+
+/* cierre */
+.end{padding:70px 0 80px}
+.end-card{background:var(--faja);border-radius:28px;padding:34px 24px;display:grid;gap:22px;position:relative;overflow:hidden}
+@media (min-width:860px){.end-card{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);padding:48px;align-items:center}}
+.end-card h2{margin:0;font-size:clamp(30px,5.4vw,48px);line-height:1;letter-spacing:-.04em;font-weight:900;max-width:14ch}
+.end-card p{margin:12px 0 0;font-size:17px;max-width:44ch}
+.end-card ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.end-card li{background:rgba(255,255,255,.55);border-radius:14px;padding:12px 14px;font-size:15px;font-weight:550;display:flex;gap:10px;align-items:flex-start}
+.end-card li svg{flex:none;margin-top:2px}
+footer{padding:26px 0 40px;font-size:13px;color:var(--steel)}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+footer a{color:var(--ink);font-weight:600}
+
+/* toast */
+.toast{position:fixed;left:50%;bottom:18px;transform:translate(-50%,140%);background:var(--ink);color:#fff;border-radius:14px;padding:12px 16px;font-size:14px;display:flex;gap:10px;align-items:center;box-shadow:0 18px 40px -16px rgba(0,0,0,.6);z-index:90;transition:transform .3s ease;width:max-content;max-width:calc(100vw - 32px)}
+.toast.show{transform:translate(-50%,0)}
+.toast svg{flex:none;color:var(--wa)}
+</style>
+</head>
+<body>
+
+<div class="demo"><div class="wrap"><span><b>Boceto de Compila</b> para Fletes Juan y Juan. Precios y viajes de ejemplo.</span><a href="#tu-dia">Ver tu agenda</a></div></div>
+
+<header class="top">
+  <div class="wrap">
+    <a class="wm" href="#">
+      <svg width="38" height="38" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="15" fill="#ffc83d"/><path d="M12 40V20h24v20M36 27h9l7 8v5H36" fill="none" stroke="#13233b" stroke-width="4.5" stroke-linejoin="round"/><circle cx="21" cy="43" r="4.5" fill="#13233b"/><circle cx="44" cy="43" r="4.5" fill="#13233b"/></svg>
+      <span><b>Fletes Juan y Juan</b><small>San Francisco Solano y Quilmes</small></span>
+    </a>
+    <div class="hdr-r">
+      <span class="hrs">Todos los días <b class="num">8 a 22</b></span>
+      <button class="wa-btn" id="waTop" type="button" aria-label="Escribir por WhatsApp">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.4-.3z"/></svg>
+        <span class="num">11 6584-3396</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO: lo que ve el cliente -->
+<section class="hero" id="cotizar" aria-label="Cotizador">
+  <div class="wrap">
+    <div class="pitch">
+      <h1>Sabé cuánto sale tu flete antes de llamar.</h1>
+      <p>Mudanzas, fletes y repartos puerta a puerta, desde Solano y Quilmes a cualquier destino del país. Elegí, mirá el precio y reservá el día.</p>
+      <ul class="facts">
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 10.5 12 4l9 6.5V20H3z"/><path d="M9 20v-6h6v6"/></svg><span><b>Mudanzas</b> de casas, locales y oficinas</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg><span><b>Desarmado, armado</b> de muebles y subidas</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 16V6h12v10M14 10h4l4 4v2h-8"/><circle cx="6.5" cy="17.5" r="2"/><circle cx="17.5" cy="17.5" r="2"/></svg><span><b>Camioneta o camión</b> mudancero, según lo que lleves</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span><b>Todos los días</b> de 8 a 22</span></li>
+      </ul>
+      <div class="g-rev"><span class="num">658</span><span>reseñas en Google<br><small style="color:#9fb0c9">de gente que ya se mudó con ellos</small></span></div>
+    </div>
+
+    <div class="cot" id="cot">
+      <div id="cotForm">
+        <div class="cot-h"><h2>Cotizá tu viaje</h2><span class="ej">Precios de ejemplo</span></div>
+        <div class="cot-b">
+          <div>
+            <span class="fl">¿Qué necesitás?</span>
+            <div class="chips" id="tipo"></div>
+          </div>
+          <div>
+            <span class="fl">¿Desde dónde y hasta dónde?</span>
+            <div class="route">
+              <label class="sel"><span>Desde</span><select id="desde"></select></label>
+              <label class="sel" id="hastaWrap"><span>Hasta</span><select id="hasta"></select></label>
+              <label class="sel" id="kmWrap" hidden><span>Ciudad de destino</span><select id="interior"></select></label>
+            </div>
+          </div>
+          <div>
+            <span class="fl" id="cargaL">¿Cuántos ambientes?</span>
+            <div class="chips" id="carga"></div>
+          </div>
+          <div class="row2">
+            <div>
+              <span class="fl">Ayudantes además del chofer</span>
+              <div class="stp"><button type="button" id="ayM" aria-label="Menos ayudantes">−</button><output id="ayO" class="num">1</output><button type="button" id="ayP" aria-label="Más ayudantes">+</button></div>
+            </div>
+            <div>
+              <span class="fl">Extras</span>
+              <label class="tog"><input type="checkbox" id="armado"> Desarmar y armar muebles</label>
+              <label class="tog"><input type="checkbox" id="escalera"> Hay escalera, sin ascensor</label>
+            </div>
+          </div>
+          <div>
+            <span class="fl">¿Qué día te queda bien?</span>
+            <div class="days" id="days"></div>
+          </div>
+          <div>
+            <span class="fl">¿A qué hora?</span>
+            <div class="chips" id="franja"></div>
+          </div>
+        </div>
+        <div class="cot-f">
+          <div class="plate-row">
+            <div class="plate" aria-live="polite"><div class="band"><span>Precio estimado</span><span id="pDist" class="num">0 km</span></div><div class="v" id="pVal">$ 0</div></div>
+            <div class="brk" id="brk"></div>
+          </div>
+          <div class="veh" id="veh"></div>
+          <div class="who">
+            <input class="inp" id="nom" placeholder="Tu nombre" autocomplete="name">
+            <input class="inp" id="tel" placeholder="Tu WhatsApp" inputmode="tel" autocomplete="tel">
+          </div>
+          <p class="err" id="err" hidden></p>
+          <button class="cta" type="button" id="reservar">Reservar el viaje</button>
+        </div>
+      </div>
+      <div class="ok-card" id="cotOk" hidden>
+        <div class="ok-badge"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg></div>
+        <h3 id="okT">Viaje reservado</h3>
+        <p id="okP"></p>
+        <p>Te llegó la confirmación por WhatsApp. El día del viaje te avisamos cuando salimos para tu casa.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap"><a class="cta" href="#tu-dia" style="text-decoration:none;text-align:center;width:auto;flex:1 1 200px">Ver cómo le llega a Juan</a><button class="ghost" type="button" id="otra">Cotizar otro</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Lo que hace Juan -->
+<section class="blk" id="tareas">
+  <div class="wrap tasks-grid">
+    <div class="sh">
+      <h2>Hoy hacés todo vos. Esto te saca varias cosas de encima.</h2>
+      <p>Me contaste que la agenda, los llamados, las preguntas, las cotizaciones, las publicaciones y las calificaciones pasan todas por vos. Tocá cada una para ver qué cambia.</p>
+    </div>
+    <div class="tasks" id="tasks"></div>
+  </div>
+</section>
+
+<!-- Tu día -->
+<section class="blk dia" id="tu-dia">
+  <div class="wrap">
+    <div class="sh">
+      <h2>Tu día de viajes, en el celu.</h2>
+      <p>Los viajes que reservan por la web caen solos acá. Tocá uno y marcá cómo va: al cliente le llega el aviso sin que escribas nada.</p>
+    </div>
+    <div class="dia-grid">
+      <div class="phone">
+        <div class="scr">
+          <div class="sbar"><span class="num" id="clk">9:41</span><span>Juan y Juan</span></div>
+          <div class="app-h"><div><small id="agFecha"></small><h3 id="agT">Hoy</h3></div><span class="cnt" id="agCnt"></span></div>
+          <div class="dsw" id="dsw"></div>
+          <div class="trips" id="trips"></div>
+          <div class="det" id="det" hidden></div>
+        </div>
+      </div>
+      <div class="side">
+        <div class="chat" aria-live="polite">
+          <div class="chat-h"><div class="av" id="chAv">M</div><div><b id="chN">Marta</b><small>Lo que le llega al cliente</small></div></div>
+          <div class="msgs" id="msgs"></div>
+        </div>
+        <div class="note">
+          <b>Así sale cada aviso, sin que lo escribas:</b>
+          <ol>
+            <li>Cuando reservan: <b>“Tu viaje quedó confirmado”</b>, con día y hora.</li>
+            <li>Cuando tocás “Salimos”: <b>“Ya salimos para tu casa”</b>.</li>
+            <li>Cuando tocás “Listo”: <b>“Terminamos”</b> y, un rato después, el pedido de reseña en Google.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Preguntas -->
+<section class="blk" id="preguntas">
+  <div class="wrap faq-grid">
+    <div>
+      <div class="sh" style="margin-bottom:20px">
+        <h2>Las preguntas de siempre, contestadas solas.</h2>
+        <p>Las respuestas las escribís una vez y quedan en la web y en el WhatsApp. Probá tocando una.</p>
+      </div>
+      <div class="qs" id="qs"></div>
+      <p class="faq-note">Si alguien pregunta algo que no está en la lista, <b>te llega a vos</b> como siempre. Lo repetido sale solo.</p>
+    </div>
+    <div class="chat">
+      <div class="chat-h"><div class="av">JJ</div><div><b>Fletes Juan y Juan</b><small>Respuesta automática</small></div></div>
+      <div class="msgs" id="faqMsgs"></div>
+    </div>
+  </div>
+</section>
+
+<section class="end">
+  <div class="wrap">
+    <div class="end-card">
+      <div>
+        <h2>Algo un poco mejor, sin complicarte.</h2>
+        <p>No hay que instalar nada ni aprender un programa. Lo abrís desde el celu como cualquier página, y empezamos por lo que más trabajo te saque.</p>
+      </div>
+      <ul>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>El cliente cotiza y reserva solo, a cualquier hora.</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>Vos ves el día ordenado y tocás un botón por viaje.</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>Los avisos y el pedido de reseña salen solos.</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>Tu web sigue en pie: esto se suma a lo que ya tenés.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap"><span>Boceto hecho por <a href="https://compilasoftware.github.io/">Compila Software</a> para Fletes Juan y Juan.</span><span>Precios, clientes y viajes de ejemplo.</span></div></footer>
+
+<div class="toast" id="toast" role="status"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg><span id="toastT"></span></div>
+
+<script>
+(function(){
+"use strict";
+var $=function(id){return document.getElementById(id)};
+var fmt=function(n){return "$ "+Math.round(n).toLocaleString("es-AR")};
+var DOW=["Dom","Lun","Mar","Mié","Jue","Vie","Sáb"];
+var DOWL=["domingo","lunes","martes","miércoles","jueves","viernes","sábado"];
+var MES=["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+
+/* ---------- datos de ejemplo ---------- */
+var TIPOS=[
+  {id:"casa",n:"Mudanza",s:"Casa o depto"},
+  {id:"local",n:"Mudanza comercial",s:"Local u oficina"},
+  {id:"flete",n:"Flete o reparto",s:"Unas cosas sueltas"},
+  {id:"interior",n:"Viaje al interior",s:"Puerta a puerta"}
+];
+/* barrios con coordenadas aproximadas en km, centradas en Solano */
+var ZONAS=[
+  ["San Francisco Solano",0,0],["Quilmes",6,6],["Quilmes Oeste",3,4],["Bernal",4,9],["Ezpeleta",9,3],
+  ["Berazategui",12,1],["Florencio Varela",5,-7],["Adrogué",-9,-7],["Lomas de Zamora",-12,1],
+  ["Lanús",-8,7],["Avellaneda",-5,14],["Capital Federal",-9,22],["La Plata",30,-24]
+];
+var INTERIOR=[["Mar del Plata",410],["Rosario",330],["Córdoba",720],["Bahía Blanca",660],["Santa Fe",490],["Mendoza",1080]];
+var CARGA={
+  casa:{l:"¿Cuántos ambientes?",o:[["mono","Monoambiente",62000,"camioneta"],["2","2 ambientes",88000,"camion"],["3","3 ambientes",122000,"camion"],["4","4 o más",165000,"camion"]]},
+  local:{l:"¿Qué tamaño tiene?",o:[["chico","Chico",80000,"camioneta"],["mediano","Mediano",120000,"camion"],["grande","Grande",170000,"camion"]]},
+  flete:{l:"¿Cuánto llevás?",o:[["poco","Pocas cosas",32000,"camioneta","Un electro, unas cajas"],["medio","Media carga",48000,"camioneta","Varios muebles"],["lleno","Vehículo lleno",68000,"camion",""]]},
+  interior:{l:"¿Cuánto llevás?",o:[["medio","Media carga",90000,"camioneta"],["lleno","Mudanza completa",160000,"camion"]]}
+};
+var FRANJAS=[["m","Mañana","8 a 12"],["t","Tarde","12 a 17"],["n","Noche","17 a 22"]];
+var KM_LOCAL=950, KM_INT=1250, AYUD=22000, ARMADO=18000, ESCALERA=14000;
+
+var st={tipo:"casa",desde:0,hasta:3,interior:0,carga:"2",ay:1,armado:false,escalera:false,day:1,franja:"m"};
+
+/* ---------- días ---------- */
+var today=new Date();today.setHours(0,0,0,0);
+function addD(n){var d=new Date(today);d.setDate(d.getDate()+n);return d}
+var FULL={3:true,6:true}; /* días completos de ejemplo */
+
+function chipEl(label,sub,on,fn,dis){
+  var b=document.createElement("button");b.type="button";b.className="chip"+(on?" on":"");
+  b.innerHTML=label+(sub?"<small>"+sub+"</small>":"");b.setAttribute("aria-pressed",on?"true":"false");
+  if(dis)b.disabled=true;b.addEventListener("click",fn);return b;
+}
+function fillSel(sel,list,val){sel.innerHTML="";list.forEach(function(z,i){var o=document.createElement("option");o.value=i;o.textContent=z[0];sel.appendChild(o)});sel.value=val}
+
+function render(){
+  var t=$("tipo");t.innerHTML="";
+  TIPOS.forEach(function(x){t.appendChild(chipEl(x.n,x.s,st.tipo===x.id,function(){
+    st.tipo=x.id;var o=CARGA[x.id].o;if(!o.some(function(c){return c[0]===st.carga}))st.carga=o[Math.min(1,o.length-1)][0];
+    st.armado=st.armado&&x.id!=="flete";render();bump();
+  }))});
+  var c=$("carga");c.innerHTML="";$("cargaL").textContent=CARGA[st.tipo].l;
+  CARGA[st.tipo].o.forEach(function(x){c.appendChild(chipEl(x[1],x[4]||"",st.carga===x[0],function(){st.carga=x[0];render();bump()}))});
+  $("hastaWrap").hidden=st.tipo==="interior";$("kmWrap").hidden=st.tipo!=="interior";
+  var d=$("days");d.innerHTML="";
+  for(var i=0;i<10;i++){(function(i){
+    var dt=addD(i),b=document.createElement("button");b.type="button";var full=!!FULL[i];
+    b.className="day"+(st.day===i?" on":"")+(full?" full":"");b.disabled=full;
+    b.innerHTML="<small>"+(i===0?"Hoy":i===1?"Mañana":DOW[dt.getDay()])+"</small><b>"+dt.getDate()+"</b><i>"+(full?"Completo":"Hay lugar")+"</i>";
+    b.setAttribute("aria-label",DOWL[dt.getDay()]+" "+dt.getDate()+(full?", completo":""));
+    b.addEventListener("click",function(){st.day=i;render();bump()});d.appendChild(b);
+  })(i)}
+  var f=$("franja");f.innerHTML="";
+  FRANJAS.forEach(function(x){f.appendChild(chipEl(x[1],x[2],st.franja===x[0],function(){st.franja=x[0];render()}))});
+  $("ayO").textContent=st.ay===0?"Ninguno":st.ay;
+  $("armado").checked=st.armado;$("escalera").checked=st.escalera;
+  price();
+}
+function dist(){
+  if(st.tipo==="interior")return INTERIOR[st.interior][1];
+  var a=ZONAS[st.desde],b=ZONAS[st.hasta];var k=Math.hypot(a[1]-b[1],a[2]-b[2])*1.3;return Math.max(3,Math.round(k));
+}
+function calc(){
+  var opt=CARGA[st.tipo].o.filter(function(c){return c[0]===st.carga})[0];
+  var km=dist(),base=opt[2];
+  var kmCost=st.tipo==="interior"?km*KM_INT:Math.max(0,km-5)*KM_LOCAL;
+  var ay=st.ay*AYUD*(st.tipo==="interior"?2:1);
+  var ex=(st.armado?ARMADO:0)+(st.escalera?ESCALERA:0);
+  var total=Math.round((base+kmCost+ay+ex)/1000)*1000;
+  return {opt:opt,km:km,base:base,kmCost:kmCost,ay:ay,ex:ex,total:total,veh:opt[3]};
+}
+function price(){
+  var p=calc();
+  $("pVal").textContent=fmt(p.total);$("pDist").textContent=p.km+" km";
+  var rows=[[p.opt[1],p.base],["Distancia",p.kmCost],["Ayudantes",p.ay]];
+  if(p.ex)rows.push(["Extras",p.ex]);
+  $("brk").innerHTML=rows.map(function(r){return "<div><span>"+r[0]+"</span><span class='num'>"+fmt(r[1])+"</span></div>"}).join("");
+  $("veh").innerHTML='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 16V6h12v10M14 10h4l4 4v2h-8"/><circle cx="6.5" cy="17.5" r="2"/><circle cx="17.5" cy="17.5" r="2"/></svg><span>Va en <b>'+(p.veh==="camion"?"camión mudancero":"camioneta")+"</b> con chofer"+(st.ay?" y "+st.ay+" ayudante"+(st.ay>1?"s":""):"")+".</span>";
+}
+function bump(){var v=$("pVal");v.classList.remove("bump");void v.offsetWidth;v.classList.add("bump");setTimeout(function(){v.classList.remove("bump")},200)}
+
+fillSel($("desde"),ZONAS,st.desde);fillSel($("hasta"),ZONAS,st.hasta);fillSel($("interior"),INTERIOR,st.interior);
+$("desde").addEventListener("change",function(e){st.desde=+e.target.value;price();bump()});
+$("hasta").addEventListener("change",function(e){st.hasta=+e.target.value;price();bump()});
+$("interior").addEventListener("change",function(e){st.interior=+e.target.value;price();bump()});
+$("ayM").addEventListener("click",function(){if(st.ay>0){st.ay--;render();bump()}});
+$("ayP").addEventListener("click",function(){if(st.ay<4){st.ay++;render();bump()}});
+$("armado").addEventListener("change",function(e){st.armado=e.target.checked;price();bump()});
+$("escalera").addEventListener("change",function(e){st.escalera=e.target.checked;price();bump()});
+
+/* ---------- agenda ---------- */
+var TRIPS=[
+  {d:0,h:"8:30",c:"Marta",n:"Mudanza 2 ambientes",r:"Solano a Bernal",s:3,amb:"2 ayudantes, camión"},
+  {d:0,h:"11:30",c:"Diego",n:"Flete de heladera y lavarropas",r:"Quilmes Oeste a Ezpeleta",s:1,amb:"1 ayudante, camioneta"},
+  {d:0,h:"15:00",c:"Silvia",n:"Mudanza comercial",r:"Quilmes a Avellaneda",s:0,amb:"2 ayudantes, camión"},
+  {d:0,h:"19:00",c:"Ramiro",n:"Reparto de muebles",r:"Solano a Florencio Varela",s:0,amb:"Sin ayudante, camioneta"},
+  {d:1,h:"9:00",c:"Laura",n:"Mudanza 3 ambientes",r:"Bernal a Capital Federal",s:0,amb:"2 ayudantes, camión"},
+  {d:1,h:"16:00",c:"Hernán",n:"Flete de sillones",r:"Lanús a Solano",s:0,amb:"1 ayudante, camioneta"},
+  {d:2,h:"8:00",c:"Graciela",n:"Viaje a Mar del Plata",r:"Solano a Mar del Plata",s:0,amb:"2 ayudantes, camión"}
+];
+var ST=[["Confirmado","p-conf"],["En camino","p-cam"],["En camino","p-cam"],["Listo","p-ok"]];
+/* s: 0 confirmado, 1 salimos, 3 listo */
+var agDay=0,selTrip=-1;
+var CHATS={};
+
+function nowStr(){var d=new Date();return d.getHours()+":"+String(d.getMinutes()).padStart(2,"0")}
+function dayLabel(i){var d=addD(i);return DOWL[d.getDay()]+" "+d.getDate()+" de "+MES[d.getMonth()]}
+function msgConf(t){return "Hola "+t.c+", soy Juan de Fletes Juan y Juan. Tu viaje quedó confirmado para el "+dayLabel(t.d)+" a las "+t.h+" ("+t.r+"). Si cambia algo, respondé este mensaje."}
+function msgSal(t){return "Hola "+t.c+", ya salimos para tu casa. Llegamos en unos 25 minutos."}
+function msgListo(t){return "Listo, "+t.c+". Terminamos el viaje. ¡Gracias por elegirnos!"}
+function msgRes(t){return t.c+", ¿nos dejás tu opinión en Google? Nos ayuda un montón a que más gente nos encuentre: <a href='#tu-dia'>g.page/fletes-juan-y-juan/review</a>"}
+
+function chatFor(i){
+  var t=TRIPS[i];if(CHATS[i])return CHATS[i];
+  var m=[{k:"conf",tx:msgConf(t),tm:"ayer"}];
+  if(t.s>=1)m.push({k:"sal",tx:msgSal(t),tm:"8:05"});
+  if(t.s>=3){m.push({k:"listo",tx:msgListo(t),tm:"10:40"});m.push({k:"res",tx:msgRes(t),tm:"11:40"})}
+  CHATS[i]=m;return m;
+}
+var TAGS={conf:["Confirmado","#e4e9f0","#13233b"],sal:["Salimos","#fff5d6","#8a5a00"],listo:["Listo","#e0f3e8","#178a4c"],res:["Pedido de reseña","#ede7fb","#5b3fb5"]};
+function drawChat(i){
+  var t=TRIPS[i],box=$("msgs");$("chN").textContent=t.c;$("chAv").textContent=t.c.charAt(0);
+  box.innerHTML="";
+  chatFor(i).forEach(function(m){
+    var el=document.createElement("div");
+    if(m.k==="sys"){el.className="msg sys";el.textContent=m.tx}
+    else{var g=TAGS[m.k];el.className="msg";el.innerHTML="<span class='tag' style='background:"+g[1]+";color:"+g[2]+"'>"+g[0]+"</span><br>"+m.tx+"<span class='tm'>"+m.tm+"</span>"}
+    box.appendChild(el);
+  });
+  box.scrollTop=box.scrollHeight;
+}
+function renderAg(){
+  var sw=$("dsw");sw.innerHTML="";
+  for(var i=0;i<5;i++){(function(i){var b=document.createElement("button");b.type="button";var d=addD(i);
+    b.textContent=i===0?"Hoy":i===1?"Mañana":DOW[d.getDay()]+" "+d.getDate();b.className=agDay===i?"on":"";
+    b.addEventListener("click",function(){agDay=i;selTrip=-1;renderAg()});sw.appendChild(b)})(i)}
+  $("agT").textContent=agDay===0?"Hoy":agDay===1?"Mañana":DOW[addD(agDay).getDay()]+" "+addD(agDay).getDate();
+  var dl=dayLabel(agDay);$("agFecha").textContent=dl.charAt(0).toUpperCase()+dl.slice(1);
+  var list=TRIPS.map(function(t,i){return [t,i]}).filter(function(x){return x[0].d===agDay})
+    .sort(function(a,b){return toMin(a[0].h)-toMin(b[0].h)});
+  $("agCnt").textContent=list.length+(list.length===1?" viaje":" viajes");
+  var box=$("trips");box.innerHTML="";
+  if(!list.length)box.innerHTML="<div class='empty'>No hay viajes este día. Cuando alguien reserve por la web, aparece acá.</div>";
+  list.forEach(function(x){var t=x[0],i=x[1];var b=document.createElement("button");b.type="button";
+    b.className="trip"+(selTrip===i?" pick":"")+(t.fresh?" new":"");t.fresh=false;
+    b.innerHTML="<span class='t'>"+t.h+"</span><span style='min-width:0'><b>"+t.n+"</b><small>"+t.c+", "+t.r+"</small></span><span class='pill "+ST[t.s][1]+"'>"+ST[t.s][0]+"</span>";
+    b.addEventListener("click",function(){selTrip=i;renderAg();drawChat(i)});box.appendChild(b)});
+  renderDet();
+}
+function toMin(h){var p=h.split(":");return +p[0]*60+ +p[1]}
+function renderDet(){
+  var det=$("det");if(selTrip<0||TRIPS[selTrip].d!==agDay){det.hidden=true;return}
+  var t=TRIPS[selTrip];det.hidden=false;
+  var canSal=t.s===0&&agDay===0,canListo=t.s===1;
+  det.innerHTML="<h4>"+t.h+", "+t.n+"</h4><div class='meta'><span>"+t.c+", "+t.r+"</span><span>"+t.amb+"</span></div>"+
+    "<div class='flow'>"+
+    "<button type='button' class='done' disabled>Confirmado<i>automático</i></button>"+
+    "<button type='button' id='bSal' class='"+(t.s>=1?"done":canSal?"next":"wait")+"' "+(canSal?"":"disabled")+">Salimos<i>"+(t.s>=1?"avisado":"tocá al salir")+"</i></button>"+
+    "<button type='button' id='bListo' class='"+(t.s>=3?"done":canListo?"next":"wait")+"' "+(canListo?"":"disabled")+">Listo<i>"+(t.s>=3?"reseña pedida":"tocá al terminar")+"</i></button>"+
+    "</div><p class='hint'>"+(t.s===0&&agDay!==0?"Los botones se activan el día del viaje.":t.s===3?"Viaje cerrado. El cliente ya tiene el link para dejar su reseña.":"Cada botón le manda el aviso al cliente por WhatsApp.")+"</p>";
+  var bs=$("bSal"),bl=$("bListo");
+  if(canSal)bs.addEventListener("click",function(){t.s=1;chatFor(selTrip).push({k:"sal",tx:msgSal(t),tm:nowStr()});renderAg();drawChat(selTrip);toast("Aviso enviado a "+t.c+": ya salimos")});
+  if(canListo)bl.addEventListener("click",function(){t.s=3;var i=selTrip;chatFor(i).push({k:"listo",tx:msgListo(t),tm:nowStr()});renderAg();drawChat(i);toast("Aviso enviado a "+t.c+": terminamos");
+    setTimeout(function(){chatFor(i).push({k:"sys",tx:"Una hora después, sale solo:"});chatFor(i).push({k:"res",tx:msgRes(t),tm:"+1 h"});if(selTrip===i)drawChat(i);toast("Pedido de reseña enviado a "+t.c)},1400)});
+}
+
+/* ---------- reservar ---------- */
+$("reservar").addEventListener("click",function(){
+  var n=$("nom").value.trim(),tel=$("tel").value.replace(/[^0-9]/g,"");
+  var e=$("err");
+  if(n.length<2){e.textContent="Escribí tu nombre para reservar.";e.hidden=false;$("nom").focus();return}
+  if(tel.length<8){e.textContent="Poné un WhatsApp con código de área, por ejemplo 11 2345 6789.";e.hidden=false;$("tel").focus();return}
+  e.hidden=true;
+  var p=calc(),fr=FRANJAS.filter(function(f){return f[0]===st.franja})[0];
+  var h=st.franja==="m"?"10:00":st.franja==="t"?"14:00":"18:30";
+  var tipo=TIPOS.filter(function(x){return x.id===st.tipo})[0];
+  var r=st.tipo==="interior"?ZONAS[st.desde][0]+" a "+INTERIOR[st.interior][0]:ZONAS[st.desde][0]+" a "+ZONAS[st.hasta][0];
+  var nm=n.split(" ")[0];nm=nm.charAt(0).toUpperCase()+nm.slice(1);
+  var trip={d:st.day,h:h,c:nm,n:(st.tipo==="casa"||st.tipo==="local"?tipo.n+" "+p.opt[1].toLowerCase():tipo.n),r:r,s:0,amb:(st.ay?st.ay+" ayudante"+(st.ay>1?"s":""):"Sin ayudante")+", "+(p.veh==="camion"?"camión":"camioneta"),fresh:true};
+  TRIPS.push(trip);var idx=TRIPS.length-1;
+  CHATS[idx]=[{k:"conf",tx:msgConf(trip),tm:nowStr()}];
+  $("okT").textContent="Listo, "+nm+". Tu viaje está reservado.";
+  $("okP").innerHTML="<b>"+trip.n+"</b>, "+r+".<br>"+dayLabel(st.day).replace(/^./,function(c){return c.toUpperCase()})+", a la "+fr[1].toLowerCase()+" ("+fr[2]+" h). Estimado <b class='num'>"+fmt(p.total)+"</b>.";
+  $("cotForm").hidden=true;$("cotOk").hidden=false;
+  if(st.day<5){agDay=st.day;selTrip=idx}
+  renderAg();if(st.day<5)drawChat(idx);
+  toast("Confirmación enviada por WhatsApp a "+nm);
+  markTask("cot");markTask("agenda");
+});
+$("otra").addEventListener("click",function(){$("cotOk").hidden=true;$("cotForm").hidden=false;$("nom").value="";$("tel").value=""});
+$("waTop").addEventListener("click",function(){toast("En la web real abre su WhatsApp. En el boceto, probá el cotizador.")});
+
+/* ---------- tareas de Juan ---------- */
+var TASKS=[
+  {id:"cot",b:"Cotizar cada viaje",s:"El cliente arma el viaje y ve el precio en la web. A vos te llega <em>con todo cargado</em>: barrios, ambientes, ayudantes y día."},
+  {id:"agenda",b:"Llevar la agenda",s:"Cada reserva cae sola en tu día, con hora y dirección. <em>Los días llenos dejan de ofrecerse.</em>"},
+  {id:"llam",b:"Los llamados con clientes",s:"“¿A qué hora vienen?” “¿Ya salieron?” El aviso de <em>confirmado, salimos y listo</em> sale solo."},
+  {id:"preg",b:"Responder las preguntas",s:"Precio, horarios, armado de muebles, viajes al interior: <em>las de siempre se contestan solas</em>."},
+  {id:"cal",b:"Las calificaciones",s:"Al terminar cada viaje, el cliente recibe <em>el link para dejarte la reseña</em>. Ya tenés 658: esto suma más."},
+  {id:"pub",b:"Las publicaciones",s:"Esta sigue siendo tuya. La diferencia es que <em>te queda más tiempo</em> para hacerlas.",keep:true}
+];
+var done={};
+function renderTasks(){
+  var box=$("tasks");box.innerHTML="";
+  TASKS.forEach(function(t){var b=document.createElement("button");b.type="button";
+    b.className="task"+(done[t.id]?" done":"")+(t.keep?" keep":"");b.setAttribute("aria-pressed",done[t.id]?"true":"false");
+    b.innerHTML="<span class='bx'><svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='#13233b' stroke-width='3.4' aria-hidden='true'><path d='m5 12 5 5 9-10'/></svg></span><b>"+t.b+"</b><span>"+t.s+"</span>";
+    if(!t.keep)b.addEventListener("click",function(){done[t.id]=!done[t.id];renderTasks()});
+    else b.addEventListener("click",function(){toast("Esta la seguís haciendo vos, con más tiempo libre.")});
+    box.appendChild(b)});
+  var n=Object.keys(done).filter(function(k){return done[k]}).length;
+  var f=document.createElement("div");f.className="tasks-f";
+  f.innerHTML="<span><b class='num'>"+n+" de 5</b> tareas pasan al sistema</span><span>Tocá cada una</span>";
+  box.appendChild(f);
+}
+function markTask(id){done[id]=true;renderTasks()}
+
+/* ---------- preguntas ---------- */
+var FAQ=[
+  ["¿Cuánto sale una mudanza?","Depende de los ambientes, la distancia y cuántos ayudantes necesitás. En la web lo armás en un minuto y te muestra el precio al toque: <a href='#cotizar'>cotizá acá</a>."],
+  ["¿Qué días trabajan?","Todos los días, de 8 a 22. También sábados y domingos."],
+  ["¿Desarman y arman los muebles?","Sí. Desarmamos, armamos y hacemos subidas. Marcalo en el cotizador así lo tenemos en cuenta."],
+  ["¿Hacen viajes al interior?","Sí, hacemos viajes puerta a puerta a cualquier destino del país. Elegí “Viaje al interior” en el cotizador."],
+  ["¿Qué zonas cubren?","Salimos desde San Francisco Solano y Quilmes, y vamos a toda la zona sur, Capital y al interior."],
+  ["¿Cómo se paga?","En efectivo, el día del viaje. Si querés sumar transferencia, se configura en el sistema."],
+  ["¿Con cuánta anticipación reservo?","Lo antes que puedas, sobre todo para fin de mes. En el cotizador ves qué días quedan libres."]
+];
+function renderFaq(){
+  var qs=$("qs"),box=$("faqMsgs");
+  FAQ.forEach(function(f,i){var b=document.createElement("button");b.type="button";b.className="q";b.textContent=f[0];
+    b.addEventListener("click",function(){
+      Array.prototype.forEach.call(qs.children,function(c){c.classList.remove("on")});b.classList.add("on");
+      box.innerHTML="";var me=document.createElement("div");me.className="msg me";me.innerHTML=f[0]+"<span class='tm'>"+nowStr()+"</span>";box.appendChild(me);
+      setTimeout(function(){var a=document.createElement("div");a.className="msg";a.innerHTML=f[1]+"<span class='tm'>"+nowStr()+"</span>";box.appendChild(a)},450);
+    });qs.appendChild(b)});
+  box.innerHTML="<div class='msg sys'>Tocá una pregunta para ver la respuesta automática.</div>";
+}
+
+/* ---------- toast ---------- */
+var tt;function toast(s){$("toastT").textContent=s;var t=$("toast");t.classList.add("show");clearTimeout(tt);tt=setTimeout(function(){t.classList.remove("show")},2800)}
+
+$("clk").textContent=nowStr();
+render();renderAg();selTrip=1;renderAg();drawChat(1);renderTasks();renderFaq();
+})();
+</script>
+</body>
+</html>
