@@ -212,9 +212,10 @@ footer a{color:var(--blue)}
 .kp span{display:block;font-size:12.5px;color:var(--dim);line-height:1.25;margin-top:3px}
 .kp.w{background:var(--yel-s);border-color:#f1dd8c}
 button.kp{cursor:pointer}
-.ptabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:0 -16px;padding:0 16px}
+.ptabs{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.ptabs .lg{display:none}
 .ptabs::-webkit-scrollbar{display:none}
-.ptabs button{flex:none;border:1px solid var(--line);background:#fff;border-radius:11px;padding:9px 13px;font-size:14.5px;font-weight:600;display:flex;gap:7px;align-items:center;white-space:nowrap}
+.ptabs button{justify-content:center;min-width:0;border:1px solid var(--line);background:#fff;border-radius:11px;padding:9px 13px;font-size:14.5px;font-weight:600;display:flex;gap:7px;align-items:center;white-space:nowrap}
 .ptabs button svg{flex:none}
 .ptabs button.on{background:var(--ink);border-color:var(--ink);color:#fff}
 .ptabs .nb{background:var(--red);color:#fff;border-radius:9px;font-size:11px;min-width:18px;height:18px;line-height:18px;text-align:center;padding:0 5px}
@@ -377,11 +378,12 @@ button.cl:hover{background:#f6f7f8}
   .remind{grid-template-columns:1fr auto;justify-items:stretch;gap:60px}
   .papp{grid-template-columns:210px minmax(0,1fr);gap:24px;padding-top:24px}
   .papp .kpis{grid-column:2}
-  .papp .ptabs{grid-column:1;grid-row:1/3;flex-direction:column;margin:0;padding:0;overflow:visible;align-self:start}
+  .papp .ptabs{grid-column:1;grid-row:1/3;display:flex;flex-direction:column;margin:0;padding:0;overflow:visible;align-self:start}
   .papp .ptabs button{justify-content:flex-start;border-color:transparent;background:transparent;padding:10px 12px}
   .papp .ptabs button:hover{background:#fff}
   .papp .ptabs button.on{background:var(--ink);color:#fff}
   .papp .ptabs .nb{margin-left:auto}
+  .papp .ptabs .lg{display:inline}
   .papp .panes{grid-column:2}
   .wscroll{margin:0;padding:0 0 6px}
   .alist{grid-template-columns:1fr 1fr}
@@ -542,8 +544,8 @@ button.cl:hover{background:#f6f7f8}
     <nav class="ptabs" id="ptabs" aria-label="Secciones del panel">
       <button class="on" data-tab="hoy"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Hoy</button>
       <button data-tab="alu"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.8c1.9.7 3.1 2.5 3.5 5.2"/></svg>Alumnos</button>
-      <button data-tab="age"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Agenda de la semana</button>
-      <button data-tab="web"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg>Reservas online<span class="nb" id="nbWeb" hidden>0</span></button>
+      <button data-tab="age"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Agenda<span class="lg">&nbsp;de la semana</span></button>
+      <button data-tab="web"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg>Reservas<span class="lg">&nbsp;online</span><span class="nb" id="nbWeb" hidden>0</span></button>
     </nav>
     <div class="panes">
       <div class="pane on" data-pane="hoy">
@@ -635,6 +637,7 @@ const STU=[
 ];
 STU[0].hist.forEach((h,k)=>h[1]=['Arranque y embrague','Cambios y frenado','Rotondas','Estacionar en paralelo','Tránsito en Rivadavia','Simulacro de examen'][k]);
 const left=s=>s.pk-s.hist.length;
+const qd=n=>n===1?'queda 1':`quedan ${n}`;
 const short=s=>{const w=s.n.split(' ');return w[0]+' '+w[1][0]+'.'};
 const stuById=id=>STU.find(s=>s.id===id);
 
@@ -716,7 +719,7 @@ function renderChat(){
   const prev=new Date(nx.day.d);prev.setDate(prev.getDate()-1);
   const hh=when==='eve'?'19:00':`${String(+nx.slot.slice(0,2)-2).padStart(2,'0')}:${nx.slot.slice(3)}`;
   const tag=(when==='eve'?cap(DL[prev.getDay()]):cap(DL[nx.day.dow]))+' '+hh;
-  const txt=when==='eve'?`Hola Camila, te recordamos tu clase de mañana ${DL[nx.day.dow]} ${nx.day.d.getDate()} a las ${nx.slot} con ${i.n}, en el auto ${i.p}. Después de esta te quedan ${lf}.`:`Hola Camila, hoy a las ${nx.slot} tenés clase con ${i.n} en el auto ${i.p}. Te esperamos en Sarmiento 1079.`;
+  const txt=when==='eve'?`Hola Camila, te recordamos tu clase de mañana ${DL[nx.day.dow]} ${nx.day.d.getDate()} a las ${nx.slot} con ${i.n}, en el auto ${i.p}. Después de esta te ${qd(lf)}.`:`Hola Camila, hoy a las ${nx.slot} tenés clase con ${i.n} en el auto ${i.p}. Te esperamos en Sarmiento 1079.`;
   let h=`<span class="daytag">${tag}</span><div class="bub">${txt}<span class="t">${hh}</span></div>`;
   if(!answered) h+=`<div class="bact"><button data-a="ok">Sí, voy</button><button data-a="mv">Necesito cambiarla</button></div>`;
   else if(answered==='ok') h+=`<div class="bub me">Sí, voy<span class="t">${hh}</span></div><div class="bub">Genial, te esperamos. Traé el DNI.<span class="t">${hh}</span></div>`;
@@ -771,7 +774,7 @@ function renderHoy(){
     const rows=WEEK.map(s=>{const o=occ(i.id,TODAY,s);const past=s<NOW;
       if(!o) return `<div class="cl free ${past?'past':''}"><span class="h">${s}</span><span><b>Libre</b></span><span></span></div>`;
       const st=stOf(i.id,s);const stu=o.sid&&stuById(o.sid);
-      return `<button class="cl ${past?'past':''}" data-i="${i.id}" data-s="${s}"><span class="h">${s}</span><span><b>${esc(o.n)}</b><small>${stu?`le quedan ${left(stu)}`:'primera clase'}</small></span><span class="st ${st}">${STL[st]}</span></button>`}).join('');
+      return `<button class="cl ${past?'past':''}" data-i="${i.id}" data-s="${s}"><span class="h">${s}</span><span><b>${esc(o.n)}</b><small>${stu?`le ${qd(left(stu))}`:'primera clase'}</small></span><span class="st ${st}">${STL[st]}</span></button>`}).join('');
     return `<div class="card ic"><div class="hd"><span class="av">${i.n[0]}</span><div><b>${i.n}</b><small>${i.cn}</small></div>${plate(i.p)}</div>${rows}</div>`;
   }).join('');
 }
@@ -805,7 +808,7 @@ function renderAlu(){
   $('#aluSub').textContent=`${STU.length} alumnos · ${act} activos · ${ren} para ofrecer renovar`;
   $('#alist').innerHTML=list.length?list.map(s=>{const l=left(s),st=stateOf(s);
     const mini=Array.from({length:s.pk},(_,k)=>`<i class="${k<s.hist.length?'d':''}"></i>`).join('');
-    return `<button class="al" data-id="${s.id}"><span class="av">${s.ini}</span><span style="min-width:0"><b>${s.n}</b><small>Paquete de ${s.pk} · ${s.car.toLowerCase()}</small>${st==='ren'?`<span class="rn">Le quedan ${l}: ofrecer renovar</span>`:''}${st==='end'?'<span class="rn dn">Terminó el paquete</span>':''}</span><span class="lf"><b>${l}</b><br>de ${s.pk}<span class="mini">${mini}</span></span></button>`}).join(''):`<div class="nores">No hay alumnos con ese nombre.</div>`;
+    return `<button class="al" data-id="${s.id}"><span class="av">${s.ini}</span><span style="min-width:0"><b>${s.n}</b><small>Paquete de ${s.pk} · ${s.car.toLowerCase()}</small>${st==='ren'?`<span class="rn">Le ${qd(l)}: ofrecer renovar</span>`:''}${st==='end'?'<span class="rn dn">Terminó el paquete</span>':''}</span><span class="lf"><b>${l}</b><br>de ${s.pk}<span class="mini">${mini}</span></span></button>`}).join(''):`<div class="nores">No hay alumnos con ese nombre.</div>`;
 }
 $('#q').addEventListener('input',renderAlu);
 $('#filt').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;setFilt(b.dataset.f)});
@@ -819,11 +822,11 @@ function fichaHTML(s){
   const rows=(nx?`<div class="hx nx"><i></i><span><b>Próxima clase</b><small>con ${insById(nx.ins).n} · ${nx.slot}</small></span><em>${nx.day.d.getDate()}/${nx.day.d.getMonth()+1}</em></div>`:'')+
     s.hist.slice().reverse().slice(0,4).map(h=>`<div class="hx"><i></i><span><b>${h[1]}</b><small>con ${insById(h[0]).n}</small></span><em>${h[2]}</em></div>`).join('');
   return `<div class="fc"><div class="h"><span class="av">${s.ini}</span><div><b>${s.n}</b><small>${s.since} · auto ${s.car.toLowerCase()}</small></div></div>
-  <div class="road"><div class="rt"><b class="num">Le quedan ${l}</b><span>de ${s.pk} clases</span></div>
+  <div class="road"><div class="rt"><b class="num">Le ${qd(l)}</b><span>de ${s.pk} clases</span></div>
   <div class="dashes" style="grid-template-columns:repeat(${s.pk},1fr)">${dashes}</div>
   <div class="lg"><span><i style="background:var(--yel)"></i>Tomadas ${took}</span>${nx?'<span><i style="background:#fff"></i>Reservada</span>':''}<span><i style="background:var(--asf-l)"></i>Por usar</span></div></div>
   <div class="facts"><div>Paquete<b>${s.pk} clases <span class="ex">ejemplo</span></b></div><div>Próxima clase<b>${nx?`${DN[nx.day.dow]} ${nx.day.d.getDate()} · ${nx.slot}`:'Sin reservar'}</b></div><div>Examen práctico<b>${l<=4?'Lo acompaña su instructor':'Todavía no'}</b></div><div>Pagado<b>${hash(s.id)<0.25?'Falta 1 cuota':'Al día'} <span class="ex">ejemplo</span></b></div></div>
-  ${l>0&&l<=2?`<div class="offer"><b>Le quedan ${l}: ofrecele renovar</b>Si sigue con otro paquete, las clases se suman a esta misma ficha.</div>`:''}
+  ${l>0&&l<=2?`<div class="offer"><b>Le ${qd(l)}: ofrecele renovar</b>Si sigue con otro paquete, las clases se suman a esta misma ficha.</div>`:''}
   ${l===0?`<div class="offer"><b>Terminó el paquete</b>Si quiere más práctica antes del examen, se le carga un paquete nuevo.</div>`:''}
   <div class="fsec">Clases con cada instructor</div><div class="bars">${bars}</div>
   ${took||nx?`<div class="fsec">Recorrido</div><div class="hist">${rows}</div>`:''}</div>`;
@@ -841,7 +844,7 @@ function compatIns(){return INS.filter(i=>i.cn===cur.car)}
 function renderWalk(){
   $('#wav').textContent=cur.ini;$('#wnm').textContent=cur.n;
   const nx=nextOf[cur.id];
-  $('#wleft').textContent=`en la recepción · le quedan ${left(cur)} · ${cur.car.toLowerCase()}`+(nx?` · próxima ${DN[nx.day.dow]} ${nx.day.d.getDate()} ${nx.slot}`:'');
+  $('#wleft').textContent=`en la recepción · le ${qd(left(cur))} · ${cur.car.toLowerCase()}`+(nx?` · próxima ${DN[nx.day.dow]} ${nx.day.d.getDate()} ${nx.slot}`:'');
   if(!agIns||!INS.find(i=>i.id===agIns)) agIns=(compatIns()[0]||INS[0]).id;
   renderWeek();
 }
@@ -858,7 +861,7 @@ function renderWeek(){
       if(!o){h+=compat?`<button class="cell fr" data-d="${d.key}" data-s="${s}" aria-label="Reservar ${dayLong(d)} ${s} con ${ins.n}">+ Libre</button>`:`<div class="cell oc">Libre<small>otro auto</small></div>`;return}
       if(o.kind==='desk') h+=`<div class="cell mine"><b>${esc(o.n)}</b><small>reservada recién</small></div>`;
       else if(o.kind==='web') h+=`<div class="cell web"><b>${esc(o.n)}</b><small>primera clase</small></div>`;
-      else {const st=stuById(o.sid);h+=`<div class="cell bz"><b>${esc(o.n)}</b><small>le quedan ${left(st)}</small></div>`}
+      else {const st=stuById(o.sid);h+=`<div class="cell bz"><b>${esc(o.n)}</b><small>le ${qd(left(st))}</small></div>`}
     });
   });
   $('#week').innerHTML=h;
@@ -868,7 +871,7 @@ $('#week').addEventListener('click',e=>{
   const c=e.target.closest('.cell.fr');if(!c)return;
   $$('.cell.sel').forEach(x=>x.classList.remove('sel'));c.classList.add('sel');
   const d=DAYS.find(x=>x.key===c.dataset.d), s=c.dataset.s, i=insById(agIns);
-  sheet(`<h3>${cur.n}</h3><p>${cap(dayLong(d))} a las ${s} con ${i.n}, auto ${i.p}. Después de esta le quedan ${left(cur)-1} clases.</p><div class="nxt" style="margin-top:0"><button class="btn g" data-close>Cancelar</button><button class="btn y" data-ok>Reservar ${s}</button></div>`,(el,close)=>{
+  sheet(`<h3>${cur.n}</h3><p>${cap(dayLong(d))} a las ${s} con ${i.n}, auto ${i.p}. Después de esta ${left(cur)-1===0?'no le quedan más clases':left(cur)-1===1?'le queda 1 clase':`le quedan ${left(cur)-1} clases`}.</p><div class="nxt" style="margin-top:0"><button class="btn g" data-close>Cancelar</button><button class="btn y" data-ok>Reservar ${s}</button></div>`,(el,close)=>{
     el.querySelector('[data-ok]').addEventListener('click',()=>{
       const prev=nextOf[cur.id];
       if(prev) delete booked[prev.ins+'|'+prev.day.key+'|'+prev.slot];
@@ -882,7 +885,7 @@ $('#week').addEventListener('click',e=>{
 });
 $('#wchg').addEventListener('click',()=>{
   const act=STU.filter(s=>left(s)>0);
-  sheet(`<button class="x" data-close aria-label="Cerrar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button><h3>¿Quién está en la recepción?</h3><p>Elegí el alumno para reservarle la próxima clase.</p><div class="alist" style="grid-template-columns:1fr">${act.map(s=>`<button class="al" data-id="${s.id}"><span class="av">${s.ini}</span><span style="min-width:0"><b>${s.n}</b><small>${s.car} · le quedan ${left(s)}</small></span><span></span></button>`).join('')}</div>`,(el,close)=>{
+  sheet(`<button class="x" data-close aria-label="Cerrar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button><h3>¿Quién está en la recepción?</h3><p>Elegí el alumno para reservarle la próxima clase.</p><div class="alist" style="grid-template-columns:1fr">${act.map(s=>`<button class="al" data-id="${s.id}"><span class="av">${s.ini}</span><span style="min-width:0"><b>${s.n}</b><small>${s.car} · le ${qd(left(s))}</small></span><span></span></button>`).join('')}</div>`,(el,close)=>{
     el.addEventListener('click',ev=>{const b=ev.target.closest('.al');if(!b)return;cur=stuById(b.dataset.id);agIns=null;close();renderWalk()});
   });
 });
