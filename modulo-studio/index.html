@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#16202d">
+<title>Módulo Studio 3D · Planos 3D y despiece para carpinterías</title>
+<meta name="description" content="Plano 3D, despiece y listado de corte para carpinterías y mueblerías. Del boceto al despiece, sin errores.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2316202d'/%3E%3Cpath d='M14 26 L32 14 L50 26 L32 38 Z' fill='none' stroke='%23c4825a' stroke-width='3.5' stroke-linejoin='round'/%3E%3Cpath d='M14 26 V42 L32 54 V38 M50 26 V42 L32 54' fill='none' stroke='%23efe3c6' stroke-width='3.5' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+/* Módulo Studio 3D: planos 3D, despiece y listado de corte para carpinterías.
+   Paleta tomada de su propio Instagram: azul plano, crema de placa, cobre de cota.
+   La pieza fuerte: su coffee bar real (100 x 60 x 95) que se desarma al tocarlo,
+   con el listado de corte que él mismo publicó al lado. Nada pegado al scroll. */
+:root{
+  --plano:#16202d;      /* fondo azul de plano */
+  --plano2:#1c2838;     /* superficies */
+  --tinta:#253449;      /* lineas de grilla */
+  --crema:#efe3c6;      /* texto y placa */
+  --crema2:#b9b09c;     /* texto secundario */
+  --cobre:#c4825a;      /* cotas y acento */
+  --cobre2:#e0a37b;
+  --acero:#34496a;      /* caras de placa */
+  --vidrio:#4e6580;
+  --serif:"Fraunces",Georgia,"Times New Roman",serif;
+  --sans:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+html,body{margin:0;background:var(--plano);color:var(--crema);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+body{overflow-x:hidden;
+  background-image:
+    linear-gradient(var(--tinta) 1px,transparent 1px),
+    linear-gradient(90deg,var(--tinta) 1px,transparent 1px);
+  background-size:44px 44px;background-position:-1px -1px;background-attachment:scroll}
+body::before{content:"";position:fixed;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(22,32,45,0) 0%,rgba(22,32,45,.55) 70%);pointer-events:none;z-index:0}
+main,header,footer,.demo{position:relative;z-index:1}
+img{max-width:100%;height:auto;display:block}
+button,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--cobre2);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1160px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-left))}
+.num{font-variant-numeric:tabular-nums lining-nums}
+.ex{display:inline-block;font-size:11.5px;font-weight:500;border:1px dashed var(--crema2);color:var(--crema2);border-radius:5px;padding:0 6px;vertical-align:2px;white-space:nowrap}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* aviso de boceto */
+.demo{background:#0f1722;color:var(--crema2);font-size:12.5px;padding:7px 0;border-bottom:1px solid var(--tinta)}
+.demo .wrap{display:flex;justify-content:space-between;gap:12px}
+.demo b{color:var(--crema);font-weight:600}
+.demo a{color:var(--crema2);white-space:nowrap}
+
+/* encabezado */
+.top{border-bottom:1px solid var(--tinta);background:rgba(22,32,45,.92)}
+.top .wrap{display:flex;align-items:center;gap:16px;height:68px}
+.logo{display:flex;align-items:baseline;gap:2px;text-decoration:none;font-family:var(--serif);font-size:24px;letter-spacing:-.01em;line-height:1;font-variation-settings:"opsz" 72}
+.logo .m{color:var(--crema)}
+.logo .s{color:var(--cobre)}
+.logo sup{font-family:var(--sans);font-size:10px;font-weight:600;color:var(--cobre);margin-left:3px;letter-spacing:.02em;align-self:flex-start;margin-top:-2px}
+.nav{margin-left:auto;display:flex;gap:4px;align-items:center}
+.nav a{display:none;text-decoration:none;font-size:14.5px;color:var(--crema2);padding:8px 12px;border-radius:8px}
+.nav a:hover{color:var(--crema)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:10px;padding:13px 20px;font-weight:600;font-size:15.5px;text-decoration:none;transition:background .2s,transform .12s;-webkit-tap-highlight-color:transparent}
+.btn:active{transform:scale(.97)}
+.btn.c{background:var(--cobre);color:#1a1208}
+.btn.c:hover{background:var(--cobre2)}
+.btn.g{background:transparent;color:var(--crema);box-shadow:inset 0 0 0 1px #4a5b72}
+.btn.g:hover{box-shadow:inset 0 0 0 1px var(--crema2)}
+.btn.sm{padding:9px 14px;font-size:14px}
+@media (min-width:860px){.nav a{display:inline-block}}
+
+/* tipografia */
+h1,h2,h3{font-family:var(--serif);font-weight:400;margin:0;letter-spacing:-.015em;font-variation-settings:"opsz" 144}
+h1{font-size:clamp(44px,7.4vw,86px);line-height:.98}
+h1 i{font-style:italic;font-weight:300;color:var(--crema)}
+h2{font-size:clamp(32px,4.6vw,52px);line-height:1.04}
+h3{font-size:24px;line-height:1.15;font-variation-settings:"opsz" 48}
+.lede{font-size:clamp(17px,1.6vw,19px);color:var(--crema2);max-width:34em;margin:22px 0 0}
+.rule{width:72px;height:2px;background:var(--cobre);margin:26px 0;border:0}
+section{padding:clamp(64px,9vw,120px) 0}
+.sec-head{max-width:640px;margin-bottom:clamp(32px,5vw,56px)}
+.sec-head p{color:var(--crema2);margin:16px 0 0;font-size:17px}
+
+/* ---------- hero: el mueble que se desarma ---------- */
+.hero{padding:clamp(40px,6vw,80px) 0 clamp(56px,8vw,104px)}
+.hero-grid{display:grid;gap:36px;align-items:center}
+@media (min-width:980px){.hero-grid{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:56px}}
+.hero .tags{display:flex;flex-wrap:wrap;gap:8px 18px;margin:28px 0 0;padding:0;list-style:none;color:var(--crema);font-size:15px}
+.hero .tags li{display:flex;align-items:center;gap:8px}
+.hero .tags li::before{content:"";width:7px;height:7px;border:1.5px solid var(--cobre);transform:rotate(45deg)}
+.hero .cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:32px}
+
+.bench{background:rgba(28,40,56,.72);border:1px solid #2c3c53;border-radius:18px;padding:18px 18px 16px;position:relative}
+.bench-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.bench-top .t{font-family:var(--serif);font-size:21px;line-height:1.15}
+.bench-top .d{font-size:13.5px;color:var(--crema2)}
+.toggle{display:inline-flex;background:#101a27;border-radius:99px;padding:3px;border:1px solid #2c3c53}
+.toggle button{border:0;background:transparent;color:var(--crema2);font-size:13.5px;font-weight:600;padding:7px 14px;border-radius:99px;transition:background .2s,color .2s}
+.toggle button[aria-pressed="true"]{background:var(--crema);color:var(--plano)}
+.stage{position:relative;margin:6px -6px 0;touch-action:manipulation}
+#mueble{width:100%;height:auto;display:block;overflow:visible;cursor:pointer}
+#mueble .pz{transition:transform .75s cubic-bezier(.2,.75,.2,1)}
+#mueble .pz polygon{stroke:var(--crema);stroke-width:.32;stroke-linejoin:round;transition:fill .25s,stroke .25s,opacity .3s}
+#mueble .pz.dim polygon{opacity:.28}
+#mueble .pz.sel polygon{stroke:var(--cobre2);stroke-width:.7}
+#mueble .pz .hit{fill:transparent;stroke:none}
+#mueble circle{stroke:var(--crema);stroke-width:.32}
+.caption{min-height:52px;display:block;text-align:center;font-family:var(--serif);font-size:18px;line-height:1.3;padding:12px 8px 0;font-variation-settings:"opsz" 30}
+.caption .k{color:var(--cobre2)}
+.caption .h{font-family:var(--sans);font-size:14px;color:var(--crema2)}
+.foot-note{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;border-top:1px solid #2c3c53;margin-top:10px;padding-top:12px;font-size:13px;color:var(--crema2)}
+
+/* ---------- listado de corte ---------- */
+.corte-grid{display:grid;gap:28px}
+@media (min-width:980px){.corte-grid{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:56px;align-items:start}}
+.sheet{background:var(--crema);color:#1e2735;border-radius:6px;padding:22px clamp(16px,3vw,28px) 18px;box-shadow:0 30px 60px -30px rgba(0,0,0,.6)}
+.sheet-h{display:flex;justify-content:space-between;align-items:baseline;gap:10px;border-bottom:2px solid #1e2735;padding-bottom:10px;flex-wrap:wrap}
+.sheet-h b{font-family:var(--serif);font-weight:500;font-size:21px}
+.sheet-h span{font-size:13px;color:#59606b}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th{font-size:12.5px;font-weight:600;text-align:left;color:#59606b;padding:10px 6px 6px}
+th:not(:first-child),td:not(:first-child){text-align:right}
+td{padding:9px 6px;border-bottom:1px solid #d9ceb4}
+tbody tr{cursor:pointer;transition:background .2s}
+tbody tr:hover{background:#e6d8b8}
+tbody tr.sel{background:#1e2735;color:var(--crema)}
+tbody tr.sel td{border-bottom-color:#1e2735}
+td .mat{display:block;font-size:12.5px;color:#6a6f78}
+tbody tr.sel td .mat{color:#b9b09c}
+.sheet-f{font-size:12.5px;color:#59606b;margin-top:12px}
+.corte-copy p{color:var(--crema2);font-size:17px;margin:16px 0 0;max-width:30em}
+.views{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:28px}
+.views figure{margin:0}
+.views img{border-radius:8px;border:1px solid #2c3c53;aspect-ratio:4/5;object-fit:cover;width:100%}
+.views figcaption{font-size:13px;color:var(--crema2);margin-top:8px}
+
+/* ---------- render y plano ---------- */
+.rp{display:grid;gap:28px}
+@media (min-width:980px){.rp{grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:56px;align-items:center}}
+.frame{position:relative;border-radius:14px;overflow:hidden;border:1px solid #2c3c53;background:#f3f1ed;aspect-ratio:1/1}
+.frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .45s}
+.frame img.off{opacity:0}
+.frame .tg{position:absolute;left:12px;bottom:12px}
+.rp-copy p{color:var(--crema2);font-size:17px;margin:16px 0 0}
+.rp-copy ul{list-style:none;padding:0;margin:24px 0 0;display:grid;gap:14px}
+.rp-copy li{padding-left:22px;position:relative}
+.rp-copy li::before{content:"";position:absolute;left:0;top:.62em;width:10px;height:2px;background:var(--cobre)}
+.rp-copy li b{font-weight:600;display:block}
+.rp-copy li span{color:var(--crema2);font-size:15px}
+
+/* ---------- proceso ---------- */
+.proc{display:grid;gap:32px}
+@media (min-width:900px){.proc{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:64px;align-items:center}}
+.poster{border-radius:14px;overflow:hidden;border:1px solid #2c3c53;max-width:380px;width:100%;justify-self:center}
+.steps{list-style:none;padding:0;margin:0;counter-reset:s}
+.steps li{display:grid;grid-template-columns:56px 1fr;gap:18px;padding:22px 0;border-top:1px solid #2c3c53}
+.steps li:last-child{border-bottom:1px solid #2c3c53}
+.steps .n{width:48px;height:48px;border-radius:50%;border:1.5px solid var(--cobre);display:grid;place-items:center;font-family:var(--serif);font-size:22px;color:var(--cobre2)}
+.steps h3{font-size:23px}
+.steps p{margin:6px 0 0;color:var(--crema2)}
+.why{margin-top:40px;font-family:var(--serif);font-size:clamp(22px,2.6vw,30px);line-height:1.3;color:var(--crema);font-variation-settings:"opsz" 60}
+.why span{display:block}
+.why span:nth-child(n+2){color:var(--crema2)}
+
+/* ---------- para quien ---------- */
+.who{display:grid;gap:16px}
+@media (min-width:760px){.who{grid-template-columns:repeat(3,1fr);gap:20px}}
+.who div{border-top:2px solid var(--cobre);padding-top:16px}
+.who b{font-family:var(--serif);font-weight:400;font-size:24px;display:block;line-height:1.2}
+.who p{color:var(--crema2);margin:8px 0 0;font-size:15.5px}
+
+/* ---------- pedido ---------- */
+.order{display:grid;gap:28px}
+@media (min-width:980px){.order{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:56px;align-items:start}}
+.form{background:var(--plano2);border:1px solid #2c3c53;border-radius:18px;padding:clamp(18px,3vw,28px)}
+.f{margin-bottom:18px}
+.f>label,.f>.lb{display:block;font-size:14px;font-weight:600;margin-bottom:8px}
+.f input,.f textarea{width:100%;background:#111a26;border:1px solid #33445c;border-radius:10px;padding:12px 14px;font-size:16px;color:var(--crema);outline:none;transition:border-color .2s}
+.f input:focus,.f textarea:focus{border-color:var(--cobre)}
+.f input::placeholder,.f textarea::placeholder{color:#7d8698}
+.f textarea{min-height:84px;resize:vertical}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips button{border:1px solid #3a4b63;background:transparent;border-radius:99px;padding:8px 14px;font-size:14.5px;color:var(--crema2);transition:background .2s,color .2s,border-color .2s}
+.chips button[aria-pressed="true"]{background:var(--crema);color:var(--plano);border-color:var(--crema)}
+.two{display:grid;gap:0 14px}
+@media (min-width:560px){.two{grid-template-columns:1fr 1fr}}
+.preview{background:#111a26;border:1px dashed #3a4b63;border-radius:10px;padding:14px;font-size:14.5px;color:var(--crema2);white-space:pre-wrap;margin:6px 0 16px;min-height:60px}
+.send{display:flex;flex-wrap:wrap;gap:10px}
+.send .btn{flex:1 1 220px}
+.hint{font-size:13px;color:var(--crema2);margin:12px 0 0}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);background:var(--crema);color:var(--plano);padding:11px 18px;border-radius:10px;font-weight:600;font-size:14.5px;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:80;max-width:calc(100% - 32px)}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.contact{margin-top:28px;display:grid;gap:12px}
+.contact a,.contact div{display:flex;justify-content:space-between;gap:12px;padding:14px 0;border-bottom:1px solid #2c3c53;text-decoration:none;font-size:15.5px}
+.contact span{color:var(--crema2)}
+
+footer{border-top:1px solid var(--tinta);padding:36px 0 44px;color:var(--crema2);font-size:14px}
+footer .wrap{display:grid;gap:18px}
+footer .credit{font-size:12.5px;max-width:62em;line-height:1.5}
+@media (min-width:760px){footer .row{display:flex;justify-content:space-between;align-items:center}}
+</style>
+</head>
+<body>
+
+<div class="demo" role="note">
+  <div class="wrap"><span><b>Boceto para Módulo Studio 3D</b> hecho por Compila</span><a href="#nota">Qué es real</a></div>
+</div>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#" aria-label="Módulo Studio 3D, inicio"><span class="m">Modulo</span><span class="s">Studio</span><sup>3D</sup></a>
+    <nav class="nav" aria-label="Secciones">
+      <a href="#despiece">Despiece</a>
+      <a href="#render">Render y plano</a>
+      <a href="#proceso">Cómo trabajamos</a>
+      <a class="btn c sm" href="#pedido">Cotizar mi proyecto</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero" id="despiece">
+  <div class="wrap hero-grid">
+    <div>
+      <h1>Del boceto al despiece, <i>sin errores.</i></h1>
+      <p class="lede">Armamos el plano 3D, el despiece y el listado de corte de tu mueble. Vos te ocupás de cortar y fabricar: cada placa ya viene resuelta, pieza por pieza.</p>
+      <ul class="tags">
+        <li>Planos 3D</li><li>Despiece</li><li>Listado de corte</li>
+      </ul>
+      <div class="cta">
+        <a class="btn c" href="#pedido">Cotizar mi proyecto</a>
+        <a class="btn g" href="#corte">Ver un listado real</a>
+      </div>
+    </div>
+
+    <div class="bench">
+      <div class="bench-top">
+        <div><div class="t">Coffee bar con puerta vidriada</div><div class="d num">100 × 60 × 95 cm · con ruedas y tapa de mármol</div></div>
+        <div class="toggle" role="group" aria-label="Vista del mueble">
+          <button type="button" id="bArm" aria-pressed="true">Armado</button>
+          <button type="button" id="bDes" aria-pressed="false">Despiece</button>
+        </div>
+      </div>
+      <div class="stage">
+        <svg id="mueble" role="img" aria-label="Coffee bar en vista 3D. Tocalo para desarmarlo y ver cada pieza con sus medidas."></svg>
+      </div>
+      <div class="caption" id="cap" aria-live="polite"><span class="h">Tocá el mueble para desarmarlo</span></div>
+      <div class="foot-note"><span>Proyecto real de Módulo Studio 3D</span><span class="num">Medidas en cm · placa de 18 mm</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- LISTADO DE CORTE -->
+<section id="corte" style="padding-top:0">
+  <div class="wrap corte-grid">
+    <div class="corte-copy">
+      <h2>El listado que llevás al corte</h2>
+      <p>Cada pieza con su cantidad, su medida y su material. Es el mismo listado del coffee bar de arriba: tocá una fila y la ves marcada en el mueble.</p>
+      <div class="views">
+        <figure><img src="img/coffee-frente-cotas.jpg" alt="Frente del coffee bar con cotas: 100 de ancho, 95 de alto, puerta de 44,5 y vano de 49,6" loading="lazy" width="1080" height="1350"><figcaption>Frente con cotas</figcaption></figure>
+        <figure><img src="img/coffee-lateral-planta.jpg" alt="Lateral y planta del coffee bar con cotas: tapa de mármol de 100 por 60 por 2" loading="lazy" width="1080" height="1350"><figcaption>Lateral y planta</figcaption></figure>
+      </div>
+    </div>
+    <div class="sheet">
+      <div class="sheet-h"><b>Listado de corte · Coffee bar</b><span class="num">100 × 60 × 95 cm</span></div>
+      <table class="num">
+        <thead><tr><th>Pieza</th><th>Cant.</th><th>Medida (cm)</th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+      <div class="sheet-f">Medidas en cm. Placa de 18 mm salvo donde se indica.</div>
+    </div>
+  </div>
+</section>
+
+<!-- RENDER Y PLANO -->
+<section id="render">
+  <div class="wrap rp">
+    <div>
+      <div class="frame" id="frame">
+        <img src="img/cocina-render.jpg" id="imR" alt="Render de una cocina con heladera de dos puertas, horno empotrado, bajo mesada en madera clara y alacenas grises" width="1080" height="1080">
+        <img src="img/cocina-plano.jpg" id="imP" class="off" alt="La misma cocina en plano 3D con medidas en milímetros y cada módulo numerado, de A1 a A8 y de M1 a M5" width="720" height="720" loading="lazy">
+        <div class="tg toggle" role="group" aria-label="Ver la cocina como">
+          <button type="button" id="bR" aria-pressed="true">Render</button>
+          <button type="button" id="bP" aria-pressed="false">Plano con medidas</button>
+        </div>
+      </div>
+    </div>
+    <div class="rp-copy">
+      <h2>Antes de cortar una placa, la cocina ya está resuelta</h2>
+      <p>El render le muestra a tu cliente cómo va a quedar. El plano te muestra a vos cómo se fabrica: cada módulo numerado y con sus medidas.</p>
+      <ul>
+        <li><b>Render para presentar</b><span>Para que tu cliente apruebe antes de arrancar.</span></li>
+        <li><b>Plano 3D con cotas</b><span>Alacenas, bajo mesadas y huecos de electrodomésticos, medidos.</span></li>
+        <li><b>Despiece por módulo</b><span>Cada módulo baja a piezas listas para la cortadora.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section id="proceso">
+  <div class="wrap proc">
+    <img class="poster" src="img/de-tu-idea-al-taller.jpg" alt="De tu idea al taller: un boceto a mano de un mueble de escritorio, su modelado 3D, el plano con medidas y las piezas listas para cortar" width="720" height="1280" loading="lazy">
+    <div>
+      <div class="sec-head" style="margin-bottom:28px">
+        <h2>Así trabajamos</h2>
+        <p>Con un boceto en papel alcanza. Lo pasamos a 3D y te lo devolvemos listo para fabricar.</p>
+      </div>
+      <ol class="steps">
+        <li><span class="n">1</span><div><h3>Nos mandás tu boceto o idea</h3><p>Una foto del dibujo, medidas del espacio o una referencia. Lo que tengas.</p></div></li>
+        <li><span class="n">2</span><div><h3>Armamos el plano 3D</h3><p>Lo modelamos con medidas reales para que lo revises antes de cortar.</p></div></li>
+        <li><span class="n">3</span><div><h3>Te entregamos el despiece listo para cortar</h3><p>Plano, despiece y listado de corte, pieza por pieza.</p></div></li>
+      </ol>
+      <p class="why"><span>Menos errores de corte.</span><span>Menos tiempo perdido.</span><span>Presupuestos más precisos.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- PARA QUIEN -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head"><h2>Para el taller que quiere cortar seguro</h2></div>
+    <div class="who">
+      <div><b>Carpinterías</b><p>Llegás al corte con cada medida resuelta, sin recalcular en la placa.</p></div>
+      <div><b>Mueblerías</b><p>Presupuestás con el material contado y le mostrás el mueble al cliente antes de fabricarlo.</p></div>
+      <div><b>Amoblamientos a medida</b><p>Cocinas, placares, escritorios y muebles especiales, de la idea al despiece.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PEDIDO -->
+<section id="pedido">
+  <div class="wrap order">
+    <div>
+      <h2>Contanos tu proyecto</h2>
+      <p class="lede">Completá lo que sepas y te armamos el mensaje. Con eso te pasamos la cotización.</p>
+      <div class="contact">
+        <a href="https://www.instagram.com/modulostudio3d/" target="_blank" rel="noopener"><span>Instagram</span><b>@modulostudio3d</b></a>
+        <div><span>WhatsApp</span><b><span class="ex">a confirmar</span></b></div>
+        <div><span>Zona</span><b><span class="ex">a confirmar</span></b></div>
+      </div>
+    </div>
+    <form class="form" id="form" autocomplete="on" novalidate>
+      <div class="two">
+        <div class="f"><label for="fN">Tu nombre o taller</label><input id="fN" name="nombre" placeholder="Ej.: Carpintería Gómez"></div>
+        <div class="f"><label for="fM">Qué mueble es</label><input id="fM" name="mueble" placeholder="Ej.: placard de 3 puertas"></div>
+      </div>
+      <div class="f"><span class="lb" id="lbN">Qué necesitás</span>
+        <div class="chips" role="group" aria-labelledby="lbN" id="cN">
+          <button type="button" aria-pressed="true">Plano 3D</button>
+          <button type="button" aria-pressed="true">Despiece</button>
+          <button type="button" aria-pressed="true">Listado de corte</button>
+          <button type="button" aria-pressed="false">Render para el cliente</button>
+        </div>
+      </div>
+      <div class="f"><span class="lb" id="lbB">Qué tenés para arrancar</span>
+        <div class="chips" role="group" aria-labelledby="lbB" id="cB" data-single>
+          <button type="button" aria-pressed="true">Un boceto</button>
+          <button type="button" aria-pressed="false">Medidas del espacio</button>
+          <button type="button" aria-pressed="false">Solo la idea</button>
+        </div>
+      </div>
+      <div class="f"><label for="fD">Medidas o detalles</label><textarea id="fD" name="detalle" placeholder="Ej.: 2,40 m de ancho, melamina blanca, con cajonera"></textarea></div>
+      <div class="lb" style="font-size:14px;font-weight:600;margin-bottom:6px">Tu mensaje</div>
+      <div class="preview" id="pv" aria-live="polite"></div>
+      <div class="send">
+        <button type="button" class="btn c" id="sIG">Copiar y abrir Instagram</button>
+        <button type="button" class="btn g" id="sWA">Mandar por WhatsApp</button>
+      </div>
+      <p class="hint">Si tenés el boceto en papel, sacale una foto y mandala junto con el mensaje.</p>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="row">
+      <a class="logo" href="#" aria-label="Módulo Studio 3D"><span class="m">Modulo</span><span class="s">Studio</span><sup>3D</sup></a>
+      <span>Planos 3D · Despiece · Listado de corte</span>
+    </div>
+    <div class="credit" id="nota">Boceto hecho por <a href="https://compilasoftware.com" target="_blank" rel="noopener">Compila Software</a> con lo que Módulo Studio 3D publica en su Instagram: el coffee bar, su despiece y listado de corte, la cocina en render y en plano, y el proceso de trabajo son suyos. El WhatsApp y la zona están marcados como a confirmar. Los textos de ejemplo del formulario son de muestra y no se envía nada a nadie.</div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(function(){
+  "use strict";
+  var $=function(s){return document.querySelector(s)};
+  var WA=""; // número de WhatsApp: a confirmar con Módulo Studio
+
+  /* ===== Coffee bar real: 100 x 60 x 95 cm, piezas y medidas de su despiece ===== */
+  // caja: x (ancho), y (profundidad, 0 = frente), z (alto); medidas en cm
+  // e = desplazamiento al desarmar
+  var C={placa:"#34496a",placa2:"#2b3d59",placa3:"#3e5578",fondo:"#24344b",marmol:"#efe3c6",marmol2:"#dccfae",marmol3:"#e6d8b8",vidrio:"#4e6580",alu:"#c4825a"};
+  var P=[
+    {id:"fondo",  n:"Fondo",              q:1, m:"94,4 × 79,4", mat:"MDF 5,5 mm", b:[2.8,58,11.8, 94.4,.55,79.4], e:[0,34,4], col:"fondo"},
+    {id:"ruedaT", n:"Ruedas giratorias",  q:4, m:"10 de alto",  mat:"giratorias", wheel:[[8,50],[92,50]], e:[0,0,-14]},
+    {id:"base",   n:"Base",               q:1, m:"94,4 × 58",   mat:"placa 18 mm", b:[2.8,0,10, 94.4,58,1.8], e:[0,0,-6]},
+    {id:"latI",   n:"Laterales",          q:2, m:"58 × 83",     mat:"placa 18 mm", b:[1,0,10, 1.8,58,83], e:[-26,0,0], grp:"lat"},
+    {id:"estI1",  n:"Estantes",           q:4, m:"49,6 × 58 y 43 × 58", mat:"placa 18 mm", b:[2.8,0,38, 43,58,1.8], e:[-12,0,4], grp:"est"},
+    {id:"estI2",  n:"Estantes",           q:4, m:"49,6 × 58 y 43 × 58", mat:"placa 18 mm", b:[2.8,0,64, 43,58,1.8], e:[-12,0,14], grp:"est"},
+    {id:"div",    n:"Divisor",            q:1, m:"58 × 79,4",   mat:"placa 18 mm", b:[45.8,0,11.8, 1.8,58,79.4], e:[0,-10,8]},
+    {id:"estD1",  n:"Estantes",           q:4, m:"49,6 × 58 y 43 × 58", mat:"placa 18 mm", b:[47.6,0,31, 49.6,58,1.8], e:[12,0,2], grp:"est"},
+    {id:"estD2",  n:"Estantes",           q:4, m:"49,6 × 58 y 43 × 58", mat:"placa 18 mm", b:[47.6,0,61.6, 49.6,58,1.8], e:[12,0,12], grp:"est"},
+    {id:"latD",   n:"Laterales",          q:2, m:"58 × 83",     mat:"placa 18 mm", b:[97.2,0,10, 1.8,58,83], e:[26,0,0], grp:"lat"},
+    {id:"techo",  n:"Techo",              q:1, m:"94,4 × 58",   mat:"placa 18 mm", b:[2.8,0,91.2, 94.4,58,1.8], e:[0,0,22]},
+    {id:"tapa",   n:"Tapa de mármol",     q:1, m:"100 × 60 × 2",mat:"mármol",      b:[0,-2,93, 100,60,2], e:[0,0,42], col:"marmol"},
+    {id:"cajon",  n:"Frente de cajón",    q:1, m:"48,6 × 18",   mat:"placa 18 mm", b:[48.1,-1.8,12, 48.6,1.8,18], e:[6,-30,-4]},
+    {id:"puerta", n:"Puerta",             q:1, m:"44,5 × 82,2", mat:"vidrio con marco de aluminio", b:[1,-2,10.4, 44.5,2,82.2], e:[-8,-34,0], door:true},
+    {id:"ruedaF", n:"Ruedas giratorias",  q:4, m:"10 de alto",  mat:"giratorias", wheel:[[8,6],[92,6]], e:[0,0,-14]}
+  ];
+  // filas del listado (en el orden en que él lo presenta)
+  var ROWS=[
+    {k:"tapa",  n:"Tapa de mármol", q:1, m:"100 × 60 × 2", mat:"Mármol"},
+    {k:"techo", n:"Techo", q:1, m:"94,4 × 58"},
+    {k:"est",   n:"Estantes", q:4, m:"49,6 × 58 (der.) · 43 × 58 (izq.)"},
+    {k:"div",   n:"Divisor", q:1, m:"58 × 79,4"},
+    {k:"lat",   n:"Laterales", q:2, m:"58 × 83"},
+    {k:"base",  n:"Base", q:1, m:"94,4 × 58"},
+    {k:"fondo", n:"Fondo", q:1, m:"94,4 × 79,4", mat:"MDF 5,5 mm"},
+    {k:"puerta",n:"Puerta", q:1, m:"44,5 × 82,2", mat:"Vidrio con marco de aluminio"},
+    {k:"cajon", n:"Frente de cajón", q:1, m:"48,6 × 18"},
+    {k:"rueda", n:"Ruedas giratorias", q:4, m:"10 de alto", mat:"Herraje"}
+  ];
+  function keyOf(p){ return p.grp || (p.wheel ? "rueda" : p.id); }
+
+  // proyección oblicua como en sus láminas: frente en verdadera magnitud, profundidad hacia arriba a la derecha
+  var K=.5, A=40*Math.PI/180, CX=Math.cos(A)*K, CY=Math.sin(A)*K;
+  function pr(x,y,z){ return [x + y*CX, -z - y*CY]; }
+  function pts(arr){ return arr.map(function(p){ var s=pr(p[0],p[1],p[2]); return s[0].toFixed(2)+","+s[1].toFixed(2); }).join(" "); }
+  var NS="http://www.w3.org/2000/svg";
+  function el(t,a){ var e=document.createElementNS(NS,t); for(var k in a) e.setAttribute(k,a[k]); return e; }
+
+  var svg=$("#mueble");
+  var groups={};
+  P.forEach(function(p){
+    var g=el("g",{"class":"pz","data-k":keyOf(p)});
+    if(p.wheel){
+      p.wheel.forEach(function(w){
+        var s=pr(w[0],w[1],4.5);
+        var top=pr(w[0],w[1],10);
+        g.appendChild(el("polygon",{points:pts([[w[0]-2,w[1],7.5],[w[0]+2,w[1],7.5],[w[0]+2,w[1],10],[w[0]-2,w[1],10]]),fill:C.placa2}));
+        g.appendChild(el("circle",{cx:s[0].toFixed(2),cy:s[1].toFixed(2),r:3.6,fill:"#101a27"}));
+        g.appendChild(el("circle",{cx:s[0].toFixed(2),cy:s[1].toFixed(2),r:1.1,fill:"#8a96a8",stroke:"none"}));
+      });
+    } else {
+      var b=p.b, x=b[0],y=b[1],z=b[2],w=b[3],d=b[4],h=b[5];
+      var front=[[x,y,z],[x+w,y,z],[x+w,y,z+h],[x,y,z+h]];
+      var top=[[x,y,z+h],[x+w,y,z+h],[x+w,y+d,z+h],[x,y+d,z+h]];
+      var side=[[x+w,y,z],[x+w,y+d,z],[x+w,y+d,z+h],[x+w,y,z+h]];
+      var f1=C.placa, f2=C.placa3, f3=C.placa2;
+      if(p.col==="marmol"){f1=C.marmol2;f2=C.marmol;f3=C.marmol3;}
+      if(p.col==="fondo"){f1=C.fondo;f2=C.fondo;f3=C.fondo;}
+      g.appendChild(el("polygon",{points:pts(side),fill:f3}));
+      g.appendChild(el("polygon",{points:pts(top),fill:f2}));
+      if(p.door){
+        g.appendChild(el("polygon",{points:pts(front),fill:C.alu}));
+        g.appendChild(el("polygon",{points:pts([[x+1.6,y,z+1.6],[x+w-1.6,y,z+1.6],[x+w-1.6,y,z+h-1.6],[x+1.6,y,z+h-1.6]]),fill:C.vidrio}));
+        g.appendChild(el("polygon",{points:pts([[x+w-4,y,z+30],[x+w-3,y,z+30],[x+w-3,y,z+60],[x+w-4,y,z+60]]),fill:C.alu}));
+      } else {
+        g.appendChild(el("polygon",{points:pts(front),fill:f1}));
+        if(p.id==="cajon") g.appendChild(el("polygon",{points:pts([[x+16,y,z+10],[x+w-16,y,z+10],[x+w-16,y,z+11],[x+16,y,z+11]]),fill:C.alu}));
+      }
+    }
+    var ex=pr(p.e[0],p.e[1],p.e[2]);
+    g.dataset.tx=ex[0].toFixed(2); g.dataset.ty=ex[1].toFixed(2);
+    svg.appendChild(g);
+    p.g=g;
+  });
+  // viewBox con margen para el estado desarmado
+  (function(){
+    var bb=svg.getBBox(); var minx=bb.x, miny=bb.y, maxx=bb.x+bb.width, maxy=bb.y+bb.height;
+    P.forEach(function(p){ var r=p.g.getBBox(); var tx=+p.g.dataset.tx, ty=+p.g.dataset.ty;
+      minx=Math.min(minx,r.x+tx); miny=Math.min(miny,r.y+ty); maxx=Math.max(maxx,r.x+r.width+tx); maxy=Math.max(maxy,r.y+r.height+ty); });
+    var pad=4; svg.setAttribute("viewBox",[minx-pad,miny-pad,maxx-minx+pad*2,maxy-miny+pad*2].map(function(v){return v.toFixed(1)}).join(" "));
+  })();
+
+  var open=false, sel=null;
+  function setOpen(v){
+    open=v;
+    P.forEach(function(p){ p.g.style.transform = v ? "translate("+p.g.dataset.tx+"px,"+p.g.dataset.ty+"px)" : ""; });
+    $("#bArm").setAttribute("aria-pressed",String(!v));
+    $("#bDes").setAttribute("aria-pressed",String(v));
+    if(!v){ select(null); $("#cap").innerHTML='<span class="h">Tocá el mueble para desarmarlo</span>'; }
+    else if(!sel){ $("#cap").innerHTML='<span class="h">Tocá una pieza para ver su medida</span>'; }
+  }
+  function select(k){
+    sel=k;
+    P.forEach(function(p){ var on=keyOf(p)===k; p.g.classList.toggle("sel",on); p.g.classList.toggle("dim",!!k && !on); });
+    document.querySelectorAll("#rows tr").forEach(function(tr){ tr.classList.toggle("sel",tr.dataset.k===k); });
+    if(k){
+      var r=ROWS.filter(function(r){return r.k===k})[0];
+      $("#cap").innerHTML=r.n+' × '+r.q+' <span class="k">·</span> <span class="num">'+r.m+'</span> <span class="k">·</span> '+(r.mat?r.mat.toLowerCase():"placa 18 mm");
+    }
+  }
+  svg.addEventListener("click",function(e){
+    var g=e.target.closest(".pz");
+    if(!open){ setOpen(true); return; }
+    if(!g){ select(null); $("#cap").innerHTML='<span class="h">Tocá una pieza para ver su medida</span>'; return; }
+    var k=g.dataset.k; select(sel===k?null:k);
+    if(sel===null) $("#cap").innerHTML='<span class="h">Tocá una pieza para ver su medida</span>';
+  });
+  $("#bArm").onclick=function(){ setOpen(false); };
+  $("#bDes").onclick=function(){ setOpen(true); };
+
+  // listado de corte
+  var tb=$("#rows");
+  ROWS.forEach(function(r){
+    var tr=document.createElement("tr"); tr.dataset.k=r.k; tr.tabIndex=0;
+    tr.innerHTML='<td>'+r.n+(r.mat?'<span class="mat">'+r.mat+'</span>':'')+'</td><td>'+r.q+'</td><td>'+r.m+'</td>';
+    function go(){
+      if(!open) setOpen(true);
+      select(sel===r.k?null:r.k);
+      if(sel===null) $("#cap").innerHTML='<span class="h">Tocá una pieza para ver su medida</span>';
+      var bench=$(".bench").getBoundingClientRect();
+      if(bench.bottom<0||bench.top>innerHeight) $(".bench").scrollIntoView({behavior:"smooth",block:"center"});
+    }
+    tr.addEventListener("click",go);
+    tr.addEventListener("keydown",function(e){ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); go(); } });
+    tb.appendChild(tr);
+  });
+
+  /* ===== Render / plano de la cocina ===== */
+  function vista(p){
+    $("#imR").classList.toggle("off",p); $("#imP").classList.toggle("off",!p);
+    $("#bR").setAttribute("aria-pressed",String(!p)); $("#bP").setAttribute("aria-pressed",String(p));
+  }
+  $("#bR").onclick=function(){vista(false)}; $("#bP").onclick=function(){vista(true)};
+  $("#frame").addEventListener("click",function(e){ if(e.target.tagName==="IMG") vista($("#imP").classList.contains("off")); });
+
+  /* ===== Pedido ===== */
+  document.querySelectorAll(".chips").forEach(function(g){
+    g.addEventListener("click",function(e){
+      var b=e.target.closest("button"); if(!b) return;
+      if(g.hasAttribute("data-single")) g.querySelectorAll("button").forEach(function(x){x.setAttribute("aria-pressed",String(x===b))});
+      else b.setAttribute("aria-pressed",String(b.getAttribute("aria-pressed")!=="true"));
+      msg();
+    });
+  });
+  function on(id){ return Array.prototype.filter.call(document.querySelectorAll(id+" button"),function(b){return b.getAttribute("aria-pressed")==="true"}).map(function(b){var s=b.textContent; return s.charAt(0).toLowerCase()+s.slice(1)}); }
+  function lista(a){ return a.length<2 ? a.join("") : a.slice(0,-1).join(", ")+" y "+a[a.length-1]; }
+  function msg(){
+    var n=$("#fN").value.trim(), m=$("#fM").value.trim(), d=$("#fD").value.trim();
+    var nec=on("#cN"), b=on("#cB")[0]||"";
+    var t=(n?"Hola, soy "+n+". ":"Hola. ")+(m?"Quiero cotizar este proyecto: "+m+".":"Quiero cotizar un proyecto.");
+    if(nec.length) t+="\nNecesito "+lista(nec)+".";
+    if(b) t+="\nTengo "+(b==="solo la idea"?"solo la idea":b)+".";
+    if(d) t+="\nDetalles: "+d;
+    $("#pv").textContent=t; return t;
+  }
+  ["#fN","#fM","#fD"].forEach(function(s){ $(s).addEventListener("input",msg); });
+  msg();
+  var tt;
+  function toast(s){ var t=$("#toast"); t.textContent=s; t.classList.add("on"); clearTimeout(tt); tt=setTimeout(function(){t.classList.remove("on")},2600); }
+  $("#sIG").onclick=function(){
+    var t=msg();
+    var go=function(){ window.open("https://ig.me/m/modulostudio3d","_blank","noopener"); };
+    if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(function(){ toast("Mensaje copiado. Pegalo en el chat de Instagram."); go(); },function(){ toast("No se pudo copiar. Copiá el texto a mano."); go(); }); }
+    else { toast("Copiá el texto y pegalo en Instagram."); go(); }
+  };
+  $("#sWA").onclick=function(){
+    if(!WA){ toast("El WhatsApp está a confirmar. Por ahora escribinos por Instagram."); return; }
+    window.open("https://wa.me/"+WA+"?text="+encodeURIComponent(msg()),"_blank","noopener");
+  };
+  $("#form").addEventListener("submit",function(e){e.preventDefault()});
+})();
+</script>
+</body>
+</html>
