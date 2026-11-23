@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#090a0f">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.jpg">
+<title>Propuesta Feli 24hs · Compila Software</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+:root{color-scheme:dark;--bg:#090a0f;--card:#14161f;--card2:#1b1e29;--line:#262935;--txt:#f2f3f7;--dim:#9a9fb2;--acc:#6d8bff;--ok:#3ddc97;--yel:#ffd43b;--bad:#ff6b5a;
+  --font:"Geist",system-ui,-apple-system,sans-serif;--mono:"Geist Mono",ui-monospace,monospace;--pad:max(20px,env(safe-area-inset-left,0px))}
+*{box-sizing:border-box}
+html{scroll-snap-type:y proximity;scroll-behavior:smooth;overflow-x:clip}
+body{margin:0;background:var(--bg);color:var(--txt);font-family:var(--font);font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:clip}
+.fx{position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px);background-size:48px 48px;-webkit-mask:radial-gradient(ellipse 90% 60% at 50% 0%,#000,transparent);mask:radial-gradient(ellipse 90% 60% at 50% 0%,#000,transparent)}
+h1,h2,h3{margin:0;font-weight:700;letter-spacing:-.04em;line-height:1.03;text-wrap:balance}
+p{margin:0}
+.mono{font-family:var(--mono)}
+
+/* Pantallas */
+.s{min-height:100svh;scroll-snap-align:start;display:flex;align-items:center;padding:72px var(--pad) 64px;position:relative}
+.in{width:100%;max-width:1100px;margin:0 auto;display:grid;gap:28px;align-items:center}
+.k{font-family:var(--mono);font-size:13px;color:var(--acc);letter-spacing:.04em;text-transform:uppercase}
+.k b{color:var(--dim);font-weight:400}
+h2{font-size:clamp(34px,7.4vw,60px);margin-top:12px}
+.lead{color:var(--dim);font-size:clamp(17px,2.2vw,20px);margin-top:16px;max-width:30em}
+.hl{color:var(--yel)}
+
+/* Marco de celular para las capturas */
+.ph{margin:0;border-radius:26px;border:1px solid #30333f;background:#000;padding:6px;box-shadow:0 30px 70px -20px rgba(0,0,0,.8),0 0 0 6px rgba(255,255,255,.02);width:min(100%,260px)}
+.ph img{display:block;width:100%;height:auto;border-radius:20px;aspect-ratio:585/1266;object-fit:cover;object-position:top}
+.ph.crop img{aspect-ratio:585/900}
+.shots{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 2px 14px;margin:0 calc(var(--pad)*-1);padding-inline:var(--pad);scrollbar-width:none}
+.shots::-webkit-scrollbar{display:none}
+.shots figure{flex:none;scroll-snap-align:center;width:min(54vw,210px);margin:0}
+@media (max-width:859px){.shots .ph img{aspect-ratio:585/1000}.dots{display:none}}
+.shots figcaption{font-size:14px;color:var(--dim);margin-top:12px;line-height:1.35}
+.shots figcaption b{color:var(--txt);display:block;font-weight:600;font-size:15px}
+
+/* Portada */
+.cover h1{font-size:clamp(46px,11vw,96px)}
+.cover .tag{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:13px;color:var(--dim);border:1px solid var(--line);border-radius:99px;padding:7px 14px;background:rgba(20,22,31,.6)}
+.cover .tag i{width:8px;height:8px;border-radius:50%;background:var(--yel);box-shadow:0 0 0 4px rgba(255,212,59,.16)}
+.logo{display:flex;align-items:center;gap:6px;font-weight:700;font-size:20px;letter-spacing:-.04em}
+.logo i{width:8px;height:18px;background:var(--acc);border-radius:1px;animation:bl 1.1s steps(1) infinite}
+@keyframes bl{50%{opacity:0}}
+.x{color:var(--dim);font-weight:400;margin:0 4px}
+.fl{width:38px;height:38px;border-radius:10px;background:#000;border:1px solid #3a3420;display:grid;place-items:center;font-weight:800;color:var(--yel);font-size:11px;line-height:.95;text-align:center;letter-spacing:-.02em}
+.duo{display:flex;align-items:center;gap:12px}
+.hint{font-family:var(--mono);font-size:12.5px;color:var(--dim);display:flex;align-items:center;gap:8px}
+.hint span{display:inline-block;animation:bob 1.6s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(4px)}}
+
+/* Problema */
+.pains{display:grid;gap:10px;margin-top:6px}
+.pain{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px 16px;display:grid;grid-template-columns:28px 1fr;gap:12px;align-items:start}
+.pain i{font-style:normal;font-size:19px;line-height:1.3}
+.pain b{display:block;font-weight:600;font-size:16.5px;letter-spacing:-.01em}
+.pain span{display:block;color:var(--dim);font-size:14.5px;margin-top:2px}
+.quote{border-left:3px solid var(--yel);padding:4px 0 4px 16px;font-size:clamp(19px,2.6vw,23px);font-weight:600;letter-spacing:-.02em;max-width:24em}
+
+/* Fases */
+.ph2{display:grid;gap:10px}
+.ph2 .it{display:grid;grid-template-columns:40px 1fr;gap:12px;align-items:start}
+.ph2 .n{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-family:var(--mono);font-size:14px;background:var(--card2);border:1px solid var(--line)}
+.ph2 .n.on{background:var(--yel);color:#141204;border-color:var(--yel);font-weight:600}
+.ph2 b{font-size:17px;font-weight:600;display:block}
+.ph2 span{color:var(--dim);font-size:14.5px}
+
+/* Día a día */
+.day{display:grid;gap:0;position:relative}
+.step{display:grid;grid-template-columns:80px 1fr;gap:14px;padding:13px 0;position:relative}
+.step time{font-family:var(--mono);font-size:13.5px;color:var(--yel);padding-top:2px}
+.step b{display:block;font-weight:600;font-size:16.5px;letter-spacing:-.01em}
+.step span{display:block;color:var(--dim);font-size:14.5px;margin-top:2px}
+.step+.step{border-top:1px solid var(--line)}
+.foot{font-size:13.5px;color:var(--dim);max-width:34em}
+.foot b{color:var(--txt);font-weight:600}
+
+/* Cómo arrancamos */
+.road{display:grid;gap:10px}
+.rd{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;display:grid;grid-template-columns:auto 1fr;gap:4px 14px}
+.rd em{font-style:normal;font-family:var(--mono);font-size:12px;color:var(--acc);grid-row:1/3;padding-top:3px;min-width:64px}
+.rd b{font-weight:600;font-size:16px}
+.rd span{color:var(--dim);font-size:14.5px}
+.price{background:linear-gradient(180deg,#171a26,#11131b);border:1px solid #333849;border-radius:20px;padding:18px;display:grid;gap:14px}
+.price .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.price label{display:flex;flex-direction:column;gap:6px;font-size:12.5px;color:var(--dim);font-weight:500;font-family:var(--mono);text-transform:uppercase;letter-spacing:.04em}
+.price input{font:700 clamp(24px,5vw,30px)/1.1 var(--font);letter-spacing:-.03em;color:var(--txt);background:transparent;border:0;border-bottom:1px dashed #454a5c;padding:6px 0;width:100%;border-radius:0}
+.price input::placeholder{color:#4b5064}
+.price input:focus{outline:none;border-bottom-color:var(--acc)}
+.price small{color:var(--dim);font-size:13.5px;line-height:1.45}
+.price ul{margin:0;padding:0;list-style:none;display:grid;gap:6px;font-size:14px;color:var(--dim)}
+.price li::before{content:"✓";color:var(--ok);margin-right:8px}
+
+/* Cierre */
+.next{display:grid;gap:12px}
+.nx{display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:start;font-size:16.5px}
+.nx i{font-style:normal;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:rgba(109,139,255,.14);color:var(--acc);font-family:var(--mono);font-size:13px}
+.nx span{display:block;color:var(--dim);font-size:14.5px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:12px 22px;border-radius:12px;background:#fff;color:#0a0b10;font:600 16.5px var(--font);text-decoration:none}
+.btn.y{background:var(--yel);color:#141204}
+.btns{display:flex;gap:10px;flex-wrap:wrap}
+
+/* Indicador */
+.dots{position:fixed;right:max(10px,env(safe-area-inset-right,0px));top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:9px;z-index:10}
+.dots a{width:8px;height:8px;border-radius:50%;background:#3a3e4e;display:block;transition:background .2s,transform .2s}
+.dots a[aria-current="true"]{background:var(--yel);transform:scale(1.35)}
+.top{position:fixed;left:0;right:0;top:0;z-index:9;display:flex;justify-content:space-between;align-items:center;padding:14px var(--pad);padding-top:max(14px,env(safe-area-inset-top,0px));background:linear-gradient(var(--bg) 40%,rgba(9,10,15,0));pointer-events:none}
+.top .logo{font-size:17px}
+.top .cnt{font-family:var(--mono);font-size:12.5px;color:var(--dim)}
+
+@media (min-width:860px){
+  .s{padding:88px 56px 64px}
+  .in.two{grid-template-columns:1.05fr .95fr;gap:56px}
+  .in.two.rev{grid-template-columns:.9fr 1.1fr}
+  .shots{margin:0;padding-inline:2px;justify-content:flex-start}
+  .ph{width:min(100%,280px);justify-self:center}
+}
+@media (max-height:700px) and (max-width:859px){.s{padding-top:64px}.ph{width:min(100%,210px)}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.logo i,.hint span{animation:none}}
+</style>
+</head>
+<body>
+<div class="fx" aria-hidden="true"></div>
+<div class="top" aria-hidden="true"><div class="logo">compila<i></i></div><div class="cnt" id="cnt">01 / 06</div></div>
+<nav class="dots" id="dots" aria-label="Pantallas"></nav>
+
+<!-- 1 · Portada -->
+<section class="s cover" id="p1" aria-label="Portada">
+  <div class="in">
+    <div class="duo"><div class="fl">FELI<br>24</div><span class="x">×</span><div class="logo">compila<i></i></div></div>
+    <h1>Que el stock de Feli <span class="hl">se controle solo.</span></h1>
+    <p class="lead">Una propuesta para Joaquín. Sin cambiar el sistema de caja que ya usás: le sumamos lo que hoy le falta.</p>
+    <div><span class="tag"><i></i>Feli 24hs · Victoria · noviembre 2026</span></div>
+    <div class="hint">Deslizá para seguir <span>↓</span></div>
+  </div>
+</section>
+
+<!-- 2 · El problema -->
+<section class="s" id="p2" aria-label="Lo que pasa hoy">
+  <div class="in two">
+    <div>
+      <div class="k">01 <b>· Lo que pasa hoy</b></div>
+      <h2>El sistema registra todo. Pero no te avisa nada.</h2>
+    </div>
+    <div class="pains">
+      <div class="pain"><i>🥤</i><div><b>Te enterás de que falta algo cuando lo pide un cliente.</b><span>Y a las 3 de la mañana no hay a quién pedirle.</span></div></div>
+      <div class="pain"><i>📝</i><div><b>El pedido al proveedor se arma a ojo.</b><span>Mirando la heladera, el estante y la memoria del que está.</span></div></div>
+      <div class="pain"><i>🚬</i><div><b>Si falta mercadería, no sabés en qué turno fue.</b><span>Cigarrillos y bebidas son plata en la mano.</span></div></div>
+      <div class="pain"><i>📱</i><div><b>La caja es una lista larga que en el celu no se lee.</b><span>Para entender el día tenés que sentarte en la compu.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 · Qué te armamos -->
+<section class="s" id="p3" aria-label="Qué te armamos">
+  <div class="in two rev">
+    <div>
+      <div class="k">02 <b>· Qué te armamos</b></div>
+      <h2>Primero, <span class="hl">el stock.</span> Después, el resto.</h2>
+      <div class="ph2" style="margin-top:22px">
+        <div class="it"><div class="n on">1</div><div><b>Stock</b><span>Avisos antes de que se termine, pedido armado por proveedor y conteo al cambio de turno.</span></div></div>
+        <div class="it"><div class="n">2</div><div><b>Panel del día en el celu</b><span>Cuánto vendiste, horas pico y qué mirar, en 5 segundos.</span></div></div>
+        <div class="it"><div class="n">3</div><div><b>Turnos y cierre de caja</b><span>Quién entró, a qué hora, y si cada turno cerró bien.</span></div></div>
+      </div>
+    </div>
+    <div class="shots" aria-label="Capturas de la demo">
+      <figure><div class="ph"><img src="img/stock.jpg" alt="Pantalla de stock: 10 productos para reponer y alertas" loading="lazy"></div><figcaption><b>Te avisa antes</b>Qué se termina hoy y qué ya no hay.</figcaption></figure>
+      <figure><div class="ph"><img src="img/pedido.jpg" alt="Pedido sugerido listo para mandar por WhatsApp" loading="lazy"></div><figcaption><b>Arma el pedido</b>Por proveedor, listo para mandar por WhatsApp.</figcaption></figure>
+      <figure><div class="ph"><img src="img/conteo.jpg" alt="Conteo al cambio de turno con faltante marcado" loading="lazy"></div><figcaption><b>Controla los turnos</b>El que entra cuenta lo clave y salta si falta algo.</figcaption></figure>
+      <figure><div class="ph"><img src="img/inicio.jpg" alt="Panel del día con ventas y alertas" loading="lazy"></div><figcaption><b>Después: el panel</b>Todo el día de Feli en una pantalla.</figcaption></figure>
+      <figure><div class="ph"><img src="img/turnos.jpg" alt="Turnos con cierre de caja y fichadas" loading="lazy"></div><figcaption><b>Y los turnos</b>Fichadas y cierre de caja de cada turno.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 4 · El día a día -->
+<section class="s" id="p4" aria-label="Cómo sería el día a día">
+  <div class="in two">
+    <div>
+      <div class="k">03 <b>· El día a día</b></div>
+      <h2>Vos seguís cobrando igual. <span class="hl">El stock se mueve solo.</span></h2>
+      <p class="foot" style="margin-top:18px">Las ventas salen de <b>tu sistema de caja</b>, sin cargar nada dos veces. Cómo las tomamos depende de qué exporta tu sistema: eso lo vemos juntos.</p>
+    </div>
+    <div class="day">
+      <div class="step"><time>10:00</time><div><b>Llega el proveedor</b><span>Tocás “Ya llegó” y el stock se suma solo. Si vino distinto, corregís la cantidad.</span></div></div>
+      <div class="step"><time>todo el día</time><div><b>Cada venta descuenta</b><span>Lo que se cobra en la caja baja del stock, sin que nadie haga nada.</span></div></div>
+      <div class="step"><time>22:00</time><div><b>Cambio de turno</b><span>El que entra cuenta 5 o 10 productos clave en el celu. Si no cierra, te llega el aviso.</span></div></div>
+      <div class="step"><time>23:50</time><div><b>Te avisa lo que se termina</b><span>“Coca 1,5 L se termina en ~5 h”. Lo ves antes de que se corte.</span></div></div>
+      <div class="step"><time>al otro día</time><div><b>Mandás el pedido</b><span>Ya está armado por proveedor. Un toque y sale por tu WhatsApp.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 · Cómo arrancamos -->
+<section class="s" id="p5" aria-label="Cómo arrancamos y precio">
+  <div class="in two">
+    <div>
+      <div class="k">04 <b>· Cómo arrancamos</b></div>
+      <h2>Arrancamos chico, con <span class="hl">tus productos.</span></h2>
+      <div class="road" style="margin-top:22px">
+        <div class="rd"><em>Paso 1</em><b>Vemos tu sistema</b><span>Qué exporta y cómo sacamos las ventas. Me pasás la lista de productos.</span></div>
+        <div class="rd"><em>Paso 2</em><b>Cargamos lo tuyo</b><span>Productos, mínimos y proveedores. Lo probás vos primero.</span></div>
+        <div class="rd"><em>Paso 3</em><b>Lo usan en los turnos</b><span>Les mostramos a los chicos cómo contar y cargar lo que llega.</span></div>
+        <div class="rd"><em>Después</em><b>Panel y turnos</b><span>Cuando el stock ya ande solo, sumamos el resto.</span></div>
+      </div>
+    </div>
+    <div class="price" aria-label="Precio">
+      <div class="k">Inversión</div>
+      <div class="row">
+        <label>Pago único<input id="pU" inputmode="numeric" placeholder="$ —" autocomplete="off" aria-label="Pago único"></label>
+        <label>Por mes<input id="pM" inputmode="numeric" placeholder="$ —" autocomplete="off" aria-label="Abono mensual"></label>
+      </div>
+      <small>50% para arrancar y 50% cuando ya lo están usando.</small>
+      <ul>
+        <li>Hecho para Feli, con tus productos y proveedores</li>
+        <li>Funciona en el celu, sin instalar nada</li>
+        <li>El mes incluye hosting, mantenimiento y soporte</li>
+        <li>Tu sistema de caja sigue igual</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 6 · Próximo paso -->
+<section class="s" id="p6" aria-label="Próximo paso">
+  <div class="in">
+    <div class="k">05 <b>· Próximo paso</b></div>
+    <h2>¿Lo armamos con <span class="hl">lo de Feli?</span></h2>
+    <div class="next">
+      <div class="nx"><i>1</i><div>Me pasás lo que exporta tu sistema<span>O fotos de la lista de productos, lo que sea más fácil.</span></div></div>
+      <div class="nx"><i>2</i><div>Te armo el stock con tus productos reales<span>Y lo volvemos a ver acá, en el kiosco.</span></div></div>
+      <div class="nx"><i>3</i><div>Si te sirve, arrancamos<span>Si no, no pasa nada.</span></div></div>
+    </div>
+    <div class="btns"><a class="btn y" href="../#stock">Ver la demo de stock</a><a class="btn" href="../">Ver el panel completo</a></div>
+    <div class="duo" style="margin-top:8px"><div class="logo">compila<i></i></div><span class="hint">compilasoftware.com</span></div>
+  </div>
+</section>
+
+<script>
+// Indicador de pantalla
+const S=[...document.querySelectorAll('.s')],dots=document.getElementById('dots'),cnt=document.getElementById('cnt'),pad=n=>String(n).padStart(2,"0");
+dots.innerHTML=S.map((s,i)=>`<a href="#${s.id}" aria-label="${s.getAttribute('aria-label')}"></a>`).join('');
+const D=[...dots.children];
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){const i=S.indexOf(e.target);D.forEach((d,k)=>d.setAttribute('aria-current',k===i));cnt.textContent=pad(i+1)+" / "+pad(S.length)}}),{threshold:.55});
+S.forEach(s=>io.observe(s));
+// Flechas y barra espaciadora en tablet o compu
+document.addEventListener('keydown',e=>{if(e.target.tagName==="INPUT")return;const i=D.findIndex(d=>d.getAttribute('aria-current')==="true");
+ if(["ArrowDown","PageDown"," "].includes(e.key)&&i<S.length-1){e.preventDefault();S[i+1].scrollIntoView()}
+ if(["ArrowUp","PageUp"].includes(e.key)&&i>0){e.preventDefault();S[i-1].scrollIntoView()}});
+// Precio: lo completa Agustín (también por link: ?unico=250000&mes=30000). Queda guardado en este dispositivo.
+const fmt=v=>{const n=String(v).replace(/\D/g,"");return n?"$ "+(+n).toLocaleString("es-AR"):""};
+const qs=new URLSearchParams(location.search);
+[["pU","unico"],["pM","mes"]].forEach(([id,k])=>{const el=document.getElementById(id);let v=qs.get(k);
+ if(v==null){try{v=localStorage.getItem("feli-"+k)}catch(_){}}
+ if(v)el.value=fmt(v);
+ el.addEventListener('input',()=>{el.value=fmt(el.value);try{localStorage.setItem("feli-"+k,el.value.replace(/\D/g,""))}catch(_){}})});
+</script>
+</body>
+</html>
