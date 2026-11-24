@@ -8,15 +8,15 @@
 <title>Somos Barrio, yerba y café</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2393391f'/%3E%3Cellipse cx='32' cy='33' rx='15' ry='20' fill='none' stroke='%23f3e8d6' stroke-width='4'/%3E%3Cpath d='M30 15c6 8-6 14 0 36' fill='none' stroke='%23f3e8d6' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Geist:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Geist:wght@400;500;600;700&display=swap">
 <style>
 /* Somos Barrio: yerba Sol y Lluvia y café tostado natural, Vicente López / Olivos.
    Paleta sacada de su Instagram: ladrillo (vaso y posts rojos), oliva (posts verdes), papel crema (posts claros),
    tinta café. Lo memorable: el selector "¿con qué lo hacés?" que te dice la molienda y la receta para tu cafetera. */
 :root{
-  --paper:#f3e8d6;--paper-2:#eadbc3;--card:#fffaf1;--ink:#2c1a12;--ink-2:#4e3326;--dim:#7a6152;--line:#dccab0;
+  --paper:#f3e8d6;--paper-2:#eadbc3;--card:#fffaf1;--ink:#2c1a12;--ink-2:#3f281d;--dim:#664c3e;--line:#dccab0;
   --brick:#93391f;--brick-d:#782c16;--brick-s:#f4d9cb;--olive:#4b5330;--olive-d:#3a4125;--olive-s:#dfe2cc;--sun:#e2a948;
-  --disp:"Bricolage Grotesque","Geist",system-ui,sans-serif;--ui:"Geist",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --disp:"Poppins","Geist",system-ui,sans-serif;--ui:"Geist",system-ui,-apple-system,"Segoe UI",sans-serif;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -42,7 +42,7 @@ img,svg{display:block}
 .top{position:sticky;top:0;z-index:40;background:rgba(243,232,214,.93);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:border-color .2s}
 .top.sc{border-color:var(--line)}
 .top .wrap{display:flex;align-items:center;gap:14px;height:64px}
-.wm{font-family:var(--disp);font-weight:800;font-size:15px;line-height:1.02;letter-spacing:.16em;color:var(--ink);text-decoration:none;flex:none}
+.wm{font-family:var(--disp);font-weight:700;font-size:15px;line-height:1.1;letter-spacing:.14em;color:var(--ink);text-decoration:none;flex:none}
 .nav{display:none;gap:22px;margin-left:28px}
 .nav a{color:var(--ink-2);text-decoration:none;font-weight:500;font-size:15px}
 .nav a:hover{color:var(--brick)}
@@ -64,7 +64,7 @@ img,svg{display:block}
 /* hero */
 .hero{padding:26px 0 56px}
 .hero .wrap{display:grid;gap:28px}
-.hero h1{font-family:var(--disp);font-weight:800;font-size:clamp(44px,13vw,92px);line-height:.9;letter-spacing:-.035em;margin:0 0 18px;color:var(--brick);text-wrap:balance}
+.hero h1{font-family:var(--disp);font-weight:700;font-size:clamp(40px,11.4vw,78px);line-height:1.04;letter-spacing:-.025em;margin:0 0 18px;color:var(--brick);text-wrap:balance}
 .hero p.lead{font-size:18px;color:var(--ink-2);max-width:34ch;margin:0 0 26px}
 .team{background:var(--card);border-radius:22px;padding:16px;box-shadow:0 0 0 1px var(--line);max-width:440px}
 .team p{margin:0 0 10px;font-weight:600;font-size:15px}
@@ -85,23 +85,23 @@ img,svg{display:block}
 /* secciones */
 section{scroll-margin-top:70px}
 .sec{padding:60px 0}
-.h2{font-family:var(--disp);font-weight:800;font-size:clamp(32px,8.4vw,54px);line-height:.98;letter-spacing:-.03em;margin:0 0 12px;text-wrap:balance}
+.h2{font-family:var(--disp);font-weight:700;font-size:clamp(30px,7.8vw,48px);line-height:1.1;letter-spacing:-.02em;margin:0 0 12px;text-wrap:balance}
 .sub{color:var(--ink-2);font-size:17px;max-width:52ch;margin:0 0 26px}
 
 /* promos */
 .promos{background:var(--olive);color:#f1ead8}
 .promos .h2{color:#fff}
-.promos .sub{color:#dcd8c0}
+.promos .sub{color:#ece8d4}
 .combos{display:grid;gap:14px}
 .combo{background:#f1ead8;color:var(--ink);border-radius:24px;padding:20px;display:grid;gap:12px}
-.combo h3{font-family:var(--disp);font-weight:800;font-size:26px;letter-spacing:-.02em;margin:0;line-height:1}
+.combo h3{font-family:var(--disp);font-weight:700;font-size:24px;letter-spacing:-.01em;margin:0;line-height:1.15}
 .combo ul{margin:0;padding:0;list-style:none;display:grid;gap:6px;font-size:15.5px}
 .combo li{display:flex;gap:9px;align-items:flex-start}
 .combo li i{flex:none;width:8px;height:8px;border-radius:50%;background:var(--brick);margin-top:9px}
 .combo .row{display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1.5px dashed var(--line);padding-top:14px;margin-top:2px}
-.combo .pr{font-family:var(--disp);font-weight:800;font-size:30px;letter-spacing:-.02em;line-height:1}
+.combo .pr{font-family:var(--disp);font-weight:700;font-size:28px;letter-spacing:-.01em;line-height:1}
 .combo .ah{font-size:13px;color:var(--olive);font-weight:600;display:block;margin-top:4px}
-.real{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:#dcd8c0;margin-top:16px}
+.real{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:#e8e4cf;margin-top:16px}
 
 /* catálogo */
 .chips{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 8px;margin:0 -2px 14px;scrollbar-width:none}
@@ -113,13 +113,18 @@ section{scroll-margin-top:70px}
 .prod .pic{background:var(--paper-2);aspect-ratio:16/10;display:grid;place-items:center;position:relative}
 .prod .pic svg{height:84%;width:auto}
 .prod .pic.c{background:#e9c9b8}
+.prod .pic.ph{aspect-ratio:4/3;overflow:hidden;display:block}
+.prod .pic.ph>img{position:absolute;top:5%;left:50%;transform:translateX(-50%);height:90%;width:auto;max-width:none;-webkit-mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent);mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent)}
+.duo{position:absolute;inset:8% 0 6%;display:flex;align-items:flex-end;justify-content:center}
+.duo svg{height:80%;width:auto;margin-right:-18px;position:relative;z-index:1}
+.duo img{height:100%;width:auto;-webkit-mask-image:linear-gradient(90deg,transparent,#000 16%,#000 84%,transparent);mask-image:linear-gradient(90deg,transparent,#000 16%,#000 84%,transparent)}
 .prod .pic.y{background:var(--olive-s)}
 .prod .pic.k{background:#e6dcc3}
 .ej{position:absolute;top:12px;left:12px;background:rgba(255,250,241,.92);border-radius:99px;font-size:12px;font-weight:600;padding:4px 10px;color:var(--dim)}
 .prod .bd{padding:16px 18px 18px;display:flex;flex-direction:column;gap:10px;flex:1}
-.prod h3{margin:0;font-size:19px;font-weight:700;letter-spacing:-.015em;line-height:1.2}
-.prod p{margin:0;color:var(--dim);font-size:14.5px}
-.lbl{font-size:13px;font-weight:600;color:var(--ink-2);display:block;margin-bottom:5px}
+.prod h3{margin:0;font-family:var(--disp);font-size:19px;font-weight:600;letter-spacing:-.005em;line-height:1.25}
+.prod p{margin:0;color:var(--ink-2);font-size:15px}
+.lbl{font-size:13.5px;font-weight:600;color:var(--ink-2);display:block;margin-bottom:5px}
 select.in,input.in,textarea.in{width:100%;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:11px 12px;font-size:15.5px}
 select.in{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%234e3326' stroke-width='1.8'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:34px}
 .in:focus{border-color:var(--brick);outline:none}
@@ -131,7 +136,7 @@ select.in{appearance:none;-webkit-appearance:none;background-image:url("data:ima
 .sz{display:flex;gap:6px}
 .sz button{flex:1;border:0;border-radius:12px;padding:10px 0;background:var(--paper);box-shadow:inset 0 0 0 1px var(--line);font-weight:600;font-size:14.5px;transition:background .2s}
 .sz button.on{background:var(--ink);color:var(--paper);box-shadow:none}
-.tst{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--dim);font-weight:600;margin-top:-4px}
+.tst{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;color:var(--dim);font-weight:600;margin-top:-4px}
 .beans{display:inline-flex;gap:3px}
 .beans i{width:9px;height:12px;border-radius:50%;background:var(--line)}
 .beans i.on{background:#6b3a1f}
@@ -141,14 +146,14 @@ select.in{appearance:none;-webkit-appearance:none;background-image:url("data:ima
 /* guía de café */
 .guia{background:var(--card);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .tool{border-radius:28px;background:var(--ink);color:#f3e8d6;padding:20px;display:grid;gap:20px}
-.tool .q{font-family:var(--disp);font-weight:800;font-size:24px;letter-spacing:-.02em;margin:0;line-height:1.1;color:#fff}
+.tool .q{font-family:var(--disp);font-weight:700;font-size:23px;letter-spacing:-.01em;margin:0;line-height:1.2;color:#fff}
 .mk{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
 .mk button{border:0;border-radius:16px;background:#3c271c;color:#f3e8d6;padding:12px 10px;display:flex;align-items:center;gap:10px;font-weight:600;font-size:14.5px;text-align:left;transition:background .2s}
 .mk button svg{flex:none;width:34px;height:34px}
 .mk button:hover{background:#4a3123}
 .mk button.on{background:var(--sun);color:var(--ink)}
 .res{background:#f3e8d6;color:var(--ink);border-radius:22px;padding:20px}
-.res h3{font-family:var(--disp);font-weight:800;font-size:28px;letter-spacing:-.02em;margin:0 0 4px;line-height:1.05}
+.res h3{font-family:var(--disp);font-weight:700;font-size:26px;letter-spacing:-.01em;margin:0 0 4px;line-height:1.15}
 .res .rs{color:var(--dim);margin:0 0 16px;font-size:15px}
 .scale{margin:0 0 18px}
 .scale .bar{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
@@ -156,10 +161,10 @@ select.in{appearance:none;-webkit-appearance:none;background-image:url("data:ima
 .scale .bar i.on{background:var(--brick)}
 .scale .bar i b{display:block;border-radius:50%;background:var(--ink-2)}
 .scale .bar i.on b{background:#fff}
-.scale .ends{display:flex;justify-content:space-between;font-size:12.5px;color:var(--dim);margin-top:6px}
+.scale .ends{display:flex;justify-content:space-between;font-size:13px;color:var(--dim);margin-top:6px}
 .facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:0 0 16px}
 .facts div{background:var(--card);border-radius:14px;padding:10px 11px}
-.facts small{display:block;font-size:12px;color:var(--dim)}
+.facts small{display:block;font-size:12.5px;color:var(--dim)}
 .facts b{font-size:15.5px;letter-spacing:-.01em;line-height:1.25;display:block;margin-top:2px}
 .steps{margin:0 0 16px;padding:0;list-style:none;counter-reset:s;display:grid;gap:8px}
 .steps li{counter-increment:s;display:grid;grid-template-columns:26px 1fr;gap:10px;font-size:15px;align-items:start}
@@ -168,7 +173,7 @@ select.in{appearance:none;-webkit-appearance:none;background-image:url("data:ima
 
 .cards{display:grid;gap:14px;margin-top:22px}
 .gcard{background:var(--paper);border-radius:22px;padding:20px;box-shadow:0 0 0 1px var(--line)}
-.gcard h3{font-family:var(--disp);font-weight:800;font-size:24px;letter-spacing:-.02em;margin:0 0 6px;line-height:1.05}
+.gcard h3{font-family:var(--disp);font-weight:700;font-size:22px;letter-spacing:-.01em;margin:0 0 6px;line-height:1.2}
 .gcard>p{margin:0 0 14px;color:var(--ink-2);font-size:15.5px}
 .acc{border-top:1px solid var(--line)}
 .acc button{width:100%;border:0;background:none;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 0;text-align:left;font-weight:600;font-size:16px}
@@ -178,7 +183,7 @@ select.in{appearance:none;-webkit-appearance:none;background-image:url("data:ima
 .acc .pn>div{overflow:hidden}
 .acc .pn.open{grid-template-rows:1fr}
 .acc .pn p{margin:0 0 14px;color:var(--ink-2);font-size:15px}
-.pill{display:inline-block;font-size:12.5px;font-weight:600;border-radius:99px;padding:3px 10px;margin:0 6px 8px 0;background:var(--card);box-shadow:inset 0 0 0 1px var(--line)}
+.pill{display:inline-block;font-size:13px;font-weight:600;border-radius:99px;padding:3px 10px;margin:0 6px 8px 0;background:var(--card);box-shadow:inset 0 0 0 1px var(--line)}
 .pill.g{background:var(--olive-s);box-shadow:none;color:var(--olive-d)}
 .pill.r{background:var(--brick-s);box-shadow:none;color:var(--brick-d)}
 
@@ -187,14 +192,14 @@ select.in{appearance:none;-webkit-appearance:none;background-image:url("data:ima
 .rec.a{background:var(--brick)}
 .rec.b{background:var(--olive)}
 .rec.m{background:var(--paper-2);color:var(--ink)}
-.rec h3{font-family:var(--disp);font-weight:800;font-size:24px;margin:0 0 4px;letter-spacing:-.02em;line-height:1.05}
+.rec h3{font-family:var(--disp);font-weight:700;font-size:22px;margin:0 0 4px;letter-spacing:-.01em;line-height:1.2}
 .rec .rs{margin:0 0 12px;font-size:14.5px;opacity:.85}
 .rec ol{margin:0;padding-left:20px;display:grid;gap:5px;font-size:15px}
 .rec .src{font-size:13px;margin:12px 0 0;opacity:.8}
 
 /* nosotras */
 .nos .wrap{display:grid;gap:26px}
-.quote{font-family:var(--disp);font-weight:800;font-size:clamp(30px,7.6vw,52px);line-height:1;letter-spacing:-.03em;color:var(--brick);margin:0;text-wrap:balance}
+.quote{font-family:var(--disp);font-weight:700;font-size:clamp(28px,7vw,46px);line-height:1.15;letter-spacing:-.02em;color:var(--brick);margin:0;text-wrap:balance}
 .nos .who{font-size:15px;color:var(--dim);margin:14px 0 0}
 .how{display:grid;gap:10px}
 .how a,.how div{display:flex;gap:12px;align-items:center;background:var(--card);border-radius:18px;padding:14px 16px;box-shadow:0 0 0 1px var(--line);text-decoration:none;color:var(--ink);font-weight:600}
@@ -214,7 +219,7 @@ footer a{color:#fff}
 .sheet{position:fixed;z-index:80;left:0;right:0;bottom:0;max-height:92vh;background:var(--paper);border-radius:26px 26px 0 0;display:flex;flex-direction:column;transform:translateY(105%);transition:transform .35s cubic-bezier(.2,.8,.2,1)}
 .sheet.on{transform:none}
 .sh-hd{display:flex;align-items:center;justify-content:space-between;padding:18px 18px 10px}
-.sh-hd b{font-family:var(--disp);font-weight:800;font-size:26px;letter-spacing:-.02em}
+.sh-hd b{font-family:var(--disp);font-weight:700;font-size:24px;letter-spacing:-.01em}
 .x{border:0;background:var(--card);width:40px;height:40px;border-radius:50%;display:grid;place-items:center;box-shadow:0 0 0 1px var(--line)}
 .sh-bd{overflow-y:auto;padding:4px 18px 18px;flex:1;overscroll-behavior:contain}
 .empty{text-align:center;padding:30px 10px;color:var(--dim)}
@@ -358,7 +363,7 @@ footer a{color:#fff}
     <div class="tool">
       <div>
         <p class="q">¿Con qué hacés el café?</p>
-        <p style="margin:6px 0 16px;color:#cdb9a2;font-size:15px">Tocá tu cafetera y te decimos cómo pedirlo y cómo prepararlo.</p>
+        <p style="margin:6px 0 16px;color:#e3d3bf;font-size:15.5px">Tocá tu cafetera y te decimos cómo pedirlo y cómo prepararlo.</p>
         <div class="mk" id="mk"></div>
       </div>
       <div class="res" id="res" aria-live="polite"></div>
@@ -458,7 +463,7 @@ footer a{color:#fff}
 <footer>
   <div class="wrap">
     <span class="wm">SOMOS<br>BARRIO</span>
-    <p id="nota">Boceto hecho por <a href="https://compilasoftware.com" target="_blank" rel="noopener">Compila Software</a> con lo que Somos Barrio publica en Instagram: los cafés, la yerba y sus precios salen del catálogo de sus historias, y los combos del post del 11 de agosto. El WhatsApp es el de Caro por ahora. Las guías y recetas de café son generales y ellas las ajustan a su gusto. Las ilustraciones son provisorias: van sus fotos y su personaje.</p>
+    <p id="nota">Boceto hecho por <a href="https://compilasoftware.com" target="_blank" rel="noopener">Compila Software</a> con lo que Somos Barrio publica en Instagram: los cafés, la yerba y sus precios salen del catálogo de sus historias, y los combos del post del 11 de agosto. El WhatsApp es el de Caro por ahora. Las guías y recetas de café son generales y ellas las ajustan a su gusto. Las bolsas de café son sus fotos; la yerba sigue siendo un dibujo provisorio.</p>
   </div>
 </footer>
 
@@ -493,9 +498,9 @@ footer a{color:#fff}
   var GRINDS = ["En grano","Molido para italiana","Molido para filtro","Molido para prensa francesa","Molido para espresso","Molido para cold brew"];
 
   var VAR = {
-    brasil:{n:"Brasil Raudal",d:"Origen Brasil, 100% arábica.",t:1,c:"#4b5330",bg:"#dfe2cc",p:{125:12800,250:22800,500:44500}},
-    colombia:{n:"Colombia Montaña Alta",d:"Dulce y afrutado. Origen Colombia.",t:2,c:"#a8322a",bg:"#efcdbf",p:{125:13500,250:25500,500:48500}},
-    blend:{n:"Blend Italiano",d:"Arábica. Una combinación al estilo italiano.",t:3,c:"#22324f",bg:"#d2d9e3",p:{125:12500,250:23000,500:43500}}
+    brasil:{n:"Brasil Raudal",d:"Origen Brasil, 100% arábica.",t:1,c:"#4b5330",bg:"#a3a68a",img:"img/cafe-brasil.jpg",p:{125:12800,250:22800,500:44500}},
+    colombia:{n:"Colombia Montaña Alta",d:"Dulce y afrutado. Origen Colombia.",t:2,c:"#a8322a",bg:"#cf9c7f",img:"img/cafe-colombia.jpg",p:{125:13500,250:25500,500:48500}},
+    blend:{n:"Blend Italiano",d:"Arábica. Una combinación al estilo italiano.",t:3,c:"#22324f",bg:"#8a9fb3",img:"img/cafe-blend.jpg",p:{125:12500,250:23000,500:43500}}
   };
   var YER = {500:4800,1000:8500,2000:15000};
   var SIZES = {cafe:[[125,"125 g"],[250,"250 g"],[500,"500 g"]],yerba:[[500,"500 g"],[1000,"1 kg"],[2000,"2 kg"]]};
@@ -579,9 +584,9 @@ footer a{color:#fff}
   var grid = document.getElementById("grid");
   var card = function(p){
     var pic, title, desc, meta = "";
-    if(p.cat==="cafe"){ var v = VAR[p.id]; pic = '<div class="pic" style="background:'+v.bg+'">'+bag(v.c,"")+'</div>'; title = v.n; desc = v.d; meta = '<span class="tst">Tueste '+beans(v.t)+'</span>'; }
+    if(p.cat==="cafe"){ var v = VAR[p.id]; pic = '<div class="pic ph" style="background:'+v.bg+'"><img src="'+v.img+'" alt="Bolsa de café Somos Barrio '+v.n+'" loading="lazy" width="260" height="404"></div>'; title = v.n; desc = v.d; meta = '<span class="tst">Tueste '+beans(v.t)+'</span>'; }
     else if(p.cat==="yerba"){ pic = '<div class="pic y">'+yerba()+'</div>'; title = p.name; desc = p.desc; }
-    else { pic = '<div class="pic k">'+combo()+'</div>'; title = p.name; desc = p.items.join(" + "); }
+    else { pic = '<div class="pic k ph"><div class="duo">'+yerba()+'<img src="img/cafe-colombia.jpg" alt="" loading="lazy" width="260" height="400"></div></div>'; title = p.name; desc = p.items.join(" + "); }
     return '<article class="prod" data-p="'+p.id+'">'+pic+'<div class="bd"><h3>'+title+'</h3>'+meta+'<p>'+desc+'</p>'+controls(p)+
       '<div class="buy"><span class="pr money">'+fmt(priceOf({id:p.id,size:defSize(p)}))+'</span><button class="add" data-add>'+PLUS+'Sumar</button></div></div></article>';
   };
