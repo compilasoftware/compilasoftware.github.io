@@ -116,7 +116,7 @@ section{scroll-margin-top:70px}
 .prod .pic.ph{aspect-ratio:4/3;overflow:hidden;display:block}
 .prod .pic.ph>img{position:absolute;top:5%;left:50%;transform:translateX(-50%);height:90%;width:auto;max-width:none;-webkit-mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent);mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent)}
 .duo{position:absolute;inset:8% 0 6%;display:flex;align-items:flex-end;justify-content:center}
-.duo svg{height:80%;width:auto;margin-right:-18px;position:relative;z-index:1}
+.duo img.yb{height:84%;margin-right:-22px;position:relative;z-index:1;border-radius:10px}
 .duo img{height:100%;width:auto;-webkit-mask-image:linear-gradient(90deg,transparent,#000 16%,#000 84%,transparent);mask-image:linear-gradient(90deg,transparent,#000 16%,#000 84%,transparent)}
 .prod .pic.y{background:var(--olive-s)}
 .prod .pic.k{background:#e6dcc3}
@@ -463,7 +463,7 @@ footer a{color:#fff}
 <footer>
   <div class="wrap">
     <span class="wm">SOMOS<br>BARRIO</span>
-    <p id="nota">Boceto hecho por <a href="https://compilasoftware.com" target="_blank" rel="noopener">Compila Software</a> con lo que Somos Barrio publica en Instagram: los cafés, la yerba y sus precios salen del catálogo de sus historias, y los combos del post del 11 de agosto. El WhatsApp es el de Caro por ahora. Las guías y recetas de café son generales y ellas las ajustan a su gusto. Las bolsas de café son sus fotos; la yerba sigue siendo un dibujo provisorio.</p>
+    <p id="nota">Boceto hecho por <a href="https://compilasoftware.com" target="_blank" rel="noopener">Compila Software</a> con lo que Somos Barrio publica en Instagram: los cafés, la yerba y sus precios salen del catálogo de sus historias, y los combos del post del 11 de agosto. El WhatsApp es el de Caro por ahora. Las guías y recetas de café son generales y ellas las ajustan a su gusto. Las fotos de los cafés y de la yerba son de sus historias.</p>
   </div>
 </footer>
 
@@ -585,8 +585,8 @@ footer a{color:#fff}
   var card = function(p){
     var pic, title, desc, meta = "";
     if(p.cat==="cafe"){ var v = VAR[p.id]; pic = '<div class="pic ph" style="background:'+v.bg+'"><img src="'+v.img+'" alt="Bolsa de café Somos Barrio '+v.n+'" loading="lazy" width="260" height="404"></div>'; title = v.n; desc = v.d; meta = '<span class="tst">Tueste '+beans(v.t)+'</span>'; }
-    else if(p.cat==="yerba"){ pic = '<div class="pic y">'+yerba()+'</div>'; title = p.name; desc = p.desc; }
-    else { pic = '<div class="pic k ph"><div class="duo">'+yerba()+'<img src="img/cafe-colombia.jpg" alt="" loading="lazy" width="260" height="400"></div></div>'; title = p.name; desc = p.items.join(" + "); }
+    else if(p.cat==="yerba"){ pic = '<div class="pic ph" style="background:#a78058"><img src="img/yerba-barbacua.jpg" alt="Paquete de yerba Sol y Lluvia Barbacuá" loading="lazy" width="168" height="312"></div>'; title = p.name; desc = p.desc; }
+    else { pic = '<div class="pic k ph"><div class="duo"><img class="yb" src="img/yerba-barbacua.jpg" alt="" loading="lazy" width="168" height="312"><img src="img/cafe-colombia.jpg" alt="" loading="lazy" width="260" height="400"></div></div>'; title = p.name; desc = p.items.join(" + "); }
     return '<article class="prod" data-p="'+p.id+'">'+pic+'<div class="bd"><h3>'+title+'</h3>'+meta+'<p>'+desc+'</p>'+controls(p)+
       '<div class="buy"><span class="pr money">'+fmt(priceOf({id:p.id,size:defSize(p)}))+'</span><button class="add" data-add>'+PLUS+'Sumar</button></div></div></article>';
   };
