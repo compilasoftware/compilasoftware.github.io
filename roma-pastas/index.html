@@ -69,6 +69,7 @@ button{cursor:pointer}
 .hbtns{display:flex;gap:10px;flex-wrap:wrap}
 .plate{position:relative;aspect-ratio:1;max-width:min(460px,82vw);width:100%;justify-self:center}
 .plate svg{width:100%;height:auto;display:block}
+.hero-img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block;border:10px solid var(--paper);box-shadow:0 30px 60px -30px rgba(42,31,23,.55)}
 .tag{position:absolute;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:8px 12px;font-size:13px;box-shadow:0 14px 30px -18px rgba(42,31,23,.5);line-height:1.25}
 .tag b{display:block;font-size:14px}
 .tag.a{left:0;top:10%}
@@ -113,10 +114,11 @@ section.blk{padding:26px 0}
 .cat h3{font-family:var(--serif);font-size:22px;font-weight:700;margin:6px 0 2px;letter-spacing:-.015em}
 .cat>p{margin:0 0 12px;color:var(--dim);font-size:14px}
 .grid{display:grid;grid-template-columns:minmax(0,1fr);gap:10px}
-.item{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:12px;display:grid;grid-template-columns:76px minmax(0,1fr);gap:12px;align-items:center;transition:border-color .2s,box-shadow .2s}
+.item{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:12px;display:grid;grid-template-columns:96px minmax(0,1fr);gap:12px;align-items:center;transition:border-color .2s,box-shadow .2s}
 .item.in{border-color:var(--tomato);box-shadow:inset 0 0 0 1px var(--tomato)}
-.pic{width:76px;height:76px;border-radius:16px;background:var(--gold-s);display:grid;place-items:center;overflow:hidden}
+.pic{width:96px;height:96px;border-radius:16px;background:var(--gold-s);display:grid;place-items:center;overflow:hidden}
 .pic svg{width:66px;height:66px}
+.pic img{width:100%;height:100%;object-fit:cover;display:block}
 .item h4{margin:0;font-size:15.5px;font-weight:600;line-height:1.25;letter-spacing:-.01em}
 .item p{margin:3px 0 8px;font-size:13px;color:var(--dim);line-height:1.35}
 .row{display:flex;align-items:center;justify-content:space-between;gap:8px}
@@ -272,26 +274,9 @@ footer a{color:var(--ink)}
           <a class="btn g" href="#carta">Ver la carta</a>
         </div>
       </div>
-      <div class="plate" aria-hidden="true">
-        <svg viewBox="0 0 400 400">
-          <defs>
-            <radialGradient id="pl" cx="50%" cy="45%" r="55%"><stop offset="0" stop-color="#fffdf7"/><stop offset="1" stop-color="#efe4cf"/></radialGradient>
-            <radialGradient id="sz" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#f7dc8f"/><stop offset="1" stop-color="#e2b04a"/></radialGradient>
-          </defs>
-          <circle cx="200" cy="205" r="178" fill="#e4d6bc"/>
-          <circle cx="200" cy="198" r="176" fill="url(#pl)" stroke="#e0d3bb" stroke-width="2"/>
-          <circle cx="200" cy="198" r="128" fill="none" stroke="#ece0c8" stroke-width="2"/>
-          <path d="M108 222c18-60 70-92 118-80 50 12 82 56 70 98-12 44-70 66-120 52-48-14-80-36-68-70z" fill="#c3471f" opacity=".92"/>
-          <path d="M130 216c20-42 60-60 96-50" stroke="#d9663a" stroke-width="10" stroke-linecap="round" fill="none" opacity=".6"/>
-          <g>
-            <circle cx="160" cy="196" r="40" fill="url(#sz)" stroke="#c9952c" stroke-width="2"/><circle cx="160" cy="196" r="24" fill="#f9e3a2" stroke="#d7a43c" stroke-width="1.5" stroke-dasharray="3 4"/>
-            <circle cx="244" cy="180" r="40" fill="url(#sz)" stroke="#c9952c" stroke-width="2"/><circle cx="244" cy="180" r="24" fill="#f9e3a2" stroke="#d7a43c" stroke-width="1.5" stroke-dasharray="3 4"/>
-            <circle cx="206" cy="256" r="40" fill="url(#sz)" stroke="#c9952c" stroke-width="2"/><circle cx="206" cy="256" r="24" fill="#f9e3a2" stroke="#d7a43c" stroke-width="1.5" stroke-dasharray="3 4"/>
-          </g>
-          <g fill="#4f6b3a"><ellipse cx="206" cy="150" rx="9" ry="17" transform="rotate(-30 206 150)"/><ellipse cx="222" cy="148" rx="8" ry="15" transform="rotate(25 222 148)"/><ellipse cx="282" cy="236" rx="8" ry="15" transform="rotate(60 282 236)"/></g>
-          <g fill="#fff8e6" opacity=".9"><circle cx="186" cy="222" r="3"/><circle cx="232" cy="214" r="2.5"/><circle cx="176" cy="164" r="2.5"/><circle cx="264" cy="208" r="3"/><circle cx="214" cy="292" r="2.5"/><circle cx="148" cy="236" r="2"/></g>
-        </svg>
-        <div class="tag a"><b>Sorrentinos de calabaza</b>asada al tomillo</div>
+      <div class="plate">
+        <img class="hero-img" src="img/banner.jpg" alt="Ñoquis de papa con ragoût de ternera de Roma" width="720" height="720">
+        <div class="tag a"><b>Ñoquis con ragoût</b>de ternera, para 2</div>
         <div class="tag b"><b>4.9 en Google</b>59 reseñas</div>
       </div>
     </div>
@@ -321,7 +306,7 @@ footer a{color:var(--ink)}
   <section class="blk" id="carta">
     <div class="wrap">
       <div class="step">Paso 2</div>
-      <div class="sh"><h2>La carta</h2><p>Precios de su carta en QueResto</p></div>
+      <div class="sh"><h2>La carta</h2><p>Fotos y precios de su carta en QueResto</p></div>
       <nav class="cats" id="cats" aria-label="Categorías"></nav>
       <div id="menu"></div>
     </div>
@@ -418,23 +403,23 @@ var CATS=[
   {id:"postres",n:"Postres",d:""}
 ];
 var P=[
-  {id:"nbp",c:"listos",n:"Ñoquis de papa con bechamel de puerros",d:"Listos para comer, 2 porciones.",p:20000,a:"noq",s:"Ñoquis bechamel"},
-  {id:"nfi",c:"listos",n:"Ñoquis de papa con filetto",d:"Listos para comer, 2 porciones.",p:20000,a:"noq",s:"Ñoquis filetto"},
-  {id:"nra",c:"listos",n:"Ñoquis de papa con ragoût de ternera",d:"Listos para comer, 2 porciones.",p:34000,a:"plato",s:"Ñoquis ragoût"},
-  {id:"scb",c:"listos",n:"Sorrentinos de calabaza y muzzarella con bechamel de puerros",d:"Listos para comer, 2 porciones.",p:28000,a:"plato",s:"Sorr. calabaza bechamel"},
-  {id:"sjf",c:"listos",n:"Sorrentinos de jamón y muzzarella con filetto",d:"Listos para comer, 2 porciones.",p:28000,a:"plato",s:"Sorr. jamón filetto"},
-  {id:"agn",c:"pastas",n:"Agnolotti dal plin de pollo y queso azul",d:"El favorito de varias reseñas.",p:14000,a:"plin",s:"Agnolotti pollo y azul"},
-  {id:"sjm",c:"pastas",n:"Sorrentinos de jamón y muzzarella",d:"Puro jamón cocido y muzzarella.",p:14000,a:"sorr",s:"Sorr. jamón y muzza"},
-  {id:"scm",c:"pastas",n:"Sorrentinos de calabaza y muzzarella",d:"Calabaza asada al tomillo.",p:15000,a:"sorr",s:"Sorr. calabaza"},
-  {id:"spf",c:"pastas",n:"Sorrentinos de papa y queso fontina",d:"Fontina levemente picante.",p:12000,a:"sorr",s:"Sorr. papa y fontina"},
-  {id:"spb",c:"pastas",n:"Sorrentinos de papa, berenjena ahumada y tomates secos",d:"Rinde para dos.",p:14000,a:"sorr",s:"Sorr. berenjena ahumada"},
-  {id:"qra",c:"salsas",n:"Queso rallado x 100 g",d:"Queso rallado seleccionado.",p:8000,a:"queso",s:"Queso rallado"},
-  {id:"bec",c:"salsas",n:"Bechamel de puerros",d:"Base de leche con puerros salteados.",p:6000,a:"crema",s:"Bechamel"},
-  {id:"mci",c:"salsas",n:"Manteca saborizada de ciboulette",d:"Rinde 4 porciones.",p:6000,a:"manteca",s:"Manteca ciboulette"},
-  {id:"msa",c:"salsas",n:"Manteca saborizada de salvia",d:"Con salvia de su huerto. Rinde 4.",p:6000,a:"manteca",s:"Manteca salvia"},
-  {id:"rag",c:"salsas",n:"Ragoût",d:"Tomate, crema y ternera a cuchillo. 400 g.",p:15000,a:"salsa",s:"Ragoût"},
-  {id:"fil",c:"salsas",n:"Salsa filetto",d:"Tomate, albahaca y ajo. 350 g.",p:6000,a:"salsa",s:"Filetto"},
-  {id:"bro",c:"postres",n:"Brownie",d:"Individual, congelado. 40 min afuera y listo.",p:10000,a:"brownie",s:"Brownie"}
+  {id:"nbp",img:"img/noquis-puerros.jpg",c:"listos",n:"Ñoquis de papa con bechamel de puerros",d:"Listos para comer, 2 porciones.",p:20000,a:"noq",s:"Ñoquis bechamel"},
+  {id:"nfi",img:"img/noquis-filetto.jpg",c:"listos",n:"Ñoquis de papa con filetto",d:"Listos para comer, 2 porciones.",p:20000,a:"noq",s:"Ñoquis filetto"},
+  {id:"nra",img:"img/banner.jpg",c:"listos",n:"Ñoquis de papa con ragoût de ternera",d:"Listos para comer, 2 porciones.",p:34000,a:"plato",s:"Ñoquis ragoût"},
+  {id:"scb",img:"img/sorr-calabaza-puerros.jpg",c:"listos",n:"Sorrentinos de calabaza y muzzarella con bechamel de puerros",d:"Listos para comer, 2 porciones.",p:28000,a:"plato",s:"Sorr. calabaza bechamel"},
+  {id:"sjf",img:"img/sorr-jamon-filetto.jpg",c:"listos",n:"Sorrentinos de jamón y muzzarella con filetto",d:"Listos para comer, 2 porciones.",p:28000,a:"plato",s:"Sorr. jamón filetto"},
+  {id:"agn",img:"img/agnolotti.jpg",c:"pastas",n:"Agnolotti dal plin de pollo y queso azul",d:"El favorito de varias reseñas.",p:14000,a:"plin",s:"Agnolotti pollo y azul"},
+  {id:"sjm",img:"img/sorr-jamon.jpg",c:"pastas",n:"Sorrentinos de jamón y muzzarella",d:"Puro jamón cocido y muzzarella.",p:14000,a:"sorr",s:"Sorr. jamón y muzza"},
+  {id:"scm",img:"img/sorr-calabaza.jpg",c:"pastas",n:"Sorrentinos de calabaza y muzzarella",d:"Calabaza asada al tomillo.",p:15000,a:"sorr",s:"Sorr. calabaza"},
+  {id:"spf",img:"img/sorr-papa-fontina.jpg",c:"pastas",n:"Sorrentinos de papa y queso fontina",d:"Fontina levemente picante.",p:12000,a:"sorr",s:"Sorr. papa y fontina"},
+  {id:"spb",img:"img/sorr-berenjena.jpg",c:"pastas",n:"Sorrentinos de papa, berenjena ahumada y tomates secos",d:"Rinde para dos.",p:14000,a:"sorr",s:"Sorr. berenjena ahumada"},
+  {id:"qra",img:"img/queso.jpg",c:"salsas",n:"Queso rallado x 100 g",d:"Queso rallado seleccionado.",p:8000,a:"queso",s:"Queso rallado"},
+  {id:"bec",img:"img/bechamel.jpg",c:"salsas",n:"Bechamel de puerros",d:"Base de leche con puerros salteados.",p:6000,a:"crema",s:"Bechamel"},
+  {id:"mci",img:"img/ciboulette.jpg",c:"salsas",n:"Manteca saborizada de ciboulette",d:"Rinde 4 porciones.",p:6000,a:"manteca",s:"Manteca ciboulette"},
+  {id:"msa",img:"img/salvia.jpg",c:"salsas",n:"Manteca saborizada de salvia",d:"Con salvia de su huerto. Rinde 4.",p:6000,a:"manteca",s:"Manteca salvia"},
+  {id:"rag",img:"img/ragout.jpg",c:"salsas",n:"Ragoût",d:"Tomate, crema y ternera a cuchillo. 400 g.",p:15000,a:"salsa",s:"Ragoût"},
+  {id:"fil",img:"img/filetto.jpg",c:"salsas",n:"Salsa filetto",d:"Tomate, albahaca y ajo. 350 g.",p:6000,a:"salsa",s:"Filetto"},
+  {id:"bro",img:"img/brownie.jpg",c:"postres",n:"Brownie",d:"Individual, congelado. 40 min afuera y listo.",p:10000,a:"brownie",s:"Brownie"}
 ];
 var BY={};P.forEach(function(x){BY[x.id]=x});
 var ZONES=[["Caseros",0],["Santos Lugares",2500],["Ciudad Jardín",2500],["Villa Bosch",3000],["Martín Coronado",3000],["El Palomar",3500]];
@@ -494,7 +479,7 @@ function renderMenu(){
   $("#cats").innerHTML=CATS.map(function(c,i){return '<button data-c="'+c.id+'"'+(i===0?' class="on"':'')+'>'+c.n+'</button>'}).join("");
   $("#menu").innerHTML=CATS.map(function(c){
     return '<div class="cat" id="c-'+c.id+'"><h3>'+c.n+'</h3>'+(c.d?'<p>'+c.d+'</p>':'')+'<div class="grid">'+
-      P.filter(function(x){return x.c===c.id}).map(function(x){return '<article class="item" data-id="'+x.id+'"><div class="pic">'+ART[x.a]+'</div><div><h4>'+x.n+'</h4><p>'+x.d+'</p><div class="row"><span class="price">'+fmt(x.p)+'</span><span class="ctl"></span></div></div></article>'}).join("")+'</div></div>';
+      P.filter(function(x){return x.c===c.id}).map(function(x){return '<article class="item" data-id="'+x.id+'"><div class="pic">'+(x.img?'<img src="'+x.img+'" alt="" loading="lazy" width="96" height="96">':ART[x.a])+'</div><div><h4>'+x.n+'</h4><p>'+x.d+'</p><div class="row"><span class="price">'+fmt(x.p)+'</span><span class="ctl"></span></div></div></article>'}).join("")+'</div></div>';
   }).join("");
   renderCtl();
 }
