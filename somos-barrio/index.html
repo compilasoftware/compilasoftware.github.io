@@ -29,7 +29,7 @@ img,svg{display:block}
 [hidden]{display:none!important}
 .wrap{max-width:1120px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-left))}
 .money{font-feature-settings:"tnum";white-space:nowrap}
-@media (prefers-reduced-motion:reduce){*:not(#scene.play *){animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+@media (prefers-reduced-motion:reduce){*:not(#scene.play *):not(.rider):not(.feca):not(.feca-wrap){animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 
 /* barra de boceto */
 .demo{background:var(--ink);color:#efe0cc;font-size:12.5px}
@@ -79,6 +79,33 @@ img,svg{display:block}
 .art{position:relative;border-radius:30px;background:var(--brick);aspect-ratio:1/1;max-width:520px;width:100%;overflow:hidden;justify-self:center;align-self:start}
 .art svg{width:100%;height:100%}
 .art .tag{position:absolute;left:16px;bottom:16px;background:var(--paper);color:var(--ink);border-radius:99px;padding:7px 13px;font-size:13.5px;font-weight:600}
+/* inicio v4: fotos reales + el grano */
+.wm img{height:34px;width:auto;display:block}
+.art{aspect-ratio:4/5;background:var(--ink)}
+.art .ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.05);transition:opacity .8s ease,transform 7s ease-out}
+.art .ph.on{opacity:1;transform:scale(1)}
+.art::after{content:"";position:absolute;left:0;right:0;bottom:0;height:58%;background:linear-gradient(rgba(30,18,12,0),rgba(30,18,12,.82));pointer-events:none;z-index:1}
+.art .tag{z-index:2;top:16px;bottom:auto}
+.feca-wrap{position:absolute;left:3%;bottom:3%;width:50%;z-index:2;animation:rideIn 2s cubic-bezier(.2,.8,.2,1) .4s both}
+.feca{width:100%;height:auto;transform-origin:50% 100%;filter:drop-shadow(0 2px 5px rgba(20,10,5,.7));animation:bobF 1.2s ease-in-out 2.4s infinite alternate}
+.feca.hop{animation:hopF .6s cubic-bezier(.3,1.5,.5,1)}
+@keyframes rideIn{from{transform:translateX(-140%)}}
+@keyframes bobF{to{transform:translateY(-4px) rotate(-1.5deg)}}
+@keyframes hopF{40%{transform:translateY(-18px) rotate(-4deg)}}
+.prod .pic.pp{aspect-ratio:4/3;overflow:hidden;display:block;position:relative}
+.prod .pic.pp img{position:absolute;left:50%;top:50%;height:104%;width:auto;transform:translate(-50%,-50%);mix-blend-mode:multiply;transition:transform .4s cubic-bezier(.3,1.6,.5,1)}
+.prod:hover .pic.pp img{transform:translate(-50%,-52%) rotate(-2deg)}
+.prod .pic.pp img.hop{animation:hop .55s cubic-bezier(.3,1.5,.5,1)}
+.prod .pic.pp .two{position:absolute;inset:0}
+.prod .pic.pp .two img{height:96%}
+.prod .pic.pp .two img:first-child{left:33%}
+.prod .pic.pp .two img:last-child{left:67%}
+.strip{padding:0 0 56px;background:var(--paper)}
+.strip-in{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 16px;scrollbar-width:none}
+.strip-in::-webkit-scrollbar{display:none}
+.strip-in img{flex:none;width:64%;max-width:300px;height:auto;aspect-ratio:3/4;object-fit:cover;border-radius:22px;scroll-snap-align:center}
+.rider{bottom:10px;width:130px}
+
 /* escena del inicio */
 .team p span{font-weight:500;color:var(--dim);font-size:13.5px;margin-left:4px}
 .team button.on{background:var(--ink);color:var(--paper)}
@@ -139,12 +166,12 @@ img,svg{display:block}
 .shop{display:grid;gap:30px}
 .live{max-width:360px;width:100%;justify-self:center}
 .live-cap{font-weight:600;font-size:15px;margin:0 0 10px;text-align:center}
-.phone{background:#1b1411;border-radius:38px;padding:10px;box-shadow:0 40px 70px -40px rgba(44,26,18,.7)}
+.phone{background:#1b1411;border-radius:38px;padding:10px;display:flex;flex-direction:column;height:560px;box-shadow:0 40px 70px -40px rgba(44,26,18,.7)}
 .ph-top{display:flex;align-items:center;gap:10px;background:#1f5c4d;color:#fff;border-radius:28px 28px 0 0;padding:14px 16px 12px}
 .ph-top .av{width:34px;height:34px;border-radius:50%;background:var(--brick);display:grid;place-items:center;font-size:12px;font-weight:700;letter-spacing:.05em}
 .ph-top b{display:block;font-size:15px;line-height:1.2}
 .ph-top small{font-size:12px;opacity:.8}
-.ph-chat{background:#ece3d6;min-height:300px;max-height:420px;overflow-y:auto;padding:14px 10px;display:flex;flex-direction:column;justify-content:flex-end;gap:8px}
+.ph-chat{background:#ece3d6;flex:1;min-height:0;overflow-y:auto;padding:14px 10px;display:flex;flex-direction:column;justify-content:flex-end;gap:8px}
 .ph-sys{align-self:center;background:#fff8e6;color:#5b4a3e;font-size:13px;border-radius:10px;padding:8px 12px;text-align:center;max-width:90%}
 .bub{align-self:flex-end;background:#d8f5c4;color:#17280f;border-radius:12px 12px 4px 12px;padding:9px 11px 6px;font-size:13.5px;line-height:1.42;white-space:pre-wrap;max-width:94%;box-shadow:0 1px 1px rgba(0,0,0,.08);transform-origin:bottom right}
 .bub.pop{animation:pop .35s cubic-bezier(.3,1.5,.5,1)}
@@ -155,9 +182,9 @@ img,svg{display:block}
 .ph-in i{width:38px;height:38px;border-radius:50%;background:#1f5c4d;color:#fff;display:grid;place-items:center}
 #liveGo{margin-top:14px}
 .prev{background:none;padding:0}
-.prev .ph-chat{min-height:0;border-radius:16px;justify-content:flex-start}
+.prev .ph-chat{min-height:0;flex:none;max-height:340px;border-radius:16px;justify-content:flex-start}
 
-@media (prefers-reduced-motion:reduce){.rider{left:auto;right:6%}.vap path{opacity:.6}}
+
 
 /* secciones */
 section{scroll-margin-top:70px}
@@ -335,9 +362,14 @@ footer a{color:#fff}
 @media (min-width:960px){
   .shop{grid-template-columns:minmax(0,1fr) 330px;align-items:start;gap:36px}
   .shop .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .live{position:sticky;top:86px}
+  .live{position:sticky;top:84px}
+  .phone{height:clamp(360px,calc(100vh - 230px),600px)}
+  .prod .pic.pp{aspect-ratio:16/10}
+  .prod .bd{padding:14px 18px 16px;gap:9px}
   .fbar{display:none}
-  .rider{width:180px}
+  .rider{width:170px}
+  .strip-in{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);overflow:visible}
+  .strip-in img{width:100%;max-width:none}
   .nav{display:flex}
   .hero{padding:44px 0 80px}
   .hero .wrap{grid-template-columns:1.05fr .95fr;grid-template-areas:"h1 art" "lead art" "team art" "meta art";grid-template-rows:auto auto auto 1fr;column-gap:56px;align-items:start}
@@ -358,7 +390,7 @@ footer a{color:#fff}
 
 <header class="top" id="top">
   <div class="wrap">
-    <a class="wm" href="#inicio" aria-label="Somos Barrio, inicio">SOMOS<br>BARRIO</a>
+    <a class="wm" href="#inicio"><img src="img/logo.webp" alt="Somos Barrio" width="520" height="220"></a>
     <nav class="nav" aria-label="Secciones">
       <a href="#tienda">Tienda</a><a href="#guia">Guía de café</a><a href="#recetas">Recetas</a><a href="#nosotras">Nosotras</a>
     </nav>
@@ -376,13 +408,13 @@ footer a{color:#fff}
       <h1>Tu ritual de todos los días.</h1>
       <p class="lead">Unimos dos pasiones: el mate y el café de calidad. Pedilo en grano o molido y te llega a tu puerta, desde Vicente López a todo el país.</p>
       <div class="team">
-        <p>¿Qué team sos? <span>Tocá y mirá</span></p>
+        <p>¿Qué team sos?</p>
         <div class="opts">
           <button data-team="yerba" aria-pressed="false"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 13h14v3a7 7 0 0 1-14 0z"/><path d="M11 13c0-3 2-4 5-4s5 1 5 4"/><path d="M19 9l4-6"/><path d="M12 26h8"/></svg>Mate</button>
-          <button data-team="cafe" aria-pressed="true" class="on"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 12h15v6a7 7 0 0 1-7 7h-1a7 7 0 0 1-7-7z"/><path d="M22 14h2a3 3 0 0 1 0 6h-2"/><path d="M12 4c1 2-1 3 0 5M16 4c1 2-1 3 0 5"/></svg>Café</button>
+          <button data-team="cafe" aria-pressed="false"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 12h15v6a7 7 0 0 1-7 7h-1a7 7 0 0 1-7-7z"/><path d="M22 14h2a3 3 0 0 1 0 6h-2"/><path d="M12 4c1 2-1 3 0 5M16 4c1 2-1 3 0 5"/></svg>Café</button>
           <button data-team="combo" aria-pressed="false"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 14h10v4a5 5 0 0 1-10 0z"/><path d="M17 12h10v6a5 5 0 0 1-5 5h0a5 5 0 0 1-5-5z"/><path d="M8 10l2-4M21 6c1 2-1 3 0 5"/></svg>Depende</button>
         </div>
-        <a class="btn p w heroCta" id="heroCta" href="#tienda">Ver los cafés</a>
+        <a class="btn p w heroCta" id="heroCta" href="#tienda">Ver la tienda</a>
       </div>
       <div class="meta">
         <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Olivos, Vicente López</span>
@@ -391,59 +423,11 @@ footer a{color:#fff}
     </div>
 
     <div class="art" id="art">
-      <svg viewBox="0 0 400 400" aria-hidden="true" id="scene">
-        <circle cx="330" cy="70" r="30" fill="#e2a948"/>
-        <g class="rain" stroke="#f3e8d6" stroke-width="3" stroke-linecap="round" opacity=".55"><path d="M300 118l-5 12M318 120l-5 12M336 118l-5 12"/></g>
-        <path d="M300 104c-10 0-16-8-12-16 3-6 10-7 14-4 3-9 16-11 22-3 9-1 14 7 11 14-2 6-8 9-14 9z" fill="#f3e8d6" opacity=".9"/>
-        <rect x="0" y="338" width="400" height="62" fill="#7a2c16"/>
-        <path d="M0 338h400" stroke="#5e210f" stroke-width="3"/>
-
-        <!-- CAFÉ: cafetera italiana que sirve en un vaso -->
-        <g id="scCafe">
-          <g transform="translate(140 112)"><g class="pot">
-            <path d="M-8 -70h16v10h-16z" fill="#2c1a12"/>
-            <path d="M-34 -60h68l-6 52h-56z" fill="#e7dcc8"/>
-            <path d="M34 -60l15 -6-8 16z" fill="#e7dcc8"/>
-            <path d="M-12 -60l-2 52M12 -60l2 52" stroke="#c9b89c" stroke-width="2"/>
-            <path d="M-24 -8h48v8h-48z" fill="#2c1a12"/>
-            <path d="M-28 0h56l10 62h-76z" fill="#e7dcc8"/>
-            <path d="M-12 0l-4 62M12 0l4 62" stroke="#c9b89c" stroke-width="2"/>
-            <path d="M-34 -52c-26 2-28 36-2 38" fill="none" stroke="#2c1a12" stroke-width="9" stroke-linecap="round"/>
-          </g></g>
-          <path class="jet" d="M219 92c18 18 26 60 26 128" fill="none" stroke="#3b1d0f" stroke-width="7" stroke-linecap="round" pathLength="100"/>
-          <defs><clipPath id="vaso"><path d="M201 194h88l-9 130h-70z"/></clipPath></defs>
-          <g clip-path="url(#vaso)"><g class="fill">
-            <rect x="195" y="216" width="100" height="120" fill="#3b1d0f"/>
-            <rect x="195" y="210" width="100" height="10" rx="4" fill="#c98a4b"/>
-          </g></g>
-          <path d="M196 190h98l-10 140h-78z" fill="rgba(255,255,255,.07)" stroke="#f3e8d6" stroke-width="5" stroke-linejoin="round"/>
-          <path d="M208 206l-6 96" stroke="#f3e8d6" stroke-width="3" stroke-linecap="round" opacity=".45"/>
-          <ellipse cx="245" cy="334" rx="72" ry="7" fill="#f3e8d6"/>
-          <g class="vap" fill="none" stroke="#f3e8d6" stroke-width="4" stroke-linecap="round"><path d="M226 178c-10-14 10-22 0-38s6-18 0-26"/><path d="M246 172c-10-14 10-22 0-38s6-18 0-26"/><path d="M266 178c-10-14 10-22 0-38s6-18 0-26"/></g>
-        </g>
-
-        <!-- MATE: termo que ceba un mate -->
-        <g id="scMate" class="off">
-          <g transform="translate(120 128)"><g class="termo">
-            <rect x="-26" y="-78" width="52" height="150" rx="12" fill="#56602f"/>
-            <rect x="-26" y="-40" width="52" height="8" fill="#3f4722"/>
-            <rect x="-20" y="-96" width="40" height="20" rx="4" fill="#2f351a"/>
-            <rect x="-9" y="-106" width="18" height="12" rx="2" fill="#2f351a"/>
-            <path d="M26 -60c16 0 16 70 0 70" fill="none" stroke="#2f351a" stroke-width="8"/>
-          </g></g>
-          <path class="jet" d="M205 62c12 30 18 90 20 150" fill="none" stroke="#f3e8d6" stroke-width="5" stroke-linecap="round" opacity=".9" pathLength="100"/>
-          <path d="M184 252c-10 46 16 84 46 84s56-38 46-84c-4-22-18-32-30-34h-32c-12 2-26 12-30 34z" fill="#6b3a1f"/>
-          <path d="M196 274c4 26 16 42 32 48" fill="none" stroke="#8a4f2c" stroke-width="5" stroke-linecap="round"/>
-          <path d="M204 216q26-22 52 0z" fill="#7d9338"/>
-          <rect x="200" y="212" width="60" height="10" rx="3" fill="#d8d2c4"/>
-          <g class="foam" fill="#c8d58a"><circle cx="216" cy="210" r="5"/><circle cx="228" cy="206" r="6"/><circle cx="242" cy="209" r="5"/><circle cx="234" cy="212" r="4"/></g>
-          <path d="M240 214l38-80" stroke="#d8d2c4" stroke-width="6" stroke-linecap="round"/>
-          <path d="M274 142l10-12" stroke="#d8d2c4" stroke-width="8" stroke-linecap="round"/>
-          <g class="vap" fill="none" stroke="#f3e8d6" stroke-width="4" stroke-linecap="round"><path d="M214 196c-10-14 10-22 0-38s6-18 0-26"/><path d="M232 190c-10-14 10-22 0-38s6-18 0-26"/></g>
-        </g>
-      </svg>
-      <span class="tag" id="artTag">Café tostado natural, molido en el barrio</span>
-      <button class="replay" id="replay" aria-label="Servir de nuevo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg></button>
+      <img class="ph on" data-ph="combo" src="img/hero-bici.webp" alt="Yerba Sol y Lluvia sobre el asiento de una bici, en el barrio" width="900" height="1125">
+      <img class="ph" data-ph="yerba" src="img/hero-mate.webp" alt="Mate, termo y yerba al sol" width="900" height="1125">
+      <img class="ph" data-ph="cafe" src="img/hero-cafe.webp" alt="Taza de café en casa" width="900" height="1125">
+      <div class="feca-wrap"><img class="feca" src="img/feca.webp" alt="El grano de Somos Barrio en bici, con su café" width="700" height="718"></div>
+      <span class="tag" id="artTag">Yerba y café, de Vicente López</span>
     </div>
   </div>
 </section>
@@ -459,17 +443,7 @@ footer a{color:#fff}
 
 <section class="ride" aria-label="Envíos">
   <div class="wrap"><p>Hacé tu pedido y te llega a tu puerta.</p></div>
-  <svg class="rider" viewBox="0 0 220 170" aria-hidden="true" fill="none" stroke="#f3e8d6" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
-    <g class="wh"><circle cx="50" cy="128" r="34"/><path d="M50 94v68M16 128h68M26 104l48 48M74 104l-48 48" stroke-width="2"/></g>
-    <g class="wh"><circle cx="178" cy="128" r="34"/><path d="M178 94v68M144 128h68M154 104l48 48M202 104l-48 48" stroke-width="2"/></g>
-    <path d="M50 128l40-52h70l18 52M90 76l34 52h54M124 128l36-52M84 64h18M160 76l-6-22h16"/>
-    <ellipse cx="116" cy="40" rx="24" ry="32" fill="#4b5330"/>
-    <path d="M112 9c12 14-10 26 2 62"/>
-    <path d="M104 72l-10 40M130 70l24 22"/>
-    <path d="M138 44c10 2 16-2 22-10"/>
-    <path d="M154 22h18v8a9 9 0 0 1-18 0z" fill="#4b5330"/>
-    <path class="vp" d="M160 16c-4-6 4-8 0-14M168 16c-4-6 4-8 0-14" stroke-width="3"/>
-  </svg>
+  <img class="rider" src="img/feca.webp" alt="" width="700" height="718">
 </section>
 
 <section class="sec" id="tienda">
@@ -590,6 +564,15 @@ footer a{color:#fff}
   </div>
 </section>
 
+<section class="strip" aria-label="Fotos de Somos Barrio">
+  <div class="strip-in">
+    <img src="img/barrio-1.webp" alt="Yerba Sol y Lluvia en el escalón de una vereda" width="640" height="853" loading="lazy">
+    <img src="img/barrio-2.webp" alt="Mate, termo y yerba en la calle" width="640" height="853" loading="lazy">
+    <img src="img/barrio-3.webp" alt="Mate y yerba Sol y Lluvia" width="640" height="853" loading="lazy">
+    <img src="img/barrio-4.webp" alt="Cosecha de yerba mate" width="640" height="853" loading="lazy">
+  </div>
+</section>
+
 <section class="sec nos" id="nosotras" style="background:var(--paper-2)">
   <div class="wrap">
     <div>
@@ -643,9 +626,9 @@ footer a{color:#fff}
   var GRINDS = ["En grano","Molido para italiana","Molido para filtro","Molido para prensa francesa","Molido para espresso","Molido para cold brew"];
 
   var VAR = {
-    brasil:{n:"Brasil Raudal",d:"Origen Brasil, 100% arábica.",t:1,c:"#4b5330",bg:"#d3d6bd",img:"img/bolsa-brasil.webp",p:{125:12800,250:22800,500:44500}},
-    colombia:{n:"Colombia Montaña Alta",d:"Dulce y afrutado. Origen Colombia.",t:2,c:"#a8322a",bg:"#efc4b0",img:"img/bolsa-colombia.webp",p:{125:13500,250:25500,500:48500}},
-    blend:{n:"Blend Italiano",d:"Arábica. Una combinación al estilo italiano.",t:3,c:"#22324f",bg:"#c9d3df",img:"img/bolsa-blend.webp",p:{125:12500,250:23000,500:43500}}
+    brasil:{n:"Brasil Raudal",d:"Origen Brasil, 100% arábica.",t:1,c:"#4b5330",bg:"#d3d6bd",img:"img/prod-brasil.webp",p:{125:12800,250:22800,500:44500}},
+    colombia:{n:"Colombia Montaña Alta",d:"Dulce y afrutado. Origen Colombia.",t:2,c:"#a8322a",bg:"#efc4b0",img:"img/prod-colombia.webp",p:{125:13500,250:25500,500:48500}},
+    blend:{n:"Blend Italiano",d:"Arábica. Una combinación al estilo italiano.",t:3,c:"#22324f",bg:"#c9d3df",img:"img/prod-blend.webp",p:{125:12500,250:23000,500:43500}}
   };
   var YER = {500:4800,1000:8500,2000:15000};
   var SIZES = {cafe:[[125,"125 g"],[250,"250 g"],[500,"500 g"]],yerba:[[500,"500 g"],[1000,"1 kg"],[2000,"2 kg"]]};
@@ -729,9 +712,9 @@ footer a{color:#fff}
   var grid = document.getElementById("grid");
   var card = function(p){
     var pic, title, desc, meta = "";
-    if(p.cat==="cafe"){ var v = VAR[p.id]; pic = '<div class="pic cut" style="background:'+v.bg+'"><img src="'+v.img+'" alt="Bolsa de café Somos Barrio '+v.n+'" loading="lazy" width="440" height="726"></div>'; title = v.n; desc = v.d; meta = '<span class="tst">Tueste '+beans(v.t)+'</span>'; }
-    else if(p.cat==="yerba"){ pic = '<div class="pic cut" style="background:#f3dc95"><img src="img/yerba-barbacua.webp" alt="Paquete de yerba Sol y Lluvia Barbacuá" loading="lazy" width="528" height="754"></div>'; title = p.name; desc = p.desc; }
-    else { pic = '<div class="pic cut" style="background:'+(p.id==="k1"?"#e8d9bd":"#dccfb3")+'"><div class="two"><img src="img/yerba-barbacua.webp" alt="" loading="lazy" width="528" height="754"><img src="img/bolsa-'+(p.id==="k1"?"colombia":"blend")+'.webp" alt="" loading="lazy" width="440" height="726"></div></div>'; title = p.name; desc = p.items.join(" + "); }
+    if(p.cat==="cafe"){ var v = VAR[p.id]; pic = '<div class="pic pp" style="background:'+v.bg+'"><img src="'+v.img+'" alt="Bolsa de café Somos Barrio '+v.n+'" loading="lazy" width="640" height="720"></div>'; title = v.n; desc = v.d; meta = '<span class="tst">Tueste '+beans(v.t)+'</span>'; }
+    else if(p.cat==="yerba"){ pic = '<div class="pic pp" style="background:#f3e3a6"><img src="img/prod-yerba.webp" alt="Paquete de yerba Sol y Lluvia Barbacuá" loading="lazy" width="640" height="720"></div>'; title = p.name; desc = p.desc; }
+    else { pic = '<div class="pic pp" style="background:'+(p.id==="k1"?"#ecdcc0":"#e2d4b8")+'"><div class="two"><img src="img/prod-yerba.webp" alt="" loading="lazy" width="640" height="720"><img src="img/prod-'+(p.id==="k1"?"colombia":"blend")+'.webp" alt="" loading="lazy" width="640" height="720"></div></div>'; title = p.name; desc = p.items.join(" + "); }
     return '<article class="prod" data-p="'+p.id+'">'+pic+'<div class="bd"><h3>'+title+'</h3>'+meta+'<p>'+desc+'</p>'+controls(p)+
       '<div class="buy"><span class="pr money">'+fmt(priceOf({id:p.id,size:defSize(p)}))+'</span><button class="add" data-add>'+PLUS+'Sumar</button></div></div></article>';
   };
@@ -744,37 +727,28 @@ footer a{color:#fff}
     renderGrid(f);
   };
   document.querySelectorAll(".chip").forEach(function(c){c.addEventListener("click",function(){setFilter(c.dataset.f)})});
-  /* escena del inicio */
-  var scene = document.getElementById("scene"), art = document.getElementById("art"), heroCta = document.getElementById("heroCta"), artTag = document.getElementById("artTag");
+  /* inicio: fotos que cambian según el team */
+  var art = document.getElementById("art"), heroCta = document.getElementById("heroCta"), artTag = document.getElementById("artTag");
   var reduce = matchMedia("(prefers-reduced-motion:reduce)").matches;
-  var team = "cafe", loopT = null;
+  var team = null;
   var TEAM = {
-    cafe:{show:"cafe",cta:"Ver los cafés",f:"cafe",tag:"Café tostado natural, molido en el barrio"},
-    yerba:{show:"mate",cta:"Ver la yerba",f:"yerba",tag:"Sol y Lluvia Barbacuá, con palo"},
-    combo:{show:"cafe",cta:"Ver los combos",f:"combo",tag:"Un poco de cada uno"}
+    cafe:{ph:"cafe",cta:"Ver los cafés",f:"cafe",tag:"Café tostado natural, molido en el barrio"},
+    yerba:{ph:"yerba",cta:"Ver la yerba",f:"yerba",tag:"Sol y Lluvia Barbacuá, con palo"},
+    combo:{ph:"combo",cta:"Ver los combos",f:"combo",tag:"Un poco de cada uno"}
   };
-  var play = function(which, user){
-    document.getElementById("scCafe").classList.toggle("off", which!=="cafe");
-    document.getElementById("scMate").classList.toggle("off", which!=="mate");
-    scene.classList.remove("play"); void scene.getBoundingClientRect(); if(!reduce || user) scene.classList.add("play");
-  };
-  var setTeam = function(t, user){
-    team = t; clearTimeout(loopT);
+  var setTeam = function(t){
+    team = t;
     document.querySelectorAll("[data-team]").forEach(function(b){var on=b.dataset.team===t; b.classList.toggle("on",on); b.setAttribute("aria-pressed",on)});
+    art.querySelectorAll(".ph").forEach(function(i){ i.classList.toggle("on", i.dataset.ph===TEAM[t].ph); });
     heroCta.textContent = TEAM[t].cta; artTag.textContent = TEAM[t].tag;
-    if(t==="combo"){
-      var seq = ["cafe","mate"], i = 0;
-      var step = function(){ play(seq[i%2], user); i++; if(i<6) loopT = setTimeout(step, 4600); };
-      step();
-    } else play(TEAM[t].show, user);
+    var fc = art.querySelector(".feca"); fc.classList.remove("hop"); void fc.offsetWidth; fc.classList.add("hop");
+    setTimeout(function(){ fc.classList.remove("hop"); }, 650);
   };
-  document.querySelectorAll("[data-team]").forEach(function(b){b.addEventListener("click",function(){ setTeam(b.dataset.team, true); })});
-  document.getElementById("replay").addEventListener("click",function(){ setTeam(team, true); });
+  document.querySelectorAll("[data-team]").forEach(function(b){b.addEventListener("click",function(){ setTeam(b.dataset.team); })});
   heroCta.addEventListener("click",function(e){
-    e.preventDefault(); setFilter(TEAM[team].f);
+    e.preventDefault(); setFilter(team ? TEAM[team].f : "todo");
     document.getElementById(team==="combo"?"promos":"tienda").scrollIntoView({behavior:reduce?"auto":"smooth"});
   });
-  setTimeout(function(){ setTeam("cafe", false); }, 350);
 
   /* carrito */
   var cart = [];
@@ -892,10 +866,10 @@ footer a{color:#fff}
   var M = [
     {k:"moka",n:"Italiana",g:2,gn:"Fina-media",grind:"Molido para italiana",facts:[["Café","Al ras del filtro"],["Agua","Hasta la válvula"],["Tiempo","4 a 5 min"]],
       steps:["Agua caliente en la base, así no se recalienta el café.","Café en el filtro, nivelado y sin apretar.","Fuego bajo con la tapa abierta.","Apenas empieza a burbujear, la sacás del fuego."],tip:"Si sale amargo, bajá el fuego. Si sale aguado, pedilo un poco más fino."},
-    {k:"prensa",n:"Prensa francesa",g:4,gn:"Gruesa",grind:"Molido para prensa francesa",facts:[["Proporción","30 g en 450 ml"],["Agua","93 a 96 °C"],["Tiempo","4 min"]],
-      steps:["Café en la jarra y un chorrito de agua para que se humedezca.","El resto del agua y revolvés suave.","Tapás sin bajar el émbolo y esperás 4 minutos.","Bajás despacio y servís todo, que no quede reposando."],tip:"El agua no tiene que hervir: dejala un minuto después de que suene la pava."},
-    {k:"filtro",n:"Filtro o V60",g:3,gn:"Media",grind:"Molido para filtro",facts:[["Proporción","15 g en 250 ml"],["Agua","92 a 96 °C"],["Tiempo","2½ a 3 min"]],
-      steps:["Mojás el filtro de papel con agua caliente y la tirás.","Café en el filtro y un poco de agua: esperás 30 segundos.","Echás el resto en círculos, de a poco.","Cuando terminó de gotear, listo."],tip:"Si gotea muy rápido y sale flojo, pedilo un toque más fino."},
+    {k:"prensa",n:"Prensa francesa",g:4,gn:"Gruesa",grind:"Molido para prensa francesa",facts:[["Proporción","30 g en 450 ml"],["Agua","90 a 95 °C"],["Tiempo","4 min"]],
+      steps:["Café en la jarra y un chorrito de agua para que se humedezca.","El resto del agua y revolvés suave.","Tapás sin bajar el émbolo y esperás 4 minutos.","Bajás despacio y servís todo, que no quede reposando."],tip:"El agua no tiene que hervir. Con el Blend Italiano, que es de tueste intenso, probá entre 85 y 90 °C para que no amargue."},
+    {k:"filtro",n:"Filtro o V60",g:3,gn:"Media",grind:"Molido para filtro",facts:[["Proporción","15 g en 250 ml"],["Agua","90 a 95 °C"],["Tiempo","2½ a 3 min"]],
+      steps:["Mojás el filtro de papel con agua caliente y la tirás.","Café en el filtro y un poco de agua: esperás 30 segundos.","Echás el resto en círculos, de a poco.","Cuando terminó de gotear, listo."],tip:"Si gotea muy rápido y sale flojo, pedilo un toque más fino. Los tuestes suaves, como el Brasil Raudal, se lucen con el agua más caliente del rango."},
     {k:"espresso",n:"Espresso",g:1,gn:"Fina",grind:"Molido para espresso",facts:[["Café","18 g"],["En la taza","36 g"],["Tiempo","25 a 30 s"]],
       steps:["Llenás el portafiltro y nivelás.","Apretás parejo con el tamper.","Prendés la extracción y medís el tiempo.","Si tarda mucho, molienda más gruesa; si sale rápido, más fina."],tip:"Para espresso lo mejor es moler en el momento. Si no tenés molinillo, pedilo molido y usalo en una o dos semanas."},
     {k:"cold",n:"Cold brew",g:5,gn:"Muy gruesa",grind:"Molido para cold brew",facts:[["Proporción","100 g en 800 ml"],["Agua","Fría"],["Tiempo","12 a 18 h"]],
