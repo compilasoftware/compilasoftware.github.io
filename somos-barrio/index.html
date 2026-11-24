@@ -1,0 +1,683 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#93391f">
+<title>Somos Barrio, yerba y café</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2393391f'/%3E%3Cellipse cx='32' cy='33' rx='15' ry='20' fill='none' stroke='%23f3e8d6' stroke-width='4'/%3E%3Cpath d='M30 15c6 8-6 14 0 36' fill='none' stroke='%23f3e8d6' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Geist:wght@400;500;600;700&display=swap">
+<style>
+/* Somos Barrio: yerba Sol y Lluvia y café tostado natural, Vicente López / Olivos.
+   Paleta sacada de su Instagram: ladrillo (vaso y posts rojos), oliva (posts verdes), papel crema (posts claros),
+   tinta café. Lo memorable: el selector "¿con qué lo hacés?" que te dice la molienda y la receta para tu cafetera. */
+:root{
+  --paper:#f3e8d6;--paper-2:#eadbc3;--card:#fffaf1;--ink:#2c1a12;--ink-2:#4e3326;--dim:#7a6152;--line:#dccab0;
+  --brick:#93391f;--brick-d:#782c16;--brick-s:#f4d9cb;--olive:#4b5330;--olive-d:#3a4125;--olive-s:#dfe2cc;--sun:#e2a948;
+  --disp:"Bricolage Grotesque","Geist",system-ui,sans-serif;--ui:"Geist",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--ui);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+body{overflow-x:hidden}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+img,svg{display:block}
+:focus-visible{outline:2.5px solid var(--brick);outline-offset:2px}
+[hidden]{display:none!important}
+.wrap{max-width:1120px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-left))}
+.money{font-feature-settings:"tnum";white-space:nowrap}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+
+/* barra de boceto */
+.demo{background:var(--ink);color:#efe0cc;font-size:12.5px}
+.demo .wrap{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:34px}
+.demo span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.demo b{color:#fff}
+.demo a{color:#fff;font-weight:600;flex:none}
+
+/* header */
+.top{position:sticky;top:0;z-index:40;background:rgba(243,232,214,.93);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:border-color .2s}
+.top.sc{border-color:var(--line)}
+.top .wrap{display:flex;align-items:center;gap:14px;height:64px}
+.wm{font-family:var(--disp);font-weight:800;font-size:15px;line-height:1.02;letter-spacing:.16em;color:var(--ink);text-decoration:none;flex:none}
+.nav{display:none;gap:22px;margin-left:28px}
+.nav a{color:var(--ink-2);text-decoration:none;font-weight:500;font-size:15px}
+.nav a:hover{color:var(--brick)}
+.cartbtn{margin-left:auto;display:inline-flex;align-items:center;gap:8px;border:0;background:var(--ink);color:var(--paper);border-radius:99px;padding:9px 14px 9px 12px;font-weight:600;font-size:14.5px}
+.cartbtn .n{background:var(--sun);color:var(--ink);border-radius:99px;min-width:21px;height:21px;line-height:21px;font-size:12.5px;text-align:center;padding:0 6px}
+.cartbtn.bump{animation:bump .4s ease}
+@keyframes bump{40%{transform:scale(1.08)}}
+
+/* botones */
+.btn{border:0;border-radius:99px;padding:14px 20px;font-weight:600;font-size:15.5px;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:9px;transition:background .2s,transform .15s}
+.btn:active{transform:scale(.97)}
+.btn.p{background:var(--brick);color:#fff}
+.btn.p:hover{background:var(--brick-d)}
+.btn.o{background:var(--olive);color:#fff}
+.btn.o:hover{background:var(--olive-d)}
+.btn.g{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.btn.w{width:100%}
+
+/* hero */
+.hero{padding:26px 0 56px}
+.hero .wrap{display:grid;gap:28px}
+.hero h1{font-family:var(--disp);font-weight:800;font-size:clamp(44px,13vw,92px);line-height:.9;letter-spacing:-.035em;margin:0 0 18px;color:var(--brick);text-wrap:balance}
+.hero p.lead{font-size:18px;color:var(--ink-2);max-width:34ch;margin:0 0 26px}
+.team{background:var(--card);border-radius:22px;padding:16px;box-shadow:0 0 0 1px var(--line);max-width:440px}
+.team p{margin:0 0 10px;font-weight:600;font-size:15px}
+.team .opts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.team button{border:0;border-radius:14px;padding:12px 6px 10px;background:var(--paper);font-weight:600;font-size:14.5px;display:flex;flex-direction:column;align-items:center;gap:4px;transition:background .2s,color .2s}
+.team button:hover{background:var(--paper-2)}
+.team button svg{width:30px;height:30px}
+.meta{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:20px;font-size:14px;color:var(--dim)}
+.meta span{display:inline-flex;gap:7px;align-items:center}
+.art{position:relative;border-radius:30px;background:var(--brick);aspect-ratio:1/1;max-width:520px;width:100%;overflow:hidden;justify-self:center}
+.art svg{width:100%;height:100%}
+.art .tag{position:absolute;left:16px;bottom:16px;background:var(--paper);color:var(--ink);border-radius:99px;padding:7px 13px;font-size:13.5px;font-weight:600}
+.steam path{stroke-dasharray:60;stroke-dashoffset:60;animation:steam 2.4s ease-out .3s forwards}
+.steam path:nth-child(2){animation-delay:.6s}
+.steam path:nth-child(3){animation-delay:.9s}
+@keyframes steam{to{stroke-dashoffset:0}}
+
+/* secciones */
+section{scroll-margin-top:70px}
+.sec{padding:60px 0}
+.h2{font-family:var(--disp);font-weight:800;font-size:clamp(32px,8.4vw,54px);line-height:.98;letter-spacing:-.03em;margin:0 0 12px;text-wrap:balance}
+.sub{color:var(--ink-2);font-size:17px;max-width:52ch;margin:0 0 26px}
+
+/* promos */
+.promos{background:var(--olive);color:#f1ead8}
+.promos .h2{color:#fff}
+.promos .sub{color:#dcd8c0}
+.combos{display:grid;gap:14px}
+.combo{background:#f1ead8;color:var(--ink);border-radius:24px;padding:20px;display:grid;gap:12px}
+.combo h3{font-family:var(--disp);font-weight:800;font-size:26px;letter-spacing:-.02em;margin:0;line-height:1}
+.combo ul{margin:0;padding:0;list-style:none;display:grid;gap:6px;font-size:15.5px}
+.combo li{display:flex;gap:9px;align-items:flex-start}
+.combo li i{flex:none;width:8px;height:8px;border-radius:50%;background:var(--brick);margin-top:9px}
+.combo .row{display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1.5px dashed var(--line);padding-top:14px;margin-top:2px}
+.combo .pr{font-family:var(--disp);font-weight:800;font-size:30px;letter-spacing:-.02em;line-height:1}
+.combo .ah{font-size:13px;color:var(--olive);font-weight:600;display:block;margin-top:4px}
+.real{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:#dcd8c0;margin-top:16px}
+
+/* catálogo */
+.chips{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 8px;margin:0 -2px 14px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{border:0;flex:none;border-radius:99px;padding:9px 16px;background:var(--card);box-shadow:inset 0 0 0 1px var(--line);font-weight:600;font-size:14.5px;color:var(--ink-2)}
+.chip.on{background:var(--ink);color:var(--paper);box-shadow:none}
+.grid{display:grid;gap:16px;grid-template-columns:minmax(0,1fr)}
+.prod{background:var(--card);border-radius:24px;overflow:hidden;box-shadow:0 0 0 1px var(--line);display:flex;flex-direction:column}
+.prod .pic{background:var(--paper-2);aspect-ratio:16/10;display:grid;place-items:center;position:relative}
+.prod .pic svg{height:84%;width:auto}
+.prod .pic.c{background:#e9c9b8}
+.prod .pic.y{background:var(--olive-s)}
+.prod .pic.k{background:#e6dcc3}
+.ej{position:absolute;top:12px;left:12px;background:rgba(255,250,241,.92);border-radius:99px;font-size:12px;font-weight:600;padding:4px 10px;color:var(--dim)}
+.prod .bd{padding:16px 18px 18px;display:flex;flex-direction:column;gap:10px;flex:1}
+.prod h3{margin:0;font-size:19px;font-weight:700;letter-spacing:-.015em;line-height:1.2}
+.prod p{margin:0;color:var(--dim);font-size:14.5px}
+.lbl{font-size:13px;font-weight:600;color:var(--ink-2);display:block;margin-bottom:5px}
+select.in,input.in,textarea.in{width:100%;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:11px 12px;font-size:15.5px}
+select.in{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%234e3326' stroke-width='1.8'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:34px}
+.in:focus{border-color:var(--brick);outline:none}
+.buy{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:auto;padding-top:6px}
+.buy .pr{font-size:21px;font-weight:700;letter-spacing:-.02em}
+.add{border:0;border-radius:99px;background:var(--brick);color:#fff;font-weight:600;font-size:15px;padding:11px 16px;display:inline-flex;gap:7px;align-items:center;transition:background .2s}
+.add:hover{background:var(--brick-d)}
+.add.ok{background:var(--olive)}
+.note-cat{font-size:14px;color:var(--dim);margin:18px 0 0}
+
+/* guía de café */
+.guia{background:var(--card);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.tool{border-radius:28px;background:var(--ink);color:#f3e8d6;padding:20px;display:grid;gap:20px}
+.tool .q{font-family:var(--disp);font-weight:800;font-size:24px;letter-spacing:-.02em;margin:0;line-height:1.1;color:#fff}
+.mk{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.mk button{border:0;border-radius:16px;background:#3c271c;color:#f3e8d6;padding:12px 10px;display:flex;align-items:center;gap:10px;font-weight:600;font-size:14.5px;text-align:left;transition:background .2s}
+.mk button svg{flex:none;width:34px;height:34px}
+.mk button:hover{background:#4a3123}
+.mk button.on{background:var(--sun);color:var(--ink)}
+.res{background:#f3e8d6;color:var(--ink);border-radius:22px;padding:20px}
+.res h3{font-family:var(--disp);font-weight:800;font-size:28px;letter-spacing:-.02em;margin:0 0 4px;line-height:1.05}
+.res .rs{color:var(--dim);margin:0 0 16px;font-size:15px}
+.scale{margin:0 0 18px}
+.scale .bar{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
+.scale .bar i{height:40px;border-radius:8px;background:var(--paper-2);display:grid;place-items:center;transition:background .25s}
+.scale .bar i.on{background:var(--brick)}
+.scale .bar i b{display:block;border-radius:50%;background:var(--ink-2)}
+.scale .bar i.on b{background:#fff}
+.scale .ends{display:flex;justify-content:space-between;font-size:12.5px;color:var(--dim);margin-top:6px}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:0 0 16px}
+.facts div{background:var(--card);border-radius:14px;padding:10px 11px}
+.facts small{display:block;font-size:12px;color:var(--dim)}
+.facts b{font-size:15.5px;letter-spacing:-.01em;line-height:1.25;display:block;margin-top:2px}
+.steps{margin:0 0 16px;padding:0;list-style:none;counter-reset:s;display:grid;gap:8px}
+.steps li{counter-increment:s;display:grid;grid-template-columns:26px 1fr;gap:10px;font-size:15px;align-items:start}
+.steps li::before{content:counter(s);width:26px;height:26px;border-radius:50%;background:var(--olive);color:#fff;font-size:13px;font-weight:700;display:grid;place-items:center}
+.res .tip{background:var(--brick-s);border-radius:14px;padding:12px 14px;font-size:14.5px;margin:0 0 14px}
+
+.cards{display:grid;gap:14px;margin-top:22px}
+.gcard{background:var(--paper);border-radius:22px;padding:20px;box-shadow:0 0 0 1px var(--line)}
+.gcard h3{font-family:var(--disp);font-weight:800;font-size:24px;letter-spacing:-.02em;margin:0 0 6px;line-height:1.05}
+.gcard>p{margin:0 0 14px;color:var(--ink-2);font-size:15.5px}
+.acc{border-top:1px solid var(--line)}
+.acc button{width:100%;border:0;background:none;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 0;text-align:left;font-weight:600;font-size:16px}
+.acc button svg{flex:none;transition:transform .25s}
+.acc button[aria-expanded="true"] svg{transform:rotate(45deg)}
+.acc .pn{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease}
+.acc .pn>div{overflow:hidden}
+.acc .pn.open{grid-template-rows:1fr}
+.acc .pn p{margin:0 0 14px;color:var(--ink-2);font-size:15px}
+.pill{display:inline-block;font-size:12.5px;font-weight:600;border-radius:99px;padding:3px 10px;margin:0 6px 8px 0;background:var(--card);box-shadow:inset 0 0 0 1px var(--line)}
+.pill.g{background:var(--olive-s);box-shadow:none;color:var(--olive-d)}
+.pill.r{background:var(--brick-s);box-shadow:none;color:var(--brick-d)}
+
+.recetas{display:grid;gap:14px;margin-top:14px}
+.rec{border-radius:22px;padding:20px;color:#fff}
+.rec.a{background:var(--brick)}
+.rec.b{background:var(--olive)}
+.rec.m{background:var(--paper-2);color:var(--ink)}
+.rec h3{font-family:var(--disp);font-weight:800;font-size:24px;margin:0 0 4px;letter-spacing:-.02em;line-height:1.05}
+.rec .rs{margin:0 0 12px;font-size:14.5px;opacity:.85}
+.rec ol{margin:0;padding-left:20px;display:grid;gap:5px;font-size:15px}
+.rec .src{font-size:13px;margin:12px 0 0;opacity:.8}
+
+/* nosotras */
+.nos .wrap{display:grid;gap:26px}
+.quote{font-family:var(--disp);font-weight:800;font-size:clamp(30px,7.6vw,52px);line-height:1;letter-spacing:-.03em;color:var(--brick);margin:0;text-wrap:balance}
+.nos .who{font-size:15px;color:var(--dim);margin:14px 0 0}
+.how{display:grid;gap:10px}
+.how a,.how div{display:flex;gap:12px;align-items:center;background:var(--card);border-radius:18px;padding:14px 16px;box-shadow:0 0 0 1px var(--line);text-decoration:none;color:var(--ink);font-weight:600}
+.how small{display:block;font-weight:400;color:var(--dim);font-size:13.5px}
+.how svg{flex:none;color:var(--brick)}
+
+footer{background:var(--ink);color:#d9c8b2;padding:36px 0 120px;font-size:14px}
+footer .wm{color:#f3e8d6;font-size:17px}
+footer p{max-width:62ch;margin:16px 0 0}
+footer a{color:#fff}
+
+/* barra flotante + carrito */
+.fbar{position:fixed;left:12px;right:12px;bottom:max(12px,env(safe-area-inset-bottom));z-index:45;border:0;border-radius:18px;background:var(--brick);color:#fff;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 18px;font-weight:600;font-size:15.5px;box-shadow:0 18px 40px -16px rgba(44,26,18,.6);transform:translateY(140%);transition:transform .35s cubic-bezier(.2,.9,.3,1.2)}
+.fbar.show{transform:none}
+.scrim{position:fixed;inset:0;background:rgba(44,26,18,.45);z-index:70;opacity:0;pointer-events:none;transition:opacity .25s}
+.scrim.on{opacity:1;pointer-events:auto}
+.sheet{position:fixed;z-index:80;left:0;right:0;bottom:0;max-height:92vh;background:var(--paper);border-radius:26px 26px 0 0;display:flex;flex-direction:column;transform:translateY(105%);transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.sheet.on{transform:none}
+.sh-hd{display:flex;align-items:center;justify-content:space-between;padding:18px 18px 10px}
+.sh-hd b{font-family:var(--disp);font-weight:800;font-size:26px;letter-spacing:-.02em}
+.x{border:0;background:var(--card);width:40px;height:40px;border-radius:50%;display:grid;place-items:center;box-shadow:0 0 0 1px var(--line)}
+.sh-bd{overflow-y:auto;padding:4px 18px 18px;flex:1;overscroll-behavior:contain}
+.empty{text-align:center;padding:30px 10px;color:var(--dim)}
+.empty b{display:block;color:var(--ink);font-size:17px;margin-bottom:4px}
+.line{display:grid;grid-template-columns:1fr auto;gap:4px 10px;padding:14px 0;border-bottom:1px solid var(--line)}
+.line .nm{font-weight:600;font-size:15.5px;line-height:1.3}
+.line .gr{font-size:13.5px;color:var(--dim);grid-column:1}
+.line .pr{font-weight:600;text-align:right}
+.qty{display:inline-flex;align-items:center;background:var(--card);border-radius:99px;box-shadow:0 0 0 1px var(--line);grid-column:2;justify-self:end}
+.qty button{border:0;background:none;width:34px;height:32px;font-size:18px;line-height:1}
+.qty span{min-width:20px;text-align:center;font-weight:600;font-size:14.5px}
+.form{display:grid;gap:12px;margin-top:18px}
+.seg2{display:grid;gap:8px}
+.seg2 label{display:flex;gap:10px;align-items:flex-start;background:var(--card);border-radius:14px;padding:12px 14px;box-shadow:0 0 0 1px var(--line);cursor:pointer;font-size:15px}
+.seg2 label small{display:block;color:var(--dim);font-size:13px}
+.seg2 input{accent-color:var(--brick);margin-top:4px}
+.seg2 label:has(input:checked){box-shadow:0 0 0 2px var(--brick)}
+.sh-ft{padding:14px 18px max(16px,env(safe-area-inset-bottom));border-top:1px solid var(--line);background:var(--paper)}
+.tot{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px}
+.tot span{color:var(--dim);font-size:14.5px}
+.tot b{font-size:24px;letter-spacing:-.02em}
+.err{color:var(--brick-d);font-size:13.5px;margin:-4px 0 10px;font-weight:600}
+.prev{background:#e4f0d8;border-radius:16px;padding:12px 14px;font-size:13.5px;white-space:pre-wrap;line-height:1.45;margin-top:14px;color:#20301a}
+.prev small{display:block;font-weight:600;color:var(--olive-d);margin-bottom:6px;white-space:normal}
+
+@media (min-width:700px){
+  .combos{grid-template-columns:1fr 1fr}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .mk{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .cards{grid-template-columns:1fr 1fr}
+  .recetas{grid-template-columns:repeat(3,1fr)}
+  .tool{padding:28px}
+}
+@media (min-width:960px){
+  .nav{display:flex}
+  .hero{padding:44px 0 80px}
+  .hero .wrap{grid-template-columns:1.05fr .95fr;align-items:center;gap:48px}
+  .grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .tool{grid-template-columns:.9fr 1.1fr;align-items:start;padding:32px}
+  .nos .wrap{grid-template-columns:1.2fr .8fr;align-items:center;gap:60px}
+  .sec{padding:88px 0}
+  .sheet{left:auto;top:0;width:440px;max-height:none;border-radius:26px 0 0 26px;transform:translateX(105%)}
+  .sheet.on{transform:none}
+  .fbar{left:auto;right:24px;width:340px}
+}
+</style>
+</head>
+<body>
+
+<div class="demo" role="note"><div class="wrap"><span><b>Boceto para Somos Barrio</b> hecho por Compila</span><a href="#nota">Qué es real</a></div></div>
+
+<header class="top" id="top">
+  <div class="wrap">
+    <a class="wm" href="#inicio" aria-label="Somos Barrio, inicio">SOMOS<br>BARRIO</a>
+    <nav class="nav" aria-label="Secciones">
+      <a href="#tienda">Tienda</a><a href="#guia">Guía de café</a><a href="#recetas">Recetas</a><a href="#nosotras">Nosotras</a>
+    </nav>
+    <button class="cartbtn" id="openCart" aria-label="Ver pedido">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1.2 11.1a2 2 0 0 1-2 1.9H8.2a2 2 0 0 1-2-1.9z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+      Pedido <span class="n" id="cartN">0</span>
+    </button>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="inicio">
+  <div class="wrap">
+    <div>
+      <h1>Tu ritual de todos los días.</h1>
+      <p class="lead">Café tostado natural y yerba mate Sol y Lluvia. Desde Vicente López, con envíos a todo el país y prioridad al barrio.</p>
+      <div class="team">
+        <p>¿Qué team sos?</p>
+        <div class="opts">
+          <button data-team="yerba"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 13h14v3a7 7 0 0 1-14 0z"/><path d="M11 13c0-3 2-4 5-4s5 1 5 4"/><path d="M19 9l4-6"/><path d="M12 26h8"/></svg>Mate</button>
+          <button data-team="cafe"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 12h15v6a7 7 0 0 1-7 7h-1a7 7 0 0 1-7-7z"/><path d="M22 14h2a3 3 0 0 1 0 6h-2"/><path d="M12 4c1 2-1 3 0 5M16 4c1 2-1 3 0 5"/></svg>Café</button>
+          <button data-team="combo"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 14h10v4a5 5 0 0 1-10 0z"/><path d="M17 12h10v6a5 5 0 0 1-5 5h0a5 5 0 0 1-5-5z"/><path d="M8 10l2-4M21 6c1 2-1 3 0 5"/></svg>Depende</button>
+        </div>
+      </div>
+      <div class="meta">
+        <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Olivos, Vicente López</span>
+        <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg>Envíos a todo el país</span>
+      </div>
+    </div>
+
+    <div class="art" aria-hidden="true">
+      <svg viewBox="0 0 400 400" fill="none" stroke="#f3e8d6" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="315" cy="88" r="34" fill="#e2a948" stroke="none" opacity=".95"/>
+        <path d="M30 330h340" opacity=".5"/>
+        <!-- bicicleta -->
+        <circle cx="120" cy="290" r="40"/><circle cx="292" cy="290" r="40"/>
+        <path d="M120 290l50-62h82l40 62M170 228l40 62h42M210 290l42-62M162 214h22M252 228l-8-28h20"/>
+        <!-- grano -->
+        <ellipse cx="200" cy="148" rx="50" ry="66" fill="#93391f"/>
+        <path d="M194 84c22 26-18 50 4 128"/>
+        <circle cx="178" cy="136" r="3.5" fill="#f3e8d6"/><circle cx="214" cy="136" r="3.5" fill="#f3e8d6"/>
+        <path d="M186 156c8 7 18 7 24 0"/>
+        <path d="M170 196l-4 32M226 194l26 34"/>
+        <!-- brazo y taza -->
+        <path d="M232 160c18 4 30-2 40-14"/>
+        <path d="M262 128h30v14a15 15 0 0 1-30 0z" fill="#93391f"/>
+        <path d="M292 132h6a6 6 0 0 1 0 12h-6"/>
+        <g class="steam"><path d="M270 116c-6-10 6-14 0-26"/><path d="M282 116c-6-10 6-14 0-26"/><path d="M288 92c4-6 0-10 4-14" opacity=".0"/></g>
+        <path d="M170 162c-14 8-20 30-8 52"/>
+      </svg>
+      <span class="tag">Café tostado natural</span>
+    </div>
+  </div>
+</section>
+
+<section class="sec promos" id="promos">
+  <div class="wrap">
+    <h2 class="h2">Promos épicas</h2>
+    <p class="sub">Las dos que publicaron en agosto, con envío por el barrio. El café lo elegís vos.</p>
+    <div class="combos" id="combos"></div>
+    <span class="real"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Precios tal cual el post del 11 de agosto</span>
+  </div>
+</section>
+
+<section class="sec" id="tienda">
+  <div class="wrap">
+    <h2 class="h2">La tienda</h2>
+    <p class="sub">Elegís, sumás al pedido y nos lo mandás por WhatsApp ya armado. El café va en grano o molido para tu cafetera.</p>
+    <div class="chips" role="tablist" aria-label="Filtrar productos">
+      <button class="chip on" data-f="todo">Todo</button>
+      <button class="chip" data-f="cafe">Café</button>
+      <button class="chip" data-f="yerba">Yerba</button>
+      <button class="chip" data-f="combo">Combos</button>
+    </div>
+    <div class="grid" id="grid"></div>
+    <p class="note-cat">Los productos sueltos y sus precios son de ejemplo: ellas cargan sus variedades de café y lo que vendan.</p>
+  </div>
+</section>
+
+<section class="sec guia" id="guia">
+  <div class="wrap">
+    <h2 class="h2">Guía de café sin tanto biri biri</h2>
+    <p class="sub">Lo justo para que el café te salga rico en casa: qué molienda va con tu cafetera, cómo elegir una máquina y qué molinillo conviene.</p>
+
+    <div class="tool">
+      <div>
+        <p class="q">¿Con qué hacés el café?</p>
+        <p style="margin:6px 0 16px;color:#cdb9a2;font-size:15px">Tocá tu cafetera y te decimos cómo pedirlo y cómo prepararlo.</p>
+        <div class="mk" id="mk"></div>
+      </div>
+      <div class="res" id="res" aria-live="polite"></div>
+    </div>
+
+    <div class="cards">
+      <article class="gcard">
+        <h3>Cómo elegir cafetera</h3>
+        <p>Depende de cuánto café tomás, para cuántos y cuánto tiempo le querés dedicar.</p>
+        <div class="acc" data-acc>
+          <button aria-expanded="false">Italiana (moka)<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+          <div class="pn"><div><span class="pill g">Barata</span><span class="pill g">Sin enchufe</span><span class="pill r">Café intenso</span><p>La de toda la vida. Va sobre la hornalla, dura años y da un café fuerte, parecido a un espresso. Ideal si tomás de a uno o dos.</p></div></div>
+          <button aria-expanded="false">Prensa francesa<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+          <div class="pn"><div><span class="pill g">Facilísima</span><span class="pill g">Varias tazas</span><span class="pill r">Con cuerpo</span><p>Agua caliente, esperás cuatro minutos y bajás el émbolo. Sale un café con cuerpo y se notan los sabores del grano. Necesita molienda gruesa.</p></div></div>
+          <button aria-expanded="false">Filtro o de goteo<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+          <div class="pn"><div><span class="pill g">Para la oficina</span><span class="pill g">Suave</span><p>La eléctrica de goteo te hace una jarra entera sin pensar. Los conos tipo V60 son manuales: más ritual, más control y un café limpio y aromático.</p></div></div>
+          <button aria-expanded="false">Espresso hogareña<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+          <div class="pn"><div><span class="pill r">Más inversión</span><span class="pill g">Cortados y capuchinos</span><p>Si te gusta el café de cafetería con leche espumada. Conviene una con vaporizador y, si podés, sumar un molinillo de muelas: el espresso es el método más exigente con la molienda.</p></div></div>
+          <button aria-expanded="false">De cápsulas<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+          <div class="pn"><div><span class="pill g">Rápida</span><span class="pill r">Café de la marca</span><p>Práctica pero te ata a las cápsulas. Si ya tenés una, existen cápsulas recargables de acero donde ponés tu propio café molido fino.</p></div></div>
+        </div>
+      </article>
+
+      <article class="gcard">
+        <h3>Molinillos: ¿vale la pena?</h3>
+        <p>El café recién molido tiene mucho más aroma. Si todavía no tenés molinillo, pedilo molido para tu cafetera y listo.</p>
+        <div class="acc" data-acc>
+          <button aria-expanded="false">Manual<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+          <div class="pn"><div><span class="pill g">Económico</span><span class="pill g">Molienda pareja</span><p>Girás la manija un minuto y tenés café para una o dos tazas. Buscá uno de muelas cerámicas o de acero con regulación: es la mejor puerta de entrada.</p></div></div>
+          <button aria-expanded="false">Eléctrico de cuchillas<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+          <div class="pn"><div><span class="pill g">Barato</span><span class="pill r">Desparejo</span><p>Es como una minipimer: pica en vez de moler y deja trozos grandes junto con polvo. Sirve para italiana o filtro si lo sacudís mientras muele, no para espresso.</p></div></div>
+          <button aria-expanded="false">Eléctrico de muelas<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+          <div class="pn"><div><span class="pill r">Más caro</span><span class="pill g">Regulable</span><span class="pill g">Para espresso</span><p>Muele parejo y elegís el punto exacto, de gruesa para prensa a fina para espresso. Si tomás café todos los días o tenés máquina de espresso, es la que conviene.</p></div></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="recetas">
+  <div class="wrap">
+    <h2 class="h2">Recetas para la semana</h2>
+    <p class="sub">Tres que salen con lo que hay en casa. Una es de mate, porque acá somos de los dos teams.</p>
+    <div class="recetas">
+      <article class="rec a">
+        <h3>Cold brew</h3>
+        <p class="rs">Para el verano. Se hace la noche anterior.</p>
+        <ol>
+          <li>100 g de café molido grueso en un frasco.</li>
+          <li>800 ml de agua fría, revolvés y tapás.</li>
+          <li>De 12 a 18 horas en la heladera.</li>
+          <li>Colás con filtro de papel o tela.</li>
+          <li>Servís mitad concentrado, mitad agua o leche, con hielo.</li>
+        </ol>
+      </article>
+      <article class="rec b">
+        <h3>Cortado en italiana</h3>
+        <p class="rs">El de todas las mañanas, bien hecho.</p>
+        <ol>
+          <li>Agua caliente hasta la válvula de la base.</li>
+          <li>Café molido fino-medio en el filtro, al ras y sin apretar.</li>
+          <li>Fuego bajo y la tapa abierta.</li>
+          <li>Cuando empieza a burbujear, la sacás del fuego.</li>
+          <li>Un chorrito de leche caliente y listo.</li>
+        </ol>
+      </article>
+      <article class="rec m">
+        <h3>El mate, sin curso</h3>
+        <p class="rs">Así de simple, como lo explicaron ellas.</p>
+        <ol>
+          <li>Yerba hasta ¾.</li>
+          <li>Incliná.</li>
+          <li>Agüita y que repose.</li>
+          <li>Disfrutá.</li>
+        </ol>
+        <p class="src">Del reel del 13 de agosto de @somosbarrio.ar</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="sec nos" id="nosotras" style="background:var(--paper-2)">
+  <div class="wrap">
+    <div>
+      <p class="quote">No cambiamos tu rutina. Le ponemos un café en el medio.</p>
+      <p class="who">Las chicas del barrio, en su Instagram. Elegimos Sol y Lluvia porque tiene 18 meses de estacionamiento natural, palo, buena proporción de hojas y nada de saborizantes.</p>
+    </div>
+    <div class="how">
+      <div><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"/></svg><span>Por WhatsApp<small>El pedido armado desde la tienda</small></span></div>
+      <a href="https://www.instagram.com/somosbarrio.ar/" target="_blank" rel="noopener"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg><span>@somosbarrio.ar<small>Por mensaje directo o comentando un post</small></span></a>
+      <div><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg><span>Envíos a todo el país<small>Con prioridad al barrio: Olivos y Vicente López</small></span></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="wm">SOMOS<br>BARRIO</span>
+    <p id="nota">Boceto hecho por <a href="https://compilasoftware.com" target="_blank" rel="noopener">Compila Software</a> con lo que Somos Barrio publica en Instagram. Es real: los dos combos y sus precios, la yerba Sol y Lluvia y sus características, la zona, el café tostado natural, la forma de pedir y los pasos del mate. Es de ejemplo: los productos sueltos y sus precios, y el número de WhatsApp (el botón abre WhatsApp sin destinatario). Las guías y recetas de café son generales y ellas las ajustan a su gusto. Las ilustraciones son provisorias: van sus fotos y su personaje.</p>
+  </div>
+</footer>
+
+<button class="fbar" id="fbar" aria-label="Ver pedido"><span id="fbarTxt">Ver pedido</span><span class="money" id="fbarTot">$0</span></button>
+
+<div class="scrim" id="scrim"></div>
+<aside class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="shT" aria-hidden="true">
+  <div class="sh-hd"><b id="shT">Tu pedido</b><button class="x" id="closeCart" aria-label="Cerrar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <div class="sh-bd">
+    <div id="lines"></div>
+    <div class="form" id="form">
+      <div class="seg2" role="radiogroup" aria-label="Entrega">
+        <label><input type="radio" name="ent" value="barrio" checked><span>Envío por el barrio<small>Olivos y Vicente López, el día que salen los envíos</small></span></label>
+        <label><input type="radio" name="ent" value="pais"><span>Envío a otra zona<small>Lo coordinan por WhatsApp</small></span></label>
+      </div>
+      <div><label class="lbl" for="fNom">Tu nombre</label><input class="in" id="fNom" autocomplete="name" placeholder="Ej: Caro"></div>
+      <div><label class="lbl" for="fDir">Dirección o barrio</label><input class="in" id="fDir" autocomplete="street-address" placeholder="Ej: Av. Maipú 1200, Olivos"></div>
+      <div><label class="lbl" for="fNota">Algo más (opcional)</label><textarea class="in" id="fNota" rows="2" placeholder="Ej: timbre 3B, después de las 17"></textarea></div>
+    </div>
+    <div class="prev" id="prev" hidden></div>
+  </div>
+  <div class="sh-ft">
+    <div class="tot"><span>Total</span><b class="money" id="tot">$0</b></div>
+    <p class="err" id="err" hidden></p>
+    <button class="btn p w" id="send"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"/></svg>Mandar pedido por WhatsApp</button>
+  </div>
+</aside>
+
+<script>
+(function(){
+  var WA = ""; // número a confirmar: sin número, WhatsApp pide elegir el chat
+  var GRINDS = ["En grano","Molido para italiana","Molido para filtro","Molido para prensa francesa","Molido para espresso","Molido para cold brew"];
+
+  var bag = function(c1,c2,label){
+    return '<svg viewBox="0 0 120 140" aria-hidden="true"><path d="M24 30h72l8 98a6 6 0 0 1-6 6H22a6 6 0 0 1-6-6z" fill="'+c1+'"/><path d="M24 30l6-16h60l6 16" fill="'+c2+'"/><path d="M30 14h60" stroke="#2c1a12" stroke-opacity=".25" stroke-width="3"/>'+
+      '<text x="60" y="70" text-anchor="middle" font-family="Bricolage Grotesque,sans-serif" font-weight="800" font-size="13" letter-spacing="2" fill="#f3e8d6">SOMOS</text><text x="60" y="86" text-anchor="middle" font-family="Bricolage Grotesque,sans-serif" font-weight="800" font-size="13" letter-spacing="2" fill="#f3e8d6">BARRIO</text>'+
+      '<text x="60" y="112" text-anchor="middle" font-family="Geist,sans-serif" font-weight="600" font-size="10" fill="#f3e8d6" opacity=".85">'+label+'</text></svg>';
+  };
+  var yerba = function(label){
+    return '<svg viewBox="0 0 120 140" aria-hidden="true"><rect x="22" y="16" width="76" height="118" rx="6" fill="#f6efdc"/><rect x="22" y="16" width="76" height="30" rx="6" fill="#4b5330"/><circle cx="60" cy="74" r="20" fill="#e2a948"/><path d="M46 98l-4 8M60 98l-4 8M74 98l-4 8" stroke="#4b5330" stroke-width="4" fill="none" stroke-linecap="round"/>'+
+      '<text x="60" y="36" text-anchor="middle" font-family="Geist,sans-serif" font-weight="700" font-size="11" fill="#f6efdc">Sol y Lluvia</text><text x="60" y="124" text-anchor="middle" font-family="Geist,sans-serif" font-weight="600" font-size="10" fill="#4b5330">'+label+'</text></svg>';
+  };
+  var combo = function(){
+    return '<svg viewBox="0 0 200 140" aria-hidden="true"><g transform="translate(6,8) scale(.9)">'+yerba("500 g").replace('<svg viewBox="0 0 120 140" aria-hidden="true">','').replace('</svg>','')+'</g><g transform="translate(80,4) scale(.95)">'+bag("#93391f","#782c16","250 g").replace('<svg viewBox="0 0 120 140" aria-hidden="true">','').replace('</svg>','')+'</g></svg>';
+  };
+
+  var P = [
+    {id:"c250",cat:"cafe",name:"Café Somos Barrio 250 g",desc:"Tostado natural. En grano o molido para tu cafetera.",price:18500,grind:true,pic:"c",svg:function(){return bag("#93391f","#782c16","250 g")}},
+    {id:"c125",cat:"cafe",name:"Café Somos Barrio 125 g",desc:"El mismo café en tamaño para probar.",price:10000,grind:true,pic:"c",svg:function(){return bag("#b4532f","#93391f","125 g")}},
+    {id:"y500",cat:"yerba",name:"Yerba Sol y Lluvia 500 g",desc:"18 meses de estacionamiento natural, con palo y sin saborizantes.",price:8000,pic:"y",svg:function(){return yerba("500 g")}},
+    {id:"k1",cat:"combo",name:"Combo 1",items:["250 g de café a elección","Yerba de 500 g"],price:25000,real:true,grind:true,save:"Suelto saldría $26.500 (ejemplo)"},
+    {id:"k2",cat:"combo",name:"Combo 2",items:["250 g de café a elección","125 g de café a elección","1,5 kg de yerba mate"],price:50000,real:true,grind:true,save:"Suelto saldría $52.500 (ejemplo)"}
+  ];
+  var byId = {}; P.forEach(function(p){byId[p.id]=p});
+
+  var fmt = function(n){return "$"+n.toLocaleString("es-AR")};
+  var esc = function(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})};
+  var grindSel = function(id,val){
+    return '<div><label class="lbl" for="g-'+id+'">Molienda</label><select class="in" id="g-'+id+'" data-g="'+id+'">'+GRINDS.map(function(g){return '<option'+(g===val?' selected':'')+'>'+g+'</option>'}).join("")+'</select></div>';
+  };
+
+  /* combos */
+  document.getElementById("combos").innerHTML = P.filter(function(p){return p.cat==="combo"}).map(function(p){
+    return '<article class="combo"><h3>'+p.name+'</h3><ul>'+p.items.map(function(i){return '<li><i></i>'+i+'</li>'}).join("")+'</ul>'+grindSel(p.id+"x","Molido para italiana")+
+      '<div class="row"><div><span class="pr money">'+fmt(p.price)+'</span><span class="ah">'+p.save+'</span></div><button class="add" data-add="'+p.id+'" data-gs="g-'+p.id+'x">Sumar</button></div></article>';
+  }).join("");
+
+  /* catálogo */
+  var grid = document.getElementById("grid");
+  var renderGrid = function(f){
+    grid.innerHTML = P.filter(function(p){return f==="todo"||p.cat===f}).map(function(p){
+      var pic = p.cat==="combo" ? '<div class="pic k">'+combo()+'</div>' : '<div class="pic '+p.pic+'">'+p.svg()+'<span class="ej">Precio de ejemplo</span></div>';
+      var desc = p.desc || p.items.join(" + ");
+      return '<article class="prod">'+pic+'<div class="bd"><h3>'+p.name+'</h3><p>'+desc+'</p>'+(p.grind?grindSel(p.id,"Molido para italiana"):"")+
+        '<div class="buy"><span class="pr money">'+fmt(p.price)+'</span><button class="add" data-add="'+p.id+'"'+(p.grind?' data-gs="g-'+p.id+'"':'')+'>'+
+        '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Sumar</button></div></div></article>';
+    }).join("");
+  };
+  renderGrid("todo");
+  var setFilter = function(f){
+    document.querySelectorAll(".chip").forEach(function(c){c.classList.toggle("on",c.dataset.f===f)});
+    renderGrid(f);
+  };
+  document.querySelectorAll(".chip").forEach(function(c){c.addEventListener("click",function(){setFilter(c.dataset.f)})});
+  document.querySelectorAll("[data-team]").forEach(function(b){b.addEventListener("click",function(){
+    setFilter(b.dataset.team);
+    document.getElementById(b.dataset.team==="combo"?"promos":"tienda").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion:reduce)").matches?"auto":"smooth"});
+  })});
+
+  /* carrito */
+  var cart = [];
+  try{ cart = JSON.parse(localStorage.getItem("sb-cart")||"[]").filter(function(l){return byId[l.id]}); }catch(e){ cart = []; }
+  var save = function(){ try{ localStorage.setItem("sb-cart",JSON.stringify(cart)); }catch(e){} };
+  var count = function(){return cart.reduce(function(a,l){return a+l.q},0)};
+  var total = function(){return cart.reduce(function(a,l){return a+l.q*byId[l.id].price},0)};
+
+  var cartN = document.getElementById("cartN"), fbar = document.getElementById("fbar");
+  var paint = function(){
+    var n = count(), t = total();
+    cartN.textContent = n;
+    document.getElementById("fbarTxt").textContent = "Ver pedido ("+n+")";
+    document.getElementById("fbarTot").textContent = fmt(t);
+    fbar.classList.toggle("show", n>0 && !sheet.classList.contains("on"));
+    document.getElementById("tot").textContent = fmt(t);
+    var L = document.getElementById("lines");
+    if(!cart.length){
+      L.innerHTML = '<div class="empty"><b>Todavía no sumaste nada</b>Elegí un combo o un café y aparece acá.</div>';
+      document.getElementById("form").hidden = true;
+    } else {
+      document.getElementById("form").hidden = false;
+      L.innerHTML = cart.map(function(l,i){
+        var p = byId[l.id];
+        return '<div class="line"><span class="nm">'+p.name+'</span><span class="pr money">'+fmt(p.price*l.q)+'</span>'+
+          (l.g?'<span class="gr">'+esc(l.g)+'</span>':'<span class="gr"></span>')+
+          '<span class="qty"><button data-dec="'+i+'" aria-label="Uno menos">−</button><span>'+l.q+'</span><button data-inc="'+i+'" aria-label="Uno más">+</button></span></div>';
+      }).join("");
+    }
+    document.getElementById("prev").hidden = true;
+    document.getElementById("err").hidden = true;
+  };
+
+  document.addEventListener("click",function(e){
+    var a = e.target.closest("[data-add]");
+    if(a){
+      var id = a.dataset.add, g = a.dataset.gs ? document.getElementById(a.dataset.gs).value : "";
+      var ex = cart.filter(function(l){return l.id===id && l.g===g})[0];
+      if(ex) ex.q++; else cart.push({id:id,g:g,q:1});
+      save(); paint();
+      var old = a.innerHTML; a.classList.add("ok"); a.textContent = "Sumado";
+      setTimeout(function(){a.classList.remove("ok"); a.innerHTML = old;},1100);
+      var cb = document.getElementById("openCart"); cb.classList.remove("bump"); void cb.offsetWidth; cb.classList.add("bump");
+      return;
+    }
+    var inc = e.target.closest("[data-inc]"), dec = e.target.closest("[data-dec]");
+    if(inc){ cart[+inc.dataset.inc].q++; save(); paint(); }
+    if(dec){ var i=+dec.dataset.dec; cart[i].q--; if(cart[i].q<1) cart.splice(i,1); save(); paint(); }
+  });
+
+  var sheet = document.getElementById("sheet"), scrim = document.getElementById("scrim");
+  var lastFocus = null;
+  var openC = function(){ lastFocus = document.activeElement; sheet.classList.add("on"); scrim.classList.add("on"); sheet.setAttribute("aria-hidden","false"); fbar.classList.remove("show"); document.body.style.overflow="hidden"; setTimeout(function(){document.getElementById("closeCart").focus()},50); };
+  var closeC = function(){ sheet.classList.remove("on"); scrim.classList.remove("on"); sheet.setAttribute("aria-hidden","true"); document.body.style.overflow=""; paint(); if(lastFocus) lastFocus.focus(); };
+  document.getElementById("openCart").addEventListener("click",openC);
+  fbar.addEventListener("click",openC);
+  document.getElementById("closeCart").addEventListener("click",closeC);
+  scrim.addEventListener("click",closeC);
+  document.addEventListener("keydown",function(e){ if(e.key==="Escape" && sheet.classList.contains("on")) closeC(); });
+
+  var buildMsg = function(){
+    var ent = document.querySelector('input[name="ent"]:checked').value;
+    var nom = document.getElementById("fNom").value.trim(), dir = document.getElementById("fDir").value.trim(), nota = document.getElementById("fNota").value.trim();
+    var lines = cart.map(function(l){ var p=byId[l.id]; return "• "+l.q+" x "+p.name+(l.g?" ("+l.g.toLowerCase()+")":"")+": "+fmt(p.price*l.q); });
+    return "Hola chicas! Soy "+nom+" y quiero hacer este pedido:\n"+lines.join("\n")+"\nTotal: "+fmt(total())+
+      "\nEntrega: "+(ent==="barrio"?"envío por el barrio":"envío a otra zona")+"\nDirección: "+dir+(nota?"\nNota: "+nota:"");
+  };
+  document.getElementById("send").addEventListener("click",function(){
+    var err = document.getElementById("err");
+    if(!cart.length){ err.textContent="Sumá algo al pedido antes de mandarlo."; err.hidden=false; return; }
+    if(!document.getElementById("fNom").value.trim() || !document.getElementById("fDir").value.trim()){ err.textContent="Completá tu nombre y la dirección o el barrio."; err.hidden=false; return; }
+    err.hidden = true;
+    var msg = buildMsg();
+    var pv = document.getElementById("prev");
+    pv.innerHTML = "<small>Este es el mensaje que les llega por WhatsApp</small>"+esc(msg);
+    pv.hidden = false;
+    pv.scrollIntoView({block:"nearest"});
+    window.open("https://wa.me/"+WA+"?text="+encodeURIComponent(msg),"_blank","noopener");
+  });
+
+  /* guía: selector de cafetera */
+  var ico = {
+    moka:'<svg viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><path d="M10 4h12l-2 11h-8z"/><path d="M12 15l-3 15h16l-3-15"/><path d="M22 7h4l-3 6"/><path d="M8 15h18"/></svg>',
+    prensa:'<svg viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><rect x="9" y="9" width="14" height="21" rx="2"/><path d="M16 3v16M11 19h10M23 13h3v10h-3M13 3h6"/></svg>',
+    filtro:'<svg viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><path d="M6 6h22l-8 12h-6z"/><path d="M12 22h10v8H12z"/><path d="M17 18v4"/></svg>',
+    espresso:'<svg viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><rect x="5" y="4" width="24" height="9" rx="2"/><path d="M8 13v17M26 13v17M5 30h24M13 13v4h8v-4"/><path d="M13 22h8v3a4 4 0 0 1-8 0z"/></svg>',
+    cold:'<svg viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><path d="M10 6h14l-2 24H12z"/><rect x="13" y="12" width="5" height="5" rx="1"/><rect x="17" y="18" width="5" height="5" rx="1"/></svg>',
+    capsula:'<svg viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><path d="M9 10h16l-3 16h-10z"/><path d="M7 10h20"/><path d="M13 16h8"/></svg>'
+  };
+  var M = [
+    {k:"moka",n:"Italiana",g:2,gn:"Fina-media",grind:"Molido para italiana",facts:[["Café","Al ras del filtro"],["Agua","Hasta la válvula"],["Tiempo","4 a 5 min"]],
+      steps:["Agua caliente en la base, así no se recalienta el café.","Café en el filtro, nivelado y sin apretar.","Fuego bajo con la tapa abierta.","Apenas empieza a burbujear, la sacás del fuego."],tip:"Si sale amargo, bajá el fuego. Si sale aguado, pedilo un poco más fino."},
+    {k:"prensa",n:"Prensa francesa",g:4,gn:"Gruesa",grind:"Molido para prensa francesa",facts:[["Proporción","30 g en 450 ml"],["Agua","93 a 96 °C"],["Tiempo","4 min"]],
+      steps:["Café en la jarra y un chorrito de agua para que se humedezca.","El resto del agua y revolvés suave.","Tapás sin bajar el émbolo y esperás 4 minutos.","Bajás despacio y servís todo, que no quede reposando."],tip:"El agua no tiene que hervir: dejala un minuto después de que suene la pava."},
+    {k:"filtro",n:"Filtro o V60",g:3,gn:"Media",grind:"Molido para filtro",facts:[["Proporción","15 g en 250 ml"],["Agua","92 a 96 °C"],["Tiempo","2½ a 3 min"]],
+      steps:["Mojás el filtro de papel con agua caliente y la tirás.","Café en el filtro y un poco de agua: esperás 30 segundos.","Echás el resto en círculos, de a poco.","Cuando terminó de gotear, listo."],tip:"Si gotea muy rápido y sale flojo, pedilo un toque más fino."},
+    {k:"espresso",n:"Espresso",g:1,gn:"Fina",grind:"Molido para espresso",facts:[["Café","18 g"],["En la taza","36 g"],["Tiempo","25 a 30 s"]],
+      steps:["Llenás el portafiltro y nivelás.","Apretás parejo con el tamper.","Prendés la extracción y medís el tiempo.","Si tarda mucho, molienda más gruesa; si sale rápido, más fina."],tip:"Para espresso lo mejor es moler en el momento. Si no tenés molinillo, pedilo molido y usalo en una o dos semanas."},
+    {k:"cold",n:"Cold brew",g:5,gn:"Muy gruesa",grind:"Molido para cold brew",facts:[["Proporción","100 g en 800 ml"],["Agua","Fría"],["Tiempo","12 a 18 h"]],
+      steps:["Café y agua fría en un frasco.","Revolvés, tapás y a la heladera.","Al otro día colás con filtro.","Servís mitad concentrado y mitad agua o leche, con hielo."],tip:"El concentrado dura cerca de una semana en la heladera."},
+    {k:"capsula",n:"Cápsulas",g:1,gn:"Fina",grind:"Molido para espresso",facts:[["Café","5 a 7 g"],["Cápsula","Recargable"],["Tiempo","Lo hace la máquina"]],
+      steps:["Conseguí cápsulas recargables para tu máquina.","Las llenás con café molido fino.","Apretás apenas con la tapita.","Las usás como cualquier cápsula."],tip:"Pedilo molido para espresso: es el punto que usan estas máquinas."}
+  ];
+  var mk = document.getElementById("mk"), res = document.getElementById("res");
+  mk.innerHTML = M.map(function(m,i){return '<button data-m="'+i+'" aria-pressed="false">'+ico[m.k]+m.n+'</button>'}).join("");
+  var showM = function(i){
+    var m = M[i];
+    mk.querySelectorAll("button").forEach(function(b){var on=+b.dataset.m===i; b.classList.toggle("on",on); b.setAttribute("aria-pressed",on)});
+    var sizes = [3,4.5,6,8,10];
+    res.innerHTML = '<h3>'+m.n+'</h3><p class="rs">Molienda '+m.gn.toLowerCase()+'</p>'+
+      '<div class="scale" role="img" aria-label="Molienda '+m.gn+'"><div class="bar">'+[1,2,3,4,5].map(function(n){return '<i class="'+(n===m.g?"on":"")+'"><b style="width:'+sizes[n-1]+'px;height:'+sizes[n-1]+'px"></b></i>'}).join("")+'</div><div class="ends"><span>Fina</span><span>Gruesa</span></div></div>'+
+      '<div class="facts">'+m.facts.map(function(f){return '<div><small>'+f[0]+'</small><b>'+f[1]+'</b></div>'}).join("")+'</div>'+
+      '<ol class="steps">'+m.steps.map(function(s){return '<li>'+s+'</li>'}).join("")+'</ol>'+
+      '<p class="tip">'+m.tip+'</p>'+
+      '<button class="btn p w" data-quick="'+m.grind+'">Pedir 250 g molido para '+m.n.toLowerCase()+'</button>';
+  };
+  mk.addEventListener("click",function(e){var b=e.target.closest("[data-m]"); if(b) showM(+b.dataset.m);});
+  res.addEventListener("click",function(e){
+    var b = e.target.closest("[data-quick]"); if(!b) return;
+    var g = b.dataset.quick === "Molido para espresso" ? "Molido para espresso" : b.dataset.quick;
+    var ex = cart.filter(function(l){return l.id==="c250" && l.g===g})[0];
+    if(ex) ex.q++; else cart.push({id:"c250",g:g,q:1});
+    save(); paint(); b.textContent = "Sumado al pedido";
+  });
+  showM(0);
+
+  /* acordeones */
+  document.querySelectorAll("[data-acc] > button").forEach(function(b){
+    b.addEventListener("click",function(){
+      var open = b.getAttribute("aria-expanded")==="true";
+      b.setAttribute("aria-expanded",!open);
+      b.nextElementSibling.classList.toggle("open",!open);
+    });
+  });
+
+  /* header con borde al scrollear */
+  var top = document.getElementById("top");
+  addEventListener("scroll",function(){top.classList.toggle("sc",scrollY>8)},{passive:true});
+
+  paint();
+})();
+</script>
+</body>
+</html>
