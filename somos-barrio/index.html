@@ -128,6 +128,14 @@ select.in{appearance:none;-webkit-appearance:none;background-image:url("data:ima
 .add{border:0;border-radius:99px;background:var(--brick);color:#fff;font-weight:600;font-size:15px;padding:11px 16px;display:inline-flex;gap:7px;align-items:center;transition:background .2s}
 .add:hover{background:var(--brick-d)}
 .add.ok{background:var(--olive)}
+.sz{display:flex;gap:6px}
+.sz button{flex:1;border:0;border-radius:12px;padding:10px 0;background:var(--paper);box-shadow:inset 0 0 0 1px var(--line);font-weight:600;font-size:14.5px;transition:background .2s}
+.sz button.on{background:var(--ink);color:var(--paper);box-shadow:none}
+.tst{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--dim);font-weight:600;margin-top:-4px}
+.beans{display:inline-flex;gap:3px}
+.beans i{width:9px;height:12px;border-radius:50%;background:var(--line)}
+.beans i.on{background:#6b3a1f}
+.combo .in{background-color:#fff}
 .note-cat{font-size:14px;color:var(--dim);margin:18px 0 0}
 
 /* guía de café */
@@ -214,6 +222,8 @@ footer a{color:#fff}
 .line{display:grid;grid-template-columns:1fr auto;gap:4px 10px;padding:14px 0;border-bottom:1px solid var(--line)}
 .line .nm{font-weight:600;font-size:15.5px;line-height:1.3}
 .line .gr{font-size:13.5px;color:var(--dim);grid-column:1}
+.line .gr::first-letter{text-transform:uppercase}
+.line .gr{display:block}
 .line .pr{font-weight:600;text-align:right}
 .qty{display:inline-flex;align-items:center;background:var(--card);border-radius:99px;box-shadow:0 0 0 1px var(--line);grid-column:2;justify-self:end}
 .qty button{border:0;background:none;width:34px;height:32px;font-size:18px;line-height:1}
@@ -276,7 +286,7 @@ footer a{color:#fff}
   <div class="wrap">
     <div>
       <h1>Tu ritual de todos los días.</h1>
-      <p class="lead">Café tostado natural y yerba mate Sol y Lluvia. Desde Vicente López, con envíos a todo el país y prioridad al barrio.</p>
+      <p class="lead">Unimos dos pasiones: el mate y el café de calidad. Pedilo en grano o molido y te llega a tu puerta, desde Vicente López a todo el país.</p>
       <div class="team">
         <p>¿Qué team sos?</p>
         <div class="opts">
@@ -319,16 +329,16 @@ footer a{color:#fff}
 <section class="sec promos" id="promos">
   <div class="wrap">
     <h2 class="h2">Promos épicas</h2>
-    <p class="sub">Las dos que publicaron en agosto, con envío por el barrio. El café lo elegís vos.</p>
+    <p class="sub">Con envío por el barrio. Los cafés los elegís vos.</p>
     <div class="combos" id="combos"></div>
-    <span class="real"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Precios tal cual el post del 11 de agosto</span>
+    <span class="real"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Precios del post del 11 de agosto</span>
   </div>
 </section>
 
 <section class="sec" id="tienda">
   <div class="wrap">
     <h2 class="h2">La tienda</h2>
-    <p class="sub">Elegís, sumás al pedido y nos lo mandás por WhatsApp ya armado. El café va en grano o molido para tu cafetera.</p>
+    <p class="sub">Tres cafés tostados natural, en grano o molidos para tu cafetera, y la yerba Sol y Lluvia Barbacuá. Sumás lo que quieras y el pedido nos llega armado por WhatsApp.</p>
     <div class="chips" role="tablist" aria-label="Filtrar productos">
       <button class="chip on" data-f="todo">Todo</button>
       <button class="chip" data-f="cafe">Café</button>
@@ -336,7 +346,7 @@ footer a{color:#fff}
       <button class="chip" data-f="combo">Combos</button>
     </div>
     <div class="grid" id="grid"></div>
-    <p class="note-cat">Los productos sueltos y sus precios son de ejemplo: ellas cargan sus variedades de café y lo que vendan.</p>
+    <p class="note-cat">Los puntitos son el tueste de cada café, como en sus bolsas: de uno a tres.</p>
   </div>
 </section>
 
@@ -437,7 +447,7 @@ footer a{color:#fff}
       <p class="who">Las chicas del barrio, en su Instagram. Elegimos Sol y Lluvia porque tiene 18 meses de estacionamiento natural, palo, buena proporción de hojas y nada de saborizantes.</p>
     </div>
     <div class="how">
-      <div><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"/></svg><span>Por WhatsApp<small>El pedido armado desde la tienda</small></span></div>
+      <a href="https://wa.me/5491140961998" target="_blank" rel="noopener"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"/></svg><span>Por WhatsApp<small>El pedido llega armado desde la tienda</small></span></a>
       <a href="https://www.instagram.com/somosbarrio.ar/" target="_blank" rel="noopener"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg><span>@somosbarrio.ar<small>Por mensaje directo o comentando un post</small></span></a>
       <div><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg><span>Envíos a todo el país<small>Con prioridad al barrio: Olivos y Vicente López</small></span></div>
     </div>
@@ -448,7 +458,7 @@ footer a{color:#fff}
 <footer>
   <div class="wrap">
     <span class="wm">SOMOS<br>BARRIO</span>
-    <p id="nota">Boceto hecho por <a href="https://compilasoftware.com" target="_blank" rel="noopener">Compila Software</a> con lo que Somos Barrio publica en Instagram. Es real: los dos combos y sus precios, la yerba Sol y Lluvia y sus características, la zona, el café tostado natural, la forma de pedir y los pasos del mate. Es de ejemplo: los productos sueltos y sus precios, y el número de WhatsApp (el botón abre WhatsApp sin destinatario). Las guías y recetas de café son generales y ellas las ajustan a su gusto. Las ilustraciones son provisorias: van sus fotos y su personaje.</p>
+    <p id="nota">Boceto hecho por <a href="https://compilasoftware.com" target="_blank" rel="noopener">Compila Software</a> con lo que Somos Barrio publica en Instagram: los cafés, la yerba y sus precios salen del catálogo de sus historias, y los combos del post del 11 de agosto. El WhatsApp es el de Caro por ahora. Las guías y recetas de café son generales y ellas las ajustan a su gusto. Las ilustraciones son provisorias: van sus fotos y su personaje.</p>
   </div>
 </footer>
 
@@ -479,53 +489,104 @@ footer a{color:#fff}
 
 <script>
 (function(){
-  var WA = ""; // número a confirmar: sin número, WhatsApp pide elegir el chat
+  var WA = "5491140961998"; // por ahora el de Caro
   var GRINDS = ["En grano","Molido para italiana","Molido para filtro","Molido para prensa francesa","Molido para espresso","Molido para cold brew"];
 
-  var bag = function(c1,c2,label){
-    return '<svg viewBox="0 0 120 140" aria-hidden="true"><path d="M24 30h72l8 98a6 6 0 0 1-6 6H22a6 6 0 0 1-6-6z" fill="'+c1+'"/><path d="M24 30l6-16h60l6 16" fill="'+c2+'"/><path d="M30 14h60" stroke="#2c1a12" stroke-opacity=".25" stroke-width="3"/>'+
-      '<text x="60" y="70" text-anchor="middle" font-family="Bricolage Grotesque,sans-serif" font-weight="800" font-size="13" letter-spacing="2" fill="#f3e8d6">SOMOS</text><text x="60" y="86" text-anchor="middle" font-family="Bricolage Grotesque,sans-serif" font-weight="800" font-size="13" letter-spacing="2" fill="#f3e8d6">BARRIO</text>'+
-      '<text x="60" y="112" text-anchor="middle" font-family="Geist,sans-serif" font-weight="600" font-size="10" fill="#f3e8d6" opacity=".85">'+label+'</text></svg>';
+  var VAR = {
+    brasil:{n:"Brasil Raudal",d:"Origen Brasil, 100% arábica.",t:1,c:"#4b5330",bg:"#dfe2cc",p:{125:12800,250:22800,500:44500}},
+    colombia:{n:"Colombia Montaña Alta",d:"Dulce y afrutado. Origen Colombia.",t:2,c:"#a8322a",bg:"#efcdbf",p:{125:13500,250:25500,500:48500}},
+    blend:{n:"Blend Italiano",d:"Arábica. Una combinación al estilo italiano.",t:3,c:"#22324f",bg:"#d2d9e3",p:{125:12500,250:23000,500:43500}}
   };
-  var yerba = function(label){
+  var YER = {500:4800,1000:8500,2000:15000};
+  var SIZES = {cafe:[[125,"125 g"],[250,"250 g"],[500,"500 g"]],yerba:[[500,"500 g"],[1000,"1 kg"],[2000,"2 kg"]]};
+  var PLUS = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>';
+
+  var bag = function(c,label){
+    return '<svg viewBox="0 0 120 140" aria-hidden="true"><path d="M20 22h80l4 108a6 6 0 0 1-6 6H22a6 6 0 0 1-6-6z" fill="#1f1915"/><path d="M20 22h80v8H20z" fill="#2c241f"/><rect x="30" y="40" width="60" height="78" rx="2" fill="'+c+'"/>'+
+      '<text x="60" y="56" text-anchor="middle" font-family="Bricolage Grotesque,sans-serif" font-weight="800" font-size="10.5" letter-spacing="1.5" fill="#f3e2b8">SOMOS</text><text x="60" y="68" text-anchor="middle" font-family="Bricolage Grotesque,sans-serif" font-weight="800" font-size="10.5" letter-spacing="1.5" fill="#f3e2b8">BARRIO</text>'+
+      '<g fill="none" stroke="#f3e2b8" stroke-width="1.6" stroke-linecap="round"><circle cx="47" cy="104" r="8"/><circle cx="73" cy="104" r="8"/><path d="M47 104l10-12h10l6 12M57 92l6 12"/><ellipse cx="60" cy="84" rx="6" ry="8"/></g>'+
+      (label?'<text x="60" y="130" text-anchor="middle" font-family="Geist,sans-serif" font-weight="600" font-size="9" fill="#f3e2b8" opacity=".8">'+label+'</text>':'')+'</svg>';
+  };
+  var yerba = function(){
     return '<svg viewBox="0 0 120 140" aria-hidden="true"><rect x="22" y="16" width="76" height="118" rx="6" fill="#f6efdc"/><rect x="22" y="16" width="76" height="30" rx="6" fill="#4b5330"/><circle cx="60" cy="74" r="20" fill="#e2a948"/><path d="M46 98l-4 8M60 98l-4 8M74 98l-4 8" stroke="#4b5330" stroke-width="4" fill="none" stroke-linecap="round"/>'+
-      '<text x="60" y="36" text-anchor="middle" font-family="Geist,sans-serif" font-weight="700" font-size="11" fill="#f6efdc">Sol y Lluvia</text><text x="60" y="124" text-anchor="middle" font-family="Geist,sans-serif" font-weight="600" font-size="10" fill="#4b5330">'+label+'</text></svg>';
+      '<text x="60" y="36" text-anchor="middle" font-family="Geist,sans-serif" font-weight="700" font-size="11" fill="#f6efdc">Sol y Lluvia</text><text x="60" y="126" text-anchor="middle" font-family="Geist,sans-serif" font-weight="600" font-size="9.5" fill="#4b5330">Barbacuá</text></svg>';
   };
+  var strip = function(s){return s.replace('<svg viewBox="0 0 120 140" aria-hidden="true">','').replace('</svg>','')};
   var combo = function(){
-    return '<svg viewBox="0 0 200 140" aria-hidden="true"><g transform="translate(6,8) scale(.9)">'+yerba("500 g").replace('<svg viewBox="0 0 120 140" aria-hidden="true">','').replace('</svg>','')+'</g><g transform="translate(80,4) scale(.95)">'+bag("#93391f","#782c16","250 g").replace('<svg viewBox="0 0 120 140" aria-hidden="true">','').replace('</svg>','')+'</g></svg>';
+    return '<svg viewBox="0 0 200 140" aria-hidden="true"><g transform="translate(4,10) scale(.88)">'+strip(yerba())+'</g><g transform="translate(78,4) scale(.95)">'+strip(bag("#a8322a",""))+'</g></svg>';
+  };
+  var beans = function(t){
+    var s = '<span class="beans" role="img" aria-label="Tueste '+t+' de 3">';
+    for(var i=1;i<=3;i++) s += '<i class="'+(i<=t?'on':'')+'"></i>';
+    return s+'</span>';
   };
 
   var P = [
-    {id:"c250",cat:"cafe",name:"Café Somos Barrio 250 g",desc:"Tostado natural. En grano o molido para tu cafetera.",price:18500,grind:true,pic:"c",svg:function(){return bag("#93391f","#782c16","250 g")}},
-    {id:"c125",cat:"cafe",name:"Café Somos Barrio 125 g",desc:"El mismo café en tamaño para probar.",price:10000,grind:true,pic:"c",svg:function(){return bag("#b4532f","#93391f","125 g")}},
-    {id:"y500",cat:"yerba",name:"Yerba Sol y Lluvia 500 g",desc:"18 meses de estacionamiento natural, con palo y sin saborizantes.",price:8000,pic:"y",svg:function(){return yerba("500 g")}},
-    {id:"k1",cat:"combo",name:"Combo 1",items:["250 g de café a elección","Yerba de 500 g"],price:25000,real:true,grind:true,save:"Suelto saldría $26.500 (ejemplo)"},
-    {id:"k2",cat:"combo",name:"Combo 2",items:["250 g de café a elección","125 g de café a elección","1,5 kg de yerba mate"],price:50000,real:true,grind:true,save:"Suelto saldría $52.500 (ejemplo)"}
+    {id:"brasil",cat:"cafe"},{id:"colombia",cat:"cafe"},{id:"blend",cat:"cafe"},
+    {id:"yerba",cat:"yerba",name:"Yerba Sol y Lluvia Barbacuá",desc:"18 meses de estacionamiento natural, con palo y sin saborizantes."},
+    {id:"k1",cat:"combo",name:"Combo 1",items:["250 g de café a elección","Yerba de 500 g"],price:25000,cafes:1},
+    {id:"k2",cat:"combo",name:"Combo 2",items:["250 g de café a elección","125 g de café a elección","1,5 kg de yerba mate"],price:50000,cafes:2}
   ];
   var byId = {}; P.forEach(function(p){byId[p.id]=p});
+  var VOPTS = Object.keys(VAR).map(function(k){return [k,VAR[k].n]});
+  var GOPTS = GRINDS.map(function(g){return [g,g]});
+  var defGrind = "Molido para italiana";
 
   var fmt = function(n){return "$"+n.toLocaleString("es-AR")};
   var esc = function(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})};
-  var grindSel = function(id,val){
-    return '<div><label class="lbl" for="g-'+id+'">Molienda</label><select class="in" id="g-'+id+'" data-g="'+id+'">'+GRINDS.map(function(g){return '<option'+(g===val?' selected':'')+'>'+g+'</option>'}).join("")+'</select></div>';
+  var sizeTxt = function(s){return s>=1000 ? (s/1000)+" kg" : s+" g"};
+  var priceOf = function(l){
+    var p = byId[l.id]; if(!p) return 0;
+    if(p.cat==="cafe") return VAR[l.id].p[l.size]||0;
+    if(p.cat==="yerba") return YER[l.size]||0;
+    return p.price;
+  };
+  var nameOf = function(l){
+    var p = byId[l.id];
+    if(p.cat==="cafe") return "Café "+VAR[l.id].n+" "+sizeTxt(l.size);
+    if(p.cat==="yerba") return p.name+" "+sizeTxt(l.size);
+    return p.name;
+  };
+  var detailOf = function(l){
+    var d = [];
+    if(l.v && l.v.length) d.push(l.v.map(function(k){return VAR[k].n}).join(" + "));
+    if(l.g) d.push(l.g.toLowerCase());
+    return d.join(", ");
+  };
+  var opt = function(arr,val){return arr.map(function(a){return '<option value="'+a[0]+'"'+(a[0]===val?' selected':'')+'>'+a[1]+'</option>'}).join("")};
+  var sel = function(attr,label,opts,id){return '<div><label class="lbl" for="'+id+'">'+label+'</label><select class="in" id="'+id+'" '+attr+'>'+opts+'</select></div>'};
+  var uid = 0;
+  var defSize = function(p){return p.cat==="cafe"?250:p.cat==="yerba"?500:0};
+  var controls = function(p){
+    var h = "", n = ++uid, def = defSize(p);
+    if(SIZES[p.cat]){
+      h += '<div class="sz" role="radiogroup" aria-label="Tamaño">'+SIZES[p.cat].map(function(s){var on=s[0]===def; return '<button type="button" role="radio" data-sz="'+s[0]+'" aria-checked="'+on+'"'+(on?' class="on"':'')+'>'+s[1]+'</button>'}).join("")+'</div>';
+    }
+    for(var i=0;i<(p.cafes||0);i++){
+      h += sel('data-var', p.cafes>1 ? (i===0?"Café de 250 g":"Café de 125 g") : "Café de 250 g", opt(VOPTS,["blend","colombia"][i]), "v"+n+"-"+i);
+    }
+    if(p.cat!=="yerba") h += sel('data-grind',"Molienda",opt(GOPTS,defGrind),"g"+n);
+    return h;
   };
 
   /* combos */
   document.getElementById("combos").innerHTML = P.filter(function(p){return p.cat==="combo"}).map(function(p){
-    return '<article class="combo"><h3>'+p.name+'</h3><ul>'+p.items.map(function(i){return '<li><i></i>'+i+'</li>'}).join("")+'</ul>'+grindSel(p.id+"x","Molido para italiana")+
-      '<div class="row"><div><span class="pr money">'+fmt(p.price)+'</span><span class="ah">'+p.save+'</span></div><button class="add" data-add="'+p.id+'" data-gs="g-'+p.id+'x">Sumar</button></div></article>';
+    return '<article class="combo" data-p="'+p.id+'"><h3>'+p.name+'</h3><ul>'+p.items.map(function(i){return '<li><i></i>'+i+'</li>'}).join("")+'</ul>'+controls(p)+
+      '<div class="row"><div><span class="pr money">'+fmt(p.price)+'</span></div><button class="add" data-add>Sumar</button></div></article>';
   }).join("");
 
   /* catálogo */
   var grid = document.getElementById("grid");
+  var card = function(p){
+    var pic, title, desc, meta = "";
+    if(p.cat==="cafe"){ var v = VAR[p.id]; pic = '<div class="pic" style="background:'+v.bg+'">'+bag(v.c,"")+'</div>'; title = v.n; desc = v.d; meta = '<span class="tst">Tueste '+beans(v.t)+'</span>'; }
+    else if(p.cat==="yerba"){ pic = '<div class="pic y">'+yerba()+'</div>'; title = p.name; desc = p.desc; }
+    else { pic = '<div class="pic k">'+combo()+'</div>'; title = p.name; desc = p.items.join(" + "); }
+    return '<article class="prod" data-p="'+p.id+'">'+pic+'<div class="bd"><h3>'+title+'</h3>'+meta+'<p>'+desc+'</p>'+controls(p)+
+      '<div class="buy"><span class="pr money">'+fmt(priceOf({id:p.id,size:defSize(p)}))+'</span><button class="add" data-add>'+PLUS+'Sumar</button></div></div></article>';
+  };
   var renderGrid = function(f){
-    grid.innerHTML = P.filter(function(p){return f==="todo"||p.cat===f}).map(function(p){
-      var pic = p.cat==="combo" ? '<div class="pic k">'+combo()+'</div>' : '<div class="pic '+p.pic+'">'+p.svg()+'<span class="ej">Precio de ejemplo</span></div>';
-      var desc = p.desc || p.items.join(" + ");
-      return '<article class="prod">'+pic+'<div class="bd"><h3>'+p.name+'</h3><p>'+desc+'</p>'+(p.grind?grindSel(p.id,"Molido para italiana"):"")+
-        '<div class="buy"><span class="pr money">'+fmt(p.price)+'</span><button class="add" data-add="'+p.id+'"'+(p.grind?' data-gs="g-'+p.id+'"':'')+'>'+
-        '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Sumar</button></div></div></article>';
-    }).join("");
+    grid.innerHTML = P.filter(function(p){return f==="todo"||p.cat===f}).map(card).join("");
   };
   renderGrid("todo");
   var setFilter = function(f){
@@ -540,10 +601,11 @@ footer a{color:#fff}
 
   /* carrito */
   var cart = [];
-  try{ cart = JSON.parse(localStorage.getItem("sb-cart")||"[]").filter(function(l){return byId[l.id]}); }catch(e){ cart = []; }
-  var save = function(){ try{ localStorage.setItem("sb-cart",JSON.stringify(cart)); }catch(e){} };
+  try{ cart = JSON.parse(localStorage.getItem("sb-cart2")||"[]").filter(function(l){return byId[l.id]}); }catch(e){ cart = []; }
+  var save = function(){ try{ localStorage.setItem("sb-cart2",JSON.stringify(cart)); }catch(e){} };
   var count = function(){return cart.reduce(function(a,l){return a+l.q},0)};
-  var total = function(){return cart.reduce(function(a,l){return a+l.q*byId[l.id].price},0)};
+  var total = function(){return cart.reduce(function(a,l){return a+l.q*priceOf(l)},0)};
+  var keyOf = function(l){return JSON.stringify([l.id,l.size,l.g,l.v])};
 
   var cartN = document.getElementById("cartN"), fbar = document.getElementById("fbar");
   var paint = function(){
@@ -555,14 +617,13 @@ footer a{color:#fff}
     document.getElementById("tot").textContent = fmt(t);
     var L = document.getElementById("lines");
     if(!cart.length){
-      L.innerHTML = '<div class="empty"><b>Todavía no sumaste nada</b>Elegí un combo o un café y aparece acá.</div>';
+      L.innerHTML = '<div class="empty"><b>Todavía no sumaste nada</b>Elegí un café, la yerba o un combo y aparece acá.</div>';
       document.getElementById("form").hidden = true;
     } else {
       document.getElementById("form").hidden = false;
       L.innerHTML = cart.map(function(l,i){
-        var p = byId[l.id];
-        return '<div class="line"><span class="nm">'+p.name+'</span><span class="pr money">'+fmt(p.price*l.q)+'</span>'+
-          (l.g?'<span class="gr">'+esc(l.g)+'</span>':'<span class="gr"></span>')+
+        return '<div class="line"><span class="nm">'+nameOf(l)+'</span><span class="pr money">'+fmt(priceOf(l)*l.q)+'</span>'+
+          '<span class="gr">'+esc(detailOf(l))+'</span>'+
           '<span class="qty"><button data-dec="'+i+'" aria-label="Uno menos">−</button><span>'+l.q+'</span><button data-inc="'+i+'" aria-label="Uno más">+</button></span></div>';
       }).join("");
     }
@@ -571,11 +632,19 @@ footer a{color:#fff}
   };
 
   document.addEventListener("click",function(e){
+    var sz = e.target.closest("[data-sz]");
+    if(sz){
+      var art0 = sz.closest("[data-p]");
+      art0.querySelectorAll("[data-sz]").forEach(function(b){var on=b===sz; b.classList.toggle("on",on); b.setAttribute("aria-checked",on)});
+      art0.querySelector(".pr").textContent = fmt(priceOf({id:art0.dataset.p,size:+sz.dataset.sz}));
+      return;
+    }
     var a = e.target.closest("[data-add]");
     if(a){
-      var id = a.dataset.add, g = a.dataset.gs ? document.getElementById(a.dataset.gs).value : "";
-      var ex = cart.filter(function(l){return l.id===id && l.g===g})[0];
-      if(ex) ex.q++; else cart.push({id:id,g:g,q:1});
+      var art = a.closest("[data-p]"), szb = art.querySelector("[data-sz].on"), gs = art.querySelector("[data-grind]");
+      var line = {id:art.dataset.p,size:szb?+szb.dataset.sz:0,g:gs?gs.value:"",v:[].map.call(art.querySelectorAll("[data-var]"),function(s){return s.value}),q:1};
+      var ex = cart.filter(function(l){return keyOf(l)===keyOf(line)})[0];
+      if(ex) ex.q++; else cart.push(line);
       save(); paint();
       var old = a.innerHTML; a.classList.add("ok"); a.textContent = "Sumado";
       setTimeout(function(){a.classList.remove("ok"); a.innerHTML = old;},1100);
@@ -600,8 +669,8 @@ footer a{color:#fff}
   var buildMsg = function(){
     var ent = document.querySelector('input[name="ent"]:checked').value;
     var nom = document.getElementById("fNom").value.trim(), dir = document.getElementById("fDir").value.trim(), nota = document.getElementById("fNota").value.trim();
-    var lines = cart.map(function(l){ var p=byId[l.id]; return "• "+l.q+" x "+p.name+(l.g?" ("+l.g.toLowerCase()+")":"")+": "+fmt(p.price*l.q); });
-    return "Hola chicas! Soy "+nom+" y quiero hacer este pedido:\n"+lines.join("\n")+"\nTotal: "+fmt(total())+
+    var lines = cart.map(function(l){ var d=detailOf(l); return "• "+l.q+" x "+nameOf(l)+(d?" ("+d+")":"")+": "+fmt(priceOf(l)*l.q); });
+    return "Hola Somos Barrio! Soy "+nom+" y quiero hacer este pedido:\n"+lines.join("\n")+"\nTotal: "+fmt(total())+
       "\nEntrega: "+(ent==="barrio"?"envío por el barrio":"envío a otra zona")+"\nDirección: "+dir+(nota?"\nNota: "+nota:"");
   };
   document.getElementById("send").addEventListener("click",function(){
@@ -651,15 +720,13 @@ footer a{color:#fff}
       '<div class="facts">'+m.facts.map(function(f){return '<div><small>'+f[0]+'</small><b>'+f[1]+'</b></div>'}).join("")+'</div>'+
       '<ol class="steps">'+m.steps.map(function(s){return '<li>'+s+'</li>'}).join("")+'</ol>'+
       '<p class="tip">'+m.tip+'</p>'+
-      '<button class="btn p w" data-quick="'+m.grind+'">Pedir 250 g molido para '+m.n.toLowerCase()+'</button>';
+      '<button class="btn p w" data-quick="'+m.grind+'">Ver los cafés molidos para '+m.n.toLowerCase()+'</button>';
   };
   mk.addEventListener("click",function(e){var b=e.target.closest("[data-m]"); if(b) showM(+b.dataset.m);});
   res.addEventListener("click",function(e){
     var b = e.target.closest("[data-quick]"); if(!b) return;
-    var g = b.dataset.quick === "Molido para espresso" ? "Molido para espresso" : b.dataset.quick;
-    var ex = cart.filter(function(l){return l.id==="c250" && l.g===g})[0];
-    if(ex) ex.q++; else cart.push({id:"c250",g:g,q:1});
-    save(); paint(); b.textContent = "Sumado al pedido";
+    defGrind = b.dataset.quick; setFilter("cafe");
+    document.getElementById("tienda").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion:reduce)").matches?"auto":"smooth"});
   });
   showM(0);
 
