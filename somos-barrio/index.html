@@ -29,7 +29,7 @@ img,svg{display:block}
 [hidden]{display:none!important}
 .wrap{max-width:1120px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-left))}
 .money{font-feature-settings:"tnum";white-space:nowrap}
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+@media (prefers-reduced-motion:reduce){*:not(#scene.play *){animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 
 /* barra de boceto */
 .demo{background:var(--ink);color:#efe0cc;font-size:12.5px}
@@ -63,7 +63,9 @@ img,svg{display:block}
 
 /* hero */
 .hero{padding:26px 0 56px}
-.hero .wrap{display:grid;gap:28px}
+.hero .wrap{display:grid;gap:0;grid-template-areas:"h1" "art" "team" "lead" "meta"}
+.hero .wrap>div:first-child{display:contents}
+.hero h1{grid-area:h1}.hero .lead{grid-area:lead;margin-top:22px!important}.team{grid-area:team;margin-top:16px}.hero .meta{grid-area:meta}.art{grid-area:art}
 .hero h1{font-family:var(--disp);font-weight:700;font-size:clamp(40px,11.4vw,78px);line-height:1.04;letter-spacing:-.025em;margin:0 0 18px;color:var(--brick);text-wrap:balance}
 .hero p.lead{font-size:18px;color:var(--ink-2);max-width:34ch;margin:0 0 26px}
 .team{background:var(--card);border-radius:22px;padding:16px;box-shadow:0 0 0 1px var(--line);max-width:440px}
@@ -74,13 +76,88 @@ img,svg{display:block}
 .team button svg{width:30px;height:30px}
 .meta{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:20px;font-size:14px;color:var(--dim)}
 .meta span{display:inline-flex;gap:7px;align-items:center}
-.art{position:relative;border-radius:30px;background:var(--brick);aspect-ratio:1/1;max-width:520px;width:100%;overflow:hidden;justify-self:center}
+.art{position:relative;border-radius:30px;background:var(--brick);aspect-ratio:1/1;max-width:520px;width:100%;overflow:hidden;justify-self:center;align-self:start}
 .art svg{width:100%;height:100%}
 .art .tag{position:absolute;left:16px;bottom:16px;background:var(--paper);color:var(--ink);border-radius:99px;padding:7px 13px;font-size:13.5px;font-weight:600}
-.steam path{stroke-dasharray:60;stroke-dashoffset:60;animation:steam 2.4s ease-out .3s forwards}
-.steam path:nth-child(2){animation-delay:.6s}
-.steam path:nth-child(3){animation-delay:.9s}
-@keyframes steam{to{stroke-dashoffset:0}}
+/* escena del inicio */
+.team p span{font-weight:500;color:var(--dim);font-size:13.5px;margin-left:4px}
+.team button.on{background:var(--ink);color:var(--paper)}
+.heroCta{margin-top:12px}
+.art .off{display:none}
+.replay{position:absolute;right:14px;bottom:14px;width:40px;height:40px;border-radius:50%;border:0;background:rgba(243,232,214,.95);color:var(--ink);display:grid;place-items:center}
+.pot,.termo{transform-origin:0 0}
+.jet{stroke-dasharray:100 100;stroke-dashoffset:100}
+.fill{transform:translateY(0)}
+.foam circle{transform-box:fill-box;transform-origin:center}
+.vap path{stroke-dasharray:40 60;opacity:0}
+.play .pot{animation:tiltPot 4.2s cubic-bezier(.45,0,.2,1) both}
+.play .termo{animation:tiltTermo 4.2s cubic-bezier(.45,0,.2,1) both}
+.play .jet{animation:jet 4.2s linear both}
+.play .fill{animation:fillUp 4.2s cubic-bezier(.3,0,.3,1) both}
+.play .foam circle{animation:foam 4.2s ease-out both}
+.play .foam circle:nth-child(2){animation-delay:.12s}
+.play .foam circle:nth-child(3){animation-delay:.24s}
+.play .foam circle:nth-child(4){animation-delay:.36s}
+.vap path{animation:vap 2.6s ease-in-out infinite}
+.vap path:nth-child(2){animation-delay:.7s}
+.vap path:nth-child(3){animation-delay:1.4s}
+.play .vap{animation:showLate 4.2s step-end both}
+@keyframes tiltPot{0%{transform:rotate(0)}16%,72%{transform:rotate(40deg)}88%,100%{transform:rotate(0)}}
+@keyframes tiltTermo{0%{transform:rotate(0)}16%,72%{transform:rotate(55deg)}88%,100%{transform:rotate(0)}}
+@keyframes jet{0%,13%{stroke-dashoffset:100}24%{stroke-dashoffset:0}64%{stroke-dashoffset:0}76%,100%{stroke-dashoffset:-100}}
+@keyframes fillUp{0%,18%{transform:translateY(120px)}70%,100%{transform:translateY(0)}}
+@keyframes foam{0%,55%{transform:scale(0)}75%,100%{transform:scale(1)}}
+@keyframes vap{0%{stroke-dashoffset:40;opacity:0;transform:translateY(8px)}30%{opacity:.85}100%{stroke-dashoffset:-60;opacity:0;transform:translateY(-14px)}}
+@keyframes showLate{0%{opacity:0}74%,100%{opacity:1}}
+
+/* banda con el repartidor */
+.ride{background:var(--olive);color:#f3e8d6;position:relative;overflow:hidden;padding:30px 0 0;height:236px}
+.ride p{font-family:var(--disp);font-weight:700;font-size:clamp(22px,5.6vw,34px);line-height:1.2;margin:0;max-width:18ch;letter-spacing:-.01em}
+.rider{position:absolute;bottom:12px;left:0;width:150px;height:auto;animation:ride 11s linear infinite}
+.rider .wh{transform-box:fill-box;transform-origin:center;animation:spin .9s linear infinite}
+.rider .vp{animation:bob 1.2s ease-in-out infinite alternate}
+@keyframes ride{from{transform:translateX(-170px)}to{transform:translateX(calc(100vw + 20px))}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes bob{to{transform:translateY(-3px)}}
+.ride::after{content:"";position:absolute;left:0;right:0;bottom:0;height:12px;background:#3a4125}
+
+/* productos recortados */
+.prod .pic.cut{aspect-ratio:4/3;overflow:hidden;display:block;position:relative}
+.prod .pic.cut img{position:absolute;left:50%;top:50%;height:84%;width:auto;transform:translate(-50%,-50%) rotate(-4deg);filter:drop-shadow(0 18px 18px rgba(44,26,18,.35));transition:transform .4s cubic-bezier(.3,1.6,.5,1)}
+.prod:hover .pic.cut img{transform:translate(-50%,-52%) rotate(-1deg)}
+.prod .pic.cut img.hop{animation:hop .55s cubic-bezier(.3,1.5,.5,1)}
+@keyframes hop{40%{transform:translate(-50%,-62%) rotate(3deg)}}
+.prod .pic.cut .two{position:absolute;inset:0}
+.prod .pic.cut .two img{height:78%}
+.prod .pic.cut .two img:first-child{left:38%;transform:translate(-50%,-50%) rotate(-8deg)}
+.prod .pic.cut .two img:last-child{left:62%;transform:translate(-50%,-48%) rotate(5deg)}
+.prod:hover .pic.cut .two img:first-child{transform:translate(-50%,-52%) rotate(-10deg)}
+.prod:hover .pic.cut .two img:last-child{transform:translate(-50%,-50%) rotate(7deg)}
+.prod .pic.cut::before{content:"";position:absolute;left:18%;right:18%;bottom:7%;height:10%;border-radius:50%;background:rgba(44,26,18,.14);filter:blur(6px)}
+
+/* celular con el WhatsApp en vivo */
+.shop{display:grid;gap:30px}
+.live{max-width:360px;width:100%;justify-self:center}
+.live-cap{font-weight:600;font-size:15px;margin:0 0 10px;text-align:center}
+.phone{background:#1b1411;border-radius:38px;padding:10px;box-shadow:0 40px 70px -40px rgba(44,26,18,.7)}
+.ph-top{display:flex;align-items:center;gap:10px;background:#1f5c4d;color:#fff;border-radius:28px 28px 0 0;padding:14px 16px 12px}
+.ph-top .av{width:34px;height:34px;border-radius:50%;background:var(--brick);display:grid;place-items:center;font-size:12px;font-weight:700;letter-spacing:.05em}
+.ph-top b{display:block;font-size:15px;line-height:1.2}
+.ph-top small{font-size:12px;opacity:.8}
+.ph-chat{background:#ece3d6;min-height:300px;max-height:420px;overflow-y:auto;padding:14px 10px;display:flex;flex-direction:column;justify-content:flex-end;gap:8px}
+.ph-sys{align-self:center;background:#fff8e6;color:#5b4a3e;font-size:13px;border-radius:10px;padding:8px 12px;text-align:center;max-width:90%}
+.bub{align-self:flex-end;background:#d8f5c4;color:#17280f;border-radius:12px 12px 4px 12px;padding:9px 11px 6px;font-size:13.5px;line-height:1.42;white-space:pre-wrap;max-width:94%;box-shadow:0 1px 1px rgba(0,0,0,.08);transform-origin:bottom right}
+.bub.pop{animation:pop .35s cubic-bezier(.3,1.5,.5,1)}
+.bub small{display:block;text-align:right;font-size:11px;color:#4f6b45;margin-top:2px}
+@keyframes pop{from{transform:scale(.9);opacity:.4}}
+.ph-in{display:flex;gap:8px;align-items:center;background:#ece3d6;border-radius:0 0 28px 28px;padding:6px 10px 12px}
+.ph-in span{flex:1;background:#fff;border-radius:99px;padding:9px 14px;font-size:13.5px;color:#8b7d72}
+.ph-in i{width:38px;height:38px;border-radius:50%;background:#1f5c4d;color:#fff;display:grid;place-items:center}
+#liveGo{margin-top:14px}
+.prev{background:none;padding:0}
+.prev .ph-chat{min-height:0;border-radius:16px;justify-content:flex-start}
+
+@media (prefers-reduced-motion:reduce){.rider{left:auto;right:6%}.vap path{opacity:.6}}
 
 /* secciones */
 section{scroll-margin-top:70px}
@@ -256,9 +333,15 @@ footer a{color:#fff}
   .tool{padding:28px}
 }
 @media (min-width:960px){
+  .shop{grid-template-columns:minmax(0,1fr) 330px;align-items:start;gap:36px}
+  .shop .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .live{position:sticky;top:86px}
+  .fbar{display:none}
+  .rider{width:180px}
   .nav{display:flex}
   .hero{padding:44px 0 80px}
-  .hero .wrap{grid-template-columns:1.05fr .95fr;align-items:center;gap:48px}
+  .hero .wrap{grid-template-columns:1.05fr .95fr;grid-template-areas:"h1 art" "lead art" "team art" "meta art";grid-template-rows:auto auto auto 1fr;column-gap:56px;align-items:start}
+  .hero .lead{margin-top:0!important}
   .grid{grid-template-columns:repeat(3,minmax(0,1fr))}
   .tool{grid-template-columns:.9fr 1.1fr;align-items:start;padding:32px}
   .nos .wrap{grid-template-columns:1.2fr .8fr;align-items:center;gap:60px}
@@ -293,12 +376,13 @@ footer a{color:#fff}
       <h1>Tu ritual de todos los días.</h1>
       <p class="lead">Unimos dos pasiones: el mate y el café de calidad. Pedilo en grano o molido y te llega a tu puerta, desde Vicente López a todo el país.</p>
       <div class="team">
-        <p>¿Qué team sos?</p>
+        <p>¿Qué team sos? <span>Tocá y mirá</span></p>
         <div class="opts">
-          <button data-team="yerba"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 13h14v3a7 7 0 0 1-14 0z"/><path d="M11 13c0-3 2-4 5-4s5 1 5 4"/><path d="M19 9l4-6"/><path d="M12 26h8"/></svg>Mate</button>
-          <button data-team="cafe"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 12h15v6a7 7 0 0 1-7 7h-1a7 7 0 0 1-7-7z"/><path d="M22 14h2a3 3 0 0 1 0 6h-2"/><path d="M12 4c1 2-1 3 0 5M16 4c1 2-1 3 0 5"/></svg>Café</button>
-          <button data-team="combo"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 14h10v4a5 5 0 0 1-10 0z"/><path d="M17 12h10v6a5 5 0 0 1-5 5h0a5 5 0 0 1-5-5z"/><path d="M8 10l2-4M21 6c1 2-1 3 0 5"/></svg>Depende</button>
+          <button data-team="yerba" aria-pressed="false"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 13h14v3a7 7 0 0 1-14 0z"/><path d="M11 13c0-3 2-4 5-4s5 1 5 4"/><path d="M19 9l4-6"/><path d="M12 26h8"/></svg>Mate</button>
+          <button data-team="cafe" aria-pressed="true" class="on"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 12h15v6a7 7 0 0 1-7 7h-1a7 7 0 0 1-7-7z"/><path d="M22 14h2a3 3 0 0 1 0 6h-2"/><path d="M12 4c1 2-1 3 0 5M16 4c1 2-1 3 0 5"/></svg>Café</button>
+          <button data-team="combo" aria-pressed="false"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 14h10v4a5 5 0 0 1-10 0z"/><path d="M17 12h10v6a5 5 0 0 1-5 5h0a5 5 0 0 1-5-5z"/><path d="M8 10l2-4M21 6c1 2-1 3 0 5"/></svg>Depende</button>
         </div>
+        <a class="btn p w heroCta" id="heroCta" href="#tienda">Ver los cafés</a>
       </div>
       <div class="meta">
         <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Olivos, Vicente López</span>
@@ -306,27 +390,60 @@ footer a{color:#fff}
       </div>
     </div>
 
-    <div class="art" aria-hidden="true">
-      <svg viewBox="0 0 400 400" fill="none" stroke="#f3e8d6" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="315" cy="88" r="34" fill="#e2a948" stroke="none" opacity=".95"/>
-        <path d="M30 330h340" opacity=".5"/>
-        <!-- bicicleta -->
-        <circle cx="120" cy="290" r="40"/><circle cx="292" cy="290" r="40"/>
-        <path d="M120 290l50-62h82l40 62M170 228l40 62h42M210 290l42-62M162 214h22M252 228l-8-28h20"/>
-        <!-- grano -->
-        <ellipse cx="200" cy="148" rx="50" ry="66" fill="#93391f"/>
-        <path d="M194 84c22 26-18 50 4 128"/>
-        <circle cx="178" cy="136" r="3.5" fill="#f3e8d6"/><circle cx="214" cy="136" r="3.5" fill="#f3e8d6"/>
-        <path d="M186 156c8 7 18 7 24 0"/>
-        <path d="M170 196l-4 32M226 194l26 34"/>
-        <!-- brazo y taza -->
-        <path d="M232 160c18 4 30-2 40-14"/>
-        <path d="M262 128h30v14a15 15 0 0 1-30 0z" fill="#93391f"/>
-        <path d="M292 132h6a6 6 0 0 1 0 12h-6"/>
-        <g class="steam"><path d="M270 116c-6-10 6-14 0-26"/><path d="M282 116c-6-10 6-14 0-26"/><path d="M288 92c4-6 0-10 4-14" opacity=".0"/></g>
-        <path d="M170 162c-14 8-20 30-8 52"/>
+    <div class="art" id="art">
+      <svg viewBox="0 0 400 400" aria-hidden="true" id="scene">
+        <circle cx="330" cy="70" r="30" fill="#e2a948"/>
+        <g class="rain" stroke="#f3e8d6" stroke-width="3" stroke-linecap="round" opacity=".55"><path d="M300 118l-5 12M318 120l-5 12M336 118l-5 12"/></g>
+        <path d="M300 104c-10 0-16-8-12-16 3-6 10-7 14-4 3-9 16-11 22-3 9-1 14 7 11 14-2 6-8 9-14 9z" fill="#f3e8d6" opacity=".9"/>
+        <rect x="0" y="338" width="400" height="62" fill="#7a2c16"/>
+        <path d="M0 338h400" stroke="#5e210f" stroke-width="3"/>
+
+        <!-- CAFÉ: cafetera italiana que sirve en un vaso -->
+        <g id="scCafe">
+          <g transform="translate(140 112)"><g class="pot">
+            <path d="M-8 -70h16v10h-16z" fill="#2c1a12"/>
+            <path d="M-34 -60h68l-6 52h-56z" fill="#e7dcc8"/>
+            <path d="M34 -60l15 -6-8 16z" fill="#e7dcc8"/>
+            <path d="M-12 -60l-2 52M12 -60l2 52" stroke="#c9b89c" stroke-width="2"/>
+            <path d="M-24 -8h48v8h-48z" fill="#2c1a12"/>
+            <path d="M-28 0h56l10 62h-76z" fill="#e7dcc8"/>
+            <path d="M-12 0l-4 62M12 0l4 62" stroke="#c9b89c" stroke-width="2"/>
+            <path d="M-34 -52c-26 2-28 36-2 38" fill="none" stroke="#2c1a12" stroke-width="9" stroke-linecap="round"/>
+          </g></g>
+          <path class="jet" d="M219 92c18 18 26 60 26 128" fill="none" stroke="#3b1d0f" stroke-width="7" stroke-linecap="round" pathLength="100"/>
+          <defs><clipPath id="vaso"><path d="M201 194h88l-9 130h-70z"/></clipPath></defs>
+          <g clip-path="url(#vaso)"><g class="fill">
+            <rect x="195" y="216" width="100" height="120" fill="#3b1d0f"/>
+            <rect x="195" y="210" width="100" height="10" rx="4" fill="#c98a4b"/>
+          </g></g>
+          <path d="M196 190h98l-10 140h-78z" fill="rgba(255,255,255,.07)" stroke="#f3e8d6" stroke-width="5" stroke-linejoin="round"/>
+          <path d="M208 206l-6 96" stroke="#f3e8d6" stroke-width="3" stroke-linecap="round" opacity=".45"/>
+          <ellipse cx="245" cy="334" rx="72" ry="7" fill="#f3e8d6"/>
+          <g class="vap" fill="none" stroke="#f3e8d6" stroke-width="4" stroke-linecap="round"><path d="M226 178c-10-14 10-22 0-38s6-18 0-26"/><path d="M246 172c-10-14 10-22 0-38s6-18 0-26"/><path d="M266 178c-10-14 10-22 0-38s6-18 0-26"/></g>
+        </g>
+
+        <!-- MATE: termo que ceba un mate -->
+        <g id="scMate" class="off">
+          <g transform="translate(120 128)"><g class="termo">
+            <rect x="-26" y="-78" width="52" height="150" rx="12" fill="#56602f"/>
+            <rect x="-26" y="-40" width="52" height="8" fill="#3f4722"/>
+            <rect x="-20" y="-96" width="40" height="20" rx="4" fill="#2f351a"/>
+            <rect x="-9" y="-106" width="18" height="12" rx="2" fill="#2f351a"/>
+            <path d="M26 -60c16 0 16 70 0 70" fill="none" stroke="#2f351a" stroke-width="8"/>
+          </g></g>
+          <path class="jet" d="M205 62c12 30 18 90 20 150" fill="none" stroke="#f3e8d6" stroke-width="5" stroke-linecap="round" opacity=".9" pathLength="100"/>
+          <path d="M184 252c-10 46 16 84 46 84s56-38 46-84c-4-22-18-32-30-34h-32c-12 2-26 12-30 34z" fill="#6b3a1f"/>
+          <path d="M196 274c4 26 16 42 32 48" fill="none" stroke="#8a4f2c" stroke-width="5" stroke-linecap="round"/>
+          <path d="M204 216q26-22 52 0z" fill="#7d9338"/>
+          <rect x="200" y="212" width="60" height="10" rx="3" fill="#d8d2c4"/>
+          <g class="foam" fill="#c8d58a"><circle cx="216" cy="210" r="5"/><circle cx="228" cy="206" r="6"/><circle cx="242" cy="209" r="5"/><circle cx="234" cy="212" r="4"/></g>
+          <path d="M240 214l38-80" stroke="#d8d2c4" stroke-width="6" stroke-linecap="round"/>
+          <path d="M274 142l10-12" stroke="#d8d2c4" stroke-width="8" stroke-linecap="round"/>
+          <g class="vap" fill="none" stroke="#f3e8d6" stroke-width="4" stroke-linecap="round"><path d="M214 196c-10-14 10-22 0-38s6-18 0-26"/><path d="M232 190c-10-14 10-22 0-38s6-18 0-26"/></g>
+        </g>
       </svg>
-      <span class="tag">Café tostado natural</span>
+      <span class="tag" id="artTag">Café tostado natural, molido en el barrio</span>
+      <button class="replay" id="replay" aria-label="Servir de nuevo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg></button>
     </div>
   </div>
 </section>
@@ -340,6 +457,21 @@ footer a{color:#fff}
   </div>
 </section>
 
+<section class="ride" aria-label="Envíos">
+  <div class="wrap"><p>Hacé tu pedido y te llega a tu puerta.</p></div>
+  <svg class="rider" viewBox="0 0 220 170" aria-hidden="true" fill="none" stroke="#f3e8d6" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+    <g class="wh"><circle cx="50" cy="128" r="34"/><path d="M50 94v68M16 128h68M26 104l48 48M74 104l-48 48" stroke-width="2"/></g>
+    <g class="wh"><circle cx="178" cy="128" r="34"/><path d="M178 94v68M144 128h68M154 104l48 48M202 104l-48 48" stroke-width="2"/></g>
+    <path d="M50 128l40-52h70l18 52M90 76l34 52h54M124 128l36-52M84 64h18M160 76l-6-22h16"/>
+    <ellipse cx="116" cy="40" rx="24" ry="32" fill="#4b5330"/>
+    <path d="M112 9c12 14-10 26 2 62"/>
+    <path d="M104 72l-10 40M130 70l24 22"/>
+    <path d="M138 44c10 2 16-2 22-10"/>
+    <path d="M154 22h18v8a9 9 0 0 1-18 0z" fill="#4b5330"/>
+    <path class="vp" d="M160 16c-4-6 4-8 0-14M168 16c-4-6 4-8 0-14" stroke-width="3"/>
+  </svg>
+</section>
+
 <section class="sec" id="tienda">
   <div class="wrap">
     <h2 class="h2">La tienda</h2>
@@ -350,8 +482,21 @@ footer a{color:#fff}
       <button class="chip" data-f="yerba">Yerba</button>
       <button class="chip" data-f="combo">Combos</button>
     </div>
-    <div class="grid" id="grid"></div>
-    <p class="note-cat">Los puntitos son el tueste de cada café, como en sus bolsas: de uno a tres.</p>
+    <div class="shop">
+      <div>
+        <div class="grid" id="grid"></div>
+        <p class="note-cat">Los puntitos son el tueste de cada café, como en sus bolsas: de uno a tres.</p>
+      </div>
+      <aside class="live" aria-label="Vista previa del WhatsApp">
+        <p class="live-cap">Así le llega tu pedido a Caro</p>
+        <div class="phone">
+          <div class="ph-top"><span class="av">SB</span><div><b>Somos Barrio</b><small>en línea</small></div></div>
+          <div class="ph-chat" id="chat"></div>
+          <div class="ph-in"><span>Mensaje</span><i><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3 20l18-8L3 4v6l12 2-12 2z"/></svg></i></div>
+        </div>
+        <button class="btn p w" id="liveGo" hidden>Completar y mandar</button>
+      </aside>
+    </div>
   </div>
 </section>
 
@@ -498,9 +643,9 @@ footer a{color:#fff}
   var GRINDS = ["En grano","Molido para italiana","Molido para filtro","Molido para prensa francesa","Molido para espresso","Molido para cold brew"];
 
   var VAR = {
-    brasil:{n:"Brasil Raudal",d:"Origen Brasil, 100% arábica.",t:1,c:"#4b5330",bg:"#a3a68a",img:"img/cafe-brasil.jpg",p:{125:12800,250:22800,500:44500}},
-    colombia:{n:"Colombia Montaña Alta",d:"Dulce y afrutado. Origen Colombia.",t:2,c:"#a8322a",bg:"#cf9c7f",img:"img/cafe-colombia.jpg",p:{125:13500,250:25500,500:48500}},
-    blend:{n:"Blend Italiano",d:"Arábica. Una combinación al estilo italiano.",t:3,c:"#22324f",bg:"#8a9fb3",img:"img/cafe-blend.jpg",p:{125:12500,250:23000,500:43500}}
+    brasil:{n:"Brasil Raudal",d:"Origen Brasil, 100% arábica.",t:1,c:"#4b5330",bg:"#d3d6bd",img:"img/bolsa-brasil.webp",p:{125:12800,250:22800,500:44500}},
+    colombia:{n:"Colombia Montaña Alta",d:"Dulce y afrutado. Origen Colombia.",t:2,c:"#a8322a",bg:"#efc4b0",img:"img/bolsa-colombia.webp",p:{125:13500,250:25500,500:48500}},
+    blend:{n:"Blend Italiano",d:"Arábica. Una combinación al estilo italiano.",t:3,c:"#22324f",bg:"#c9d3df",img:"img/bolsa-blend.webp",p:{125:12500,250:23000,500:43500}}
   };
   var YER = {500:4800,1000:8500,2000:15000};
   var SIZES = {cafe:[[125,"125 g"],[250,"250 g"],[500,"500 g"]],yerba:[[500,"500 g"],[1000,"1 kg"],[2000,"2 kg"]]};
@@ -584,9 +729,9 @@ footer a{color:#fff}
   var grid = document.getElementById("grid");
   var card = function(p){
     var pic, title, desc, meta = "";
-    if(p.cat==="cafe"){ var v = VAR[p.id]; pic = '<div class="pic ph" style="background:'+v.bg+'"><img src="'+v.img+'" alt="Bolsa de café Somos Barrio '+v.n+'" loading="lazy" width="260" height="404"></div>'; title = v.n; desc = v.d; meta = '<span class="tst">Tueste '+beans(v.t)+'</span>'; }
-    else if(p.cat==="yerba"){ pic = '<div class="pic ph" style="background:#a78058"><img src="img/yerba-barbacua.jpg" alt="Paquete de yerba Sol y Lluvia Barbacuá" loading="lazy" width="168" height="312"></div>'; title = p.name; desc = p.desc; }
-    else { pic = '<div class="pic k ph"><div class="duo"><img class="yb" src="img/yerba-barbacua.jpg" alt="" loading="lazy" width="168" height="312"><img src="img/cafe-colombia.jpg" alt="" loading="lazy" width="260" height="400"></div></div>'; title = p.name; desc = p.items.join(" + "); }
+    if(p.cat==="cafe"){ var v = VAR[p.id]; pic = '<div class="pic cut" style="background:'+v.bg+'"><img src="'+v.img+'" alt="Bolsa de café Somos Barrio '+v.n+'" loading="lazy" width="440" height="726"></div>'; title = v.n; desc = v.d; meta = '<span class="tst">Tueste '+beans(v.t)+'</span>'; }
+    else if(p.cat==="yerba"){ pic = '<div class="pic cut" style="background:#f3dc95"><img src="img/yerba-barbacua.webp" alt="Paquete de yerba Sol y Lluvia Barbacuá" loading="lazy" width="528" height="754"></div>'; title = p.name; desc = p.desc; }
+    else { pic = '<div class="pic cut" style="background:'+(p.id==="k1"?"#e8d9bd":"#dccfb3")+'"><div class="two"><img src="img/yerba-barbacua.webp" alt="" loading="lazy" width="528" height="754"><img src="img/bolsa-'+(p.id==="k1"?"colombia":"blend")+'.webp" alt="" loading="lazy" width="440" height="726"></div></div>'; title = p.name; desc = p.items.join(" + "); }
     return '<article class="prod" data-p="'+p.id+'">'+pic+'<div class="bd"><h3>'+title+'</h3>'+meta+'<p>'+desc+'</p>'+controls(p)+
       '<div class="buy"><span class="pr money">'+fmt(priceOf({id:p.id,size:defSize(p)}))+'</span><button class="add" data-add>'+PLUS+'Sumar</button></div></div></article>';
   };
@@ -599,10 +744,37 @@ footer a{color:#fff}
     renderGrid(f);
   };
   document.querySelectorAll(".chip").forEach(function(c){c.addEventListener("click",function(){setFilter(c.dataset.f)})});
-  document.querySelectorAll("[data-team]").forEach(function(b){b.addEventListener("click",function(){
-    setFilter(b.dataset.team);
-    document.getElementById(b.dataset.team==="combo"?"promos":"tienda").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion:reduce)").matches?"auto":"smooth"});
-  })});
+  /* escena del inicio */
+  var scene = document.getElementById("scene"), art = document.getElementById("art"), heroCta = document.getElementById("heroCta"), artTag = document.getElementById("artTag");
+  var reduce = matchMedia("(prefers-reduced-motion:reduce)").matches;
+  var team = "cafe", loopT = null;
+  var TEAM = {
+    cafe:{show:"cafe",cta:"Ver los cafés",f:"cafe",tag:"Café tostado natural, molido en el barrio"},
+    yerba:{show:"mate",cta:"Ver la yerba",f:"yerba",tag:"Sol y Lluvia Barbacuá, con palo"},
+    combo:{show:"cafe",cta:"Ver los combos",f:"combo",tag:"Un poco de cada uno"}
+  };
+  var play = function(which, user){
+    document.getElementById("scCafe").classList.toggle("off", which!=="cafe");
+    document.getElementById("scMate").classList.toggle("off", which!=="mate");
+    scene.classList.remove("play"); void scene.getBoundingClientRect(); if(!reduce || user) scene.classList.add("play");
+  };
+  var setTeam = function(t, user){
+    team = t; clearTimeout(loopT);
+    document.querySelectorAll("[data-team]").forEach(function(b){var on=b.dataset.team===t; b.classList.toggle("on",on); b.setAttribute("aria-pressed",on)});
+    heroCta.textContent = TEAM[t].cta; artTag.textContent = TEAM[t].tag;
+    if(t==="combo"){
+      var seq = ["cafe","mate"], i = 0;
+      var step = function(){ play(seq[i%2], user); i++; if(i<6) loopT = setTimeout(step, 4600); };
+      step();
+    } else play(TEAM[t].show, user);
+  };
+  document.querySelectorAll("[data-team]").forEach(function(b){b.addEventListener("click",function(){ setTeam(b.dataset.team, true); })});
+  document.getElementById("replay").addEventListener("click",function(){ setTeam(team, true); });
+  heroCta.addEventListener("click",function(e){
+    e.preventDefault(); setFilter(TEAM[team].f);
+    document.getElementById(team==="combo"?"promos":"tienda").scrollIntoView({behavior:reduce?"auto":"smooth"});
+  });
+  setTimeout(function(){ setTeam("cafe", false); }, 350);
 
   /* carrito */
   var cart = [];
@@ -632,8 +804,8 @@ footer a{color:#fff}
           '<span class="qty"><button data-dec="'+i+'" aria-label="Uno menos">−</button><span>'+l.q+'</span><button data-inc="'+i+'" aria-label="Uno más">+</button></span></div>';
       }).join("");
     }
-    document.getElementById("prev").hidden = true;
     document.getElementById("err").hidden = true;
+    paintChat();
   };
 
   document.addEventListener("click",function(e){
@@ -646,11 +818,12 @@ footer a{color:#fff}
     }
     var a = e.target.closest("[data-add]");
     if(a){
-      var art = a.closest("[data-p]"), szb = art.querySelector("[data-sz].on"), gs = art.querySelector("[data-grind]");
-      var line = {id:art.dataset.p,size:szb?+szb.dataset.sz:0,g:gs?gs.value:"",v:[].map.call(art.querySelectorAll("[data-var]"),function(s){return s.value}),q:1};
+      var card0 = a.closest("[data-p]"), szb = card0.querySelector("[data-sz].on"), gs = card0.querySelector("[data-grind]");
+      var line = {id:card0.dataset.p,size:szb?+szb.dataset.sz:0,g:gs?gs.value:"",v:[].map.call(card0.querySelectorAll("[data-var]"),function(s){return s.value}),q:1};
       var ex = cart.filter(function(l){return keyOf(l)===keyOf(line)})[0];
       if(ex) ex.q++; else cart.push(line);
       save(); paint();
+      var im = card0.querySelector(".pic img"); if(im && !reduce){ im.classList.remove("hop"); void im.offsetWidth; im.classList.add("hop"); }
       var old = a.innerHTML; a.classList.add("ok"); a.textContent = "Sumado";
       setTimeout(function(){a.classList.remove("ok"); a.innerHTML = old;},1100);
       var cb = document.getElementById("openCart"); cb.classList.remove("bump"); void cb.offsetWidth; cb.classList.add("bump");
@@ -675,20 +848,36 @@ footer a{color:#fff}
     var ent = document.querySelector('input[name="ent"]:checked').value;
     var nom = document.getElementById("fNom").value.trim(), dir = document.getElementById("fDir").value.trim(), nota = document.getElementById("fNota").value.trim();
     var lines = cart.map(function(l){ var d=detailOf(l); return "• "+l.q+" x "+nameOf(l)+(d?" ("+d+")":"")+": "+fmt(priceOf(l)*l.q); });
-    return "Hola Somos Barrio! Soy "+nom+" y quiero hacer este pedido:\n"+lines.join("\n")+"\nTotal: "+fmt(total())+
-      "\nEntrega: "+(ent==="barrio"?"envío por el barrio":"envío a otra zona")+"\nDirección: "+dir+(nota?"\nNota: "+nota:"");
+    return "Hola Somos Barrio! "+(nom?"Soy "+nom+" y quiero":"Quiero")+" hacer este pedido:\n"+lines.join("\n")+"\nTotal: "+fmt(total())+
+      "\nEntrega: "+(ent==="barrio"?"envío por el barrio":"envío a otra zona")+(dir?"\nDirección: "+dir:"")+(nota?"\nNota: "+nota:"");
   };
+  var lastMsg = "";
+  var chatHTML = function(){
+    if(!cart.length) return '<div class="ph-sys">Sumá algo al pedido y mirá cómo se arma el mensaje acá.</div>';
+    var d = new Date(), hh = ("0"+d.getHours()).slice(-2)+":"+("0"+d.getMinutes()).slice(-2);
+    return '<div class="ph-sys">Hoy</div><div class="bub">'+esc(buildMsg())+'<small>'+hh+' ✓✓</small></div>';
+  };
+  var paintChat = function(){
+    var msg = cart.length ? buildMsg() : "";
+    var changed = msg !== lastMsg; lastMsg = msg;
+    ["chat","prevChat"].forEach(function(id){
+      var el = document.getElementById(id); if(!el) return;
+      el.innerHTML = chatHTML(); el.scrollTop = el.scrollHeight;
+      var b = el.querySelector(".bub"); if(b && changed && !reduce) b.classList.add("pop");
+    });
+    document.getElementById("prev").hidden = !cart.length;
+    document.getElementById("liveGo").hidden = !cart.length;
+  };
+  document.getElementById("prev").innerHTML = '<p class="lbl" style="margin:0 0 6px">Así le llega a Caro por WhatsApp</p><div class="ph-chat" id="prevChat"></div>';
+  ["fNom","fDir","fNota"].forEach(function(id){ document.getElementById(id).addEventListener("input",paintChat); });
+  document.querySelectorAll('input[name="ent"]').forEach(function(r){ r.addEventListener("change",paintChat); });
+  document.getElementById("liveGo").addEventListener("click",openC);
   document.getElementById("send").addEventListener("click",function(){
     var err = document.getElementById("err");
     if(!cart.length){ err.textContent="Sumá algo al pedido antes de mandarlo."; err.hidden=false; return; }
     if(!document.getElementById("fNom").value.trim() || !document.getElementById("fDir").value.trim()){ err.textContent="Completá tu nombre y la dirección o el barrio."; err.hidden=false; return; }
     err.hidden = true;
-    var msg = buildMsg();
-    var pv = document.getElementById("prev");
-    pv.innerHTML = "<small>Este es el mensaje que les llega por WhatsApp</small>"+esc(msg);
-    pv.hidden = false;
-    pv.scrollIntoView({block:"nearest"});
-    window.open("https://wa.me/"+WA+"?text="+encodeURIComponent(msg),"_blank","noopener");
+    window.open("https://wa.me/"+WA+"?text="+encodeURIComponent(buildMsg()),"_blank","noopener");
   });
 
   /* guía: selector de cafetera */
