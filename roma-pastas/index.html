@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#2a1f17">
+<title>Roma, pastas artesanales</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%23f6ecd6'/%3E%3Ctext x='32' y='40' text-anchor='middle' font-family='Georgia,serif' font-weight='700' font-size='19' fill='%23c8931c'%3EROMA%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,800&family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap">
+<style>
+/* Roma: casa de pastas artesanales en Caseros. Abren de noche y el domingo al mediodía.
+   Paleta: harina (fondo), masa de huevo (tarjetas), tinta tostada (texto), mostaza del logo (resaltado),
+   tomate del filetto (acción), salvia de su huerto (confirmado). Lo memorable: el encargo para un día
+   y el panel que suma cuánto producir. */
+:root{
+  --flour:#f4ecdc;--flour-d:#e9dec8;--paper:#fffaf0;--ink:#2a1f17;--ink-2:#4a3a2c;--dim:#76665a;--line:#e0d3bb;--soft:#f8f2e6;
+  --tomato:#b3401f;--tomato-d:#933214;--tomato-s:#f6dfd3;--gold:#c8931c;--gold-s:#f6e8c4;
+  --sage:#4f6b3a;--sage-s:#e2ebd6;
+  --serif:"Fraunces",Georgia,serif;--ui:"Geist",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"Geist Mono",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--flour);color:var(--ink);font-family:var(--ui);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+body{overflow-x:hidden}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2.5px solid var(--tomato);outline-offset:2px}
+[hidden]{display:none!important}
+.wrap{max-width:1120px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-left))}
+.num{font-family:var(--mono);font-feature-settings:"tnum";letter-spacing:-.02em}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* barra de boceto */
+.demo{position:sticky;top:0;z-index:60;background:var(--ink);color:#efe3cf;font-size:12.5px;display:flex;align-items:center;gap:10px;justify-content:space-between;padding:7px max(12px,env(safe-area-inset-left))}
+.demo span{opacity:.9;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.demo b{color:#fff}
+.seg{display:flex;background:#4a3a2c;border-radius:99px;padding:3px;flex:none}
+.seg button{border:0;background:transparent;color:#efe3cf;font-size:12.5px;font-weight:600;padding:6px 12px;border-radius:99px;display:flex;align-items:center}
+.seg button.on{background:#fff;color:var(--ink)}
+.seg .dot{min-width:17px;height:17px;border-radius:9px;background:var(--gold);color:var(--ink);font-size:11px;line-height:17px;margin-left:6px;padding:0 4px;text-align:center}
+
+/* header */
+.top .wrap{display:flex;align-items:center;gap:12px;height:72px}
+.wm{display:flex;align-items:center;gap:11px;text-decoration:none;color:inherit;min-width:0}
+.wm svg{flex:none}
+.wm b{font-family:var(--serif);font-weight:700;font-size:21px;letter-spacing:-.01em;line-height:1;white-space:nowrap}
+.wm small{display:block;font-size:12.5px;color:var(--dim);font-weight:500;margin-top:4px}
+.ig{margin-left:auto;display:inline-flex;align-items:center;gap:7px;text-decoration:none;color:var(--ink);font-weight:600;font-size:14px;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:8px 11px}
+
+/* botones */
+.btn{border:0;border-radius:14px;padding:14px 18px;font-weight:600;font-size:15.5px;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:transform .15s,background .2s}
+.btn:active{transform:scale(.97)}
+.btn.p{background:var(--tomato);color:#fff}
+.btn.p:hover{background:var(--tomato-d)}
+.btn.g{background:var(--paper);color:var(--ink);border:1px solid var(--line)}
+.btn.w{width:100%}
+.btn[disabled]{opacity:.38;pointer-events:none}
+
+/* hero */
+.hero{padding:14px 0 34px}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1fr);gap:26px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;background:var(--paper);border:1px solid var(--line);border-radius:99px;padding:5px 12px 5px 9px}
+.eyebrow i{width:8px;height:8px;border-radius:50%;background:var(--tomato);flex:none}
+.eyebrow.open i{background:var(--sage)}
+.hero h1{font-family:var(--serif);font-weight:800;font-size:clamp(40px,11vw,78px);line-height:.95;letter-spacing:-.035em;margin:16px 0 16px;text-wrap:balance}
+.hero h1 em{font-style:italic;color:var(--tomato);font-weight:700}
+.lead{font-size:18px;color:var(--ink-2);max-width:34ch;margin:0 0 22px}
+.hbtns{display:flex;gap:10px;flex-wrap:wrap}
+.plate{position:relative;aspect-ratio:1;max-width:min(460px,82vw);width:100%;justify-self:center}
+.plate svg{width:100%;height:auto;display:block}
+.tag{position:absolute;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:8px 12px;font-size:13px;box-shadow:0 14px 30px -18px rgba(42,31,23,.5);line-height:1.25}
+.tag b{display:block;font-size:14px}
+.tag.a{left:0;top:10%}
+.tag.b{right:0;bottom:12%}
+
+/* secciones */
+section.blk{padding:26px 0}
+.sh{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:14px}
+.sh h2{font-family:var(--serif);font-weight:700;font-size:clamp(28px,7vw,40px);letter-spacing:-.025em;line-height:1.05;margin:0}
+.sh p{margin:0;color:var(--dim);font-size:14px}
+.step{font-family:var(--mono);font-size:12px;color:var(--tomato);font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin-bottom:6px}
+
+/* cuándo */
+.when{background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:18px}
+.days{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0 -18px;padding:2px 18px 4px;scroll-snap-type:x mandatory}
+.days::-webkit-scrollbar{display:none}
+.day{flex:none;scroll-snap-align:start;border:1.5px solid var(--line);background:var(--soft);border-radius:16px;padding:10px 12px;min-width:76px;text-align:center;line-height:1.15}
+.day small{display:block;font-size:12px;color:var(--dim);font-weight:500;text-transform:capitalize}
+.day b{display:block;font-family:var(--serif);font-size:24px;font-weight:700;margin:2px 0}
+.day span{font-size:11.5px;color:var(--dim)}
+.day.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.day.on small,.day.on span{color:#e7d9c4}
+.lbl{font-size:13px;font-weight:600;color:var(--dim);margin:16px 0 8px}
+.slots{display:flex;flex-wrap:wrap;gap:7px}
+.slot{border:1.5px solid var(--line);background:var(--soft);border-radius:11px;padding:7px 11px;font-size:14px;font-family:var(--mono)}
+.slot.on{border-color:var(--tomato);background:var(--tomato-s);color:var(--tomato-d);font-weight:600}
+.mode{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mode button{border:1.5px solid var(--line);background:var(--soft);border-radius:16px;padding:12px;text-align:left;line-height:1.3}
+.mode button b{display:block;font-size:15px}
+.mode button span{font-size:12.5px;color:var(--dim)}
+.mode button.on{border-color:var(--ink);background:#fff;box-shadow:inset 0 0 0 1px var(--ink)}
+.zone{margin-top:10px}
+.zone select{width:100%;border:1.5px solid var(--line);background:var(--soft);border-radius:12px;padding:11px 12px;font-size:15px}
+.note{font-size:12.5px;color:var(--dim);margin:8px 0 0}
+
+/* carta */
+.cats{position:sticky;top:38px;z-index:20;background:var(--flour);display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;padding:10px 0;margin-bottom:6px}
+.cats::-webkit-scrollbar{display:none}
+.cats button{flex:none;border:1px solid var(--line);background:var(--paper);border-radius:99px;padding:7px 13px;font-size:14px;font-weight:500}
+.cats button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.cat{scroll-margin-top:96px;margin-bottom:22px}
+.cat h3{font-family:var(--serif);font-size:22px;font-weight:700;margin:6px 0 2px;letter-spacing:-.015em}
+.cat>p{margin:0 0 12px;color:var(--dim);font-size:14px}
+.grid{display:grid;grid-template-columns:minmax(0,1fr);gap:10px}
+.item{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:12px;display:grid;grid-template-columns:76px minmax(0,1fr);gap:12px;align-items:center;transition:border-color .2s,box-shadow .2s}
+.item.in{border-color:var(--tomato);box-shadow:inset 0 0 0 1px var(--tomato)}
+.pic{width:76px;height:76px;border-radius:16px;background:var(--gold-s);display:grid;place-items:center;overflow:hidden}
+.pic svg{width:66px;height:66px}
+.item h4{margin:0;font-size:15.5px;font-weight:600;line-height:1.25;letter-spacing:-.01em}
+.item p{margin:3px 0 8px;font-size:13px;color:var(--dim);line-height:1.35}
+.row{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.price{font-family:var(--mono);font-weight:600;font-size:15px}
+.qty{display:flex;align-items:center;background:var(--soft);border:1px solid var(--line);border-radius:12px;flex:none}
+.qty button{border:0;background:transparent;width:36px;height:36px;font-size:19px;line-height:1;border-radius:11px;font-weight:500}
+.qty button:active{background:var(--flour-d)}
+.qty output{min-width:22px;text-align:center;font-family:var(--mono);font-weight:600}
+.add{border:0;background:var(--ink);color:#fff;border-radius:12px;height:38px;padding:0 14px;font-weight:600;font-size:14px;flex:none}
+
+/* barra carrito */
+.cbar{position:fixed;left:0;right:0;bottom:0;z-index:40;padding:10px max(12px,env(safe-area-inset-left)) calc(10px + env(safe-area-inset-bottom));pointer-events:none}
+.cbar button{pointer-events:auto;width:100%;max-width:560px;margin:0 auto;display:flex;align-items:center;gap:12px;border:0;background:var(--tomato);color:#fff;border-radius:18px;padding:13px 16px;box-shadow:0 20px 40px -18px rgba(147,50,20,.7);text-align:left;transform:translateY(130%);transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.cbar.show button{transform:none}
+.cbar .n{background:#fff;color:var(--tomato);font-family:var(--mono);font-weight:700;border-radius:9px;min-width:28px;height:28px;display:grid;place-items:center;font-size:14px;flex:none}
+.cbar .t{flex:1;min-width:0;line-height:1.2}
+.cbar .t b{display:block;font-size:15px}
+.cbar .t small{font-size:12.5px;opacity:.85;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
+.cbar .tot{font-family:var(--mono);font-weight:700;font-size:16px;flex:none}
+
+/* hoja pedido */
+.sheet{position:fixed;inset:0;z-index:80;display:flex;align-items:flex-end;justify-content:center;background:rgba(42,31,23,.45)}
+.sheet .in{background:var(--paper);width:100%;max-width:560px;max-height:92vh;overflow:auto;border-radius:26px 26px 0 0;padding:18px 18px calc(18px + env(safe-area-inset-bottom));animation:up .32s cubic-bezier(.2,.8,.2,1)}
+@keyframes up{from{transform:translateY(40px);opacity:0}}
+.sheet h3{font-family:var(--serif);font-size:26px;margin:0;letter-spacing:-.02em}
+.shd{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.x{border:0;background:var(--soft);width:38px;height:38px;border-radius:50%;font-size:20px}
+.lines{list-style:none;margin:0;padding:0;border-top:1px dashed var(--line)}
+.lines li{display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px dashed var(--line);font-size:14.5px}
+.lines li span{flex:1;min-width:0}
+.lines li .q{font-family:var(--mono);color:var(--dim);flex:none}
+.sum{display:grid;gap:4px;margin:12px 0;font-size:14.5px}
+.sum div{display:flex;justify-content:space-between}
+.sum .big{font-size:19px;font-weight:700;margin-top:4px}
+.recap a{color:var(--tomato-d);font-weight:600}
+.recap{background:var(--gold-s);border-radius:14px;padding:11px 13px;font-size:14px;line-height:1.4;margin-bottom:12px}
+.f{display:grid;gap:8px;margin-bottom:12px}
+.f input{border:1.5px solid var(--line);background:var(--soft);border-radius:12px;padding:12px;font-size:16px;width:100%}
+.pay{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.pay button{border:1.5px solid var(--line);background:var(--soft);border-radius:12px;padding:10px;font-size:14px;font-weight:600}
+.pay button.on{border-color:var(--ink);background:#fff;box-shadow:inset 0 0 0 1px var(--ink)}
+.ok{text-align:center;padding:10px 0 4px}
+.ok .ring{width:72px;height:72px;border-radius:50%;background:var(--sage-s);color:var(--sage);display:grid;place-items:center;margin:0 auto 12px}
+.ok h3{margin-bottom:6px}
+.ok p{color:var(--dim);margin:0 0 16px}
+.ticket{background:var(--soft);border:1px dashed var(--line);border-radius:16px;padding:14px;text-align:left;font-size:14px;margin-bottom:14px}
+.ticket b{font-family:var(--mono)}
+
+/* info */
+.info{display:grid;gap:10px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:16px}
+.card h3{margin:0 0 8px;font-size:16px}
+.card table{width:100%;border-collapse:collapse;font-size:14px}
+.card td{padding:5px 0;border-bottom:1px dashed var(--line)}
+.card td:last-child{text-align:right;font-family:var(--mono)}
+.card p{margin:0;font-size:14.5px;color:var(--ink-2)}
+footer{padding:30px 0 120px;font-size:13px;color:var(--dim)}
+footer a{color:var(--ink)}
+.credit{margin-top:10px;max-width:70ch}
+
+/* ===================== PANEL ===================== */
+.panel{background:#f7f3ec;min-height:100vh;padding-bottom:40px}
+.ptop{background:#fff;border-bottom:1px solid var(--line)}
+.ptop .wrap{display:flex;align-items:center;gap:10px;height:60px}
+.ptop .wm b{font-family:var(--ui);font-size:17px;font-weight:700}
+.ptop .sub{margin-left:auto;font-size:13px;color:var(--dim)}
+.pdays{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;padding:14px 0 4px}
+.pdays::-webkit-scrollbar{display:none}
+.pdays button{flex:none;border:1px solid var(--line);background:#fff;border-radius:12px;padding:8px 12px;font-size:14px;font-weight:600;text-transform:capitalize;display:flex;gap:7px;align-items:center}
+.pdays button i{font-style:normal;font-family:var(--mono);font-size:12px;background:var(--soft);border-radius:7px;padding:1px 6px;color:var(--dim)}
+.pdays button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.pdays button.on i{background:#4a3a2c;color:#efe3cf}
+.kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:12px 0}
+.kp{background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px}
+.kp small{display:block;font-size:12px;color:var(--dim)}
+.kp b{display:block;font-family:var(--mono);font-size:20px;letter-spacing:-.03em;margin-top:2px;white-space:nowrap}
+.pgrid{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
+.pcard{background:#fff;border:1px solid var(--line);border-radius:20px;padding:16px}
+.pcard h2{font-size:17px;margin:0 0 2px;letter-spacing:-.01em}
+.pcard>p{margin:0 0 12px;font-size:13px;color:var(--dim)}
+.prod{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.prod li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:3px 10px;align-items:center}
+.prod li span{font-size:14px;line-height:1.25}
+.prod li b{font-family:var(--mono);font-size:17px}
+.prod li .bar{grid-column:1/-1;height:7px;background:var(--soft);border-radius:9px;overflow:hidden}
+.prod li .bar i{display:block;height:100%;background:var(--gold);border-radius:9px;transition:width .4s}
+.prod li.hot .bar i{background:var(--tomato)}
+.prod .grp{font-size:11.5px;font-weight:600;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;margin-top:6px;display:block}
+.orders{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.ord{border:1px solid var(--line);border-radius:16px;padding:12px;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:4px 12px;align-items:start}
+.ord.done{opacity:.5}
+.ord.new{border-color:var(--gold);background:#fffaf0;animation:pop .5s}
+@keyframes pop{from{transform:scale(.97)}}
+.ord .h{font-family:var(--mono);font-weight:600;font-size:15px}
+.ord .who{font-weight:600;font-size:15px;line-height:1.25}
+.ord .its{grid-column:2/3;font-size:13px;color:var(--dim);line-height:1.35}
+.ord .tt{font-family:var(--mono);font-weight:600;text-align:right;font-size:14px}
+.pill{display:inline-block;font-size:11.5px;font-weight:600;border-radius:7px;padding:1px 7px;margin-left:6px;vertical-align:1px}
+.pill.r{background:var(--gold-s);color:#7a5a0c}
+.pill.e{background:var(--tomato-s);color:var(--tomato-d)}
+.pill.n{background:var(--sage-s);color:var(--sage)}
+.chk{grid-column:3/4;grid-row:2/3;border:1.5px solid var(--line);background:#fff;border-radius:10px;font-size:12.5px;font-weight:600;padding:5px 9px;white-space:nowrap}
+.ord.done .chk{background:var(--sage);border-color:var(--sage);color:#fff}
+.empty{padding:20px;text-align:center;color:var(--dim);font-size:14px;border:1px dashed var(--line);border-radius:16px}
+.hint{background:var(--gold-s);border-radius:14px;padding:11px 13px;font-size:13.5px;margin-top:12px;line-height:1.4}
+
+@media (min-width:860px){
+  .hero{padding:30px 0 50px}
+  .hero .wrap{grid-template-columns:1.1fr .9fr;gap:40px}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .info{grid-template-columns:1fr 1fr}
+  .pgrid{grid-template-columns:.9fr 1.1fr;align-items:start}
+  .kp b{font-size:24px}
+  .sheet{align-items:center}
+  .sheet .in{border-radius:26px}
+}
+@media (max-width:520px){.ig span{display:none}.ig{padding:9px}}
+@media (max-width:370px){.kp b{font-size:16px}.kp{padding:10px}.demo span{font-size:11.5px}}
+</style>
+</head>
+<body>
+
+<div class="demo" role="region" aria-label="Aviso de boceto">
+  <span><b>Boceto para Roma</b> hecho por Compila</span>
+  <div class="seg" role="tablist" aria-label="Cambiar de vista">
+    <button id="vCli" class="on" role="tab" aria-selected="true">Cliente</button>
+    <button id="vPan" role="tab" aria-selected="false">Panel<span class="dot" id="dotNew" hidden>0</span></button>
+  </div>
+</div>
+
+<!-- ===================== VISTA CLIENTE ===================== -->
+<main id="cli">
+  <header class="top">
+    <div class="wrap">
+      <a class="wm" href="#" aria-label="Roma pastas artesanales">
+        <svg width="44" height="44" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="31" fill="#f6ecd6" stroke="#c8931c" stroke-width="1.5"/><path d="M32 9v12M32 13l-4-3M32 13l4-3M32 17l-4-3M32 17l4-3" stroke="#c8931c" stroke-width="1.6" stroke-linecap="round" fill="none"/><text x="32" y="40" text-anchor="middle" font-family="Fraunces,Georgia,serif" font-weight="700" font-size="17" fill="#c8931c">ROMA</text><text x="32" y="50" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="6.5" fill="#a07513">artesanales</text></svg>
+        <span><b>Roma</b><small>Pastas artesanales · Caseros</small></span>
+      </a>
+      <a class="ig" href="https://www.instagram.com/romapastasartesanales/" rel="noopener" target="_blank" aria-label="Instagram de Roma">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg><span>@romapastasartesanales</span>
+      </a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow" id="estado"><i></i><span>Cargando horario…</span></span>
+        <h1>Tus pastas del finde, <em>encargadas</em> desde hoy.</h1>
+        <p class="lead">Elegí el día y la hora, sumá lo que quieras y lo retirás en Juan Larrea 3034 o te lo llevamos. Sin apps de por medio.</p>
+        <div class="hbtns">
+          <a class="btn p" href="#cuando">Armar mi pedido</a>
+          <a class="btn g" href="#carta">Ver la carta</a>
+        </div>
+      </div>
+      <div class="plate" aria-hidden="true">
+        <svg viewBox="0 0 400 400">
+          <defs>
+            <radialGradient id="pl" cx="50%" cy="45%" r="55%"><stop offset="0" stop-color="#fffdf7"/><stop offset="1" stop-color="#efe4cf"/></radialGradient>
+            <radialGradient id="sz" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#f7dc8f"/><stop offset="1" stop-color="#e2b04a"/></radialGradient>
+          </defs>
+          <circle cx="200" cy="205" r="178" fill="#e4d6bc"/>
+          <circle cx="200" cy="198" r="176" fill="url(#pl)" stroke="#e0d3bb" stroke-width="2"/>
+          <circle cx="200" cy="198" r="128" fill="none" stroke="#ece0c8" stroke-width="2"/>
+          <path d="M108 222c18-60 70-92 118-80 50 12 82 56 70 98-12 44-70 66-120 52-48-14-80-36-68-70z" fill="#c3471f" opacity=".92"/>
+          <path d="M130 216c20-42 60-60 96-50" stroke="#d9663a" stroke-width="10" stroke-linecap="round" fill="none" opacity=".6"/>
+          <g>
+            <circle cx="160" cy="196" r="40" fill="url(#sz)" stroke="#c9952c" stroke-width="2"/><circle cx="160" cy="196" r="24" fill="#f9e3a2" stroke="#d7a43c" stroke-width="1.5" stroke-dasharray="3 4"/>
+            <circle cx="244" cy="180" r="40" fill="url(#sz)" stroke="#c9952c" stroke-width="2"/><circle cx="244" cy="180" r="24" fill="#f9e3a2" stroke="#d7a43c" stroke-width="1.5" stroke-dasharray="3 4"/>
+            <circle cx="206" cy="256" r="40" fill="url(#sz)" stroke="#c9952c" stroke-width="2"/><circle cx="206" cy="256" r="24" fill="#f9e3a2" stroke="#d7a43c" stroke-width="1.5" stroke-dasharray="3 4"/>
+          </g>
+          <g fill="#4f6b3a"><ellipse cx="206" cy="150" rx="9" ry="17" transform="rotate(-30 206 150)"/><ellipse cx="222" cy="148" rx="8" ry="15" transform="rotate(25 222 148)"/><ellipse cx="282" cy="236" rx="8" ry="15" transform="rotate(60 282 236)"/></g>
+          <g fill="#fff8e6" opacity=".9"><circle cx="186" cy="222" r="3"/><circle cx="232" cy="214" r="2.5"/><circle cx="176" cy="164" r="2.5"/><circle cx="264" cy="208" r="3"/><circle cx="214" cy="292" r="2.5"/><circle cx="148" cy="236" r="2"/></g>
+        </svg>
+        <div class="tag a"><b>Sorrentinos de calabaza</b>asada al tomillo</div>
+        <div class="tag b"><b>4.9 en Google</b>59 reseñas</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="blk" id="cuando">
+    <div class="wrap">
+      <div class="step">Paso 1</div>
+      <div class="sh"><h2>¿Para cuándo?</h2><p>Abren lun, jue a sáb y dom al mediodía</p></div>
+      <div class="when">
+        <div class="days" id="days" role="listbox" aria-label="Día del pedido"></div>
+        <div class="lbl">Horario</div>
+        <div class="slots" id="slots" role="listbox" aria-label="Horario"></div>
+        <div class="lbl">¿Cómo lo recibís?</div>
+        <div class="mode" role="radiogroup" aria-label="Retiro o envío">
+          <button id="mRet" class="on" role="radio" aria-checked="true"><b>Retiro</b><span>Juan Larrea 3034, Caseros</span></button>
+          <button id="mEnv" role="radio" aria-checked="false"><b>Envío</b><span>Caseros y alrededores</span></button>
+        </div>
+        <div class="zone" id="zone" hidden>
+          <select id="zoneSel" aria-label="Barrio de envío"></select>
+          <p class="note">Zonas y costos de envío de ejemplo, los define Roma.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="blk" id="carta">
+    <div class="wrap">
+      <div class="step">Paso 2</div>
+      <div class="sh"><h2>La carta</h2><p>Precios de su carta en QueResto</p></div>
+      <nav class="cats" id="cats" aria-label="Categorías"></nav>
+      <div id="menu"></div>
+    </div>
+  </section>
+
+  <section class="blk">
+    <div class="wrap info">
+      <div class="card">
+        <h3>Días y horarios</h3>
+        <table><tbody>
+          <tr><td>Lunes</td><td>18 a 24</td></tr>
+          <tr><td>Martes y miércoles</td><td>cerrado</td></tr>
+          <tr><td>Jueves a sábado</td><td>18 a 24</td></tr>
+          <tr><td>Domingo</td><td>11 a 15</td></tr>
+        </tbody></table>
+      </div>
+      <div class="card"><h3>Cómo cocinarlas</h3><p>Pueden venir congeladas. Dejalas 30 minutos a temperatura ambiente y cocinalas en abundante agua hirviendo. Las salsas vienen en envase apto microondas.</p></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div><b style="color:var(--ink)">Roma pastas artesanales</b> · Juan Larrea 3034, Caseros<br>Instagram <a href="https://www.instagram.com/romapastasartesanales/" rel="noopener" target="_blank">@romapastasartesanales</a></div>
+      <div class="credit">Boceto hecho por <a href="https://compilasoftware.com" rel="noopener" target="_blank">Compila Software</a> con los datos públicos de Roma. Productos y precios de su carta en QueResto al 24/11; las zonas y costos de envío y los pedidos del panel son de muestra. No se cobra ni se envía nada a nadie.</div>
+    </div>
+  </footer>
+
+  <div class="cbar" id="cbar">
+    <button id="openCart" aria-label="Ver pedido"><span class="n num" id="cN">0</span><span class="t"><b>Ver mi pedido</b><small id="cWhen"></small></span><span class="tot" id="cT">$0</span></button>
+  </div>
+</main>
+
+<!-- hoja del pedido -->
+<div class="sheet" id="sheet" hidden role="dialog" aria-modal="true" aria-labelledby="shTitle">
+  <div class="in" id="sheetIn"></div>
+</div>
+
+<!-- ===================== PANEL ===================== -->
+<main id="pan" class="panel" hidden>
+  <header class="ptop">
+    <div class="wrap">
+      <span class="wm"><svg width="30" height="30" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="31" fill="#f6ecd6" stroke="#c8931c" stroke-width="2"/><text x="32" y="39" text-anchor="middle" font-family="Georgia,serif" font-weight="700" font-size="17" fill="#c8931c">ROMA</text></svg><b>Pedidos y producción</b></span>
+      <span class="sub">Vista de Roma</span>
+    </div>
+  </header>
+  <div class="wrap">
+    <div class="pdays" id="pdays" role="tablist" aria-label="Día"></div>
+    <div class="kpis">
+      <div class="kp"><small>Pedidos</small><b id="kN">0</b></div>
+      <div class="kp"><small>Total</small><b id="kT">$0</b></div>
+      <div class="kp"><small>Retiro / envío</small><b id="kM">0 / 0</b></div>
+    </div>
+    <div class="pgrid">
+      <div class="pcard">
+        <h2>Para producir</h2>
+        <p id="prodSub">Suma de todos los pedidos del día</p>
+        <ul class="prod" id="prod"></ul>
+      </div>
+      <div class="pcard">
+        <h2>Pedidos del día</h2>
+        <p>Ordenados por horario. Tocá "Listo" cuando esté armado.</p>
+        <ul class="orders" id="orders"></ul>
+        <div class="hint">Probá: volvé a <b>Cliente</b>, hacé un pedido para este día y mirá cómo se suma acá.</div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+(function(){
+"use strict";
+var $=function(s){return document.querySelector(s)};
+var fmt=function(n){return "$"+Math.round(n).toLocaleString("es-AR")};
+var store={get:function(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},set:function(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+
+/* dibujos de cada pasta */
+var ART={
+  sorr:'<svg viewBox="0 0 66 66"><circle cx="33" cy="34" r="24" fill="#f0c766" stroke="#c9952c" stroke-width="2"/><circle cx="33" cy="34" r="14" fill="#f9e3a2" stroke="#d7a43c" stroke-width="1.5" stroke-dasharray="2.5 3"/></svg>',
+  plin:'<svg viewBox="0 0 66 66"><g fill="#f0c766" stroke="#c9952c" stroke-width="1.8"><path d="M10 30c0-8 8-12 13-8 5-4 13 0 13 8-4 6-22 6-26 0z"/><path d="M30 44c0-8 8-12 13-8 5-4 13 0 13 8-4 6-22 6-26 0z"/></g><path d="M23 22v-5M43 36v-5" stroke="#c9952c" stroke-width="2" stroke-linecap="round"/></svg>',
+  noq:'<svg viewBox="0 0 66 66"><g fill="#f3d27d" stroke="#c9952c" stroke-width="1.6"><ellipse cx="22" cy="24" rx="10" ry="7" transform="rotate(-20 22 24)"/><ellipse cx="43" cy="26" rx="10" ry="7" transform="rotate(15 43 26)"/><ellipse cx="31" cy="44" rx="10" ry="7" transform="rotate(-5 31 44)"/></g><g stroke="#d7a43c" stroke-width="1.2"><path d="M17 22l8 4M38 24l9 3M26 42l9 3"/></g></svg>',
+  plato:'<svg viewBox="0 0 66 66"><circle cx="33" cy="34" r="27" fill="#fffaf0" stroke="#e0d3bb" stroke-width="2"/><path d="M14 38c4-14 18-20 28-16 9 4 12 14 8 20-5 8-20 10-28 6-6-3-9-6-8-10z" fill="#c3471f"/><circle cx="27" cy="34" r="8" fill="#f0c766" stroke="#c9952c" stroke-width="1.4"/><circle cx="41" cy="32" r="8" fill="#f0c766" stroke="#c9952c" stroke-width="1.4"/><ellipse cx="35" cy="24" rx="3" ry="6" fill="#4f6b3a" transform="rotate(-25 35 24)"/></svg>',
+  salsa:'<svg viewBox="0 0 66 66"><path d="M14 26h38l-4 26a4 4 0 0 1-4 3H22a4 4 0 0 1-4-3z" fill="#fffaf0" stroke="#c9b48c" stroke-width="2"/><path d="M17 30h32l-1 7H18z" fill="#c3471f"/><rect x="12" y="20" width="42" height="7" rx="3" fill="#e0d3bb"/></svg>',
+  crema:'<svg viewBox="0 0 66 66"><path d="M14 26h38l-4 26a4 4 0 0 1-4 3H22a4 4 0 0 1-4-3z" fill="#fffaf0" stroke="#c9b48c" stroke-width="2"/><path d="M17 30h32l-1 7H18z" fill="#f2ead6"/><circle cx="28" cy="33" r="1.6" fill="#4f6b3a"/><circle cx="37" cy="32" r="1.6" fill="#4f6b3a"/><rect x="12" y="20" width="42" height="7" rx="3" fill="#e0d3bb"/></svg>',
+  manteca:'<svg viewBox="0 0 66 66"><rect x="12" y="24" width="42" height="26" rx="6" fill="#fffaf0" stroke="#c9b48c" stroke-width="2"/><rect x="18" y="30" width="30" height="14" rx="4" fill="#f6dc85"/><ellipse cx="28" cy="37" rx="3" ry="5" fill="#4f6b3a" transform="rotate(40 28 37)"/><ellipse cx="38" cy="36" rx="3" ry="5" fill="#6d8a55" transform="rotate(-30 38 36)"/></svg>',
+  queso:'<svg viewBox="0 0 66 66"><path d="M12 44l28-24 14 24z" fill="#f6dc85" stroke="#c9952c" stroke-width="2" stroke-linejoin="round"/><circle cx="34" cy="38" r="3" fill="#e2b04a"/><circle cx="44" cy="40" r="2" fill="#e2b04a"/><circle cx="26" cy="41" r="2" fill="#e2b04a"/></svg>',
+  brownie:'<svg viewBox="0 0 66 66"><path d="M12 30l20-8 22 8v16l-22 8-20-8z" fill="#5a3a26"/><path d="M12 30l20 8 22-8-22-8z" fill="#7a5038"/><path d="M32 38v16" stroke="#3e2718" stroke-width="1.5"/></svg>'
+};
+
+/* carta real de Roma (QueResto, 24/11) */
+var CATS=[
+  {id:"listos",n:"Listos para comer",d:"2 porciones con queso rallado y panificados. Lun, vie y sáb de 20 a 24, dom de 12:30 a 15."},
+  {id:"pastas",n:"Pastas",d:"Rinden 2 porciones. Pueden venir congeladas."},
+  {id:"salsas",n:"Salsas y acompañamientos",d:"Envases aptos microondas."},
+  {id:"postres",n:"Postres",d:""}
+];
+var P=[
+  {id:"nbp",c:"listos",n:"Ñoquis de papa con bechamel de puerros",d:"Listos para comer, 2 porciones.",p:20000,a:"noq",s:"Ñoquis bechamel"},
+  {id:"nfi",c:"listos",n:"Ñoquis de papa con filetto",d:"Listos para comer, 2 porciones.",p:20000,a:"noq",s:"Ñoquis filetto"},
+  {id:"nra",c:"listos",n:"Ñoquis de papa con ragoût de ternera",d:"Listos para comer, 2 porciones.",p:34000,a:"plato",s:"Ñoquis ragoût"},
+  {id:"scb",c:"listos",n:"Sorrentinos de calabaza y muzzarella con bechamel de puerros",d:"Listos para comer, 2 porciones.",p:28000,a:"plato",s:"Sorr. calabaza bechamel"},
+  {id:"sjf",c:"listos",n:"Sorrentinos de jamón y muzzarella con filetto",d:"Listos para comer, 2 porciones.",p:28000,a:"plato",s:"Sorr. jamón filetto"},
+  {id:"agn",c:"pastas",n:"Agnolotti dal plin de pollo y queso azul",d:"El favorito de varias reseñas.",p:14000,a:"plin",s:"Agnolotti pollo y azul"},
+  {id:"sjm",c:"pastas",n:"Sorrentinos de jamón y muzzarella",d:"Puro jamón cocido y muzzarella.",p:14000,a:"sorr",s:"Sorr. jamón y muzza"},
+  {id:"scm",c:"pastas",n:"Sorrentinos de calabaza y muzzarella",d:"Calabaza asada al tomillo.",p:15000,a:"sorr",s:"Sorr. calabaza"},
+  {id:"spf",c:"pastas",n:"Sorrentinos de papa y queso fontina",d:"Fontina levemente picante.",p:12000,a:"sorr",s:"Sorr. papa y fontina"},
+  {id:"spb",c:"pastas",n:"Sorrentinos de papa, berenjena ahumada y tomates secos",d:"Rinde para dos.",p:14000,a:"sorr",s:"Sorr. berenjena ahumada"},
+  {id:"qra",c:"salsas",n:"Queso rallado x 100 g",d:"Queso rallado seleccionado.",p:8000,a:"queso",s:"Queso rallado"},
+  {id:"bec",c:"salsas",n:"Bechamel de puerros",d:"Base de leche con puerros salteados.",p:6000,a:"crema",s:"Bechamel"},
+  {id:"mci",c:"salsas",n:"Manteca saborizada de ciboulette",d:"Rinde 4 porciones.",p:6000,a:"manteca",s:"Manteca ciboulette"},
+  {id:"msa",c:"salsas",n:"Manteca saborizada de salvia",d:"Con salvia de su huerto. Rinde 4.",p:6000,a:"manteca",s:"Manteca salvia"},
+  {id:"rag",c:"salsas",n:"Ragoût",d:"Tomate, crema y ternera a cuchillo. 400 g.",p:15000,a:"salsa",s:"Ragoût"},
+  {id:"fil",c:"salsas",n:"Salsa filetto",d:"Tomate, albahaca y ajo. 350 g.",p:6000,a:"salsa",s:"Filetto"},
+  {id:"bro",c:"postres",n:"Brownie",d:"Individual, congelado. 40 min afuera y listo.",p:10000,a:"brownie",s:"Brownie"}
+];
+var BY={};P.forEach(function(x){BY[x.id]=x});
+var ZONES=[["Caseros",0],["Santos Lugares",2500],["Ciudad Jardín",2500],["Villa Bosch",3000],["Martín Coronado",3000],["El Palomar",3500]];
+
+/* horarios reales: 0 dom ... 6 sáb */
+var HOURS={0:[11,15],1:[18,24],4:[18,24],5:[18,24],6:[18,24]};
+var DN=["dom","lun","mar","mié","jue","vie","sáb"],MN=["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"];
+function key(d){return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()}
+function nextDays(n){var out=[],d=new Date();d.setHours(0,0,0,0);for(var i=0;out.length<n&&i<20;i++){var x=new Date(d);x.setDate(d.getDate()+i);if(HOURS[x.getDay()])out.push(x)}return out}
+function slotsFor(d){var h=HOURS[d.getDay()],o=[];for(var t=h[0]*60+30;t<=h[1]*60-30;t+=30){o.push(String(Math.floor(t/60)%24).padStart(2,"0")+":"+String(t%60).padStart(2,"0"))}return o}
+function dLabel(d){var t=new Date();t.setHours(0,0,0,0);var diff=Math.round((d-t)/864e5);return diff===0?"hoy":diff===1?"mañana":DN[d.getDay()]+" "+d.getDate()}
+var DAYS=nextDays(7);
+
+/* estado */
+var st={day:0,slot:null,mode:"ret",zone:0,cart:{},pay:"mp",name:""};
+var orders=store.get("roma-orders");
+if(!orders||!orders.length||orders[0].day!==key(DAYS[0])){orders=seed();store.set("roma-orders",orders)}
+var unseen=0;
+
+function seed(){
+  var names=["Lucía","Martín","Sofía","Gabriel","Carla","Diego","Paula","Nico","Flor","Ramiro","Vale","Juli"];
+  var combos=[{agn:2,msa:1},{scm:1,sjm:1,fil:1},{scb:1,bro:1},{spb:2,rag:1},{agn:1,spf:1,bec:1},{nra:1},{sjm:2,fil:2,qra:1},{scm:2,msa:1},{nfi:1,sjf:1},{agn:3,mci:1,qra:1},{spf:2,fil:1},{scm:1,agn:1,bro:2}];
+  var o=[],k=0;
+  DAYS.forEach(function(d,di){
+    var sl=slotsFor(d),n=Math.max(2,6-di);
+    if(d.getDay()===6||d.getDay()===0)n+=2;
+    for(var i=0;i<n;i++){var c=combos[(k*5+di)%combos.length];var z=(k%3===0)?(1+k%4):-1;
+      o.push({id:"s"+k,day:key(d),slot:sl[(i*3+di)%sl.length],name:names[k%names.length],items:c,mode:z>=0?"env":"ret",zone:z>=0?z:null,done:false,seed:true});k++}
+  });
+  return o;
+}
+function tot(items){var s=0;for(var id in items)s+=BY[id].p*items[id];return s}
+function count(items){var s=0;for(var id in items)s+=items[id];return s}
+
+/* ---- vista cliente ---- */
+function renderEstado(){
+  var now=new Date(),h=HOURS[now.getDay()],hr=now.getHours()+now.getMinutes()/60,open=h&&hr>=h[0]&&hr<h[1];
+  var el=$("#estado");el.classList.toggle("open",!!open);
+  var nd=DAYS.filter(function(d){return key(d)!==key(now)})[0];
+  el.lastElementChild.textContent=open?"Abierto ahora · encargá para hoy o para otro día":"Hoy cerrado · igual podés encargar para el "+(nd?DN[nd.getDay()]+" "+nd.getDate():"próximo día");
+}
+function renderDays(){
+  $("#days").innerHTML=DAYS.map(function(d,i){var h=HOURS[d.getDay()];return '<button class="day'+(i===st.day?' on':'')+'" role="option" aria-selected="'+(i===st.day)+'" data-i="'+i+'"><small>'+dLabel(d).replace(/ \d+$/,"")+'</small><b>'+d.getDate()+'</b><span>'+MN[d.getMonth()]+' · '+h[0]+'–'+(h[1]%24||24)+'</span></button>'}).join("");
+  var sl=slotsFor(DAYS[st.day]);
+  var now=new Date();if(key(DAYS[st.day])===key(now)){var m=now.getHours()*60+now.getMinutes()+60;sl=sl.filter(function(s){var p=s.split(":");var t=+p[0]*60+ +p[1];if(+p[0]<6)t+=1440;return t>=m})}
+  if(sl.indexOf(st.slot)<0)st.slot=sl[0]||null;
+  $("#slots").innerHTML=sl.length?sl.map(function(s){return '<button class="slot'+(s===st.slot?' on':'')+'" role="option" aria-selected="'+(s===st.slot)+'" data-s="'+s+'">'+s+'</button>'}).join(""):'<span class="note">No quedan horarios para hoy, elegí otro día.</span>';
+}
+$("#days").addEventListener("click",function(e){var b=e.target.closest(".day");if(!b)return;st.day=+b.dataset.i;renderDays();renderBar()});
+$("#slots").addEventListener("click",function(e){var b=e.target.closest(".slot");if(!b)return;st.slot=b.dataset.s;renderDays();renderBar()});
+function setMode(m){st.mode=m;$("#mRet").classList.toggle("on",m==="ret");$("#mEnv").classList.toggle("on",m==="env");$("#mRet").setAttribute("aria-checked",m==="ret");$("#mEnv").setAttribute("aria-checked",m==="env");$("#zone").hidden=m!=="env";renderBar()}
+$("#mRet").onclick=function(){setMode("ret")};$("#mEnv").onclick=function(){setMode("env")};
+$("#zoneSel").innerHTML=ZONES.map(function(z,i){return '<option value="'+i+'">'+z[0]+(z[1]?" · envío "+fmt(z[1]):" · envío sin cargo")+'</option>'}).join("");
+$("#zoneSel").onchange=function(){st.zone=+this.value;renderBar()};
+
+function renderMenu(){
+  $("#cats").innerHTML=CATS.map(function(c,i){return '<button data-c="'+c.id+'"'+(i===0?' class="on"':'')+'>'+c.n+'</button>'}).join("");
+  $("#menu").innerHTML=CATS.map(function(c){
+    return '<div class="cat" id="c-'+c.id+'"><h3>'+c.n+'</h3>'+(c.d?'<p>'+c.d+'</p>':'')+'<div class="grid">'+
+      P.filter(function(x){return x.c===c.id}).map(function(x){return '<article class="item" data-id="'+x.id+'"><div class="pic">'+ART[x.a]+'</div><div><h4>'+x.n+'</h4><p>'+x.d+'</p><div class="row"><span class="price">'+fmt(x.p)+'</span><span class="ctl"></span></div></div></article>'}).join("")+'</div></div>';
+  }).join("");
+  renderCtl();
+}
+function renderCtl(){
+  document.querySelectorAll(".item").forEach(function(el){var id=el.dataset.id,q=st.cart[id]||0;el.classList.toggle("in",q>0);
+    el.querySelector(".ctl").innerHTML=q?'<span class="qty"><button data-a="-" aria-label="Sacar uno">−</button><output>'+q+'</output><button data-a="+" aria-label="Sumar uno">+</button></span>':'<button class="add" data-a="+">Agregar</button>'});
+}
+$("#menu").addEventListener("click",function(e){var b=e.target.closest("[data-a]");if(!b)return;var id=b.closest(".item").dataset.id;st.cart[id]=(st.cart[id]||0)+(b.dataset.a==="+"?1:-1);if(st.cart[id]<=0)delete st.cart[id];renderCtl();renderBar()});
+$("#cats").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;document.getElementById("c-"+b.dataset.c).scrollIntoView({behavior:"smooth"})});
+var catObs="IntersectionObserver" in window?new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){var id=en.target.id.slice(2);document.querySelectorAll("#cats button").forEach(function(b){b.classList.toggle("on",b.dataset.c===id)})}})},{rootMargin:"-40% 0px -55% 0px"}):null;
+
+function ship(){return st.mode==="env"?ZONES[st.zone][1]:0}
+function whenTxt(){var d=DAYS[st.day];return (st.mode==="env"?"Envío":"Retiro")+" · "+dLabel(d)+(st.slot?" · "+st.slot:"")}
+function renderBar(){var n=count(st.cart);$("#cbar").classList.toggle("show",n>0);$("#cN").textContent=n;$("#cT").textContent=fmt(tot(st.cart)+ship());$("#cWhen").textContent=whenTxt()}
+
+/* hoja */
+function openSheet(){var s=$("#sheet");s.hidden=false;document.body.style.overflow="hidden";drawSheet()}
+function closeSheet(){$("#sheet").hidden=true;document.body.style.overflow=""}
+function drawSheet(){
+  var d=DAYS[st.day],sub=tot(st.cart),sh=ship();
+  $("#sheetIn").innerHTML='<div class="shd"><h3 id="shTitle">Tu pedido</h3><button class="x" data-x aria-label="Cerrar">×</button></div>'+
+   '<div class="recap"><b>'+(st.mode==="env"?"Envío a "+ZONES[st.zone][0]:"Retiro en Juan Larrea 3034")+'</b><br>'+DN[d.getDay()]+" "+d.getDate()+" de "+MN[d.getMonth()]+(st.slot?" · "+st.slot+" hs":"")+' · <a href="#cuando" data-x>cambiar</a></div>'+
+   '<ul class="lines">'+Object.keys(st.cart).map(function(id){return '<li><span>'+BY[id].n+'</span><span class="q">×'+st.cart[id]+'</span><span class="num">'+fmt(BY[id].p*st.cart[id])+'</span></li>'}).join("")+'</ul>'+
+   '<div class="sum"><div><span>Productos</span><span class="num">'+fmt(sub)+'</span></div><div><span>Envío</span><span class="num">'+(st.mode==="env"?(sh?fmt(sh):"sin cargo"):"—")+'</span></div><div class="big"><span>Total</span><span class="num">'+fmt(sub+sh)+'</span></div></div>'+
+   '<div class="f"><input id="nm" placeholder="Tu nombre" autocomplete="given-name" value="'+st.name.replace(/"/g,"")+'">'+(st.mode==="env"?'<input id="dir" placeholder="Dirección (calle y altura)" autocomplete="street-address" value="'+(st.dir||"").replace(/"/g,"")+'">':'')+'</div>'+
+   '<div class="pay" role="radiogroup" aria-label="Forma de pago"><button data-p="mp" class="'+(st.pay==="mp"?"on":"")+'">Transferencia / MP</button><button data-p="ef" class="'+(st.pay==="ef"?"on":"")+'">Efectivo al '+(st.mode==="env"?"recibir":"retirar")+'</button></div>'+
+   '<button class="btn p w" id="conf"'+(st.slot?'':' disabled')+'>Confirmar pedido · '+fmt(sub+sh)+'</button>'+
+   '<p class="note" style="text-align:center">Es un boceto: no se cobra ni se envía nada.</p>';
+}
+$("#openCart").onclick=openSheet;
+$("#sheet").addEventListener("click",function(e){
+  if(e.target===e.currentTarget||e.target.closest("[data-x]")){closeSheet();return}
+  var p=e.target.closest("[data-p]");if(p){st.pay=p.dataset.p;var nm=$("#nm"),dr=$("#dir");if(nm)st.name=nm.value;if(dr)st.dir=dr.value;drawSheet();return}
+  if(e.target.closest("#conf"))confirmOrder();
+  if(e.target.closest("#again")){closeSheet()}
+});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!$("#sheet").hidden)closeSheet()});
+function confirmOrder(){
+  var nm=$("#nm");st.name=(nm&&nm.value.trim())||"Cliente de prueba";
+  var d=DAYS[st.day],num=100+orders.filter(function(o){return !o.seed}).length+37;
+  var o={id:"w"+Date.now(),num:num,day:key(d),slot:st.slot,name:st.name,items:JSON.parse(JSON.stringify(st.cart)),mode:st.mode,zone:st.mode==="env"?st.zone:null,done:false,fresh:true};
+  orders.push(o);store.set("roma-orders",orders);unseen++;renderDot();
+  $("#sheetIn").innerHTML='<div class="ok"><div class="ring"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div><h3>¡Pedido encargado!</h3><p>Te escribimos por WhatsApp para confirmar.</p>'+
+    '<div class="ticket">Pedido <b>#'+num+'</b><br>'+(o.mode==="env"?"Envío a "+ZONES[o.zone][0]:"Retiro en Juan Larrea 3034")+'<br>'+DN[d.getDay()]+" "+d.getDate()+" de "+MN[d.getMonth()]+" · "+o.slot+' hs<br>'+count(o.items)+' productos · <b>'+fmt(tot(o.items)+ship())+'</b></div>'+
+    '<button class="btn p w" id="seePanel">Ver cómo le llega a Roma</button><div style="height:8px"></div><button class="btn g w" id="again">Seguir mirando</button></div>';
+  $("#seePanel").onclick=function(){closeSheet();pDay=st.day;show("pan")};
+  st.cart={};renderCtl();renderBar();
+}
+
+/* ---- panel ---- */
+var pDay=0;
+function renderDot(){var d=$("#dotNew");d.hidden=!unseen;d.textContent=unseen}
+function renderPanel(){
+  $("#pdays").innerHTML=DAYS.map(function(d,i){var n=orders.filter(function(o){return o.day===key(d)}).length;return '<button role="tab" aria-selected="'+(i===pDay)+'" class="'+(i===pDay?"on":"")+'" data-i="'+i+'">'+dLabel(d)+'<i>'+n+'</i></button>'}).join("");
+  var k=key(DAYS[pDay]),list=orders.filter(function(o){return o.day===k}).sort(function(a,b){var f=function(s){var p=s.split(":");return (+p[0]<6?24+ +p[0]:+p[0])*60+ +p[1]};return f(a.slot)-f(b.slot)});
+  var T=0,R=0,E=0,sum={};
+  list.forEach(function(o){T+=tot(o.items)+(o.mode==="env"?ZONES[o.zone][1]:0);o.mode==="env"?E++:R++;for(var id in o.items)sum[id]=(sum[id]||0)+o.items[id]});
+  $("#kN").textContent=list.length;$("#kT").textContent=fmt(T);$("#kM").textContent=R+" / "+E;
+  var d=DAYS[pDay];$("#prodSub").textContent="Suma de "+list.length+" pedidos para el "+DN[d.getDay()]+" "+d.getDate()+". Cada pasta rinde 2 porciones.";
+  var max=0;for(var id in sum)max=Math.max(max,sum[id]);
+  var html="";CATS.forEach(function(c){var ids=P.filter(function(x){return x.c===c.id&&sum[x.id]}).sort(function(a,b){return sum[b.id]-sum[a.id]});if(!ids.length)return;
+    html+='<li style="display:block"><span class="grp">'+c.n+'</span></li>'+ids.map(function(x){var q=sum[x.id];return '<li class="'+(q===max?"hot":"")+'"><span>'+x.s+'</span><b>'+q+'</b><span class="bar"><i style="width:'+Math.round(q/max*100)+'%"></i></span></li>'}).join("")});
+  $("#prod").innerHTML=html||'<li class="empty">Todavía no hay pedidos para este día.</li>';
+  $("#orders").innerHTML=list.length?list.map(function(o){var its=Object.keys(o.items).map(function(id){return o.items[id]+"× "+BY[id].s}).join(" · ");
+    return '<li class="ord'+(o.done?" done":"")+(o.fresh?" new":"")+'" data-id="'+o.id+'"><span class="h">'+o.slot+'</span><span class="who">'+o.name+(o.mode==="env"?'<span class="pill e">Envío · '+ZONES[o.zone][0]+'</span>':'<span class="pill r">Retiro</span>')+(o.fresh?'<span class="pill n">Nuevo</span>':'')+'</span><span class="tt">'+fmt(tot(o.items)+(o.mode==="env"?ZONES[o.zone][1]:0))+'</span><span class="its">'+its+'</span><button class="chk">'+(o.done?"✓ Listo":"Listo")+'</button></li>'}).join(""):'<li class="empty">Sin pedidos para este día.</li>';
+}
+$("#pdays").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;pDay=+b.dataset.i;renderPanel()});
+$("#orders").addEventListener("click",function(e){var b=e.target.closest(".chk");if(!b)return;var id=b.closest(".ord").dataset.id;orders.forEach(function(o){if(o.id===id){o.done=!o.done;o.fresh=false}});store.set("roma-orders",orders);renderPanel()});
+
+function show(v){var pan=v==="pan";$("#cli").hidden=pan;$("#pan").hidden=!pan;$("#cbar").style.display=pan?"none":"";
+  $("#vCli").classList.toggle("on",!pan);$("#vPan").classList.toggle("on",pan);$("#vCli").setAttribute("aria-selected",!pan);$("#vPan").setAttribute("aria-selected",pan);
+  if(pan){unseen=0;renderDot();renderPanel();orders.forEach(function(o){o.fresh=false});store.set("roma-orders",orders)}
+  window.scrollTo(0,0)}
+$("#vCli").onclick=function(){show("cli")};$("#vPan").onclick=function(){show("pan")};
+
+renderEstado();renderDays();renderMenu();renderBar();
+if(catObs)document.querySelectorAll(".cat").forEach(function(c){catObs.observe(c)});
+})();
+</script>
+</body>
+</html>
