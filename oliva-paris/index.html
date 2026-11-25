@@ -193,6 +193,33 @@ section.blk{padding:30px 0}
 .zone select{width:100%;border:1.5px solid var(--line);background:var(--soft);border-radius:12px;padding:11px 12px;font-size:17px}
 .note{font-size:14px;color:var(--dim);margin:8px 0 0}
 
+/* cómo comprar */
+.how{background:var(--paper);border-bottom:1px solid var(--line);padding:24px 0 26px}
+.howl{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:14px}
+.howl li{display:grid;grid-template-columns:44px minmax(0,1fr);gap:12px;align-items:start}
+.howl span{width:44px;height:44px;border-radius:50%;background:var(--olive-d);color:#fff;display:grid;place-items:center;font-family:var(--serif);font-weight:700;font-size:21px}
+.howl b{display:block;font-size:18px;line-height:1.25;margin-top:2px}
+.howl small{display:block;font-size:15.5px;color:var(--dim);line-height:1.4;margin-top:2px}
+@media (min-width:860px){.howl{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}}
+/* pasos del carrito */
+.ck{list-style:none;margin:0 0 16px;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;counter-reset:none}
+.ck li{display:flex;align-items:center;gap:7px;font-size:15px;font-weight:600;color:var(--dim);border-top:4px solid var(--line);padding-top:8px}
+.ck li b{width:26px;height:26px;border-radius:50%;background:var(--soft);border:1.5px solid var(--line);display:grid;place-items:center;font-size:14px;flex:none}
+.ck li.on{color:var(--ink);border-top-color:var(--olive-d)}
+.ck li.on b{background:var(--olive-d);border-color:var(--olive-d);color:#fff}
+.ck li.done{color:var(--olive-d);border-top-color:var(--olive)}
+.ck li.done b{background:var(--olive-s);border-color:var(--olive)}
+.brow{display:flex;gap:10px;margin-top:16px}
+.brow .btn{flex:1}
+.brow .btn.g{flex:none}
+.freebar{height:8px;background:var(--line);border-radius:8px;overflow:hidden;margin-top:8px}
+.freebar i{display:block;height:100%;background:var(--olive);border-radius:8px;transition:width .4s}
+.sheet .days{margin:0 -18px;padding:2px 18px 4px}
+.retbox{background:var(--olive-s);color:var(--olive-d);border-radius:14px;padding:12px 14px;font-size:15.5px;line-height:1.45;margin-top:10px}
+.sheet .zone select,.sheet .zone input{margin-top:0}
+.sheet .zone{display:grid;gap:8px}
+.sheet .zone input{border:1.5px solid var(--line);background:var(--soft);border-radius:12px;padding:12px;font-size:17px;width:100%}
+.minis{font-size:15px;color:var(--dim);margin:0 0 4px}
 /* info */
 .info{display:grid;gap:10px}
 .card{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:16px}
@@ -479,6 +506,17 @@ footer a{color:var(--ink)}
 
   <div class="strip" aria-label="Fotos de los productos"><div class="rail" id="rail"></div></div>
 
+  <section class="how" aria-label="Cómo comprar">
+    <div class="wrap">
+      <div class="step">Cómo comprar</div>
+      <ol class="howl">
+        <li><span>1</span><div><b>Elegí tus productos</b><small>Tocá el + en cada uno. Se van sumando al pedido.</small></div></li>
+        <li><span>2</span><div><b>Elegí el día</b><small>Llevamos martes y viernes de 10 a 14, o retirás en Vicente López.</small></div></li>
+        <li><span>3</span><div><b>Pagá como prefieras</b><small>Transferencia, efectivo o Mercado Pago. Te confirmamos por WhatsApp.</small></div></li>
+      </ol>
+    </div>
+  </section>
+
   <section class="gondola" id="tamanos">
     <div class="wrap">
       <div class="step">El aceite de la finca</div>
@@ -526,27 +564,6 @@ footer a{color:var(--ink)}
       <div class="sh"><h2>Productos</h2><p>Precios de su tienda en Pency</p></div>
       <nav class="cats" id="cats" aria-label="Categorías"></nav>
       <div id="menu"></div>
-    </div>
-  </section>
-
-  <section class="blk" id="cuando">
-    <div class="wrap">
-      <div class="step">Último paso</div>
-      <div class="sh"><h2>¿Cuándo te lo llevamos?</h2><p>Repartos martes y viernes, de 10 a 14</p></div>
-      <div class="when">
-        <div class="days" id="days" role="listbox" aria-label="Día de entrega"></div>
-        <div class="lbl">Franja horaria</div>
-        <div class="slots" id="slots" role="listbox" aria-label="Franja"></div>
-        <div class="lbl">¿Cómo lo recibís?</div>
-        <div class="mode" role="radiogroup" aria-label="Envío o retiro">
-          <button id="mEnv" class="on" role="radio" aria-checked="true"><b>Envío</b><span>Zona Norte y CABA</span></button>
-          <button id="mRet" role="radio" aria-checked="false"><b>Retiro</b><span>En Vicente López</span></button>
-        </div>
-        <div class="zone" id="zone">
-          <select id="zoneSel" aria-label="Barrio de envío"></select>
-          <p class="note">Envío $5.000, sin cargo desde $50.000 (como hoy en Pency). Los barrios y cupos por día son de ejemplo.</p>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -748,7 +765,7 @@ var DAYS=nextDays(4);
 $("#nextShip").textContent="Próximo envío: "+DN[DAYS[0].getDay()]+" "+DAYS[0].getDate()+" de "+MN[DAYS[0].getMonth()]+" · 10 a 14 hs";
 
 /* estado */
-var st={day:0,fr:0,mode:"env",zone:0,cart:{},pay:"tr",name:"",dir:""};
+var st={day:0,fr:0,mode:"env",zone:0,cart:{},pay:"tr",name:"",dir:"",tel:"",step:1};
 var GIFT={items:["a250","neg","mix","mem"],msg:"",q:1};
 var orders=store.get("oliva-orders");
 if(!orders||!orders.length||orders[0].day!==key(DAYS[0])){orders=seed();store.set("oliva-orders",orders)}
@@ -919,6 +936,10 @@ $("#sheet").addEventListener("click",function(e){
       if(img){var r=img.getBoundingClientRect();ghost=img.cloneNode();ghost.style.cssText="position:fixed;left:"+r.left+"px;top:"+r.top+"px;width:"+r.width+"px;height:"+r.height+"px;object-fit:cover;opacity:0";document.body.appendChild(ghost)}
       var l=L(PD.id,PD.vi,PD.o,PD.q);closeSheet();addLine(l,null);if(ghost){ghost.style.opacity=1;fly(ghost);setTimeout(function(){ghost.remove()},50)}else toast("Sumado al pedido",lineName(l))}
     return}
+  var sp=e.target.closest("[data-step]");if(sp){e.preventDefault();keepInputs();st.step=+sp.dataset.step;drawCart();$("#sheetIn").scrollTop=0;return}
+  var md=e.target.closest("[data-mode]");if(md){keepInputs();st.mode=md.dataset.mode;drawCart();return}
+  var dy=e.target.closest("[data-day]");if(dy){keepInputs();var sc=$("#sheetIn .days").scrollLeft;st.day=+dy.dataset.day;drawCart();$("#sheetIn .days").scrollLeft=sc;return}
+  var fr=e.target.closest("[data-fr]");if(fr){keepInputs();st.fr=+fr.dataset.fr;drawCart();return}
   var m=e.target.closest("[data-m]");if(m){var k=m.dataset.k;st.cart[k].q+=m.dataset.m==="+"?1:-1;if(st.cart[k].q<=0)delete st.cart[k];refreshCards();renderBar();if(!cartLines().length){closeSheet();return}drawCart();return}
   var p=e.target.closest("[data-p]");if(p){keepInputs();st.pay=p.dataset.p;drawCart();return}
   if(e.target.closest("#conf"))confirmOrder();
@@ -926,40 +947,51 @@ $("#sheet").addEventListener("click",function(e){
 });
 document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!$("#sheet").hidden)closeSheet()});
 
-/* ---- cuándo ---- */
+/* ---- entrega (ahora es el paso 2 del carrito) ---- */
 function dayCount(d){return orders.filter(function(o){return o.day===key(d)}).length}
-function renderDays(){
-  $("#days").innerHTML=DAYS.map(function(d,i){var left=Math.max(0,CAP-dayCount(d));return '<button class="day'+(i===st.day?' on':'')+'" role="option" aria-selected="'+(i===st.day)+'" data-i="'+i+'"><small>'+DN[d.getDay()]+'</small><b>'+d.getDate()+'</b><span>'+MN[d.getMonth()]+'</span><span class="cup">quedan '+left+'</span></button>'}).join("");
-  $("#slots").innerHTML=FR.map(function(f,i){return '<button class="slot'+(i===st.fr?' on':'')+'" role="option" aria-selected="'+(i===st.fr)+'" data-f="'+i+'">'+f+' hs</button>'}).join("");
-}
-$("#days").addEventListener("click",function(e){var b=e.target.closest(".day");if(!b)return;st.day=+b.dataset.i;renderDays();renderBar()});
-$("#slots").addEventListener("click",function(e){var b=e.target.closest(".slot");if(!b)return;st.fr=+b.dataset.f;renderDays();renderBar()});
-function setMode(m){st.mode=m;$("#mRet").classList.toggle("on",m==="ret");$("#mEnv").classList.toggle("on",m==="env");$("#mRet").setAttribute("aria-checked",m==="ret");$("#mEnv").setAttribute("aria-checked",m==="env");$("#zone").hidden=m!=="env";renderBar()}
-$("#mRet").onclick=function(){setMode("ret")};$("#mEnv").onclick=function(){setMode("env")};
-$("#zoneSel").innerHTML=ZONES.map(function(z,i){return '<option value="'+i+'">'+z[0]+' · '+z[1]+'</option>'}).join("");
-$("#zoneSel").onchange=function(){st.zone=+this.value;renderBar()};
-
 function whenTxt(){var d=DAYS[st.day];return DN[d.getDay()]+" "+d.getDate()+" · "+FR[st.fr]+" hs"}
-function renderBar(){var ls=cartLines(),n=units(ls),sub=subtotal(ls);$("#cbar").classList.toggle("show",n>0);$("#cN").textContent=n;$("#cT").textContent=fmt(sub+shipFor(sub,st.mode));
-  $("#cSub").textContent=st.mode==="env"?(sub>=FREE?"Envío sin cargo ✓ · "+whenTxt():"Te faltan "+fmt(FREE-sub)+" para el envío sin cargo"):"Retiro · "+whenTxt();
-  $("#cProg").style.width=(st.mode==="env"?Math.min(100,sub/FREE*100):100)+"%"}
+function renderBar(){var ls=cartLines(),n=units(ls),sub=subtotal(ls);$("#cbar").classList.toggle("show",n>0);$("#cN").textContent=n;$("#cT").textContent=fmt(sub);
+  $("#cSub").textContent=sub>=FREE?"Envío sin cargo ✓":"Te faltan "+fmt(FREE-sub)+" para el envío sin cargo";
+  $("#cProg").style.width=Math.min(100,sub/FREE*100)+"%"}
 
-/* ---- hoja del pedido ---- */
-function openSheet(isProduct){var s=$("#sheet");s.hidden=false;document.body.style.overflow="hidden";if(!isProduct){$("#sheetIn").classList.remove("pd");drawCart()}}
+/* ---- hoja del pedido: 1 pedido, 2 entrega, 3 pago ---- */
+function openSheet(isProduct){var s=$("#sheet");s.hidden=false;document.body.style.overflow="hidden";if(!isProduct){st.step=1;$("#sheetIn").classList.remove("pd");drawCart()}}
 function closeSheet(){$("#sheet").hidden=true;document.body.style.overflow="";$("#sheetIn").classList.remove("pd")}
-function keepInputs(){var nm=$("#nm"),dr=$("#dir");if(nm)st.name=nm.value;if(dr)st.dir=dr.value}
+function keepInputs(){var nm=$("#nm"),dr=$("#dir"),tl=$("#tel");if(nm)st.name=nm.value;if(dr)st.dir=dr.value;if(tl)st.tel=tl.value}
+function steps(){return '<ol class="ck" aria-label="Pasos">'+["Pedido","Entrega","Pago"].map(function(t,i){var n=i+1,c=n<st.step?"done":n===st.step?"on":"";return '<li class="'+c+'"'+(n===st.step?' aria-current="step"':'')+'><b>'+(n<st.step?"✓":n)+'</b>'+t+'</li>'}).join("")+'</ol>'}
+function head(t){return '<div class="shd"><h3 id="shTitle">'+t+'</h3><button class="x" data-x aria-label="Cerrar">×</button></div>'+steps()}
 function drawCart(){
-  var d=DAYS[st.day],ls=cartLines(),sub=subtotal(ls),sh=shipFor(sub,st.mode);
-  $("#sheetIn").innerHTML='<div class="shd"><h3 id="shTitle">Tu pedido</h3><button class="x" data-x aria-label="Cerrar">×</button></div>'+
-   '<div class="recap"><b>'+(st.mode==="env"?"Envío a "+ZONES[st.zone][0]:"Retiro en Vicente López")+'</b><br>'+DN[d.getDay()]+" "+d.getDate()+" de "+MN[d.getMonth()]+" · "+FR[st.fr]+' hs · <a href="#cuando" data-x>cambiar</a></div>'+
-   '<ul class="lines">'+Object.keys(st.cart).map(function(k){var l=st.cart[k];return '<li><span class="nm">'+esc(lineName(l))+(l.id==="gift"?'<small>'+l.items.map(function(i){return BY[i].s}).join(" · ")+(l.msg?' · “'+esc(l.msg)+'”':'')+'</small>':'')+'</span><span class="ctl"><span class="mini"><button data-m="-" data-k="'+esc(k)+'" aria-label="Menos">−</button><output>'+l.q+'</output><button data-m="+" data-k="'+esc(k)+'" aria-label="Más">+</button></span><span class="num">'+fmt(lineTotal(l))+'</span></span></li>'}).join("")+'</ul>'+
-   (st.mode==="env"?'<div class="free">'+(sub>=FREE?"Tu envío es sin cargo.":"Sumá "+fmt(FREE-sub)+" más y el envío es sin cargo.")+'</div>':'')+
-   '<div class="sum"><div><span>Productos</span><span class="num">'+fmt(sub)+'</span></div><div><span>Envío</span><span class="num">'+(st.mode==="env"?(sh?fmt(sh):"sin cargo"):"—")+'</span></div><div class="big"><span>Total</span><span class="num">'+fmt(sub+sh)+'</span></div></div>'+
-   '<div class="f"><input id="nm" placeholder="Tu nombre" autocomplete="name" value="'+esc(st.name)+'">'+(st.mode==="env"?'<input id="dir" placeholder="Dirección y barrio" autocomplete="street-address" value="'+esc(st.dir)+'">':'')+'</div>'+
-   '<div class="pay" role="radiogroup" aria-label="Forma de pago"><button data-p="tr" class="'+(st.pay==="tr"?"on":"")+'">Transferencia</button><button data-p="ef" class="'+(st.pay==="ef"?"on":"")+'">Efectivo<small>al recibir</small></button><button data-p="mp" class="'+(st.pay==="mp"?"on":"")+'">Mercado Pago<span class="new">nuevo</span></button></div>'+
-   '<button class="btn p w" id="conf">Confirmar pedido · '+fmt(sub+sh)+'</button>'+
-   '<p class="note" style="text-align:center">Es un boceto: no se cobra ni se envía nada.</p>';
+  var d=DAYS[st.day],ls=cartLines(),sub=subtotal(ls),sh=shipFor(sub,st.mode),html="";
+  if(st.step===1){
+    html=head("Tu pedido")+
+     '<ul class="lines">'+Object.keys(st.cart).map(function(k){var l=st.cart[k];return '<li><span class="nm">'+esc(lineName(l))+(l.id==="gift"?'<small>'+l.items.map(function(i){return BY[i].s}).join(" · ")+(l.msg?' · “'+esc(l.msg)+'”':'')+'</small>':'')+'</span><span class="ctl"><span class="mini"><button data-m="-" data-k="'+esc(k)+'" aria-label="Menos">−</button><output>'+l.q+'</output><button data-m="+" data-k="'+esc(k)+'" aria-label="Más">+</button></span><span class="num">'+fmt(lineTotal(l))+'</span></span></li>'}).join("")+'</ul>'+
+     '<div class="free">'+(sub>=FREE?"Tu envío es sin cargo.":"Sumá "+fmt(FREE-sub)+" más y el envío es sin cargo.")+'<div class="freebar"><i style="width:'+Math.min(100,sub/FREE*100)+'%"></i></div></div>'+
+     '<div class="sum"><div class="big"><span>Productos</span><span class="num">'+fmt(sub)+'</span></div></div>'+
+     '<button class="btn p w" data-step="2">Siguiente: elegir la entrega</button>'+
+     '<p class="note" style="text-align:center">Después elegís el día y cómo pagar.</p>';
+  }else if(st.step===2){
+    html=head("¿Cómo lo recibís?")+
+     '<div class="mode" role="radiogroup" aria-label="Envío o retiro"><button data-mode="env" class="'+(st.mode==="env"?"on":"")+'" role="radio" aria-checked="'+(st.mode==="env")+'"><b>Te lo llevamos</b><span>Zona Norte y CABA</span></button><button data-mode="ret" class="'+(st.mode==="ret"?"on":"")+'" role="radio" aria-checked="'+(st.mode==="ret")+'"><b>Lo retiro</b><span>En Vicente López</span></button></div>'+
+     (st.mode==="env"?'<div class="lbl">¿Adónde?</div><div class="zone"><select id="zs" aria-label="Barrio">'+ZONES.map(function(z,i){return '<option value="'+i+'"'+(i===st.zone?" selected":"")+'>'+z[0]+' · '+z[1]+'</option>'}).join("")+'</select><input id="dir" placeholder="Calle y altura" autocomplete="street-address" value="'+esc(st.dir||"")+'"></div>'+
+       '<p class="note">'+(sub>=FREE?"Tu envío es sin cargo.":"El envío cuesta "+fmt(SHIP)+". Es sin cargo desde "+fmt(FREE)+".")+'</p>'
+       :'<div class="retbox">Lo retirás en Vicente López el día que elijas, de 10 a 14. Te pasamos la dirección por WhatsApp.</div>')+
+     '<div class="lbl">¿Qué día?</div><div class="days" role="radiogroup" aria-label="Día">'+DAYS.map(function(x,i){var left=Math.max(0,CAP-dayCount(x));return '<button class="day'+(i===st.day?' on':'')+'" role="radio" aria-checked="'+(i===st.day)+'" data-day="'+i+'"><small>'+DN[x.getDay()]+'</small><b>'+x.getDate()+'</b><span>'+MN[x.getMonth()]+'</span><span class="cup">quedan '+left+'</span></button>'}).join("")+'</div>'+
+     '<div class="lbl">¿A qué hora?</div><div class="slots" role="radiogroup" aria-label="Franja">'+FR.map(function(t,i){return '<button class="slot'+(i===st.fr?' on':'')+'" role="radio" aria-checked="'+(i===st.fr)+'" data-fr="'+i+'">'+t+' hs</button>'}).join("")+'</div>'+
+     '<div class="brow"><button class="btn g" data-step="1">Volver</button><button class="btn p" data-step="3">Siguiente: pago</button></div>'+
+     '<p class="note" style="text-align:center">Los barrios y los cupos por día son de ejemplo.</p>';
+  }else{
+    html=head("Último paso")+
+     '<div class="recap"><b>'+(st.mode==="env"?"Envío a "+(st.dir?esc(st.dir)+", ":"")+ZONES[st.zone][0]:"Retiro en Vicente López")+'</b><br>'+DN[d.getDay()]+" "+d.getDate()+" de "+MN[d.getMonth()]+" · "+FR[st.fr]+' hs · <a href="#" data-step="2">cambiar</a></div>'+
+     '<p class="minis">'+units(ls)+' producto'+(units(ls)>1?"s":"")+' · <a href="#" data-step="1" style="color:var(--olive-d);font-weight:600">ver pedido</a></p>'+
+     '<div class="sum"><div><span>Productos</span><span class="num">'+fmt(sub)+'</span></div><div><span>Envío</span><span class="num">'+(st.mode==="env"?(sh?fmt(sh):"sin cargo"):"—")+'</span></div><div class="big"><span>Total</span><span class="num">'+fmt(sub+sh)+'</span></div></div>'+
+     '<div class="f"><input id="nm" placeholder="Tu nombre" autocomplete="name" value="'+esc(st.name)+'"><input id="tel" type="tel" inputmode="tel" placeholder="Tu WhatsApp (para avisarte)" autocomplete="tel" value="'+esc(st.tel||"")+'"></div>'+
+     '<div class="lbl" style="margin-top:0">¿Cómo pagás?</div><div class="pay" role="radiogroup" aria-label="Forma de pago"><button data-p="tr" class="'+(st.pay==="tr"?"on":"")+'">Transferencia</button><button data-p="ef" class="'+(st.pay==="ef"?"on":"")+'">Efectivo<small>al recibir</small></button><button data-p="mp" class="'+(st.pay==="mp"?"on":"")+'">Mercado Pago<span class="new">nuevo</span></button></div>'+
+     '<button class="btn p w" id="conf">Confirmar pedido · '+fmt(sub+sh)+'</button>'+
+     '<p class="note" style="text-align:center">Es un boceto: no se cobra ni se envía nada.</p>';
+  }
+  $("#sheetIn").innerHTML=html;
 }
+$("#sheet").addEventListener("change",function(e){if(e.target.id==="zs"){keepInputs();st.zone=+e.target.value;drawCart()}});
 $("#openCart").onclick=function(){openSheet(false)};
 var PAYN={tr:"Transferencia",ef:"Efectivo al recibir",mp:"Mercado Pago (pagado)"};
 function waMsg(o){var d=DAYS.filter(function(x){return key(x)===o.day})[0]||DAYS[0];var sub=subtotal(o.items),sh=shipFor(sub,o.mode);
@@ -968,7 +1000,7 @@ function confirmOrder(){
   keepInputs();var name=(st.name||"").trim()||"Cliente de prueba";
   var d=DAYS[st.day],num=300+orders.filter(function(o){return !o.seed}).length;
   var o={id:"w"+Date.now(),num:num,day:key(d),fr:st.fr,name:name,dir:(st.dir||"").trim(),items:JSON.parse(JSON.stringify(cartLines())),mode:st.mode,zone:st.mode==="env"?st.zone:null,pay:st.pay,paid:st.pay==="mp",st:0,fresh:true};
-  orders.push(o);store.set("oliva-orders",orders);unseen++;renderDot();renderDays();
+  orders.push(o);store.set("oliva-orders",orders);unseen++;renderDot();
   /* descuenta stock: lo que se agota pasa solo a "sin stock" en la web */
   o.items.forEach(function(l){var ks=l.id==="gift"?["mlk|0"].concat(l.items.map(function(i){return i+"|0"})):[l.id+"|"+l.vi];ks.forEach(function(k){STK[k]=Math.max(0,qOf(k)-l.q)})});saveStk();
   $("#sheetIn").innerHTML='<div class="ok"><div class="ring"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div><h3>¡Pedido hecho!</h3><p>Te confirmamos por WhatsApp. Sale el '+DN[d.getDay()]+" "+d.getDate()+' entre las '+FR[o.fr].replace(" a "," y las ")+'.</p>'+
@@ -1055,7 +1087,7 @@ function show(v){var pan=v==="pan";$("#cli").hidden=pan;$("#pan").hidden=!pan;$(
   window.scrollTo(0,0)}
 $("#vCli").onclick=function(){show("cli")};$("#vPan").onclick=function(){show("pan")};
 
-renderGift(false);renderMenu();renderDays();renderBar();
+renderGift(false);renderMenu();renderBar();
 })();
 </script>
 </body>
