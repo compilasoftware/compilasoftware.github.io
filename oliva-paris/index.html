@@ -487,9 +487,19 @@ section.blk{padding:30px 0}
 }
 @media (max-width:520px){.ig span{display:none}.ig{padding:9px}}
 @media (max-width:370px){.kp b{font-size:17px}.kp{padding:10px}.demo>span{font-size:14px}.wm b{font-size:20px}}
+
+/* fondo: ramas de olivo borrosas a los costados de las partes claras */
+body{background:transparent}
+.fondo{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.fondo i{position:absolute;top:-4%;bottom:-4%;width:34vw;background:url(img/banner.jpg) center/cover no-repeat;filter:blur(7px) saturate(1.15) brightness(1.08);opacity:.42}
+.fondo .l{left:-3vw;-webkit-mask:linear-gradient(90deg,#000 15%,transparent 95%);mask:linear-gradient(90deg,#000 15%,transparent 95%)}
+.fondo .r{right:-3vw;transform:scaleX(-1);-webkit-mask:linear-gradient(90deg,#000 15%,transparent 95%);mask:linear-gradient(90deg,#000 15%,transparent 95%)}
+@media (max-width:700px){.fondo i{width:46vw;opacity:.3}}
+.cats{background:rgba(245,241,230,.9);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
 </style>
 </head>
 <body>
+<div class="fondo" aria-hidden="true"><i class="l"></i><i class="r"></i></div>
 
 <div class="demo" role="region" aria-label="Aviso de boceto">
   <span><b>Boceto para Oliva Paris</b> hecho por Compila</span>
