@@ -32,7 +32,7 @@ button{cursor:pointer}
 .c{text-align:center}
 
 /* header */
-.top{position:sticky;top:0;z-index:20;background:rgba(29,39,66,.96);backdrop-filter:blur(8px);color:var(--luz)}
+.top{position:sticky;top:0;z-index:20;background:#1d2742;color:var(--luz)}
 .top .wrap{display:flex;align-items:center;gap:18px;height:64px}
 .mark{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit}
 .mark b{font-family:var(--serif);font-size:25px;font-weight:600;letter-spacing:.16em;text-transform:uppercase}
@@ -173,8 +173,9 @@ h2.T{font-size:clamp(30px,4.4vw,46px)}
 .news span{color:#c6cad8;font-size:15.5px}
 
 /* estudio de historias */
-.studio{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:40px;margin-top:46px;align-items:start}
-@media (max-width:900px){.studio{grid-template-columns:1fr;gap:26px}.prev{order:-1;position:static}.phone{max-width:250px}}
+.studio{display:grid;grid-template-columns:minmax(0,1fr) 380px;grid-template-areas:"a p" "b p" "b d";grid-template-rows:auto auto 1fr;column-gap:40px;row-gap:16px;margin-top:46px;align-items:start}
+.cA{grid-area:a}.cB{grid-area:b}.prev{grid-area:p}.acts{grid-area:d}
+
 .ctrl{background:var(--blanco);border-radius:24px;padding:24px;border:1px solid #c7c8ce}
 .tpls{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
 @media (max-width:520px){.tpls{grid-template-columns:repeat(3,1fr)}}
@@ -221,6 +222,7 @@ footer .wrap{display:grid;gap:12px}
 footer b{color:#fff;font-family:var(--serif);font-size:22px;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
 footer a{color:var(--luz)}
 footer .cr{font-size:13.5px;color:#8f97ad;max-width:56em}
+@media (max-width:900px){.studio{grid-template-columns:1fr;grid-template-areas:"a" "p" "b" "d";grid-template-rows:auto;row-gap:14px}.prev{position:static}.phone{max-width:230px;border-radius:30px;padding:8px}.phone canvas{border-radius:23px}.ctrl{padding:18px}.studio .tpls{grid-template-columns:repeat(5,1fr);gap:6px}.studio .tp{font-size:11.5px;padding:9px 2px 7px}.studio .tp i{font-size:20px}.before{display:none}}
 </style>
 </head>
 <body>
@@ -317,7 +319,7 @@ footer .cr{font-size:13.5px;color:#8f97ad;max-width:56em}
     <div class="c"><h2 class="T">Tu estudio de historias</h2><div class="orn">☾</div>
     <p class="sub">Elegís una plantilla, escribís tu texto y la historia se arma sola: la letra se acomoda al tamaño justo y nunca queda tapada por la foto ni por los botones de Instagram.</p></div>
     <div class="studio">
-      <div class="ctrl">
+      <div class="ctrl cA">
         <span class="lbl">1. Elegí la plantilla</span>
         <div class="tpls" id="tpls"></div>
         <div id="fLuna">
@@ -330,6 +332,8 @@ footer .cr{font-size:13.5px;color:#8f97ad;max-width:56em}
           <span class="lbl">Tu foto</span>
           <label class="up"><input type="file" id="ph" accept="image/*"><span style="font-size:24px" aria-hidden="true">🖼</span><span><b id="phN">Subir una foto</b><small>La foto va arriba y el texto abajo, en su propio espacio</small></span></label>
         </div>
+      </div>
+      <div class="ctrl cB">
         <label class="lbl" for="tTit">2. Título</label>
         <input class="fld" id="tTit" maxlength="60">
         <label class="lbl" for="tTxt">3. Tu texto</label>
@@ -344,11 +348,13 @@ footer .cr{font-size:13.5px;color:#8f97ad;max-width:56em}
       </div>
       <div class="prev">
         <div class="phone" id="phone"><canvas id="cv" width="1080" height="1920" aria-label="Vista previa de la historia"></canvas><div class="safe" aria-hidden="true"></div></div>
-        <div class="pact">
+      </div>
+      <div class="acts"><div class="pact">
           <button class="btn n" id="dl">Descargar la historia</button>
           <button class="btn o" id="sh" style="color:var(--noche);box-shadow:inset 0 0 0 1.5px var(--noche)" hidden>Compartir a Instagram</button>
         </div>
         <label class="tg"><input type="checkbox" id="sf">Mostrar dónde van los botones de Instagram</label>
+        
       </div>
     </div>
   </div>
@@ -378,7 +384,7 @@ const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",
 const SIG=[["Aries","♈"],["Tauro","♉"],["Géminis","♊"],["Cáncer","♋"],["Leo","♌"],["Virgo","♍"],["Libra","♎"],["Escorpio","♏"],["Sagitario","♐"],["Capricornio","♑"],["Acuario","♒"],["Piscis","♓"]];
 
 /* ---------- estrellas ---------- */
-(function(){const c=$("#stars");const r=()=>{const w=c.offsetWidth,h=c.offsetHeight;c.width=w*devicePixelRatio;c.height=h*devicePixelRatio;const x=c.getContext("2d");x.scale(devicePixelRatio,devicePixelRatio);let s=7;const rnd=()=>(s=(s*16807)%2147483647)/2147483647;for(let i=0;i<Math.round(w*h/3800);i++){x.globalAlpha=.25+rnd()*.75;x.fillStyle="#e9e6dc";const R=rnd()<.06?1.6:.8;x.beginPath();x.arc(rnd()*w,rnd()*h,R,0,7);x.fill();}};r();addEventListener("resize",r);})();
+(function(){const c=$("#stars");const r=()=>{const w=c.offsetWidth,h=c.offsetHeight;const dp=Math.min(2,devicePixelRatio||1);c.width=w*dp;c.height=h*dp;const x=c.getContext("2d");x.scale(dp,dp);let s=7;const rnd=()=>(s=(s*16807)%2147483647)/2147483647;for(let i=0;i<Math.round(w*h/3800);i++){x.globalAlpha=.25+rnd()*.75;x.fillStyle="#e9e6dc";const R=rnd()<.06?1.6:.8;x.beginPath();x.arc(rnd()*w,rnd()*h,R,0,7);x.fill();}};r();let lw=innerWidth;addEventListener("resize",()=>{if(innerWidth!==lw){lw=innerWidth;r();}});})();
 
 /* ---------- luna ---------- */
 function drawMoon(x,cx,cy,r,illum,waxing,dark){
