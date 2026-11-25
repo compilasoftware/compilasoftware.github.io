@@ -214,8 +214,8 @@ h2{font-size:clamp(34px,7.4vw,60px);margin-top:12px}
     <div class="price" aria-label="Precio">
       <div class="k">Inversión</div>
       <div class="row">
-        <label>Pago único<input id="pU" inputmode="numeric" placeholder="$ —" autocomplete="off" aria-label="Pago único"></label>
-        <label>Por mes<input id="pM" inputmode="numeric" placeholder="$ —" autocomplete="off" aria-label="Abono mensual"></label>
+        <label>Pago único<input id="pU" inputmode="numeric" value="$ 150.000" placeholder="$ —" autocomplete="off" aria-label="Pago único"></label>
+        <label>Por mes<input id="pM" inputmode="numeric" value="$ 40.000" placeholder="$ —" autocomplete="off" aria-label="Abono mensual"></label>
       </div>
       <small>50% para arrancar y 50% cuando ya lo están usando.</small>
       <ul>
@@ -254,13 +254,13 @@ S.forEach(s=>io.observe(s));
 document.addEventListener('keydown',e=>{if(e.target.tagName==="INPUT")return;const i=D.findIndex(d=>d.getAttribute('aria-current')==="true");
  if(["ArrowDown","PageDown"," "].includes(e.key)&&i<S.length-1){e.preventDefault();S[i+1].scrollIntoView()}
  if(["ArrowUp","PageUp"].includes(e.key)&&i>0){e.preventDefault();S[i-1].scrollIntoView()}});
-// Precio: lo completa Agustín (también por link: ?unico=250000&mes=30000). Queda guardado en este dispositivo.
+// Precio definido: $150.000 + $40.000/mes. Se puede cambiar en la pantalla o por link (?unico=…&mes=…); lo editado queda en este dispositivo.
 const fmt=v=>{const n=String(v).replace(/\D/g,"");return n?"$ "+(+n).toLocaleString("es-AR"):""};
 const qs=new URLSearchParams(location.search);
 [["pU","unico"],["pM","mes"]].forEach(([id,k])=>{const el=document.getElementById(id);let v=qs.get(k);
- if(v==null){try{v=localStorage.getItem("feli-"+k)}catch(_){}}
+ if(v==null){try{v=localStorage.getItem("feli2-"+k)}catch(_){}}
  if(v)el.value=fmt(v);
- el.addEventListener('input',()=>{el.value=fmt(el.value);try{localStorage.setItem("feli-"+k,el.value.replace(/\D/g,""))}catch(_){}})});
+ el.addEventListener('input',()=>{el.value=fmt(el.value);try{localStorage.setItem("feli2-"+k,el.value.replace(/\D/g,""))}catch(_){}})});
 </script>
 </body>
 </html>
