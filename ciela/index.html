@@ -91,8 +91,8 @@ h2.T{font-size:clamp(30px,4.4vw,46px)}
 .sv .ft{margin-top:auto;padding-top:18px;display:flex;align-items:center;justify-content:space-between;gap:10px}
 .sv .pr{font-size:15px;color:var(--gris)}.sv .pr b{color:var(--tinta);font-size:18px}
 .sv.big{grid-column:span 2;display:grid;grid-template-columns:1fr 1.1fr}
-.sv.big img{height:100%;aspect-ratio:auto;min-height:320px}
-@media (max-width:600px){.sv.big{grid-column:auto;display:flex}.sv.big img{aspect-ratio:4/3}}
+.sv.big img{height:100%;aspect-ratio:auto;min-height:320px;object-fit:contain}
+@media (max-width:600px){.sv.big{grid-column:auto;display:flex}.sv.big img{min-height:0;height:auto}.sv img{aspect-ratio:16/9;object-fit:cover}.sv .bd{padding:18px}.sv h3{font-size:25px}}
 .lect{display:grid;gap:8px;margin-top:14px}
 .lect label{display:grid;grid-template-columns:22px 1fr auto;gap:10px;align-items:start;border:1px solid var(--linea);border-radius:14px;padding:11px 13px;cursor:pointer}
 .lect input{accent-color:var(--noche);width:18px;height:18px;margin-top:3px}
@@ -135,6 +135,7 @@ h2.T{font-size:clamp(30px,4.4vw,46px)}
 /* acuarela */
 .acq{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:center;margin-top:10px}
 @media (max-width:820px){.acq{grid-template-columns:1fr;gap:28px}.acq figure{max-width:280px}.acq figure img{max-height:380px;width:100%;object-fit:cover;object-position:center 30%}}
+.acq figure img{width:100%;height:auto}
 .acq figure{margin:0 auto;max-width:400px;border-radius:6px;overflow:hidden;box-shadow:0 24px 50px -28px rgba(29,39,66,.55);transform:rotate(-1.5deg);background:#fff;padding:12px}
 .acq h2{text-align:left}
 .acq ul{list-style:none;padding:0;margin:20px 0 0;display:grid;gap:8px}
@@ -353,12 +354,6 @@ footer .cr{font-size:13.5px;color:#8f97ad;max-width:56em}
   </div>
 </section>
 
-<section class="band perla" style="padding:56px 0">
-  <div class="wrap">
-    <div class="later"><i>✦</i><div><b>Más adelante: talleres online</b><span>Este mismo lugar puede alojar cursos y encuentros grabados, con inscripción y pago, cuando quieras sumarlos.</span></div></div>
-  </div>
-</section>
-
 <footer>
   <div class="wrap">
     <b>Ciela</b>
@@ -424,11 +419,11 @@ function sunSign(d=new Date()){const c=[[1,20,"Capricornio"],[2,19,"Acuario"],[3
 
 /* ---------- servicios ---------- */
 const SV=[
-  {id:"tarot",t:"Lecturas de Tarot",img:"img/lecturas.jpg",d:"Una mirada a las energías disponibles y a lo que el Tarot tiene para decirte.",tags:["Videollamada","Presencial"],opts:[["Lectura express","Lectura anual y una pregunta específica.","15 min",12000],["Lectura básica","Trabajamos sobre algún tema puntual. Lectura general y hasta 3 preguntas.","30 min",20000],["Lectura extensa","Tirada general y todas las preguntas que quieras hacer.","1 hora",32000]],big:true},
-  {id:"rs",t:"Revolución Solar",img:"img/revolucion-solar.jpg",bgi:"#1b2541",d:"Cada cumpleaños nuestro Sol ilumina distintos escenarios de la carta natal. Vemos qué trae tu nuevo año.",tags:["Con tu fecha y hora de nacimiento"],p:35000,nac:true},
-  {id:"tirada",t:"Tirada astrológica",img:"img/tirada.jpg",d:"Astrología y tarot juntos: las cartas hablan en las doce Casas, tus escenarios de vida y vínculos para el ciclo que empieza.",tags:["Ideal para fin de año"],p:30000},
-  {id:"inf",t:"Carta natal infantil",img:"img/infantiles.jpg",d:"La carta natal de tu hijo, pintada en acuarela y con su descripción.",tags:["Lámina en acuarela"],p:40000,nac:true},
-  {id:"enc",t:"Encuentro y Tarot",img:"img/encuentro.jpg",d:"Una noche con amigas y lecturas de tarot para todas. Yo voy a tu casa.",tags:["Grupos"],p:60000,grupo:true},
+  {id:"tarot",t:"Lecturas de Tarot",img:"img/svc-tarot.jpg",d:"Una mirada a las energías disponibles y a lo que el Tarot tiene para decirte.",tags:["Videollamada","Presencial"],opts:[["Lectura express","Lectura anual y una pregunta específica.","15 min",12000],["Lectura básica","Trabajamos sobre algún tema puntual. Lectura general y hasta 3 preguntas.","30 min",20000],["Lectura extensa","Tirada general y todas las preguntas que quieras hacer.","1 hora",32000]],big:true},
+  {id:"rs",t:"Revolución Solar",img:"img/svc-rs.jpg",bgi:"#10213b",d:"Cada cumpleaños nuestro Sol ilumina distintos escenarios de la carta natal. Vemos qué trae tu nuevo año.",tags:["Con tu fecha y hora de nacimiento"],p:35000,nac:true},
+  {id:"tirada",t:"Tirada astrológica",img:"img/svc-tirada.jpg",d:"Astrología y tarot juntos: las cartas hablan en las doce Casas, tus escenarios de vida y vínculos para el ciclo que empieza.",tags:["Ideal para fin de año"],p:30000},
+  {id:"inf",t:"Carta natal infantil",img:"img/svc-infantiles.jpg",d:"La carta natal de tu hijo, pintada en acuarela y con su descripción.",tags:["Lámina en acuarela"],p:40000,nac:true},
+  {id:"enc",t:"Encuentro y Tarot",img:"img/svc-encuentro.jpg",d:"Una noche con amigas y lecturas de tarot para todas. Yo voy a tu casa.",tags:["Grupos"],p:60000,grupo:true},
   {id:"gift",t:"Gift card",img:null,d:"Regalá una lectura.",p:20000,gift:true,hide:true}
 ];
 const DEP=.3;
