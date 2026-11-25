@@ -473,8 +473,8 @@ function setPrice(){const s=R.s;let p=R.price;if(s.gift){const g=$("#gOpt [aria-
 $("#drC").addEventListener("click",e=>{const c=e.target.closest(".chip");if(!c||c.disabled)return;const g=c.parentElement;g.querySelectorAll(".chip").forEach(x=>x.setAttribute("aria-pressed",x===c));
   if(g.id==="bDay")R.day=days[+c.dataset.i];if(g.id==="bHr")R.hr=c.dataset.h;if(g.id==="bMod")R.mod=c.textContent;setPrice();});
 $("#drC").addEventListener("input",e=>{if(e.target.id==="bG")setPrice();});
-const close=()=>{$("#dr").classList.remove("on");document.body.style.overflow="";};
-document.querySelectorAll("[data-close]").forEach(b=>b.onclick=close);addEventListener("keydown",e=>{if(e.key==="Escape")close();});
+const closeDr=()=>{$("#dr").classList.remove("on");document.body.style.overflow="";};
+document.querySelectorAll("[data-close]").forEach(b=>b.onclick=closeDr);addEventListener("keydown",e=>{if(e.key==="Escape")closeDr();});
 document.addEventListener("click",e=>{const b=e.target.closest("[data-book]");if(b)openBook(b.dataset.book);});
 const moonSvg=`<svg class="m" viewBox="0 0 84 84" aria-hidden="true"><circle cx="42" cy="42" r="40" fill="#1d2742"/><path d="M50 18a24 24 0 1 0 0 48a19 19 0 1 1 0-48z" fill="#e9e6dc"/><circle cx="62" cy="24" r="1.6" fill="#e9e6dc"/><circle cx="66" cy="54" r="1.2" fill="#e9e6dc"/></svg>`;
 $("#drGo").onclick=()=>{const s=R.s,nom=($("#bNom")?.value||"").trim();let er="";
@@ -526,6 +526,7 @@ $("#ph").onchange=e=>{const f=e.target.files[0];if(!f)return;const im=new Image(
 $("#sf").onchange=e=>$("#phone").classList.toggle("showsafe",e.target.checked);
 
 const cv=$("#cv"),X=cv.getContext("2d");
+if(!X.roundRect)CanvasRenderingContext2D.prototype.roundRect=function(x,y,w,h,r){this.moveTo(x+r,y);this.arcTo(x+w,y,x+w,y+h,r);this.arcTo(x+w,y+h,x,y+h,r);this.arcTo(x,y+h,x,y,r);this.arcTo(x,y,x+w,y,r);this.closePath();};
 const W=1080,H=1920,SAFE_T=250,SAFE_B=H-340,PAD=96;
 function wrap(t,font,maxW){X.font=font;const out=[];for(const para of t.split(/\n/)){const w=para.split(/\s+/).filter(Boolean);let l="";for(const word of w){const tt=l?l+" "+word:word;if(X.measureText(tt).width>maxW&&l){out.push(l);l=word;}else l=tt;}out.push(l);}return out;}
 function fit(t,fam,weight,maxW,maxH,big,small,lh,upper,track){
