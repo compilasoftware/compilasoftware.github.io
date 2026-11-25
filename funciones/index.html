@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#090a0f">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.jpg">
+<title>Qué le podemos sumar a tu sistema · Compila Software</title>
+<meta name="description" content="Todo lo que se le puede agregar a un sistema de pedidos, turnos o gestión hecho por Compila, explicado simple.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Catálogo de funciones: una referencia para que cualquiera entienda hasta dónde llega un sistema.
+   Cada categoría tiene su color; cada función es una línea: qué es, qué te resuelve y un ejemplo. */
+:root{color-scheme:dark;--bg:#090a0f;--card:#12141c;--card2:#181b26;--line:#262935;--txt:#f2f3f7;--dim:#9a9fb2;--faint:#6b7086;
+  --acc:#6d8bff;--vio:#9b6bff;--pink:#ff5fa8;--ok:#3ddc97;--yel:#ffd43b;--org:#ff9f5a;
+  --font:"Geist",system-ui,-apple-system,sans-serif;--mono:"Geist Mono",ui-monospace,monospace;--pad:max(18px,env(safe-area-inset-left,0px))}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:120px;overflow-x:clip}
+body{margin:0;background:var(--bg);color:var(--txt);font-family:var(--font);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:clip}
+.fx{position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px);background-size:48px 48px;-webkit-mask:radial-gradient(ellipse 90% 55% at 50% 0%,#000,transparent);mask:radial-gradient(ellipse 90% 55% at 50% 0%,#000,transparent)}
+.glow{position:absolute;inset:-20% -10% auto;height:620px;z-index:-1;pointer-events:none;background:radial-gradient(40% 50% at 80% 30%,rgba(155,107,255,.22),transparent 70%),radial-gradient(35% 45% at 10% 60%,rgba(109,139,255,.16),transparent 70%)}
+h1,h2,h3{margin:0;letter-spacing:-.035em;line-height:1.05;text-wrap:balance}
+p{margin:0}
+a{color:inherit}
+.wrap{max-width:980px;margin:0 auto;padding:0 var(--pad)}
+.grad{background:linear-gradient(90deg,var(--acc),var(--vio) 55%,var(--pink));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* cabecera */
+.top{display:flex;justify-content:space-between;align-items:center;padding:20px 0}
+.logo{font-weight:700;font-size:22px;letter-spacing:-.03em;text-decoration:none}
+.logo i{display:inline-block;width:3px;height:19px;background:var(--acc);margin-left:3px;vertical-align:-2px;border-radius:1px}
+.top a.cta{font-size:15px;font-weight:600;text-decoration:none;color:var(--acc)}
+
+/* hero */
+.hero{position:relative;padding:48px 0 40px}
+.hero h1{font-size:clamp(40px,8.6vw,78px);font-weight:800}
+.hero .lead{margin-top:22px;font-size:clamp(18px,2.4vw,21px);color:var(--dim);max-width:60ch}
+.legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+.legend a{display:flex;align-items:center;gap:9px;padding:10px 14px;border:1px solid var(--line);border-radius:12px;background:var(--card);text-decoration:none;font-weight:600;font-size:15px}
+.legend a span{color:var(--faint);font-weight:500;font-family:var(--mono);font-size:13px}
+.dot{width:10px;height:10px;border-radius:50%;flex:none}
+
+/* precio */
+.price{margin:12px 0 8px;border:1px solid var(--line);border-radius:20px;background:linear-gradient(180deg,var(--card2),var(--card));padding:26px;display:grid;gap:18px}
+.price h2{font-size:clamp(26px,4.4vw,36px)}
+.price .cols{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))}
+.price .c{display:grid;gap:6px;padding:16px;border-radius:14px;background:rgba(255,255,255,.03);border:1px solid var(--line)}
+.price .c b{font-size:17px}
+.price .c p{color:var(--dim);font-size:15.5px}
+.price .note{color:var(--dim);font-size:15.5px}
+
+/* barra de filtros */
+.bar{position:sticky;top:0;z-index:5;background:rgba(9,10,15,.86);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line);margin-top:34px}
+.bar .wrap{display:flex;gap:10px;align-items:center;padding-top:12px;padding-bottom:12px}
+.search{flex:1;min-width:0;position:relative}
+.search input{width:100%;font:500 16px var(--font);color:var(--txt);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px 12px 40px;outline:none}
+.search input:focus{border-color:var(--acc)}
+.search svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);opacity:.6}
+.chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:0 var(--pad) 12px;max-width:980px;margin:0 auto}
+.chips::-webkit-scrollbar{display:none}
+.chips button{flex:none;font:600 14px var(--font);color:var(--dim);background:transparent;border:1px solid var(--line);border-radius:999px;padding:8px 13px;cursor:pointer;display:flex;align-items:center;gap:7px}
+.chips button[aria-pressed="true"]{color:var(--txt);background:var(--card2);border-color:#3a3f52}
+
+/* categorías */
+.cat{padding:46px 0 10px}
+.cat header{display:grid;gap:10px;margin-bottom:20px}
+.cat .tag{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:13px;color:var(--c)}
+.cat h2{font-size:clamp(30px,5.6vw,46px);font-weight:800}
+.cat header p{color:var(--dim);max-width:62ch}
+.list{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr))}
+.f{position:relative;border:1px solid var(--line);border-radius:16px;background:var(--card);padding:18px 18px 16px;display:grid;gap:8px;align-content:start;overflow:hidden}
+.f::before{content:"";position:absolute;left:0;top:18px;bottom:18px;width:3px;border-radius:0 3px 3px 0;background:var(--c)}
+.f h3{font-size:18.5px;font-weight:700;letter-spacing:-.02em;line-height:1.2;padding-right:4px}
+.f p{color:#c9ccd8;font-size:15.5px;line-height:1.5}
+.f .ej{color:var(--faint);font-size:14px}
+.f .ej b{color:var(--dim);font-weight:600}
+.f .ext{justify-self:start;font-family:var(--mono);font-size:12px;color:var(--yel);border:1px solid rgba(255,212,59,.28);border-radius:999px;padding:3px 9px;margin-top:2px}
+.f[hidden]{display:none}
+.cat[hidden]{display:none}
+.empty{display:none;color:var(--dim);padding:40px 0;text-align:left}
+.empty.on{display:block}
+
+/* base */
+.base .list{grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr))}
+.base .f{padding:15px 16px}
+.base .f h3{font-size:16.5px}
+.base .f p{font-size:14.5px}
+
+/* cierre */
+.end{margin:60px 0 30px;border-radius:22px;padding:30px 26px;background:linear-gradient(135deg,rgba(109,139,255,.16),rgba(155,107,255,.12) 55%,rgba(255,95,168,.12));border:1px solid #2d3150;display:grid;gap:16px}
+.end h2{font-size:clamp(30px,5.4vw,46px);font-weight:800}
+.end p{color:#c9ccd8;max-width:58ch}
+.btn{justify-self:start;display:inline-flex;align-items:center;gap:10px;background:var(--txt);color:#0b0c12;font-weight:700;text-decoration:none;padding:15px 22px;border-radius:14px;font-size:17px}
+.btn:focus-visible,.legend a:focus-visible,.chips button:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+footer{color:var(--faint);font-size:13.5px;padding:10px 0 40px;font-family:var(--mono)}
+@media (max-width:560px){.price{padding:20px}.f{padding:16px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="fx"></div>
+
+<div class="wrap">
+  <div class="top">
+    <a class="logo" href="/">compila<i></i></a>
+    <a class="cta" href="https://wa.me/5491125259699?text=Hola!%20Vi%20la%20gu%C3%ADa%20de%20funciones%20y%20quiero%20consultar%20por%20mi%20negocio" target="_blank" rel="noopener">Escribinos</a>
+  </div>
+
+  <section class="hero">
+    <div class="glow"></div>
+    <h1>Todo lo que le podemos sumar <span class="grad">a tu sistema.</span></h1>
+    <p class="lead">Cada sistema arranca con lo básico: tus productos, los pedidos y un panel para verlos. Desde ahí se le puede agregar casi cualquier cosa. Esta guía junta todo lo que hacemos, explicado simple y con ejemplos, para que veas hasta dónde puede llegar el tuyo.</p>
+    <nav class="legend" aria-label="Categorías" id="legend"></nav>
+  </section>
+
+  <section class="price" aria-labelledby="pt">
+    <h2 id="pt">¿Cuánto cuesta cada cosa?</h2>
+    <div class="cols">
+      <div class="c"><b>No hay precio de lista</b><p>Cada negocio es distinto: no es lo mismo sumar Mercado Pago a una tienda de 10 productos que a una distribuidora con 800.</p></div>
+      <div class="c"><b>Se cotiza por dos cosas</b><p>El tiempo que lleva desarrollarlo y lo que cuesta mantenerlo andando (servidores, mensajes, servicios que usa).</p></div>
+      <div class="c"><b>Sabés el precio antes</b><p>Nos contás qué querés, te pasamos un precio cerrado y arrancamos solo si lo aprobás. Si no, no se cobra nada.</p></div>
+    </div>
+    <p class="note">Las funciones marcadas con <span class="mono" style="color:var(--yel)">usa un servicio externo</span> dependen de otra empresa (Mercado Pago, WhatsApp, Google, etc.), que puede cobrar su propia comisión o un costo por uso. Siempre te lo aclaramos antes.</p>
+  </section>
+</div>
+
+<div class="bar">
+  <div class="wrap">
+    <label class="search">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="q" type="search" placeholder="Buscá: stock, turnos, envío, Mercado Pago…" aria-label="Buscar una función" autocomplete="off">
+    </label>
+  </div>
+  <div class="chips" id="chips" role="group" aria-label="Filtrar por categoría"></div>
+</div>
+
+<main class="wrap" id="cats"></main>
+<div class="wrap"><p class="empty" id="empty">No encontramos esa función en la guía. Igual escribinos: si se puede programar, se puede hacer.</p></div>
+
+<div class="wrap">
+  <section class="end">
+    <h2>¿Tenés una idea que no está acá?</h2>
+    <p>Esta lista es un punto de partida, no un límite. Si algo de tu negocio se hace a mano y se repite, casi seguro se puede automatizar. Contanos cómo trabajás y te armamos una demo con tus productos para que la pruebes antes de decidir nada.</p>
+    <a class="btn" href="https://wa.me/5491125259699?text=Hola!%20Vi%20la%20gu%C3%ADa%20de%20funciones%20y%20quiero%20consultar%20por%20mi%20negocio" target="_blank" rel="noopener">Escribinos por WhatsApp</a>
+  </section>
+  <footer>Compila Software · software a medida para pymes · compilasoftware.com</footer>
+</div>
+
+<script>
+const EXT = "usa un servicio externo";
+const CATS = [
+ {id:"base", name:"La base", color:"#9a9fb2",
+  intro:"Lo que trae cualquier sistema que armamos, desde el primer día. Sobre esto se suma todo lo demás.",
+  items:[
+   ["Tu catálogo online","Tus productos con foto, precio y descripción, con tus colores y tu logo.","Una heladería con sus sabores, una ferretería con sus herramientas."],
+   ["Pedido desde el celu","El cliente elige, arma el carrito y manda el pedido sin escribirte uno por uno.",""],
+   ["El pedido te llega ordenado","Con nombre, productos, total, dirección y forma de pago, listo para preparar.",""],
+   ["Panel de pedidos","Ves todos los pedidos juntos y los movés de estado: nuevo, preparando, listo, entregado.",""],
+   ["Editás vos mismo","Cambiás precios, fotos, marcás algo agotado o sumás un producto en segundos.",""],
+   ["Funciona en cualquier celu","No hay que descargar nada: es un link que se abre en el navegador.",""],
+  ]},
+ {id:"vender", name:"Para vender más", color:"#3ddc97",
+  intro:"Funciones que ayudan a que el cliente compre más, compre otra vez o te encuentre por primera vez.",
+  items:[
+   ["Pago online con Mercado Pago","El cliente paga al hacer el pedido. Menos pedidos que se caen y nada de vueltos.","Tienda de regalos: el pedido entra ya cobrado.",EXT],
+   ["Seña para encargos","Para tortas, eventos o pedidos grandes: el cliente deja una seña y reserva la fecha.","Pastelería: torta de cumpleaños con 50% de seña.",EXT],
+   ["Cupones y descuentos","Códigos de descuento para una fecha, un cliente o un producto.","«NAVIDAD10» del 15 al 24 de diciembre."],
+   ["Programa de puntos","Cada compra suma puntos que el cliente canjea por productos o descuentos.","Cada 10 cafés, uno gratis, sin tarjetita de cartón."],
+   ["Recuperar clientes","El sistema detecta a quien hace tiempo no compra y le manda un mensaje para que vuelva.","«Hace un mes que no pedís, te guardamos un 10%».",EXT],
+   ["Avisame cuando vuelva","Si un producto está agotado, el cliente deja su contacto y le llega un aviso cuando hay stock.","Vinoteca: el vino que se agotó vuelve el viernes."],
+   ["Combos y «suele llevarse con»","Sugiere productos que van juntos al momento de comprar.","Pastas + salsa, pizza + gaseosa."],
+   ["Cajas y regalos armables","El cliente arma su propia caja eligiendo productos y suma una dedicatoria.","Caja de fin de año con 6 productos a elección."],
+   ["Pedidos anticipados","El cliente encarga para un día y horario, aunque estés cerrado.","Fábrica de pastas: encargo del domingo hecho el jueves."],
+   ["Repetir mi último pedido","Un botón para pedir lo mismo de la vez pasada, sin buscar todo de nuevo.","El almacén que pide lo mismo todas las semanas."],
+   ["Lista mayorista","Precios distintos para clientes mayoristas, con su propio acceso.","Distribuidora: el kiosco ve su precio, el público el suyo."],
+   ["Referidos","El cliente comparte un link y los dos ganan un beneficio cuando su amigo compra.","«Traé un vecino y te regalamos una docena»."],
+   ["Gift cards","Tarjetas de regalo con saldo para usar en tu negocio.","Un voucher para un tratamiento de estética."],
+   ["Reseñas después de la entrega","Al día siguiente le llega al cliente un pedido de opinión que suma a tu Google.","",EXT],
+   ["Página web de marca","Una web que presenta tu negocio, cuenta quién sos y lleva directo a pedir.",""],
+   ["Dominio propio","Tu sistema en tunegocio.com.ar en lugar de una dirección genérica.","",EXT],
+   ["Perfil de Google Maps","Que aparezcas cuando alguien de tu zona busca lo que vendés.","",EXT],
+   ["Catálogo en Instagram","Tus productos etiquetados en las publicaciones, con link directo a comprar.","",EXT],
+  ]},
+ {id:"menos", name:"Para trabajar menos", color:"#6d8bff",
+  intro:"Tareas que hoy hacés a mano, todos los días, y que el sistema puede hacer solo.",
+  items:[
+   ["Avisos automáticos por WhatsApp","«Recibimos tu pedido», «está en camino», «ya podés retirar», sin que escribas nada.","Lavadero: le avisa al cliente cuando la ropa está lista.",EXT],
+   ["Turnos online","El cliente reserva solo, a cualquier hora, viendo los horarios libres.","Peluquería, kinesiología, taller, estética."],
+   ["Recordatorio de turnos","Al cliente le llega un recordatorio el día antes; si cancela, el horario se libera.","",EXT],
+   ["Zonas y costo de envío","El envío se calcula solo según el barrio o la distancia, y avisa si no llegás.","Envío sin cargo desde $50.000."],
+   ["Días y cupos de entrega","El cliente elige día y franja horaria, y cada día tiene un máximo de pedidos.","Reparto martes y viernes, de 10 a 14."],
+   ["Ruta de reparto","Un botón arma el recorrido ordenado con todas las entregas del día en Google Maps.","Fletes, congelados, viandas."],
+   ["Lista de producción","Suma todos los pedidos y te dice cuánto preparar de cada cosa.","«Mañana: 14 kg de ñoquis, 9 de sorrentinos»."],
+   ["Control de stock","Cada venta descuenta stock y te avisa cuando algo se está por terminar.","Kiosco: alerta cuando quedan 3 cartones."],
+   ["Pedido al proveedor","Cuando algo baja del mínimo, arma el pedido al proveedor listo para mandar.","",""],
+   ["Presupuestos automáticos","El cliente elige y recibe el presupuesto en PDF, listo para aprobar.","Corralón, taller, imprenta, catering."],
+   ["Cobro de cuotas","Lleva quién pagó y quién no, y manda el recordatorio de pago solo.","Gimnasio, escuela, academia de manejo.",EXT],
+   ["Ticket o comanda impresa","Cada pedido nuevo sale impreso en la cocina o el depósito.","Rotisería en hora pico."],
+   ["Carga masiva de productos","Subís una planilla y se cargan o actualizan cientos de productos de una vez.","Distribuidora que cambia precios cada semana."],
+   ["Asistente que responde","Contesta las preguntas de siempre (horarios, envíos, precios) por WhatsApp o en la web.","«¿Hacen envíos a Pilar?» respondido a las 2 de la mañana.",EXT],
+   ["Varios usuarios y permisos","Cada empleado entra con su usuario y ve solo lo que le corresponde.","El repartidor ve su ruta, la cajera la caja."],
+   ["El panel como app en tu celu","Lo instalás en la pantalla del celular y lo abrís como cualquier app.",""],
+  ]},
+ {id:"orden", name:"Para tener más orden", color:"#ffd43b",
+  intro:"Para saber qué pasa en tu negocio con números claros, sin armar planillas.",
+  items:[
+   ["Tablero de ventas","Cuánto vendiste, tus productos estrella, tus mejores clientes y tus zonas fuertes.",""],
+   ["Resumen semanal al celu","Cada lunes te llega cómo fue la semana, comparada con la anterior.","",EXT],
+   ["Ficha de cada cliente","Qué pide, cada cuánto, cuánto gastó y cuándo fue su última compra.",""],
+   ["Caja diaria","Ingresos por medio de pago y cierre de caja en dos minutos.","Cafetería: efectivo, transferencia y Mercado Pago, separados."],
+   ["Gastos y ganancia real","Cargás gastos y ves cuánto ganás de verdad, no solo cuánto vendés.",""],
+   ["Qué sale y qué no","Los productos que más se venden y los que hace semanas nadie pide.",""],
+   ["Historial de pedidos","Buscás cualquier pedido viejo por cliente, fecha o producto.",""],
+   ["Exportar a Excel","Todo descargable en planilla, o conectado directo a Google Sheets.",""],
+   ["Varios locales","Cada sucursal con su stock y sus pedidos, y vos ves todo junto.",""],
+   ["Horarios del equipo","Quién trabaja cada día, pedidos de cambio y aviso a todos.","Heladería con 8 empleados rotativos."],
+   ["Seguimiento del pedido","El cliente ve en qué etapa está lo suyo, sin preguntarte.","Taller: «tu auto está en pintura»."],
+  ]},
+ {id:"medida", name:"A medida y conexiones", color:"#ff5fa8",
+  intro:"Lo que no entra en ninguna lista: se analiza tu caso y se diseña para cómo trabajás vos.",
+  items:[
+   ["Conexión con tu sistema actual","Si ya usás un sistema de gestión, una planilla o un programa de facturación, vemos cómo conectarlos.","",EXT],
+   ["Portal para tus clientes","Tus clientes entran con su usuario, ven su historial, sus facturas y repiten pedidos.","Distribuidora con 60 comercios."],
+   ["Inscripciones online","Formulario de inscripción con pago y lista de inscriptos ordenada.","Colonia de verano, cursos, torneos."],
+   ["Reservas","Reservas de mesas, canchas o salones con calendario y seña.","",EXT],
+   ["Firma y conformidad","El cliente aprueba un presupuesto o un servicio desde el celu.",""],
+   ["Asistente con IA a medida","Un asistente entrenado con la información de tu negocio que ayuda a vender o a atender.","",EXT],
+   ["Funciones nuevas o cambios","Cualquier idea que tengas, analizada y cotizada antes de empezar.",""],
+  ]}
+];
+
+const strip = s => s.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
+const $ = (t, c, txt) => { const e = document.createElement(t); if (c) e.className = c; if (txt != null) e.textContent = txt; return e; };
+const cats = document.getElementById("cats"), legend = document.getElementById("legend"), chips = document.getElementById("chips");
+let active = "all";
+
+CATS.forEach(c => {
+  const s = $("section", "cat" + (c.id === "base" ? " base" : "")); s.id = c.id; s.style.setProperty("--c", c.color);
+  const h = $("header"), tag = $("span", "tag"), d = $("span", "dot"); d.style.background = c.color;
+  tag.append(d, document.createTextNode(c.items.length + " funciones"));
+  h.append(tag, $("h2", "", c.name), $("p", "", c.intro)); s.append(h);
+  const l = $("div", "list");
+  c.items.forEach(([t, p, ej, ext]) => {
+    const a = $("article", "f"); a.append($("h3", "", t), $("p", "", p));
+    if (ej) { const e = $("p", "ej"); e.append($("b", "", "Ej.: "), document.createTextNode(ej)); a.append(e); }
+    if (ext) a.append($("span", "ext", ext));
+    a.dataset.k = strip([t, p, ej, c.name].join(" "));
+    l.append(a);
+  });
+  s.append(l); cats.append(s);
+
+  const la = $("a"); la.href = "#" + c.id; const ld = $("span", "dot"); ld.style.background = c.color;
+  la.append(ld, document.createTextNode(c.name), $("span", "", String(c.items.length))); legend.append(la);
+});
+
+[["all", "Todo", null], ...CATS.map(c => [c.id, c.name, c.color])].forEach(([id, name, col]) => {
+  const b = $("button"); b.type = "button"; b.setAttribute("aria-pressed", id === active ? "true" : "false");
+  if (col) { const d = $("span", "dot"); d.style.background = col; b.append(d); }
+  b.append(document.createTextNode(name));
+  b.addEventListener("click", () => { active = id; chips.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === b ? "true" : "false")); apply(); if (id !== "all") document.getElementById(id).scrollIntoView({block:"start"}); });
+  chips.append(b);
+});
+
+const q = document.getElementById("q"), empty = document.getElementById("empty");
+function apply() {
+  const term = strip(q.value.trim()); let total = 0;
+  cats.querySelectorAll(".cat").forEach(s => {
+    let n = 0;
+    s.querySelectorAll(".f").forEach(f => { const ok = !term || f.dataset.k.includes(term); f.hidden = !ok; if (ok) n++; });
+    s.hidden = (active !== "all" && s.id !== active) || n === 0; if (!s.hidden) total += n;
+  });
+  empty.classList.toggle("on", total === 0);
+}
+q.addEventListener("input", apply);
+</script>
+</body>
+</html>
