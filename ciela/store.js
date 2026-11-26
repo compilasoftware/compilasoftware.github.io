@@ -2,17 +2,17 @@
    Boceto: todo se guarda en este navegador (localStorage). En la versión real va a una base de datos. */
 (function () {
   var K = { cfg: 'ciela.cfg', res: 'ciela.res', gift: 'ciela.gift', qs: 'ciela.qs', acu: 'ciela.acu', seed: 'ciela.seed' };
-  var VERSION = '3';
+  var VERSION = '4';
   var DEF = {
     sena: 30,
-    precios: { tarot: [12000, 20000, 32000], rs: 35000, tirada: 30000, inf: 40000, enc: 60000, encExtra: 8000 },
-    activos: { tarot: true, rs: true, tirada: true, inf: true, enc: true },
+    precios: { tarot: [12000, 20000, 32000], cn: 35000, rs: 35000, tirada: 30000, inf: 40000, enc: 60000, encExtra: 8000 },
+    activos: { tarot: true, cn: true, rs: true, tirada: true, inf: true, enc: true },
     horas: { 0: [], 1: ['10:00', '11:30', '15:00', '17:00', '18:30'], 2: ['15:00', '17:00', '18:30'], 3: ['10:00', '11:30', '15:00', '17:00', '18:30'], 4: ['15:00', '17:00', '18:30'], 5: ['10:00', '11:30', '15:00'], 6: ['10:00', '11:30'] },
     libres: []
   };
   var SERV = {
     tarot: { n: 'Lectura de Tarot', opts: ['Lectura express', 'Lectura básica', 'Lectura extensa'], dur: ['15 min', '30 min', '1 hora'] },
-    rs: { n: 'Revolución Solar' }, tirada: { n: 'Tirada astrológica' }, inf: { n: 'Carta natal infantil' }, enc: { n: 'Encuentro y Tarot' }
+    cn: { n: 'Carta natal' }, rs: { n: 'Revolución Solar' }, tirada: { n: 'Tirada astrológica' }, inf: { n: 'Carta natal infantil' }, enc: { n: 'Encuentro y Tarot' }
   };
   function rd(k, d) { try { var v = JSON.parse(localStorage.getItem(k)); return v == null ? d : v; } catch (e) { return d; } }
   function wr(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
@@ -37,21 +37,22 @@
       for (var j = 0; j < hs.length; j++) {
         var h = hs[j], dens = k < 0 ? 0.55 : k === 0 ? 0.75 : k < 10 ? 0.5 : 0.28;
         if (r() > dens) continue;
-        var tp = r(), tipo = tp < 0.52 ? 'tarot' : tp < 0.74 ? 'rs' : tp < 0.88 ? 'tirada' : 'enc';
+        var tp = r(), tipo = tp < 0.44 ? 'tarot' : tp < 0.6 ? 'cn' : tp < 0.76 ? 'rs' : tp < 0.89 ? 'tirada' : 'enc';
         if (tipo === 'enc' && h !== '18:30') tipo = 'tarot';
         var opt = tipo === 'tarot' ? Math.floor(r() * 3) : null;
-        var pr = precio(cfg, tipo, opt) + (tipo === 'enc' ? Math.floor(r() * 4) * cfg.precios.encExtra : 0);
+        var combo = (tipo === 'cn' && r() < 0.35) ? [{ tipo: 'cn', opt: null }, { tipo: 'rs', opt: null }] : null;
+        var pr = precio(cfg, tipo, opt) + (combo ? cfg.precios.rs : 0) + (tipo === 'enc' ? Math.floor(r() * 4) * cfg.precios.encExtra : 0);
         var pas = k < 0;
         var estado = pas ? (r() < 0.07 ? 'cancelada' : 'hecha') : 'confirmada';
         var pagado = pas ? (r() < 0.16 ? Math.round(pr * 0.3) : pr) : Math.round(pr * cfg.sena / 100);
         var nom = N[Math.floor(r() * N.length)];
         res.push({
-          id: 'r' + (id++), tipo: tipo, opt: opt, fecha: ymd(d), hora: h, nombre: nom,
+          id: 'r' + (id++), tipo: tipo, opt: opt, combo: combo, fecha: ymd(d), hora: h, nombre: nom,
           tel: '11 5555-0' + pad(Math.floor(r() * 99)) + Math.floor(r() * 9),
-          mod: tipo === 'enc' ? 'En su casa' : (r() < 0.7 ? 'Videollamada' : 'Presencial'),
+          mod: 'Videollamada',
           grupo: tipo === 'enc' ? 6 + Math.round((pr - cfg.precios.enc) / cfg.precios.encExtra) : null,
           precio: pr, pagado: pagado, estado: estado, origen: r() < 0.72 ? 'web' : 'manual',
-          nac: tipo === 'rs' ? { fecha: (1960 + Math.floor(r() * 40)) + '-' + pad(1 + Math.floor(r() * 12)) + '-' + pad(1 + Math.floor(r() * 28)), hora: pad(Math.floor(r() * 24)) + ':' + pad(Math.floor(r() * 60)), lugar: LUG[Math.floor(r() * LUG.length)] } : null,
+          nac: (tipo === 'rs' || tipo === 'cn') ? { fecha: (1960 + Math.floor(r() * 40)) + '-' + pad(1 + Math.floor(r() * 12)) + '-' + pad(1 + Math.floor(r() * 28)), hora: pad(Math.floor(r() * 24)) + ':' + pad(Math.floor(r() * 60)), lugar: LUG[Math.floor(r() * LUG.length)] } : null,
           nota: tipo === 'tarot' ? TEMAS[Math.floor(r() * TEMAS.length)] : '',
           creado: ymd(addD(d, -1 - Math.floor(r() * 9)))
         });
@@ -66,8 +67,8 @@
     ];
     var gift = [
       { code: 'CIELA-7K2Q', tipo: 'tarot', opt: 1, precio: cfg.precios.tarot[1], para: 'Mónica', de: 'Julieta', dedic: 'Feliz cumple, ma. Que el cielo te sorprenda', nota: '', vendida: ymd(addD(t, -9)), usada: false },
-      { code: 'CIELA-M4HX', tipo: 'rs', opt: null, precio: cfg.precios.rs, para: 'Abuela Marta', de: 'Lu', dedic: 'Gracias por acompañarme siempre, este regalo es para vos', nota: '¡Abuela querida, feliz cumpleaños!', vendida: ymd(addD(t, -4)), usada: false },
-      { code: 'CIELA-P9TD', tipo: 'tarot', opt: 2, precio: cfg.precios.tarot[2], para: 'Silvia', de: 'Las chicas del trabajo', dedic: 'Para que arranques el año con todo', nota: '', vendida: ymd(addD(t, -18)), usada: true },
+      { code: 'CIELA-M4HX', tipo: 'rs', opt: null, items: [{ tipo: 'rs', opt: null }], precio: cfg.precios.rs, para: 'Abuela Marta', de: 'Lu', dedic: 'Gracias por acompañarme siempre, este regalo es para vos', nota: '¡Abuela querida, feliz cumpleaños!', vendida: ymd(addD(t, -4)), usada: false },
+      { code: 'CIELA-P9TD', tipo: 'cn', opt: null, items: [{ tipo: 'cn', opt: null }, { tipo: 'rs', opt: null }], precio: cfg.precios.cn + cfg.precios.rs, para: 'Silvia', de: 'Las chicas del trabajo', dedic: 'Para que arranques el año con todo', nota: '', vendida: ymd(addD(t, -18)), usada: true },
       { code: 'CIELA-W3RA', tipo: 'tarot', opt: 0, precio: cfg.precios.tarot[0], para: 'Flor', de: 'Gabi', dedic: 'Un mimo para vos', nota: '', vendida: ymd(addD(t, -1)), usada: false }
     ];
     var qs = [

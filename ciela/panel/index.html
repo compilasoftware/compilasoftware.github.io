@@ -15,7 +15,7 @@
   --tinta:#1d2742;--gris:#555b6e;--gris2:#7a8093;--linea:#dcdee5;--oro:#b89a5e;--luz:#e9e6dc;
   --ok:#2f7d5b;--okb:#e5f3ec;--warn:#9a6412;--warnb:#fbf0dc;--bad:#a3322a;--badb:#f8e4e2;
   --serif:"Cormorant Garamond",Georgia,serif;--sans:Figtree,system-ui,sans-serif;--sym:"Noto Sans Symbols","Segoe UI Symbol",sans-serif;
-  --c-tarot:#6d5fb0;--c-rs:#b0893c;--c-tirada:#2c7c8c;--c-enc:#c05578;--c-inf:#4f8a5b;
+  --c-tarot:#6d5fb0;--c-cn:#3f6fa8;--c-rs:#b0893c;--c-tirada:#2c7c8c;--c-enc:#c05578;--c-inf:#4f8a5b;
 }
 *{box-sizing:border-box}
 body{margin:0;background:var(--fondo);color:var(--tinta);font-family:var(--sans);font-size:16.5px;line-height:1.5;-webkit-font-smoothing:antialiased}
@@ -296,7 +296,7 @@ var MES=["enero","febrero","marzo","abril","mayo","junio","julio","agosto","sept
 var DIA=["domingo","lunes","martes","miércoles","jueves","viernes","sábado"];
 var DIAC=["Dom","Lun","Mar","Mié","Jue","Vie","Sáb"];
 var ORD=[1,2,3,4,5,6,0];
-var COL={tarot:"var(--c-tarot)",rs:"var(--c-rs)",tirada:"var(--c-tirada)",enc:"var(--c-enc)",inf:"var(--c-inf)"};
+var COL={tarot:"var(--c-tarot)",cn:"var(--c-cn)",rs:"var(--c-rs)",tirada:"var(--c-tirada)",enc:"var(--c-enc)",inf:"var(--c-inf)"};
 var ETAPAS=["Datos recibidos","Pintando","Lista para entregar","Entregada"];
 var HOY=C.ymd(new Date());
 var ST={todos:false,v:"agenda",mes:primero(new Date()),sel:HOY,vmes:primero(new Date()),fil:"todo"};
@@ -315,7 +315,9 @@ function primero(d){return new Date(d.getFullYear(),d.getMonth(),1,12)}
 function P(s){return C.parse(s)}
 function largo(s){var d=P(s),t=DIA[d.getDay()]+" "+d.getDate()+" de "+MES[d.getMonth()];return t.charAt(0).toUpperCase()+t.slice(1)}
 function corto(s){var d=P(s);return DIAC[d.getDay()]+" "+d.getDate()+"/"+(d.getMonth()+1)}
-function serv(r){return r.tipo==="tarot"?C.SERV.tarot.opts[r.opt==null?1:r.opt]:C.SERV[r.tipo].n}
+function nomItem(t,o){return t==="tarot"?"Lectura de Tarot "+["express","básica","extensa"][o==null?1:o]:C.SERV[t].n}
+function serv(r){return r.combo?r.combo.map(function(i){return nomItem(i.tipo,i.opt)}).join(" + "):r.tipo==="tarot"?C.SERV.tarot.opts[r.opt==null?1:r.opt]:C.SERV[r.tipo].n}
+function nomGift(g){return (g.items||[{tipo:g.tipo,opt:g.opt}]).map(function(i){return nomItem(i.tipo,i.opt)}).join(" + ")}
 function nac(n){if(!n||!n.fecha)return "";return n.fecha.split("-").reverse().join("/")+(n.hora?" · "+n.hora+" hs":"")+(n.lugar?" · "+esc(n.lugar):"")}
 function pago(r){
   if(r.estado==="cancelada")return '<span class="chip gr">Cancelado</span>';
@@ -362,7 +364,7 @@ function calendario(res,cfg){
   var ini=new Date(y,mo,1,12);var off=(ini.getDay()+6)%7;var start=C.addD(ini,-off);
   var fin=new Date(y,mo+1,0,12);var tot=off+fin.getDate();var semanas=Math.ceil(tot/7);
   var h='<div class="calh"><h2>'+MES[mo]+' '+y+'</h2><button class="btn o sm" data-act="mes-hoy">Hoy</button><button class="ib" data-act="mes" data-d="-1" aria-label="Mes anterior">‹</button><button class="ib" data-act="mes" data-d="1" aria-label="Mes siguiente">›</button></div>';
-  h+='<div class="leg">'+["tarot","rs","tirada","enc"].map(function(k){return '<span><i class="dot" style="--c:'+COL[k]+'"></i>'+(k==="tarot"?"Tarot":C.SERV[k].n)+'</span>'}).join("")+'<span><i class="dot" style="--c:#c9ccd5"></i>No trabajás</span></div>';
+  h+='<div class="leg">'+["tarot","cn","rs","tirada","enc"].map(function(k){return '<span><i class="dot" style="--c:'+COL[k]+'"></i>'+(k==="tarot"?"Tarot":C.SERV[k].n)+'</span>'}).join("")+'<span><i class="dot" style="--c:#c9ccd5"></i>No trabajás</span></div>';
   h+='<div class="cg">'+ORD.map(function(i){return '<div class="wd">'+DIAC[i]+'</div>'}).join("");
   for(var i=0;i<semanas*7;i++){
     var d=C.addD(start,i),f=C.ymd(d),evs=delDia(f,res),act=evs.filter(function(r){return r.estado!=="cancelada"});
@@ -398,7 +400,7 @@ function verRes(id){
    '<div><span>Cliente</span><b>'+esc(r.nombre)+'</b></div>'+
    '<div><span>WhatsApp</span><span style="color:var(--tinta)">'+esc(r.tel||"—")+'</span></div>'+
    '<div><span>Cuándo</span><span style="color:var(--tinta)">'+largo(r.fecha)+' · '+r.hora+' hs</span></div>'+
-   '<div><span>Cómo</span><span style="color:var(--tinta)">'+esc(r.mod)+(r.grupo?' · '+r.grupo+' personas':'')+'</span></div>'+
+   '<div><span>Cómo</span><span style="color:var(--tinta)">Videollamada'+(r.grupo?' · '+r.grupo+' personas':'')+'</span></div>'+
    (r.nac?'<div><span>Nacimiento</span><span style="color:var(--tinta)">'+nac(r.nac)+'</span></div>':'')+
    (r.nota?'<div><span>Quiere preguntar</span><span style="color:var(--tinta)">'+esc(r.nota)+'</span></div>':'')+
    '<div><span>Cómo llegó</span><span style="color:var(--tinta)">'+(r.origen==="web"?"Reservó desde tu web":r.origen==="gift"?"Canjeó una gift card":"Lo anotaste vos")+'</span></div>'+
@@ -419,16 +421,16 @@ function horasLibres(f,exceptoId){var res=C.res(),cfg=C.cfg();return (cfg.horas[
 function selHoras(f,ex,actual){var hs=horasLibres(f,ex);if(actual&&hs.indexOf(actual)<0)hs.push(actual);hs.sort();return hs.length?hs.map(function(h){return '<option'+(h===actual?" selected":"")+'>'+h+'</option>'}).join("")+'<option value="otra">Otro horario…</option>':'<option value="otra">Ese día no tenés horarios libres: elegí otro horario…</option>'}
 
 /* ---------- hoja: anotar un turno ---------- */
-var OPS=[["tarot",0],["tarot",1],["tarot",2],["rs",null],["tirada",null],["enc",null]];
+var OPS=[["tarot",0],["tarot",1],["tarot",2],["cn",null],["rs",null],["tirada",null],["enc",null]];
 function nombreOp(o){return o[0]==="tarot"?"Tarot · "+C.SERV.tarot.opts[o[1]]:C.SERV[o[0]].n}
 function nuevo(f,h,gift){
   f=f||(ST.sel>=HOY?ST.sel:HOY);
   if(!h){for(var i=0;i<60&&!horasLibres(f).length;i++)f=C.ymd(C.addD(P(f),1));}
   var cfg=C.cfg(),gi=gift?OPS.findIndex(function(o){return o[0]===gift.tipo&&(o[1]===gift.opt||gift.tipo!=="tarot")}):1;
-  var html='<label class="lbl" for="nS">Qué consulta</label><select class="fld" id="nS">'+OPS.map(function(o,i){return '<option value="'+i+'"'+(i===gi?" selected":"")+'>'+nombreOp(o)+' · '+fmt(C.precio(cfg,o[0],o[1]))+'</option>'}).join("")+'</select>'+
+  var html='<label class="lbl" for="nS">Qué consulta</label>'+(gift?'<p style="margin:0 0 6px;font-weight:600">'+esc(nomGift(gift))+'</p>':'')+'<select class="fld" id="nS"'+(gift?' hidden':'')+'>'+OPS.map(function(o,i){return '<option value="'+i+'"'+(i===gi?" selected":"")+'>'+nombreOp(o)+' · '+fmt(C.precio(cfg,o[0],o[1]))+'</option>'}).join("")+'</select>'+
   '<div class="g2"><div><label class="lbl" for="nN">Nombre</label><input class="fld" id="nN" value="'+esc(gift?gift.para:"")+'" placeholder="Ej: Laura"></div><div><label class="lbl" for="nT">WhatsApp</label><input class="fld" id="nT" inputmode="tel" placeholder="11 2345-6789"></div></div>'+
   '<div class="g2"><div><label class="lbl" for="nF">Día</label><input class="fld" type="date" id="nF" value="'+f+'"></div><div><label class="lbl" for="nH">Hora</label><select class="fld" id="nH">'+selHoras(f,null,h)+'</select><input class="fld" type="time" id="nH2" step="900" style="margin-top:6px" hidden></div></div>'+
-  '<span class="lbl">Cómo</span><div class="opts" id="nM"><button aria-pressed="true">Videollamada</button><button aria-pressed="false">Presencial</button><button aria-pressed="false">En su casa</button></div>'+
+  
   '<span class="lbl">Pago</span><div class="opts" id="nP">'+(gift?'<button aria-pressed="true" data-p="gift">Pagado con gift card</button>':'<button aria-pressed="false" data-p="0">Todavía no pagó</button><button aria-pressed="true" data-p="sena">Pagó la seña ('+cfg.sena+'%)</button><button aria-pressed="false" data-p="todo">Pagó todo</button>')+'</div>'+
   '<label class="lbl" for="nQ">Notas <span style="font-weight:400">(opcional)</span></label><input class="fld" id="nQ" placeholder="Ej: quiere preguntar por trabajo">'+
   '<p class="note" id="nErr" style="color:var(--bad)" hidden></p>'+
@@ -440,7 +442,8 @@ function guardarNuevo(giftCode){
   var err=!n?"Escribí el nombre.":!f?"Elegí el día.":!h?"Elegí la hora.":"";
   if(err){$("#nErr").textContent=err;$("#nErr").hidden=false;return}
   var pr=C.precio(cfg,o[0],o[1]),p=$("#nP [aria-pressed=true]").dataset.p;
-  var r={id:C.nid("r"),tipo:o[0],opt:o[1],fecha:f,hora:h,nombre:n,tel:$("#nT").value.trim(),mod:$("#nM [aria-pressed=true]").textContent,grupo:o[0]==="enc"?6:null,precio:pr,pagado:p==="0"?0:p==="sena"?Math.round(pr*cfg.sena/100):pr,estado:"confirmada",origen:giftCode?"gift":"manual",nac:null,nota:$("#nQ").value.trim(),creado:HOY};
+  var r={id:C.nid("r"),tipo:o[0],opt:o[1],fecha:f,hora:h,nombre:n,tel:$("#nT").value.trim(),mod:"Videollamada",grupo:o[0]==="enc"?6:null,precio:pr,pagado:p==="0"?0:p==="sena"?Math.round(pr*cfg.sena/100):pr,estado:"confirmada",origen:giftCode?"gift":"manual",nac:null,nota:$("#nQ").value.trim(),creado:HOY};
+  if(giftCode){var gg=C.gifts().find(function(x){return x.code===giftCode});if(gg){var its=gg.items||[{tipo:gg.tipo,opt:gg.opt}];r.tipo=its[0].tipo;r.opt=its[0].opt;r.combo=its.length>1?its:null;r.precio=gg.precio;r.pagado=gg.precio}}
   C.add(C.K.res,r);
   if(giftCode){var g=C.gifts();g.forEach(function(x){if(x.code===giftCode){x.usada=true;x.res=r.id}});C.saveGifts(g)}
   ST.sel=f;ST.mes=primero(P(f));cerrar();ST.v="agenda";render();toast("Turno guardado: "+corto(f)+" "+h+" · "+esc(n));
@@ -450,7 +453,7 @@ function guardarNuevo(giftCode){
 function movimientos(m){
   var pre=C.ymd(m).slice(0,7),out=[];
   C.res().forEach(function(r){if(r.fecha.slice(0,7)===pre)out.push({k:"res",id:r.id,f:r.fecha,t:serv(r),c:r.nombre,tot:r.estado==="cancelada"?0:r.precio,pag:r.estado==="cancelada"?r.pagado:r.pagado,tipo:r.tipo,r:r})});
-  C.gifts().forEach(function(g){if(g.vendida.slice(0,7)===pre)out.push({k:"gift",id:g.code,f:g.vendida,t:"Gift card · "+(g.tipo==="rs"?"Revolución Solar":C.SERV.tarot.opts[g.opt]),c:"De "+g.de+" para "+g.para,tot:g.precio,pag:g.precio,tipo:"gift",g:g})});
+  C.gifts().forEach(function(g){if(g.vendida.slice(0,7)===pre)out.push({k:"gift",id:g.code,f:g.vendida,t:"Gift card · "+nomGift(g),c:"De "+g.de+" para "+g.para,tot:g.precio,pag:g.precio,tipo:"gift",g:g})});
   C.acu().forEach(function(a){if(a.creado.slice(0,7)===pre)out.push({k:"acu",id:a.id,f:a.creado,t:"Carta natal en acuarela",c:a.nombre+(a.nene?" · para "+a.nene:""),tot:a.precio,pag:a.pagado,tipo:"inf",a:a})});
   return out.sort(function(a,b){return a.f<b.f?1:-1});
 }
@@ -462,7 +465,7 @@ function vVentas(){
   var gifts=mv.filter(function(x){return x.k==="gift"});
   var por={};mv.forEach(function(x){if(x.r&&x.r.estado==="cancelada")return;var k=x.k==="gift"?"gift":x.tipo;por[k]=(por[k]||0)+x.tot});
   var max=Math.max.apply(null,Object.values(por).concat([1]));
-  var NOM={tarot:"Lecturas de Tarot",rs:"Revolución Solar",tirada:"Tirada astrológica",enc:"Encuentro y Tarot",inf:"Acuarelas",gift:"Gift cards"};
+  var NOM={tarot:"Lecturas de Tarot",cn:"Carta natal",rs:"Revolución Solar",tirada:"Tirada astrológica",enc:"Encuentro y Tarot",inf:"Acuarelas",gift:"Gift cards"};
   var COLB=Object.assign({gift:"var(--oro)"},COL);
   var fil=mv.filter(function(x){return ST.fil==="todo"||(ST.fil==="falta"&&x.tot>x.pag&&!(x.r&&x.r.estado==="cancelada"))||(ST.fil==="gift"&&x.k==="gift")||(ST.fil==="acu"&&x.k==="acu")||(ST.fil==="lect"&&x.k==="res")});
   var h='<header class="vh"><div><small>Cobros y ventas</small><h1 style="text-transform:capitalize">'+MES[m.getMonth()]+' '+m.getFullYear()+'</h1></div><div style="display:flex;gap:8px;align-items:center"><button class="ib" data-act="vmes" data-d="-1" aria-label="Mes anterior">‹</button><button class="ib" data-act="vmes" data-d="1" aria-label="Mes siguiente">›</button><button class="btn o" data-act="csv">Descargar planilla</button></div></header>'+
@@ -489,7 +492,7 @@ function vPedidos(){
   ETAPAS.map(function(e,i){var l=acu.filter(function(a){return a.etapa===i});return '<div class="col"><h3>'+e+'<span>'+l.length+'</span></h3>'+l.map(function(a){return '<div class="pc"><b>'+esc(a.nene||"Sin nombre aún")+'</b><small>Pedido por '+esc(a.nombre)+' · '+corto(a.creado)+'</small><small>'+(a.nac?"Nació "+nac(a.nac):"Faltan los datos de nacimiento")+'</small><div class="a">'+(a.pagado>=a.precio?'<span class="chip ok">Pagado</span>':'<button class="btn ok sm" data-act="cacu" data-id="'+a.id+'">Me pagó el resto</button>')+(i<3?'<button class="btn o sm" data-act="etapa" data-id="'+a.id+'">Pasar a: '+ETAPAS[i+1]+' →</button>':'')+'</div></div>'}).join("")+'</div>'}).join("")+
   '</div></section>'+
   '<section class="card"><div class="ch"><h2>Gift cards</h2><span class="muted" style="font-size:14.5px">'+g.filter(function(x){return !x.usada}).length+' sin canjear</span></div><div class="gcs">'+
-  g.map(function(x){return '<div class="gci"><div style="display:flex;justify-content:space-between;align-items:center"><span class="cd">'+x.code+'</span>'+(x.usada?'<span class="chip gr">Canjeada</span>':'<span class="chip ok">Sin usar</span>')+'</div><b>'+(x.tipo==="rs"?"Revolución Solar":C.SERV.tarot.opts[x.opt])+' · '+fmt(x.precio)+'</b><span class="muted" style="font-size:14.5px">Para '+esc(x.para)+' · de '+esc(x.de)+' · vendida el '+corto(x.vendida)+'</span>'+(x.dedic?'<span class="dd">“'+esc(x.dedic)+'”</span>':'')+'<div class="a">'+(x.usada?'<span class="muted" style="font-size:14px">Ya tiene su turno</span>':'<button class="btn n sm" data-act="canje" data-code="'+x.code+'">Canjear y darle turno</button>')+'</div></div>'}).join("")+
+  g.map(function(x){return '<div class="gci"><div style="display:flex;justify-content:space-between;align-items:center"><span class="cd">'+x.code+'</span>'+(x.usada?'<span class="chip gr">Canjeada</span>':'<span class="chip ok">Sin usar</span>')+'</div><b>'+nomGift(x)+' · '+fmt(x.precio)+'</b><span class="muted" style="font-size:14.5px">Para '+esc(x.para)+' · de '+esc(x.de)+' · vendida el '+corto(x.vendida)+'</span>'+(x.dedic?'<span class="dd">“'+esc(x.dedic)+'”</span>':'')+'<div class="a">'+(x.usada?'<span class="muted" style="font-size:14px">Ya tiene su turno</span>':'<button class="btn n sm" data-act="canje" data-code="'+x.code+'">Canjear y darle turno</button>')+'</div></div>'}).join("")+
   '</div></section>';
   $("#main").innerHTML=h;
 }
@@ -522,6 +525,7 @@ function vAjustes(){
   var h='<header class="vh"><div><small>Lo que ve la gente en tu web</small><h1>Precios y horarios</h1></div><a class="btn o" href="../#servicios" target="_blank" rel="noopener">Ver cómo queda ↗</a></header>'+
   '<div class="ag"><section class="card"><div class="ch"><h2>Precios</h2><span class="muted" style="font-size:14px">Se guarda solo</span></div><div class="pr">'+
    item("tarot","Lecturas de Tarot","",mon("tarot.0","Express",c.precios.tarot[0])+mon("tarot.1","Básica",c.precios.tarot[1])+mon("tarot.2","Extensa",c.precios.tarot[2]))+
+   item("cn","Carta natal","",mon("cn","Precio",c.precios.cn))+
    item("rs","Revolución Solar","",mon("rs","Precio",c.precios.rs))+
    item("tirada","Tirada astrológica","",mon("tirada","Precio",c.precios.tirada))+
    item("inf","Carta natal infantil","Lámina en acuarela",mon("inf","Precio",c.precios.inf))+

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="none" stroke="#3d4767" stroke-linecap="round">
+  <g transform="translate(200 150)">
+    <circle r="118" stroke-width="1.6"/>
+    <circle r="96" stroke-width="1.2"/>
+    <circle r="44" stroke-width="1.2"/>
+    <g stroke-width="1">
+      <path d="M0-118V-44M0 44V118M-118 0H-44M44 0H118"/>
+      <path d="M59-102.2L22-38.1M-59 102.2L-22 38.1M102.2-59L38.1-22M-102.2 59L-38.1 22M102.2 59L38.1 22M-102.2-59L-38.1-22M59 102.2L22 38.1M-59-102.2L-22-38.1"/>
+    </g>
+    <g stroke-width=".9" stroke="#b89a5e">
+      <path d="M-30-14L26 20L-8 33Z"/>
+      <path d="M-30-14L18-30"/>
+    </g>
+    <g fill="#3d4767" stroke="none">
+      <circle cx="-30" cy="-14" r="3"/><circle cx="26" cy="20" r="3"/><circle cx="-8" cy="33" r="3"/><circle cx="18" cy="-30" r="3"/>
+    </g>
+    <g font-family="Noto Sans Symbols,Segoe UI Symbol,sans-serif" font-size="15" fill="#3d4767" stroke="none" text-anchor="middle" dominant-baseline="central">
+      <text x="27.6" y="-103">♈︎</text><text x="75.5" y="-75.5">♉︎</text><text x="103" y="-27.6">♊︎</text>
+      <text x="103" y="27.6">♋︎</text><text x="75.5" y="75.5">♌︎</text><text x="27.6" y="103">♍︎</text>
+      <text x="-27.6" y="103">♎︎</text><text x="-75.5" y="75.5">♏︎</text><text x="-103" y="27.6">♐︎</text>
+      <text x="-103" y="-27.6">♑︎</text><text x="-75.5" y="-75.5">♒︎</text><text x="-27.6" y="-103">♓︎</text>
+    </g>
+  </g>
+  <g stroke="#3d4767" stroke-width="1">
+    <path d="M40 40v10M35 45h10M362 250v8M358 254h8M350 52v6M347 55h6M52 246v6M49 249h6"/>
+  </g>
+</svg>

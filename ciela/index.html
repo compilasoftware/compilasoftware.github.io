@@ -8,7 +8,7 @@
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#1d2742">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Figtree:wght@400;500;600;700&family=Noto+Sans+Symbols:wght@400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Figtree:wght@400;500;600;700&family=Noto+Sans+Symbols:wght@400&family=Patrick+Hand&display=swap">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231d2742'/%3E%3Cpath d='M40 14a20 20 0 1 0 0 36a16 16 0 1 1 0-36z' fill='%23e9e6dc'/%3E%3C/svg%3E">
 <style>
 :root{
@@ -78,9 +78,9 @@ h2.T{font-size:clamp(30px,4.4vw,46px)}
 .noche .sub{color:#c6cad8}
 
 /* servicios: cinco tarjetas iguales */
-.svs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px;margin-top:46px}
+.svs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:46px}
 .sv{background:var(--blanco);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;border:1px solid #c7c8ce}
-.sv img{width:100%;aspect-ratio:4/3;object-fit:contain;background:var(--bgi,#d2d2d4)}
+.sv img{width:100%;aspect-ratio:16/10;object-fit:contain;background:var(--bgi,#d2d2d4)}
 .sv .bd{padding:18px 18px 20px;display:flex;flex-direction:column;flex:1}
 .sv h3{font-family:var(--serif);font-size:24px;font-weight:600;margin:0;line-height:1.1}
 .sv p{color:var(--gris);font-size:15px;line-height:1.5;margin:8px 0 0}
@@ -182,22 +182,31 @@ h2.T{font-size:clamp(30px,4.4vw,46px)}
 .gift h2{text-align:left}
 .gift .note{display:flex;gap:10px;align-items:flex-start;margin-top:18px;font-size:15.5px;color:var(--gris)}
 .gift .note i{font-style:normal;font-family:var(--sym);color:var(--oro);font-size:18px}
-.gc{aspect-ratio:1.6;border-radius:20px;background:radial-gradient(120% 90% at 100% 0%,#34405f 0%,#1d2742 55%);color:#fff;padding:24px 26px;display:flex;flex-direction:column;position:relative;overflow:hidden;box-shadow:0 26px 50px -26px rgba(29,39,66,.7);width:100%;max-width:460px;container-type:inline-size;text-align:left}
-.gc .s{position:absolute;right:-50px;top:-50px;width:170px;opacity:.32;pointer-events:none}
-.gc .tp{display:flex;justify-content:space-between;align-items:center;position:relative}
-.gc .tp small{letter-spacing:.18em;text-transform:uppercase;color:#aeb4c6;font-size:11.5px}
-.gc .t{font-family:var(--serif);font-weight:500;font-size:clamp(22px,7.4cqi,34px);line-height:1.05;margin-top:auto;position:relative}
-.gc .d{font-family:var(--serif);font-style:italic;font-size:clamp(15px,4.6cqi,20px);line-height:1.3;color:#e9e6dc;margin-top:8px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;position:relative}
-.gc .d.ph,.gc .w .ph{opacity:.5}
-.gc .w{display:flex;justify-content:space-between;gap:10px;margin-top:14px;padding-top:10px;border-top:1px solid rgba(233,230,220,.18);font-size:clamp(12px,3.4cqi,14.5px);color:#c6cad8;position:relative}
-.gc .w b{color:#fff;font-weight:600}
-.gcw{position:sticky;top:-20px;z-index:3;background:var(--blanco);margin:-20px -20px 6px;padding:16px 20px 14px;border-bottom:1px solid var(--linea)}
-.gcw .gc{max-width:340px;margin:0 auto;box-shadow:0 16px 30px -18px rgba(29,39,66,.6)}
+.gc{position:relative;width:100%;max-width:520px;aspect-ratio:1680/1192;border-radius:14px;overflow:hidden;box-shadow:0 26px 50px -26px rgba(29,39,66,.55);container-type:inline-size;color:#485680;font-family:"Patrick Hand",var(--sans);text-align:center}
+.gc img{position:absolute;inset:0;width:100%;height:100%;display:block}
+.gc .gv{position:absolute;left:20%;right:20%;top:46%;height:14%;display:flex;align-items:center;justify-content:center;font-size:2.9cqi;line-height:1.45;letter-spacing:.08em;text-transform:uppercase}
+.gc .gv.l{font-size:2.45cqi}
+.gc .gv u{text-decoration:underline;text-decoration-color:#cfbfa0;text-decoration-thickness:.22em;text-underline-offset:.22em}
+.gc .gn{position:absolute;left:41.6%;width:27%;font-size:2.45cqi;letter-spacing:.06em;text-transform:uppercase;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.2}
+.gc .gp{bottom:33.4%}
+.gc .gd{bottom:26.7%}
+.gc .gdd{position:absolute;left:27%;right:22%;top:76.5%;font-family:var(--serif);font-style:italic;font-size:2.7cqi;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.gc .ph{opacity:.38}
+.gcw{position:sticky;top:-20px;z-index:3;background:var(--blanco);margin:-20px -20px 6px;padding:14px 20px 12px;border-bottom:1px solid var(--linea)}
+.gcw .gc{max-width:380px;margin:0 auto;box-shadow:0 14px 26px -18px rgba(29,39,66,.55)}
+.pick{display:grid;gap:8px}
+.pk{display:grid;grid-template-columns:22px 1fr auto;gap:10px;align-items:center;border:1px solid var(--linea);border-radius:14px;padding:12px 13px;cursor:pointer;background:#fff}
+.pk input{accent-color:var(--noche);width:19px;height:19px;margin:0}
+.pk b{display:block;font-size:16px}.pk small{display:block;color:var(--gris);font-size:13.5px;line-height:1.35}
+.pk em{font-style:normal;font-size:15px;font-weight:600;white-space:nowrap}
+.pk:has(input:checked){border-color:var(--noche);background:#f1f2f6}
+.pick .lect{margin:-2px 0 4px 32px}
+.lect[hidden],#bNac[hidden],#bPreg[hidden]{display:none}
 .msg{background:#e7f6ec;border-radius:14px 14px 14px 4px;padding:10px 14px;font-size:15px;line-height:1.45;white-space:pre-wrap;text-align:left;max-width:340px;margin:10px auto 0}
 .msg small{display:block;color:var(--ok);font-weight:600;font-size:12.5px;margin-bottom:3px}
 .ok .gc{margin:4px auto 0}
 .dr .fo[hidden]{display:none}
-@media (max-width:600px){.gcw .gc{max-width:270px;padding:18px 20px}.gcw{padding:12px 20px 12px}}
+@media (max-width:600px){.gcw .gc{max-width:290px}.gcw{padding:10px 16px}}
 
 /* pie */
 .foot{background:var(--noche);background-image:radial-gradient(70% 60% at 12% 0%,rgba(52,64,95,.9),transparent 70%);color:#c6cad8}
@@ -290,7 +299,7 @@ h2.T{font-size:clamp(30px,4.4vw,46px)}
 <section class="band perla" id="servicios">
   <div class="wrap">
     <div class="c"><h2 class="T">Lecturas y consultas</h2><div class="orn">☾</div>
-    <p class="sub">Elegí la consulta, completá tus datos y reservá el día. Por videollamada o en persona.</p></div>
+    <p class="sub">Elegí una o varias consultas, completá tus datos y reservá el día. Todas son por videollamada.</p></div>
     <div class="svs" id="svs"></div>
     <p class="swipe">Deslizá para ver las 5 consultas →</p>
   </div>
@@ -340,7 +349,7 @@ h2.T{font-size:clamp(30px,4.4vw,46px)}
     <div>
       <h2 class="T">Regalá Ciela</h2>
       <div class="orn" style="justify-content:flex-start">✦</div>
-      <p class="sub" style="margin-left:0">Una lectura de regalo, para un cumpleaños o para fin de año. Elegís la consulta, escribís la dedicatoria que va en la tarjeta y, si querés, un mensaje para acompañarla.</p>
+      <p class="sub" style="margin-left:0">Una lectura de regalo, para un cumpleaños o para fin de año. Elegís una o varias consultas, escribís para quién es y, si querés, una dedicatoria y un mensaje para acompañarla.</p>
       <p class="note"><i>✉</i>La tarjeta es digital: mientras la armás ves cómo queda, y le llega por WhatsApp a quien quieras.</p>
       <div class="btns"><button class="btn n" data-book="gift">Armar una gift card</button></div>
     </div>
@@ -354,14 +363,15 @@ h2.T{font-size:clamp(30px,4.4vw,46px)}
       <div class="fwm"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="31" fill="none" stroke="#b89a5e" stroke-width="1"/><path d="M38 14a19 19 0 1 0 0 36a15 15 0 1 1 0-36z" fill="#e9e6dc"/></svg><b>Ciela</b></div>
       <p>Astrología y tarot con Graciela Pastore: lecturas, Revolución Solar y cartas natales en acuarela.</p>
       <div class="fcta">
-        <button class="fbtn lz" data-book="tarot"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span>Reservar una lectura<small>Por videollamada o en persona</small></span></button>
+        <button class="fbtn lz" data-book="tarot"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span>Reservar una lectura<small>Por videollamada</small></span></button>
         <a class="fbtn fig" href="https://www.instagram.com/ciela.astroytarot/" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg><span>Instagram<small>@ciela.astroytarot</small></span></a>
       </div>
     </div>
     <div class="fcol">
       <h4>Consultas</h4>
       <ul>
-        <li><button data-book="tarot">Lecturas de Tarot</button></li>
+        <li><button data-book="tarot">Lectura de Tarot</button></li>
+        <li><button data-book="cn">Carta natal</button></li>
         <li><button data-book="rs">Revolución Solar</button></li>
         <li><button data-book="tirada">Tirada astrológica</button></li>
         <li><button data-book="inf">Carta natal infantil</button></li>
@@ -445,58 +455,74 @@ function sunSign(d=new Date()){const c=[[1,20,"Capricornio"],[2,19,"Acuario"],[3
 
 /* ---------- servicios ---------- */
 const SV=[
-  {id:"tarot",t:"Lecturas de Tarot",img:"img/svc-tarot.jpg",d:"Express, básica o extensa: de 15 minutos a una hora. Elegís cuál al reservar.",tags:["Videollamada o presencial"],opts:[["Lectura express","Lectura anual y una pregunta específica.","15 min",12000],["Lectura básica","Trabajamos sobre algún tema puntual. Lectura general y hasta 3 preguntas.","30 min",20000],["Lectura extensa","Tirada general y todas las preguntas que quieras hacer.","1 hora",32000]]},
+  {id:"tarot",t:"Lectura de Tarot",img:"img/svc-tarot.jpg",d:"Una mirada a las energías disponibles y a lo que el Tarot tiene para decirte. Express, básica o extensa.",tags:["Por videollamada"],opts:[["Lectura express","Lectura anual y una pregunta específica.","15 min",12000],["Lectura básica","Trabajamos sobre algún tema puntual. Lectura general y hasta 3 preguntas.","30 min",20000],["Lectura extensa","Tirada general y todas las preguntas que quieras hacer.","1 hora",32000]]},
+  {id:"cn",t:"Carta natal",img:"img/svc-cn.svg",d:"El mapa del cielo en el momento en que naciste: tus planetas, tus signos y tus casas.",tags:["Con tu fecha y hora de nacimiento"],p:35000,nac:true},
   {id:"rs",t:"Revolución Solar",img:"img/svc-rs.jpg",bgi:"#10213b",d:"Cada cumpleaños nuestro Sol ilumina distintos escenarios de la carta natal. Vemos qué trae tu nuevo año.",tags:["Con tu fecha y hora de nacimiento"],p:35000,nac:true},
   {id:"tirada",t:"Tirada astrológica",img:"img/svc-tirada.jpg",d:"Astrología y tarot juntos: las cartas hablan en las doce Casas, tus escenarios de vida y vínculos para el ciclo que empieza.",tags:["Ideal para fin de año"],p:30000},
   {id:"inf",t:"Carta natal infantil",img:"img/svc-infantiles.jpg",d:"La carta natal de tu hijo, pintada en acuarela y con su descripción.",tags:["Lámina en acuarela"],p:40000,nac:true},
-  {id:"enc",t:"Encuentro y Tarot",img:"img/svc-encuentro.jpg",d:"Una noche con amigas y lecturas de tarot para todas. Yo voy a tu casa.",tags:["Grupos"],p:60000,grupo:true},
+  {id:"enc",t:"Encuentro y Tarot",img:"img/svc-encuentro.jpg",d:"Una noche con amigas y lecturas de tarot para todas.",tags:["Grupos · por videollamada"],p:60000,grupo:true},
   {id:"gift",t:"Gift card",img:null,d:"Regalá una lectura.",p:20000,gift:true,hide:true}
 ];
 const CFG=CS.cfg();
 SV.forEach(s=>{const p=CFG.precios[s.id];if(s.opts&&Array.isArray(p))s.opts.forEach((o,i)=>{o[3]=p[i];});else if(!s.gift&&p!=null)s.p=p;if(CFG.activos[s.id]===false)s.hide=true;});
 const DEP=CFG.sena/100;
 $("#svs").innerHTML=SV.filter(s=>!s.hide).map(s=>{
-    const price=s.opts?`desde <b>${fmt(s.opts[0][3])}</b>`:`<b>${fmt(s.p)}</b>`;
+  const price=s.opts?`desde <b>${fmt(s.opts[0][3])}</b>`:`<b>${fmt(s.p)}</b>`;
   return `<article class="sv"><img style="--bgi:${s.bgi||"#d2d2d4"}" src="${s.img}" alt="${esc(s.t)}" loading="lazy"><div class="bd"><h3>${s.t}</h3><p>${s.d}</p><div class="meta">${s.tags.map(t=>`<span>${t}</span>`).join("")}</div><div class="ft"><span class="pr">${price}</span><button class="btn n" data-book="${s.id}">Reservar</button></div></div></article>`;}).join("");
+const nSw=document.querySelector(".swipe");if(nSw)nSw.textContent=`Deslizá para ver las ${SV.filter(s=>!s.hide).length} consultas →`;
 
-/* ---------- reserva ---------- */
+/* ---------- reserva: una o varias consultas ---------- */
+const IND=["tarot","cn","rs","tirada"].filter(id=>!SV.find(s=>s.id===id).hide);
+const TNOM=["express","básica","extensa"];
+const nomItem=it=>it.s.opts?"Lectura de Tarot "+TNOM[it.opt]:it.s.t;
 const days=[];{let d=new Date();d.setHours(12,0,0,0);for(let i=1;i<=45&&days.length<8;i++){const x=CS.addD(d,i);if(CS.horasDia(CS.ymd(x)).some(h=>!h.ocupado))days.push(x);}}
 let R={};
+function pickHTML(pre,gift){
+  return `<span class="lbl">${gift?"¿Qué querés regalar?":"¿Qué consultas querés?"}</span><p class="hint" style="margin:-2px 0 10px">${gift?"Podés regalar más de una.":"Podés elegir más de una y las hacemos en la misma videollamada."}</p><div class="pick" id="bSel">${IND.map(id=>{const s=SV.find(x=>x.id===id);
+    return `<label class="pk"><input type="checkbox" value="${id}" ${id===pre?"checked":""}><span><b>${s.t}</b>${s.opts?"<small>Express, básica o extensa</small>":""}</span><em>${s.opts?"desde ":""}${fmt(s.opts?s.opts[0][3]:s.p)}</em></label>${s.opts?`<div class="lect" id="tOpts" role="radiogroup" aria-label="Tipo de lectura" ${id===pre?"":"hidden"}>${s.opts.map((o,i)=>`<label><input type="radio" name="dlec" value="${i}" ${i===1?"checked":""}><div><b>${o[0]}</b><span>${o[1]}</span></div><em>${o[2]}<i>${fmt(o[3])}</i></em></label>`).join("")}</div>`:""}`;}).join("")}</div>`;}
+function selItems(){if(!$("#bSel"))return [];return [...document.querySelectorAll("#bSel .pk input:checked")].map(c=>{const s=SV.find(x=>x.id===c.value);const opt=s.opts?+(document.querySelector("#bSel input[name=dlec]:checked")||{value:1}).value:null;return {s,opt,price:s.opts?s.opts[opt][3]:s.p};});}
 function openBook(id){
-  const s=SV.find(x=>x.id===id);let opt=null;
-  if(s.opts)opt=s.opts[1];
-  const price=opt?opt[3]:s.p;R={s,opt,price,day:null,hr:null,mod:"Videollamada"};
-  $("#drT").textContent=opt?opt[0]:s.t;$("#drS").textContent=opt?`${s.t} · ${opt[2]}`:s.gift?"Tarjeta de regalo":s.t;
-  let h=s.opts?`<span class="lbl">¿Qué lectura querés?</span><div class="lect" role="radiogroup" aria-label="Tipo de lectura">${s.opts.map((o,i)=>`<label><input type="radio" name="dlec" value="${i}" ${i===1?"checked":""}><div><b>${o[0]}</b><span>${o[1]}</span></div><em>${o[2]}<i>${fmt(o[3])}</i></em></label>`).join("")}</div>`:"";
+  const s=SV.find(x=>x.id===id);const multi=s.gift||IND.includes(id);
+  R={s,multi,price:s.p,day:null,hr:null,mod:"Videollamada"};
+  let h=multi?pickHTML(s.gift?"tarot":id,s.gift):"";
   if(s.gift){
-    h+=`<div class="gcw" id="gcLive"></div><span class="lbl">¿Qué querés regalar?</span><div class="chips" id="gOpt">${SV[0].opts.map((o,i)=>`<button class="chip" data-g="${i}" aria-pressed="${i===1}">${o[0]}</button>`).join("")}<button class="chip" data-g="rs" aria-pressed="false">Revolución Solar</button></div>
-    <label class="lbl" for="gPara">Para quién es</label><input class="fld" id="gPara" maxlength="30" placeholder="Ej: Abuela Marta">
-    <label class="lbl" for="gMsg">Dedicatoria <span style="font-weight:400">(va dentro de la tarjeta)</span></label><input class="fld" id="gMsg" maxlength="80" placeholder="Ej: Gracias por acompañarme siempre, este regalo es para vos">
-    <label class="lbl" for="bNom">De parte de</label><input class="fld" id="bNom" maxlength="30" autocomplete="name" placeholder="Tu nombre">
+    h=`<div class="gcw" id="gcLive"></div>`+h+`
+    <label class="lbl" for="gPara">Para quién es</label><input class="fld" id="gPara" maxlength="28" placeholder="Ej: Abuela Marta">
+    <label class="lbl" for="bNom">De parte de</label><input class="fld" id="bNom" maxlength="28" autocomplete="name" placeholder="Tu nombre">
+    <label class="lbl" for="gMsg">Dedicatoria <span style="font-weight:400">(opcional, va en la tarjeta)</span></label><input class="fld" id="gMsg" maxlength="70" placeholder="Ej: Gracias por acompañarme siempre">
     <label class="lbl" for="gNota">Mensaje para acompañarla <span style="font-weight:400">(opcional)</span></label><textarea class="fld" id="gNota" maxlength="400" rows="3" placeholder="Ej: ¡Abuela querida, feliz cumpleaños! Te regalo una lectura para que arranques tu año con todo."></textarea>
     <p class="hint">Le llega por WhatsApp junto con la tarjeta.</p>`;
   }else{
-    h+=`<label class="lbl" for="bNom"${s.opts?' style="margin-top:20px"':""}>Tu nombre</label><input class="fld" id="bNom" autocomplete="name" placeholder="Nombre y apellido">
+    h+=`<label class="lbl" for="bNom"${multi?' style="margin-top:20px"':""}>Tu nombre</label><input class="fld" id="bNom" autocomplete="name" placeholder="Nombre y apellido">
     <label class="lbl" for="bTel">Tu WhatsApp</label><input class="fld" id="bTel" inputmode="tel" placeholder="11 2345-6789">`;
-    if(s.nac)h+=`<span class="lbl">${s.id==="inf"?"Datos de nacimiento del nene o la nena":"Tus datos de nacimiento"}</span><div class="g2"><input class="fld" id="bFec" type="date" aria-label="Fecha de nacimiento"><input class="fld" id="bHor" type="time" aria-label="Hora de nacimiento"></div><input class="fld" id="bLug" style="margin-top:10px" placeholder="Lugar de nacimiento (ciudad)" aria-label="Lugar de nacimiento"><p class="hint">Si no sabés la hora exacta, fijate en la partida de nacimiento.</p>`;
-    if(s.id==="tarot")h+=`<label class="lbl" for="bQ">¿Sobre qué querés preguntar? <span style="font-weight:400">(opcional)</span></label><input class="fld" id="bQ" placeholder="Ej: trabajo, un vínculo, una decisión">`;
+    if(s.nac||multi)h+=`<div id="bNac"><span class="lbl">${s.id==="inf"?"Datos de nacimiento del nene o la nena":"Tus datos de nacimiento"}</span><div class="g2"><input class="fld" id="bFec" type="date" aria-label="Fecha de nacimiento"><input class="fld" id="bHor" type="time" aria-label="Hora de nacimiento"></div><input class="fld" id="bLug" style="margin-top:10px" placeholder="Lugar de nacimiento (ciudad)" aria-label="Lugar de nacimiento"><p class="hint">Si no sabés la hora exacta, fijate en la partida de nacimiento.</p></div>`;
+    if(multi)h+=`<div id="bPreg"><label class="lbl" for="bQ">¿Sobre qué querés preguntar? <span style="font-weight:400">(opcional)</span></label><input class="fld" id="bQ" placeholder="Ej: trabajo, un vínculo, una decisión"></div>`;
     if(s.grupo)h+=`<label class="lbl" for="bG">¿Cuántas van a ser?</label><input class="fld" id="bG" type="number" min="3" max="15" value="6">`;
-    if(s.id!=="inf"&&!s.grupo)h+=`<span class="lbl">¿Cómo preferís?</span><div class="chips" id="bMod"><button class="chip" aria-pressed="true">Videollamada</button><button class="chip" aria-pressed="false">Presencial</button></div>`;
     if(s.id!=="inf")h+=`<span class="lbl">Elegí el día</span><div class="chips" id="bDay">${days.map((d,i)=>`<button class="chip" data-i="${i}" aria-pressed="false">${d.toLocaleDateString("es-AR",{weekday:"short",day:"numeric"}).replace(",","")}</button>`).join("")}</div>
     <span class="lbl">Horario</span><div class="chips" id="bHr"><p class="hint" style="margin:0">Primero elegí el día.</p></div>`;
     else h+=`<p class="hint" style="margin-top:16px">La lámina se pinta a mano: te aviso por WhatsApp cuando está lista.</p>`;
   }
-  h+=`<p class="err" id="bErr" hidden></p><p class="hint">${s.gift||s.id==="inf"?"Precio de ejemplo.":"Los horarios tachados ya están reservados. Precios de ejemplo."}</p>`;
+  h+=`<p class="err" id="bErr" hidden></p><p class="hint">${s.gift||s.id==="inf"?"Precio de ejemplo.":"Es por videollamada. Los horarios tachados ya están reservados. Precios de ejemplo."}</p>`;
   $("#drC").innerHTML=h;$("#drF").hidden=false;$("#drGo").textContent=s.gift?"Pagar gift card":"Pagar seña";
-  setPrice();if(s.gift)drawGift();$("#dr").classList.add("on");document.body.style.overflow="hidden";setTimeout(()=>$("#bNom")?.focus(),50);
+  refresh();$("#dr").classList.add("on");document.body.style.overflow="hidden";
 }
-function setPrice(){const s=R.s;let p=R.price;if(s.gift){const g=$("#gOpt [aria-pressed=true]");p=g.dataset.g==="rs"?SV[1].p:SV[0].opts[+g.dataset.g][3];R.price=p;}
-  if(s.grupo){p=s.p+Math.max(0,(+($("#bG")?.value||6)-6))*CFG.precios.encExtra;R.price=p;}
-  $("#drF .tot span").textContent=s.gift?"Total":"Seña para reservar";$("#drP").textContent=fmt(s.gift?p:p*DEP);}
-$("#drC").addEventListener("click",e=>{const c=e.target.closest(".chip");if(!c||c.disabled)return;const g=c.parentElement;g.querySelectorAll(".chip").forEach(x=>x.setAttribute("aria-pressed",x===c));if(g.id==="gOpt")setTimeout(drawGift);
-  if(g.id==="bDay"){R.day=days[+c.dataset.i];R.hr=null;$("#bHr").innerHTML=CS.horasDia(CS.ymd(R.day)).map(x=>`<button class="chip" data-h="${x.h}" aria-pressed="false" ${x.ocupado?"disabled":""}>${x.h}</button>`).join("");}if(g.id==="bHr")R.hr=c.dataset.h;if(g.id==="bMod")R.mod=c.textContent;setPrice();});
-$("#drC").addEventListener("input",e=>{if(e.target.id==="bG")setPrice();if(R.s&&R.s.gift)drawGift();});
-$("#drC").addEventListener("change",e=>{if(e.target.name!=="dlec")return;R.opt=R.s.opts[+e.target.value];R.price=R.opt[3];$("#drT").textContent=R.opt[0];$("#drS").textContent=`${R.s.t} · ${R.opt[2]}`;setPrice();});
+function refresh(){const s=R.s;
+  if(R.multi){R.items=selItems();R.price=R.items.reduce((a,i)=>a+i.price,0);
+    const ids=R.items.map(i=>i.s.id);
+    if($("#tOpts"))$("#tOpts").hidden=!ids.includes("tarot");
+    if($("#bNac"))$("#bNac").hidden=!ids.some(x=>x==="cn"||x==="rs");
+    if($("#bPreg"))$("#bPreg").hidden=!ids.some(x=>x==="tarot"||x==="tirada");
+    $("#drT").textContent=s.gift?"Gift card":R.items.length>1?"Tu reserva":nomItem(R.items[0]);
+    $("#drS").textContent=s.gift?R.items.map(nomItem).join(" + "):R.items.length>1?R.items.map(nomItem).join(" + "):(R.items[0].s.opts?R.items[0].s.opts[R.items[0].opt][2]+" · por videollamada":"Por videollamada");
+  }else{$("#drT").textContent=s.t;$("#drS").textContent=s.id==="inf"?"Lámina en acuarela":"Por videollamada";}
+  if(s.grupo)R.price=s.p+Math.max(0,(+($("#bG")?.value||6)-6))*CFG.precios.encExtra;
+  $("#drF .tot span").textContent=s.gift?"Total":"Seña para reservar";$("#drP").textContent=fmt(s.gift?R.price:R.price*DEP);
+  if(s.gift)drawGift();}
+$("#drC").addEventListener("click",e=>{const c=e.target.closest(".chip");if(!c||c.disabled)return;const g=c.parentElement;g.querySelectorAll(".chip").forEach(x=>x.setAttribute("aria-pressed",x===c));
+  if(g.id==="bDay"){R.day=days[+c.dataset.i];R.hr=null;$("#bHr").innerHTML=CS.horasDia(CS.ymd(R.day)).map(x=>`<button class="chip" data-h="${x.h}" aria-pressed="false" ${x.ocupado?"disabled":""}>${x.h}</button>`).join("");}
+  if(g.id==="bHr")R.hr=c.dataset.h;});
+$("#drC").addEventListener("input",e=>{if(e.target.id==="bG")refresh();if(R.s&&R.s.gift)drawGift();});
+$("#drC").addEventListener("change",e=>{const t=e.target;if(t.closest("#bSel")){if(t.type==="checkbox"&&!document.querySelector("#bSel .pk input:checked"))t.checked=true;refresh();}});
 const closeDr=()=>{$("#dr").classList.remove("on");document.body.style.overflow="";};
 document.querySelectorAll("[data-close]").forEach(b=>b.onclick=closeDr);addEventListener("keydown",e=>{if(e.key==="Escape")closeDr();});
 document.addEventListener("click",e=>{const b=e.target.closest("[data-book]");if(b)openBook(b.dataset.book);});
@@ -504,28 +530,27 @@ const moonSvg=`<svg class="m" viewBox="0 0 84 84" aria-hidden="true"><circle cx=
 $("#drGo").onclick=()=>{const s=R.s,nom=($("#bNom")?.value||"").trim();let er="";
   if(!nom)er="Escribí tu nombre.";else if(s.gift&&!$("#gPara").value.trim())er="Escribí para quién es.";else if(!s.gift&&s.id!=="inf"&&(!R.day||!R.hr))er="Elegí el día y el horario.";
   if(er){$("#bErr").textContent=er;$("#bErr").hidden=false;return;}
-  let txt,wa;
-  if(s.gift){const para=$("#gPara").value.trim(),msg=$("#gMsg").value.trim();const what=$("#gOpt [aria-pressed=true]").textContent;
-    const nota=$("#gNota").value.trim();const card={t:what,d:msg,para,de:nom};const gsel=$("#gOpt [aria-pressed=true]").dataset.g;
-    const cod=CS.code();CS.add(CS.K.gift,{code:cod,tipo:gsel==="rs"?"rs":"tarot",opt:gsel==="rs"?null:+gsel,precio:R.price,para,de:nom,dedic:msg,nota,vendida:CS.ymd(new Date()),usada:false});$("#gcBox").innerHTML=gcHTML(card);
-    txt=`La gift card de ${esc(what)} para ${esc(para)} está lista. Así le llega por WhatsApp:`;wa=`🎁 Gift card vendida: ${esc(what)} para ${esc(para)}, de ${esc(nom)}. Pagada ${fmt(R.price)}.`;
-    $("#drC").innerHTML=`<div class="ok"><h3>¡Gift card lista!</h3><p>${txt}</p>${gcHTML(card)}${nota?`<div class="msg"><small>Mensaje de ${esc(nom)}</small>${esc(nota)}</div>`:""}<div class="wa"><small>Así le avisa a Ciela por WhatsApp</small>${wa}</div><p class="hint">Código de canje: <b>${cod}</b>. Es un boceto: no se cobró ni se envió nada.</p></div>`;$("#drF").hidden=true;return;}
-  else{const when=s.id==="inf"?"":`el ${R.day.toLocaleDateString("es-AR",{weekday:"long",day:"numeric",month:"numeric"})} a las ${R.hr}`;
-    const nac=s.nac&&$("#bFec").value?{fecha:$("#bFec").value,hora:$("#bHor").value||"",lugar:$("#bLug").value.trim()}:null,tel=($("#bTel")?.value||"").trim();
-    if(s.id==="inf")CS.add(CS.K.acu,{id:CS.nid("a"),nombre:nom,nene:"",nac,etapa:0,precio:R.price,pagado:Math.round(R.price*DEP),creado:CS.ymd(new Date()),tel});
-    else CS.add(CS.K.res,{id:CS.nid("r"),tipo:s.id,opt:R.opt?s.opts.indexOf(R.opt):null,fecha:CS.ymd(R.day),hora:R.hr,nombre:nom,tel,mod:s.grupo?"En su casa":R.mod,grupo:s.grupo?+($("#bG").value||6):null,precio:R.price,pagado:Math.round(R.price*DEP),estado:"confirmada",origen:"web",nac,nota:($("#bQ")?.value||"").trim(),creado:CS.ymd(new Date())});
-    const name=R.opt?R.opt[0]:s.t;txt=`${esc(name)}${when?" "+when:""}${s.id!=="inf"&&!s.grupo?" por "+R.mod.toLowerCase():""}. Te llega la confirmación por WhatsApp.`;
-    wa=`✨ Nueva reserva: ${esc(name)} · ${esc(nom)}${when?" · "+when:""}. Seña de ${fmt(R.price*DEP)} pagada.${s.nac&&$("#bFec").value?` Nacimiento: ${$("#bFec").value.split("-").reverse().join("/")} ${$("#bHor").value||""} ${esc($("#bLug").value)}`:""}`;}
-  $("#drC").innerHTML=`<div class="ok">${moonSvg}<h3>${s.gift?"¡Gift card lista!":"¡Reservado!"}</h3><p>${txt}</p><div class="wa"><small>Así le llega a Ciela por WhatsApp</small>${wa}</div><p class="hint">Es un boceto: no se cobró nada.</p></div>`;$("#drF").hidden=true;};
+  const items=R.multi?R.items.map(i=>({tipo:i.s.id,opt:i.opt})):null,names=R.multi?R.items.map(nomItem).join(" + "):s.t;
+  if(s.gift){const para=$("#gPara").value.trim(),msg=$("#gMsg").value.trim(),nota=$("#gNota").value.trim();const card={t:names,d:msg,para,de:nom};
+    const cod=CS.code();CS.add(CS.K.gift,{code:cod,tipo:items[0].tipo,opt:items[0].opt,items,precio:R.price,para,de:nom,dedic:msg,nota,vendida:CS.ymd(new Date()),usada:false});
+    $("#gcBox").innerHTML=gcHTML(card);
+    const wa=`🎁 Gift card vendida: ${esc(names)} para ${esc(para)}, de ${esc(nom)}. Pagada ${fmt(R.price)}.`;
+    $("#drC").innerHTML=`<div class="ok"><h3>¡Gift card lista!</h3><p>Así le llega a ${esc(para)} por WhatsApp:</p>${gcHTML(card)}${nota?`<div class="msg"><small>Mensaje de ${esc(nom)}</small>${esc(nota)}</div>`:""}<div class="wa"><small>Así le avisa a Ciela por WhatsApp</small>${wa}</div><p class="hint">Código de canje: <b>${cod}</b>. Es un boceto: no se cobró ni se envió nada.</p></div>`;$("#drF").hidden=true;return;}
+  const when=s.id==="inf"?"":`el ${R.day.toLocaleDateString("es-AR",{weekday:"long",day:"numeric",month:"numeric"})} a las ${R.hr}`;
+  const nac=$("#bFec")&&$("#bFec").value&&!($("#bNac")&&$("#bNac").hidden)?{fecha:$("#bFec").value,hora:$("#bHor").value||"",lugar:$("#bLug").value.trim()}:null,tel=($("#bTel")?.value||"").trim();
+  if(s.id==="inf")CS.add(CS.K.acu,{id:CS.nid("a"),nombre:nom,nene:"",nac,etapa:0,precio:R.price,pagado:Math.round(R.price*DEP),creado:CS.ymd(new Date()),tel});
+  else CS.add(CS.K.res,{id:CS.nid("r"),tipo:items?items[0].tipo:s.id,opt:items?items[0].opt:null,combo:items&&items.length>1?items:null,fecha:CS.ymd(R.day),hora:R.hr,nombre:nom,tel,mod:"Videollamada",grupo:s.grupo?+($("#bG").value||6):null,precio:R.price,pagado:Math.round(R.price*DEP),estado:"confirmada",origen:"web",nac,nota:($("#bQ")?.value||"").trim(),creado:CS.ymd(new Date())});
+  const txt=`${esc(names)}${when?" "+when:""}${s.id!=="inf"?" por videollamada":""}. Te llega la confirmación por WhatsApp.`;
+  const wa=`✨ Nueva reserva: ${esc(names)} · ${esc(nom)}${when?" · "+when:""}. Seña de ${fmt(R.price*DEP)} pagada.${nac?` Nacimiento: ${nac.fecha.split("-").reverse().join("/")} ${nac.hora} ${esc(nac.lugar)}`:""}`;
+  $("#drC").innerHTML=`<div class="ok">${moonSvg}<h3>¡Reservado!</h3><p>${txt}</p><div class="wa"><small>Así le llega a Ciela por WhatsApp</small>${wa}</div><p class="hint">Es un boceto: no se cobró nada.</p></div>`;$("#drF").hidden=true;};
 
-/* ---------- gift card ---------- */
-const GC_EJ={t:"Lectura de Tarot",d:"Gracias por acompañarme siempre, este regalo es para vos",para:"vos",de:""};
-const gcSvg='<svg class="s" viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="70" fill="none" stroke="#e9e6dc" stroke-width="1"/><circle cx="100" cy="100" r="92" fill="none" stroke="#e9e6dc" stroke-width=".6" stroke-dasharray="2 6"/><path d="M118 62a40 40 0 1 0 0 76a32 32 0 1 1 0-76z" fill="#e9e6dc"/></svg>';
-function gcHTML(c,ph){ph=ph||{};
-  const d=c.d?esc(c.d):`<span>${esc(GC_EJ.d)}</span>`;
-  return `<div class="gc">${gcSvg}<div class="tp"><small>Gift card · Ciela</small></div><div class="t">${esc(c.t)}</div><div class="d${c.d?"":" ph"}">“${c.d?esc(c.d):esc(GC_EJ.d)}”</div><div class="w"><span>Para <b class="${c.para?"":"ph"}">${esc(c.para||"…")}</b></span>${c.de||ph.de?`<span>De <b class="${c.de?"":"ph"}">${esc(c.de||"…")}</b></span>`:""}</div></div>`;}
-function drawGift(){const g=$("#gOpt [aria-pressed=true]");if(!g||!$("#gcLive"))return;
-  $("#gcLive").innerHTML=gcHTML({t:g.textContent,d:$("#gMsg").value.trim(),para:$("#gPara").value.trim(),de:$("#bNom").value.trim()},{de:1});}
+/* ---------- gift card (diseño de Ciela en Canva) ---------- */
+const GC_EJ={t:"Lectura de Tarot",d:"Gracias por acompañarme siempre, este regalo es para vos",para:"Mi amigo invisible",de:"Tu amigo invisible"};
+function gcHTML(c,live){
+  const t=c.t||"…",ph=v=>v?"":" ph";
+  return `<div class="gc"><img src="img/giftcard.jpg" alt="" aria-hidden="true"><div class="gv${t.length>34?" l":""}"><span>Vale por una <u>${esc(t)}</u> con @ciela.astroytarot</span></div><div class="gn gp${ph(c.para)}">${esc(c.para||(live?"…":""))}</div><div class="gn gd${ph(c.de)}">${esc(c.de||(live?"…":""))}</div>${c.d||live?`<div class="gdd${ph(c.d)}">“${esc(c.d||"Gracias por acompañarme siempre")}”</div>`:""}<span class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Gift card de Ciela: vale por una ${esc(t)}${c.para?", para "+esc(c.para):""}${c.de?", de "+esc(c.de):""}</span></div>`;}
+function drawGift(){if(!$("#gcLive"))return;
+  $("#gcLive").innerHTML=gcHTML({t:(R.items||[]).map(nomItem).join(" + "),d:$("#gMsg").value.trim(),para:$("#gPara").value.trim(),de:$("#bNom").value.trim()},true);}
 $("#gcBox").innerHTML=gcHTML(GC_EJ);
 
 /* ---------- blog ---------- */
