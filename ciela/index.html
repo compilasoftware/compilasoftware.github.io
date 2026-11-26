@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Ciela · Astrología y Tarot</title>
-<meta name="description" content="Boceto de Compila para Ciela, Graciela Pastore: lecturas de tarot, revolución solar, cartas natales, blog y estudio de historias.">
+<meta name="description" content="Boceto de Compila para Ciela, Graciela Pastore: lecturas de tarot, revolución solar, cartas natales y blog.">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#1d2742">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -172,37 +172,6 @@ h2.T{font-size:clamp(30px,4.4vw,46px)}
 .news b{font-family:var(--serif);font-weight:500;font-size:26px;display:block;line-height:1.15}
 .news span{color:#c6cad8;font-size:15.5px}
 
-/* estudio de historias */
-.studio{display:grid;grid-template-columns:minmax(0,1fr) 380px;grid-template-areas:"a p" "b p" "b d";grid-template-rows:auto auto 1fr;column-gap:40px;row-gap:16px;margin-top:46px;align-items:start}
-.cA{grid-area:a}.cB{grid-area:b}.prev{grid-area:p}.acts{grid-area:d}
-
-.ctrl{background:var(--blanco);border-radius:24px;padding:24px;border:1px solid #c7c8ce}
-.tpls{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
-@media (max-width:520px){.tpls{grid-template-columns:repeat(3,1fr)}}
-.tp{border:1.5px solid var(--linea);background:#fff;border-radius:14px;padding:10px 4px 8px;display:grid;justify-items:center;gap:4px;font-size:13.5px;font-weight:600}
-.tp i{font-style:normal;font-family:var(--sym);font-size:24px;line-height:1}
-.tp[aria-pressed="true"]{border-color:var(--noche);background:var(--noche);color:#fff}
-textarea.fld{min-height:120px;resize:vertical;line-height:1.5}
-.count{font-size:13px;color:var(--gris);text-align:right;margin-top:4px}
-.up{display:flex;gap:10px;align-items:center;border:1.5px dashed var(--linea);border-radius:14px;padding:12px 14px;cursor:pointer;background:#fff}
-.up input{display:none}
-.up b{font-size:15.5px}.up small{display:block;color:var(--gris);font-size:13.5px}
-.prev{position:sticky;top:84px}
-.phone{background:#0e1220;border-radius:40px;padding:10px;box-shadow:0 30px 60px -28px rgba(29,39,66,.7);max-width:340px;margin:0 auto;position:relative}
-.phone canvas{width:100%;aspect-ratio:9/16;border-radius:31px;display:block;background:var(--noche)}
-.safe{position:absolute;inset:10px;border-radius:31px;pointer-events:none;display:none}
-.safe::before,.safe::after{content:"";position:absolute;left:0;right:0;background:repeating-linear-gradient(-45deg,rgba(220,70,70,.22) 0 8px,rgba(220,70,70,.1) 8px 16px)}
-.safe::before{top:0;height:13%;border-radius:31px 31px 0 0}
-.safe::after{bottom:0;height:17.5%;border-radius:0 0 31px 31px}
-.phone.showsafe .safe{display:block}
-.pact{display:grid;gap:8px;margin:18px auto 0;max-width:340px}
-.tg{display:flex;align-items:center;gap:8px;justify-content:center;font-size:14.5px;color:var(--gris);margin-top:10px}
-.tg input{accent-color:var(--noche)}
-.before{display:grid;grid-template-columns:110px 1fr;gap:16px;align-items:center;margin-top:20px;background:var(--niebla);border-radius:18px;padding:14px}
-.before img{border-radius:10px}
-.before p{margin:0;font-size:15px;color:var(--gris)}
-.before b{color:var(--tinta)}
-
 /* gift + escuela */
 .gift{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
 @media (max-width:820px){.gift{grid-template-columns:1fr}}
@@ -223,6 +192,20 @@ footer b{color:#fff;font-family:var(--serif);font-size:22px;letter-spacing:.14em
 footer a{color:var(--luz)}
 footer .cr{font-size:13.5px;color:#8f97ad;max-width:56em}
 @media (max-width:900px){.studio{grid-template-columns:1fr;grid-template-areas:"a" "p" "b" "d";grid-template-rows:auto;row-gap:14px}.prev{position:static}.phone{max-width:230px;border-radius:30px;padding:8px}.phone canvas{border-radius:23px}.ctrl{padding:18px}.studio .tpls{grid-template-columns:repeat(5,1fr);gap:6px}.studio .tp{font-size:11.5px;padding:9px 2px 7px}.studio .tp i{font-size:20px}.before{display:none}}
+
+/* celu: todo sigue ahí, pero se desliza de costado en vez de apilarse */
+.swipe{display:none}
+@media (max-width:600px){
+.band{padding:58px 0}
+.svs,.posts{display:flex;align-items:flex-start;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin:30px -20px 0;padding:2px 20px 8px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.svs::-webkit-scrollbar,.posts::-webkit-scrollbar{display:none}
+.svs>.sv,.posts>.post{flex:0 0 86%;scroll-snap-align:center;min-width:0}
+.lect label:not(:has(input:checked)) span{display:none}
+.swipe{display:block;text-align:center;font-size:14px;color:var(--gris);margin:12px 0 0}
+.noche .swipe{color:#aeb4c6}
+.acq figure{max-width:210px}
+.ask{margin-top:34px}
+}
 </style>
 </head>
 <body>
@@ -230,7 +213,7 @@ footer .cr{font-size:13.5px;color:#8f97ad;max-width:56em}
 <header class="top">
   <div class="wrap">
     <a class="mark" href="#"><b>Ciela</b><small>Astrología y Tarot</small></a>
-    <nav aria-label="Secciones"><a href="#servicios">Lecturas</a><a href="#cielo">El cielo</a><a href="#regalos">Regalos</a><a href="#historias">Historias</a></nav>
+    <nav aria-label="Secciones"><a href="#servicios">Lecturas</a><a href="#cielo">El cielo</a><a href="#regalos">Regalos</a></nav>
     <a class="cta" href="#servicios">Reservar</a>
   </div>
 </header>
@@ -257,6 +240,7 @@ footer .cr{font-size:13.5px;color:#8f97ad;max-width:56em}
     <div class="c"><h2 class="T">Lecturas y consultas</h2><div class="orn">☾</div>
     <p class="sub">Elegí la consulta, completá tus datos y reservá el día. Por videollamada o en persona.</p></div>
     <div class="svs" id="svs"></div>
+    <p class="swipe">Deslizá para ver las 5 consultas →</p>
   </div>
 </section>
 
@@ -282,6 +266,7 @@ footer .cr{font-size:13.5px;color:#8f97ad;max-width:56em}
     <div class="c"><h2 class="T">El cielo de la semana</h2><div class="orn">✧</div>
     <p class="sub">Lunas, temporadas y tránsitos explicados simple. Para quienes aman la astrología y para mis alumnas.</p></div>
     <div class="posts" id="posts"></div>
+    <p class="swipe">Deslizá para ver más →</p>
     <div class="ask">
       <div>
         <h3>Preguntale al cielo</h3>
@@ -310,52 +295,6 @@ footer .cr{font-size:13.5px;color:#8f97ad;max-width:56em}
       <svg class="s" viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="70" fill="none" stroke="#e9e6dc" stroke-width="1"/><circle cx="100" cy="100" r="92" fill="none" stroke="#e9e6dc" stroke-width=".6" stroke-dasharray="2 6"/><path d="M118 62a40 40 0 1 0 0 76a32 32 0 1 1 0-76z" fill="#e9e6dc"/></svg>
       <small>Gift card · Ciela</small>
       <div><b id="gcT">Lectura de Tarot</b><div class="to" id="gcTo">Para vos, con cariño</div></div>
-    </div>
-  </div>
-</section>
-
-<section class="band niebla" id="historias">
-  <div class="wrap">
-    <div class="c"><h2 class="T">Tu estudio de historias</h2><div class="orn">☾</div>
-    <p class="sub">Elegís una plantilla, escribís tu texto y la historia se arma sola: la letra se acomoda al tamaño justo y nunca queda tapada por la foto ni por los botones de Instagram.</p></div>
-    <div class="studio">
-      <div class="ctrl cA">
-        <span class="lbl">1. Elegí la plantilla</span>
-        <div class="tpls" id="tpls"></div>
-        <div id="fLuna">
-          <div class="g2">
-            <div><label class="lbl" for="sFase">Fase</label><select class="fld" id="sFase"><option value="nueva">Luna nueva</option><option value="llena" selected>Luna llena</option><option value="creciente">Cuarto creciente</option><option value="menguante">Cuarto menguante</option></select></div>
-            <div><label class="lbl" for="sSig">Signo</label><select class="fld" id="sSig"></select></div>
-          </div>
-        </div>
-        <div id="fFoto" hidden>
-          <span class="lbl">Tu foto</span>
-          <label class="up"><input type="file" id="ph" accept="image/*"><span style="font-size:24px" aria-hidden="true">🖼</span><span><b id="phN">Subir una foto</b><small>La foto va arriba y el texto abajo, en su propio espacio</small></span></label>
-        </div>
-      </div>
-      <div class="ctrl cB">
-        <label class="lbl" for="tTit">2. Título</label>
-        <input class="fld" id="tTit" maxlength="60">
-        <label class="lbl" for="tTxt">3. Tu texto</label>
-        <textarea class="fld" id="tTxt" maxlength="420"></textarea>
-        <div class="count" id="cnt"></div>
-        <span class="lbl">4. Fondo</span>
-        <div class="chips" id="bgs"><button class="chip" data-bg="noche" aria-pressed="true">Azul noche</button><button class="chip" data-bg="perla" aria-pressed="false">Gris perla</button></div>
-        <div class="before">
-          <img src="img/historia-vieja.jpg" alt="Historia anterior con el texto encima de una foto del mar" loading="lazy">
-          <p><b>Antes:</b> el texto arriba de la foto se pierde en el cielo. <b>Ahora:</b> la plantilla le da su lugar y elige el tamaño de letra sola.</p>
-        </div>
-      </div>
-      <div class="prev">
-        <div class="phone" id="phone"><canvas id="cv" width="1080" height="1920" aria-label="Vista previa de la historia"></canvas><div class="safe" aria-hidden="true"></div></div>
-      </div>
-      <div class="acts"><div class="pact">
-          <button class="btn n" id="dl">Descargar la historia</button>
-          <button class="btn o" id="sh" style="color:var(--noche);box-shadow:inset 0 0 0 1.5px var(--noche)" hidden>Compartir a Instagram</button>
-        </div>
-        <label class="tg"><input type="checkbox" id="sf">Mostrar dónde van los botones de Instagram</label>
-        
-      </div>
     </div>
   </div>
 </section>
@@ -504,87 +443,6 @@ const drawQ=()=>{$("#qs").innerHTML=QS.map(q=>`<div class="q${q[3]?" new":""}"><
 $("#qf").onsubmit=e=>{e.preventDefault();const v=$("#qi").value.trim();if(!v)return;QS.unshift([v,"Vos",null,true]);$("#qi").value="";drawQ();};
 $("#sub").onclick=e=>{e.target.textContent="¡Listo! Te llega la próxima luna";e.target.disabled=true;};
 
-/* ---------- estudio de historias ---------- */
-const TP=[
-  {id:"luna",n:"Luna",i:"☾",t:"Luna llena en Géminis",x:"Podemos tomar conciencia de nuestras ideas y nuestras palabras. Una excelente oportunidad para soltar preconceptos y comunicarnos desde lo más auténtico."},
-  {id:"temp",n:"Temporada",i:"♐",t:"Empezó la temporada Sagitario",x:"Llega el fuego que busca sentido: viajes, estudio y ganas de ir más allá. ¿Hacia dónde querés apuntar tu flecha?"},
-  {id:"frase",n:"Frase",i:"✦",t:"",x:"El cielo no decide por vos: te muestra el clima para que elijas cómo navegar."},
-  {id:"foto",n:"Con foto",i:"▣",t:"Noche de Tarot",x:"Gracias por esta noche mágica, por tantas preguntas y lecturas hermosas. ¡Nos vemos en la próxima!"},
-  {id:"serv",n:"Servicio",i:"☉",t:"Revolución Solar",x:"Cada cumpleaños tu Sol ilumina un escenario nuevo de tu carta. Reservá tu lectura y conocé qué trae tu año."}
-];
-const ST={tp:TP[0],bg:"noche",img:null};
-$("#tpls").innerHTML=TP.map((t,i)=>`<button class="tp" data-i="${i}" aria-pressed="${i===0}"><i>${t.i}</i>${t.n}</button>`).join("");
-$("#sSig").innerHTML=SIG.map(s=>`<option ${s[0]==="Géminis"?"selected":""}>${s[0]}</option>`).join("");
-const fill=()=>{$("#tTit").value=ST.tp.t;$("#tTxt").value=ST.tp.x;};
-$("#tpls").onclick=e=>{const b=e.target.closest(".tp");if(!b)return;ST.tp=TP[+b.dataset.i];document.querySelectorAll(".tp").forEach(x=>x.setAttribute("aria-pressed",x===b));
-  $("#fLuna").hidden=!["luna","temp"].includes(ST.tp.id);$("#sFase").parentElement.hidden=ST.tp.id!=="luna";$("#fFoto").hidden=ST.tp.id!=="foto";
-  if(ST.tp.id==="temp")$("#sSig").value="Sagitario";if(ST.tp.id==="luna")$("#sSig").value="Géminis";fill();draw();};
-$("#bgs").onclick=e=>{const b=e.target.closest(".chip");if(!b)return;ST.bg=b.dataset.bg;document.querySelectorAll("#bgs .chip").forEach(x=>x.setAttribute("aria-pressed",x===b));draw();};
-["tTit","tTxt"].forEach(id=>$("#"+id).addEventListener("input",draw));
-$("#sFase").onchange=()=>{const f=$("#sFase").selectedOptions[0].text;$("#tTit").value=`${f.replace("Cuarto ","Luna ")} en ${$("#sSig").value}`;draw();};
-$("#sSig").onchange=()=>{const s=$("#sSig").value;if(ST.tp.id==="temp")$("#tTit").value=`Empezó la temporada ${s}`;else $("#tTit").value=`${$("#sFase").selectedOptions[0].text.replace("Cuarto ","Luna ")} en ${s}`;draw();};
-$("#ph").onchange=e=>{const f=e.target.files[0];if(!f)return;const im=new Image();im.onload=()=>{ST.img=im;$("#phN").textContent=f.name.length>28?f.name.slice(0,26)+"…":f.name;draw();};im.src=URL.createObjectURL(f);};
-$("#sf").onchange=e=>$("#phone").classList.toggle("showsafe",e.target.checked);
-
-const cv=$("#cv"),X=cv.getContext("2d");
-if(!X.roundRect)CanvasRenderingContext2D.prototype.roundRect=function(x,y,w,h,r){this.moveTo(x+r,y);this.arcTo(x+w,y,x+w,y+h,r);this.arcTo(x+w,y+h,x,y+h,r);this.arcTo(x,y+h,x,y,r);this.arcTo(x,y,x+w,y,r);this.closePath();};
-const W=1080,H=1920,SAFE_T=250,SAFE_B=H-340,PAD=96;
-function wrap(t,font,maxW){X.font=font;const out=[];for(const para of t.split(/\n/)){const w=para.split(/\s+/).filter(Boolean);let l="";for(const word of w){const tt=l?l+" "+word:word;if(X.measureText(tt).width>maxW&&l){out.push(l);l=word;}else l=tt;}out.push(l);}return out;}
-function fit(t,fam,weight,maxW,maxH,big,small,lh,upper,track){
-  t=upper?t.toUpperCase():t;
-  for(let s=big;s>=small;s-=2){const f=`${weight} ${s}px ${fam}`;const tr=track?`${Math.round(s*track)}px`:"0px";X.letterSpacing=tr;const ls=wrap(t,f,maxW);if(ls.length*s*lh<=maxH)return{f,s,ls,lh,track:tr};}
-  const f=`${weight} ${small}px ${fam}`;const tr=track?`${Math.round(small*track)}px`:"0px";X.letterSpacing=tr;return{f,s:small,ls:wrap(t,f,maxW),lh,track:tr};}
-function text(b,x,y,color,align="center"){X.font=b.f;X.fillStyle=color;X.textAlign=align;X.textBaseline="top";X.letterSpacing=b.track||"0px";b.ls.forEach((l,i)=>X.fillText(l,x,y+i*b.s*b.lh));return y+b.ls.length*b.s*b.lh;}
-function ornament(y,c){X.save();X.strokeStyle=c;X.fillStyle=c;X.lineWidth=2;X.beginPath();X.moveTo(W/2-170,y);X.lineTo(W/2-30,y);X.moveTo(W/2+30,y);X.lineTo(W/2+170,y);X.stroke();X.beginPath();X.arc(W/2,y,7,0,7);X.fill();X.restore();}
-function starfield(c){let s=3;const r=()=>(s=(s*16807)%2147483647)/2147483647;X.fillStyle=c;for(let i=0;i<160;i++){X.globalAlpha=.2+r()*.7;X.beginPath();X.arc(r()*W,r()*H,r()<.08?2.6:1.3,0,7);X.fill();}X.globalAlpha=1;}
-function signGlyph(name,y,size,c){const g=SIG.find(s=>s[0]===name)[1]+"︎";X.font=`${size}px "Noto Sans Symbols"`;X.fillStyle=c;X.textAlign="center";X.textBaseline="middle";X.letterSpacing="0px";X.fillText(g,W/2,y);}
-function draw(){
-  const dark=ST.bg==="noche";const BG=dark?"#1d2742":"#d4d4d7",INK=dark?"#f1efe8":"#1d2742",SOFT=dark?"#c6cad8":"#3a4462",ACC=dark?"#c9b27c":"#6b5a33";
-  X.clearRect(0,0,W,H);X.fillStyle=BG;X.fillRect(0,0,W,H);if(dark)starfield("#e9e6dc");
-  const tit=$("#tTit").value.trim(),txt=$("#tTxt").value.trim();const id=ST.tp.id;
-  $("#cnt").textContent=`${txt.length}/420 · la letra se achica sola si escribís más`;
-  let y=SAFE_T+40;
-  // firma
-  const firm=()=>{X.font='600 34px "Cormorant Garamond"';X.letterSpacing="10px";X.fillStyle=SOFT;X.textAlign="center";X.textBaseline="alphabetic";X.fillText("CIELA · ASTROLOGÍA Y TAROT",W/2+5,SAFE_B-10);X.letterSpacing="0px";};
-  const AV=SAFE_B-SAFE_T-110;
-  if(id==="luna"||id==="temp"){
-    const T=fit(tit||" ",'"Cormorant Garamond"',500,W-2*PAD,330,104,60,1.12,true,.06);const Th=T.ls.length*T.s*T.lh;
-    let area,B;for(area of (id==="luna"?[600,540,480,420,360,300]:[480,420,360,300])){const room=AV-(Th+90+area+70);B=fit(txt||" ",'"Cormorant Garamond"',500,W-2*PAD-40,room,60,46,1.32,false);if(B.ls.length*B.s*B.lh<=room)break;}
-    if(B.ls.length*B.s*B.lh>AV-(Th+90+area+70))B=fit(txt||" ",'"Cormorant Garamond"',500,W-2*PAD-40,AV-(Th+90+area+70),46,34,1.32,false);
-    const tot=Th+90+area+70+B.ls.length*B.s*B.lh;y=SAFE_T+Math.max(0,(AV-tot)/2);
-    y=text(T,W/2,y,INK);ornament(y+44,ACC);
-    const cy=y+90+area/2;
-    if(id==="luna"){const f=$("#sFase").value;const ill={nueva:0,llena:1,creciente:.5,menguante:.5}[f];drawMoon(X,W/2,cy,area/2-10,ill,f!=="menguante",dark);if(f==="nueva"){X.save();X.beginPath();X.arc(W/2,cy,area/2-10,0,7);X.strokeStyle=ACC;X.lineWidth=3;X.stroke();X.restore();}}
-    else{X.save();X.beginPath();X.arc(W/2,cy,area/2-6,0,7);X.strokeStyle=ACC;X.lineWidth=2;X.setLineDash([3,12]);X.stroke();X.restore();signGlyph($("#sSig").value,cy,260,INK);}
-    y=cy+area/2+70;text(B,W/2,y,SOFT);firm();
-  }else if(id==="frase"){
-    X.font='italic 500 260px "Cormorant Garamond"';X.fillStyle=ACC;X.textAlign="center";X.textBaseline="top";X.fillText("“",W/2,SAFE_T+60);
-    const B=fit(txt||" ",'"Cormorant Garamond"',"italic 500",W-2*PAD-30,SAFE_B-SAFE_T-520,92,46,1.22,false);const h=B.ls.length*B.s*B.lh;const by=(SAFE_T+SAFE_B)/2-h/2+40;text(B,W/2,by,INK);ornament(by+h+60,ACC);
-    if(tit){const T=fit(tit,"Figtree",600,W-2*PAD,120,40,28,1.3,false);text(T,W/2,by+h+100,SOFT);}firm();
-  }else if(id==="foto"){
-    const T0=fit(tit||" ",'"Cormorant Garamond"',500,W-2*PAD,200,88,54,1.12,true,.06),Th=T0.ls.length*T0.s*T0.lh;let phh,B0;
-    for(phh of [880,780,680,580,500]){const room=AV+40-(phh+70+Th+80);B0=fit(txt||" ",'"Cormorant Garamond"',500,W-2*PAD-30,room,56,44,1.3,false);if(B0.ls.length*B0.s*B0.lh<=room)break;}
-    const tot=phh+70+Th+80+B0.ls.length*B0.s*B0.lh;
-    const ph={x:PAD-36,y:SAFE_T-40+Math.max(0,(AV+40-tot)/2),w:W-2*(PAD-36),h:phh};X.save();X.beginPath();X.roundRect(ph.x,ph.y,ph.w,ph.h,36);X.clip();
-    if(ST.img){const im=ST.img,s=Math.max(ph.w/im.width,ph.h/im.height);X.drawImage(im,ph.x+(ph.w-im.width*s)/2,ph.y+(ph.h-im.height*s)/2,im.width*s,im.height*s);}
-    else{X.fillStyle=dark?"#27324f":"#c2c3c9";X.fillRect(ph.x,ph.y,ph.w,ph.h);X.fillStyle=SOFT;X.font='500 40px Figtree';X.textAlign="center";X.textBaseline="middle";X.fillText("Tu foto va acá",W/2,ph.y+ph.h/2);}
-    X.restore();y=ph.y+ph.h+70;
-    y=text(T0,W/2,y,INK);ornament(y+36,ACC);
-    const B=B0.ls.length*B0.s*B0.lh<=SAFE_B-80-(y+80)?B0:fit(txt||" ",'"Cormorant Garamond"',500,W-2*PAD-30,SAFE_B-80-(y+80),44,32,1.3,false);text(B,W/2,y+80,SOFT);firm();
-  }else if(id==="serv"){
-    const T=fit(tit||" ",'"Cormorant Garamond"',500,W-2*PAD,260,110,64,1.1,true,.06);y=text(T,W/2,y+30,INK);ornament(y+44,ACC);
-    // tarjeta
-    const cy=y+110,ch=SAFE_B-cy-230;X.save();X.beginPath();X.roundRect(PAD-20,cy,W-2*(PAD-20),ch,40);X.fillStyle=dark?"#27324f":"#ececef";X.fill();X.strokeStyle=ACC;X.lineWidth=2;X.stroke();X.restore();
-    const B=fit(txt||" ",'"Cormorant Garamond"',500,W-2*PAD-80,ch-120,62,36,1.3,false);const bh=B.ls.length*B.s*B.lh;text(B,W/2,cy+(ch-bh)/2,INK);
-    const by=SAFE_B-170;X.save();X.beginPath();X.roundRect(W/2-250,by,500,104,52);X.fillStyle=dark?"#e9e6dc":"#1d2742";X.fill();X.font='600 40px Figtree';X.fillStyle=dark?"#1d2742":"#fff";X.textAlign="center";X.textBaseline="middle";X.letterSpacing="0px";X.fillText("Reservá por mensaje",W/2,by+53);X.restore();
-  }
-}
-fill();
-document.fonts.load('500 60px "Cormorant Garamond"').then(()=>Promise.all([document.fonts.load('italic 500 60px "Cormorant Garamond"'),document.fonts.load('600 40px Figtree'),document.fonts.load('60px "Noto Sans Symbols"',"♈♉♊♋♌♍♎♏♐♑♒♓")])).finally(draw);
-draw();
-const fname=()=>"historia-"+($("#tTit").value.trim()||ST.tp.n).toLowerCase().normalize("NFD").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,40)+".png";
-$("#dl").onclick=()=>cv.toBlob(b=>{const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=fname();document.body.append(a);a.click();a.remove();},"image/png");
-if(navigator.canShare&&navigator.canShare({files:[new File([new Blob()],"a.png",{type:"image/png"})]})){$("#sh").hidden=false;$("#sh").onclick=()=>cv.toBlob(b=>navigator.share({files:[new File([b],fname(),{type:"image/png"})]}).catch(()=>{}),"image/png");}
 </script>
 </body>
 </html>
