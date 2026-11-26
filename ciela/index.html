@@ -396,6 +396,7 @@ h2.T{font-size:clamp(30px,4.4vw,46px)}
   </div>
 </div>
 
+<script src="store.js"></script>
 <script>
 const $=s=>document.querySelector(s);
 const fmt=n=>"$"+Math.round(n).toLocaleString("es-AR");
@@ -451,14 +452,15 @@ const SV=[
   {id:"enc",t:"Encuentro y Tarot",img:"img/svc-encuentro.jpg",d:"Una noche con amigas y lecturas de tarot para todas. Yo voy a tu casa.",tags:["Grupos"],p:60000,grupo:true},
   {id:"gift",t:"Gift card",img:null,d:"Regalá una lectura.",p:20000,gift:true,hide:true}
 ];
-const DEP=.3;
+const CFG=CS.cfg();
+SV.forEach(s=>{const p=CFG.precios[s.id];if(s.opts&&Array.isArray(p))s.opts.forEach((o,i)=>{o[3]=p[i];});else if(!s.gift&&p!=null)s.p=p;if(CFG.activos[s.id]===false)s.hide=true;});
+const DEP=CFG.sena/100;
 $("#svs").innerHTML=SV.filter(s=>!s.hide).map(s=>{
     const price=s.opts?`desde <b>${fmt(s.opts[0][3])}</b>`:`<b>${fmt(s.p)}</b>`;
   return `<article class="sv"><img style="--bgi:${s.bgi||"#d2d2d4"}" src="${s.img}" alt="${esc(s.t)}" loading="lazy"><div class="bd"><h3>${s.t}</h3><p>${s.d}</p><div class="meta">${s.tags.map(t=>`<span>${t}</span>`).join("")}</div><div class="ft"><span class="pr">${price}</span><button class="btn n" data-book="${s.id}">Reservar</button></div></div></article>`;}).join("");
 
 /* ---------- reserva ---------- */
-const days=[];{const d=new Date();d.setHours(12);d.setDate(d.getDate()+1);while(days.length<8){if(d.getDay()!==0)days.push(new Date(d));d.setDate(d.getDate()+1);}}
-const HRS=["10:00","11:30","15:00","17:00","18:30"];
+const days=[];{let d=new Date();d.setHours(12,0,0,0);for(let i=1;i<=45&&days.length<8;i++){const x=CS.addD(d,i);if(CS.horasDia(CS.ymd(x)).some(h=>!h.ocupado))days.push(x);}}
 let R={};
 function openBook(id){
   const s=SV.find(x=>x.id===id);let opt=null;
@@ -480,19 +482,19 @@ function openBook(id){
     if(s.id==="tarot")h+=`<label class="lbl" for="bQ">¿Sobre qué querés preguntar? <span style="font-weight:400">(opcional)</span></label><input class="fld" id="bQ" placeholder="Ej: trabajo, un vínculo, una decisión">`;
     if(s.grupo)h+=`<label class="lbl" for="bG">¿Cuántas van a ser?</label><input class="fld" id="bG" type="number" min="3" max="15" value="6">`;
     if(s.id!=="inf"&&!s.grupo)h+=`<span class="lbl">¿Cómo preferís?</span><div class="chips" id="bMod"><button class="chip" aria-pressed="true">Videollamada</button><button class="chip" aria-pressed="false">Presencial</button></div>`;
-    if(s.id!=="inf")h+=`<span class="lbl">Elegí el día</span><div class="chips" id="bDay">${days.map((d,i)=>`<button class="chip" data-i="${i}" aria-pressed="false" ${i===2||i===5?"disabled":""}>${d.toLocaleDateString("es-AR",{weekday:"short",day:"numeric"}).replace(",","")}</button>`).join("")}</div>
-    <span class="lbl">Horario</span><div class="chips" id="bHr">${HRS.map((x,i)=>`<button class="chip" data-h="${x}" aria-pressed="false" ${i===1?"disabled":""}>${x}</button>`).join("")}</div>`;
+    if(s.id!=="inf")h+=`<span class="lbl">Elegí el día</span><div class="chips" id="bDay">${days.map((d,i)=>`<button class="chip" data-i="${i}" aria-pressed="false">${d.toLocaleDateString("es-AR",{weekday:"short",day:"numeric"}).replace(",","")}</button>`).join("")}</div>
+    <span class="lbl">Horario</span><div class="chips" id="bHr"><p class="hint" style="margin:0">Primero elegí el día.</p></div>`;
     else h+=`<p class="hint" style="margin-top:16px">La lámina se pinta a mano: te aviso por WhatsApp cuando está lista.</p>`;
   }
-  h+=`<p class="err" id="bErr" hidden></p><p class="hint">Los días tachados ya están ocupados. Precios y horarios de ejemplo.</p>`;
+  h+=`<p class="err" id="bErr" hidden></p><p class="hint">${s.gift||s.id==="inf"?"Precio de ejemplo.":"Los horarios tachados ya están reservados. Precios de ejemplo."}</p>`;
   $("#drC").innerHTML=h;$("#drF").hidden=false;$("#drGo").textContent=s.gift?"Pagar gift card":"Pagar seña";
   setPrice();if(s.gift)drawGift();$("#dr").classList.add("on");document.body.style.overflow="hidden";setTimeout(()=>$("#bNom")?.focus(),50);
 }
 function setPrice(){const s=R.s;let p=R.price;if(s.gift){const g=$("#gOpt [aria-pressed=true]");p=g.dataset.g==="rs"?SV[1].p:SV[0].opts[+g.dataset.g][3];R.price=p;}
-  if(s.grupo){p=s.p+Math.max(0,(+($("#bG")?.value||6)-6))*8000;R.price=p;}
+  if(s.grupo){p=s.p+Math.max(0,(+($("#bG")?.value||6)-6))*CFG.precios.encExtra;R.price=p;}
   $("#drF .tot span").textContent=s.gift?"Total":"Seña para reservar";$("#drP").textContent=fmt(s.gift?p:p*DEP);}
 $("#drC").addEventListener("click",e=>{const c=e.target.closest(".chip");if(!c||c.disabled)return;const g=c.parentElement;g.querySelectorAll(".chip").forEach(x=>x.setAttribute("aria-pressed",x===c));if(g.id==="gOpt")setTimeout(drawGift);
-  if(g.id==="bDay")R.day=days[+c.dataset.i];if(g.id==="bHr")R.hr=c.dataset.h;if(g.id==="bMod")R.mod=c.textContent;setPrice();});
+  if(g.id==="bDay"){R.day=days[+c.dataset.i];R.hr=null;$("#bHr").innerHTML=CS.horasDia(CS.ymd(R.day)).map(x=>`<button class="chip" data-h="${x.h}" aria-pressed="false" ${x.ocupado?"disabled":""}>${x.h}</button>`).join("");}if(g.id==="bHr")R.hr=c.dataset.h;if(g.id==="bMod")R.mod=c.textContent;setPrice();});
 $("#drC").addEventListener("input",e=>{if(e.target.id==="bG")setPrice();if(R.s&&R.s.gift)drawGift();});
 $("#drC").addEventListener("change",e=>{if(e.target.name!=="dlec")return;R.opt=R.s.opts[+e.target.value];R.price=R.opt[3];$("#drT").textContent=R.opt[0];$("#drS").textContent=`${R.s.t} · ${R.opt[2]}`;setPrice();});
 const closeDr=()=>{$("#dr").classList.remove("on");document.body.style.overflow="";};
@@ -504,10 +506,14 @@ $("#drGo").onclick=()=>{const s=R.s,nom=($("#bNom")?.value||"").trim();let er=""
   if(er){$("#bErr").textContent=er;$("#bErr").hidden=false;return;}
   let txt,wa;
   if(s.gift){const para=$("#gPara").value.trim(),msg=$("#gMsg").value.trim();const what=$("#gOpt [aria-pressed=true]").textContent;
-    const nota=$("#gNota").value.trim();const card={t:what,d:msg,para,de:nom};$("#gcBox").innerHTML=gcHTML(card);
+    const nota=$("#gNota").value.trim();const card={t:what,d:msg,para,de:nom};const gsel=$("#gOpt [aria-pressed=true]").dataset.g;
+    const cod=CS.code();CS.add(CS.K.gift,{code:cod,tipo:gsel==="rs"?"rs":"tarot",opt:gsel==="rs"?null:+gsel,precio:R.price,para,de:nom,dedic:msg,nota,vendida:CS.ymd(new Date()),usada:false});$("#gcBox").innerHTML=gcHTML(card);
     txt=`La gift card de ${esc(what)} para ${esc(para)} está lista. Así le llega por WhatsApp:`;wa=`🎁 Gift card vendida: ${esc(what)} para ${esc(para)}, de ${esc(nom)}. Pagada ${fmt(R.price)}.`;
-    $("#drC").innerHTML=`<div class="ok"><h3>¡Gift card lista!</h3><p>${txt}</p>${gcHTML(card)}${nota?`<div class="msg"><small>Mensaje de ${esc(nom)}</small>${esc(nota)}</div>`:""}<div class="wa"><small>Así le avisa a Ciela por WhatsApp</small>${wa}</div><p class="hint">Es un boceto: no se cobró ni se envió nada.</p></div>`;$("#drF").hidden=true;return;}
+    $("#drC").innerHTML=`<div class="ok"><h3>¡Gift card lista!</h3><p>${txt}</p>${gcHTML(card)}${nota?`<div class="msg"><small>Mensaje de ${esc(nom)}</small>${esc(nota)}</div>`:""}<div class="wa"><small>Así le avisa a Ciela por WhatsApp</small>${wa}</div><p class="hint">Código de canje: <b>${cod}</b>. Es un boceto: no se cobró ni se envió nada.</p></div>`;$("#drF").hidden=true;return;}
   else{const when=s.id==="inf"?"":`el ${R.day.toLocaleDateString("es-AR",{weekday:"long",day:"numeric",month:"numeric"})} a las ${R.hr}`;
+    const nac=s.nac&&$("#bFec").value?{fecha:$("#bFec").value,hora:$("#bHor").value||"",lugar:$("#bLug").value.trim()}:null,tel=($("#bTel")?.value||"").trim();
+    if(s.id==="inf")CS.add(CS.K.acu,{id:CS.nid("a"),nombre:nom,nene:"",nac,etapa:0,precio:R.price,pagado:Math.round(R.price*DEP),creado:CS.ymd(new Date()),tel});
+    else CS.add(CS.K.res,{id:CS.nid("r"),tipo:s.id,opt:R.opt?s.opts.indexOf(R.opt):null,fecha:CS.ymd(R.day),hora:R.hr,nombre:nom,tel,mod:s.grupo?"En su casa":R.mod,grupo:s.grupo?+($("#bG").value||6):null,precio:R.price,pagado:Math.round(R.price*DEP),estado:"confirmada",origen:"web",nac,nota:($("#bQ")?.value||"").trim(),creado:CS.ymd(new Date())});
     const name=R.opt?R.opt[0]:s.t;txt=`${esc(name)}${when?" "+when:""}${s.id!=="inf"&&!s.grupo?" por "+R.mod.toLowerCase():""}. Te llega la confirmación por WhatsApp.`;
     wa=`✨ Nueva reserva: ${esc(name)} · ${esc(nom)}${when?" · "+when:""}. Seña de ${fmt(R.price*DEP)} pagada.${s.nac&&$("#bFec").value?` Nacimiento: ${$("#bFec").value.split("-").reverse().join("/")} ${$("#bHor").value||""} ${esc($("#bLug").value)}`:""}`;}
   $("#drC").innerHTML=`<div class="ok">${moonSvg}<h3>${s.gift?"¡Gift card lista!":"¡Reservado!"}</h3><p>${txt}</p><div class="wa"><small>Así le llega a Ciela por WhatsApp</small>${wa}</div><p class="hint">Es un boceto: no se cobró nada.</p></div>`;$("#drF").hidden=true;};
@@ -534,9 +540,9 @@ $("#posts").addEventListener("click",e=>{const b=e.target.closest("[data-post]")
   $("#drT").textContent=p.t;$("#drS").textContent=`${p.k} · ${p.f}`;
   $("#drC").innerHTML=`<div class="rd"><div class="gl" aria-hidden="true">${p.g}︎</div><p>${p.p}</p><p>${p.m}</p><div class="cta"><span>¿Querés ver cómo te toca a vos?</span><button class="btn n" data-book="tarot">Reservar una lectura</button></div></div>`;
   $("#drF").hidden=true;$("#dr").classList.add("on");document.body.style.overflow="hidden";});
-const QS=[["¿Qué diferencia hay entre una luna nueva y una llena para empezar algo?","Laura · alumna","La luna nueva es siembra: buen momento para intenciones. La llena es cosecha: ver resultados y soltar."],["¿Necesito la hora exacta para la Revolución Solar?","Vero","Sí, con la hora de nacimiento la lectura es mucho más precisa. Está en la partida de nacimiento."]];
+let QS=[];const loadQ=()=>{QS=CS.qs().filter(q=>(q.r&&q.pub!==false)||q.mine).sort((a,b)=>(b.mine?1:0)-(a.mine?1:0)).map(q=>[q.q,q.quien,q.r,q.mine&&!q.r]);};loadQ();
 const drawQ=()=>{$("#qs").innerHTML=QS.map(q=>`<div class="q${q[3]?" new":""}"><b>${esc(q[0])}</b><small>${esc(q[1])}</small>${q[2]?`<div class="r"><div><em>Responde Ciela</em>${esc(q[2])}</div></div>`:`<div class="r"><div><em>Pendiente</em>Ciela la va a responder pronto.</div></div>`}</div>`).join("");};drawQ();
-$("#qf").onsubmit=e=>{e.preventDefault();const v=$("#qi").value.trim();if(!v)return;QS.unshift([v,"Vos",null,true]);$("#qi").value="";drawQ();};
+$("#qf").onsubmit=e=>{e.preventDefault();const v=$("#qi").value.trim();if(!v)return;CS.add(CS.K.qs,{id:CS.nid("q"),q:v,quien:"Desde la web",r:null,fecha:CS.ymd(new Date()),pub:true,mine:true});$("#qi").value="";loadQ();drawQ();};
 $("#sub").onclick=e=>{e.target.textContent="¡Listo! Te llega la próxima luna";e.target.disabled=true;};
 
 </script>

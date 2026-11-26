@@ -1,0 +1,603 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Tu panel · Ciela</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#1d2742">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Figtree:wght@400;500;600;700&family=Noto+Sans+Symbols:wght@400&display=swap">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231d2742'/%3E%3Cpath d='M40 14a20 20 0 1 0 0 36a16 16 0 1 1 0-36z' fill='%23e9e6dc'/%3E%3C/svg%3E">
+<style>
+:root{
+  --noche:#1d2742;--noche2:#27324f;--noche3:#34405f;--fondo:#eceef2;--card:#fff;--perla:#d4d4d7;--niebla:#f3f4f7;
+  --tinta:#1d2742;--gris:#555b6e;--gris2:#7a8093;--linea:#dcdee5;--oro:#b89a5e;--luz:#e9e6dc;
+  --ok:#2f7d5b;--okb:#e5f3ec;--warn:#9a6412;--warnb:#fbf0dc;--bad:#a3322a;--badb:#f8e4e2;
+  --serif:"Cormorant Garamond",Georgia,serif;--sans:Figtree,system-ui,sans-serif;--sym:"Noto Sans Symbols","Segoe UI Symbol",sans-serif;
+  --c-tarot:#6d5fb0;--c-rs:#b0893c;--c-tirada:#2c7c8c;--c-enc:#c05578;--c-inf:#4f8a5b;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--fondo);color:var(--tinta);font-family:var(--sans);font-size:16.5px;line-height:1.5;-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--oro);outline-offset:2px;border-radius:6px}
+h1,h2,h3{margin:0}
+.ser{font-family:var(--serif);font-weight:600}
+
+/* estructura */
+.app{display:grid;grid-template-columns:250px minmax(0,1fr);min-height:100vh}
+.side{background:var(--noche);color:#c6cad8;padding:22px 16px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;gap:4px}
+.brand{display:flex;align-items:center;gap:10px;padding:4px 8px 22px}
+.brand svg{width:36px;height:36px;flex:none}
+.brand b{display:block;font-family:var(--serif);font-weight:600;font-size:23px;letter-spacing:.16em;color:#fff;line-height:1}
+.brand small{font-size:13px;color:#aeb4c6}
+.nv{display:flex;align-items:center;gap:12px;border:0;background:none;color:#c6cad8;padding:11px 12px;border-radius:12px;font-size:16px;font-weight:500;text-align:left;width:100%;text-decoration:none}
+.nv svg{width:21px;height:21px;flex:none}
+.nv:hover{background:var(--noche2);color:#fff}
+.nv[aria-current="page"]{background:var(--luz);color:var(--noche);font-weight:600}
+.nv .n{margin-left:auto;background:var(--oro);color:#fff;border-radius:999px;font-size:12.5px;padding:1px 8px;font-weight:700}
+.side .sep{height:1px;background:#34405f;margin:14px 8px}
+.side .foot{margin-top:auto;font-size:13px;color:#8f97ad;padding:0 8px}
+.side .foot button{background:none;border:0;color:var(--luz);text-decoration:underline;padding:0;font-size:13px;margin-top:6px}
+main{padding:30px 34px 60px;min-width:0}
+.mtop,.tabs{display:none}
+
+/* cabecera de cada vista */
+.vh{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+.vh small{color:var(--gris);font-size:15px}
+.vh h1{font-family:var(--serif);font-weight:600;font-size:38px;line-height:1.05}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;padding:11px 18px;font-weight:600;font-size:15.5px;text-decoration:none;white-space:nowrap}
+.btn.n{background:var(--noche);color:#fff}.btn.n:hover{background:var(--noche2)}
+.btn.o{background:#fff;color:var(--noche);box-shadow:inset 0 0 0 1.5px var(--linea)}.btn.o:hover{box-shadow:inset 0 0 0 1.5px var(--noche)}
+.btn.ok{background:var(--ok);color:#fff}
+.btn.bad{background:#fff;color:var(--bad);box-shadow:inset 0 0 0 1.5px #e3b9b5}
+.btn.sm{padding:7px 13px;font-size:14px}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.card{background:var(--card);border-radius:20px;border:1px solid var(--linea);padding:20px}
+.card>h2,.ch h2{font-family:var(--serif);font-weight:600;font-size:25px;line-height:1.1}
+.ch{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.muted{color:var(--gris)}
+.chip{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:3px 10px;font-size:13px;font-weight:600;white-space:nowrap}
+.chip.ok{background:var(--okb);color:var(--ok)}.chip.warn{background:var(--warnb);color:var(--warn)}.chip.bad{background:var(--badb);color:var(--bad)}.chip.gr{background:var(--niebla);color:var(--gris)}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--c);display:inline-block;flex:none}
+
+/* indicadores */
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:18px}
+.kpi{background:var(--card);border:1px solid var(--linea);border-radius:18px;padding:16px 18px}
+.kpi small{display:block;color:var(--gris);font-size:14px}
+.kpi b{display:block;font-size:28px;font-weight:700;letter-spacing:-.01em;line-height:1.15;margin-top:4px}
+.kpi span{font-size:13.5px;color:var(--gris2)}
+
+/* agenda */
+.agrid{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:18px;align-items:start}
+.calh{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.calh h2{font-family:var(--serif);font-weight:600;font-size:28px;text-transform:capitalize;margin-right:auto}
+.ib{width:40px;height:40px;border-radius:50%;border:1px solid var(--linea);background:#fff;font-size:20px;line-height:1;display:grid;place-items:center}
+.ib:hover{border-color:var(--noche)}
+.leg{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13.5px;color:var(--gris);margin-bottom:12px}
+.leg span{display:inline-flex;align-items:center;gap:6px}
+.cg{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+.cg .wd{font-size:13px;font-weight:600;color:var(--gris);text-align:center;padding:2px 0}
+.cell{min-height:118px;border:1px solid var(--linea);border-radius:12px;background:#fff;padding:7px;text-align:left;display:flex;flex-direction:column;gap:3px;min-width:0;position:relative}
+.cell:hover{border-color:#9aa0b3}
+.cell .dn{font-weight:700;font-size:15px;display:flex;justify-content:space-between;align-items:center}
+.cell .dn em{font-style:normal;font-weight:600;font-size:11.5px;color:var(--gris2)}
+.cell.out{background:transparent;border-style:dashed;opacity:.55}
+.cell.off{background:repeating-linear-gradient(-45deg,#f4f5f8 0 7px,#eceef3 7px 14px)}
+.cell.today .dn b{background:var(--noche);color:#fff;border-radius:999px;padding:0 8px}
+.cell.sel{border:2px solid var(--noche);padding:6px}
+.ev{display:block;font-size:12.5px;line-height:1.3;padding:2px 6px;border-radius:6px;background:color-mix(in srgb,var(--c) 13%,#fff);border-left:3px solid var(--c);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ev.x{opacity:.45;text-decoration:line-through}
+.more{font-size:12px;color:var(--gris);font-weight:600;padding-left:4px}
+.dots{display:none;gap:3px;flex-wrap:wrap;margin-top:auto}
+.dots i{width:7px;height:7px;border-radius:50%;background:var(--c)}
+.day{position:sticky;top:20px}
+.day h2{font-family:var(--serif);font-weight:600;font-size:26px;line-height:1.1}
+.slots{display:grid;gap:8px;margin-top:14px}
+.slot{display:grid;grid-template-columns:56px 1fr;gap:12px;align-items:start;border:1px solid var(--linea);border-radius:14px;padding:12px;background:#fff;text-align:left;width:100%}
+.slot>b{font-size:16px}
+.slot.bk{border-left:4px solid var(--c)}
+.slot.bk:hover{border-color:var(--noche);border-left-color:var(--c)}
+.slot .who{font-weight:700;font-size:16.5px;display:block}
+.slot .what{color:var(--gris);font-size:14.5px;display:block}
+.slot .bd{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.slot.free{background:var(--niebla);border-style:dashed;align-items:center}
+.slot.free span{color:var(--gris);font-size:15px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.slot.cx{opacity:.55}
+.offnote{background:var(--niebla);border-radius:14px;padding:14px;color:var(--gris);font-size:15px;margin-top:14px}
+
+/* listas */
+.rows{display:grid;gap:8px}
+.row{display:grid;grid-template-columns:94px minmax(0,1fr) auto;gap:14px;align-items:center;border:1px solid var(--linea);border-radius:14px;padding:12px 14px;background:#fff;text-align:left;width:100%}
+.row:hover{border-color:#9aa0b3}
+.row .f{font-size:14px;color:var(--gris)}
+.row .f b{display:block;color:var(--tinta);font-size:15px}
+.row .t b{display:block;font-size:16px}
+.row .t span{font-size:14px;color:var(--gris)}
+.row .m{text-align:right}
+.row .m b{display:block;font-size:16.5px}
+.fil{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.fil button{border:1.5px solid var(--linea);background:#fff;border-radius:999px;padding:7px 14px;font-size:14.5px;font-weight:500}
+.fil button[aria-pressed="true"]{background:var(--noche);border-color:var(--noche);color:#fff}
+.vg{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:18px;align-items:start}
+.bars{display:grid;gap:12px}
+.bar small{display:flex;justify-content:space-between;font-size:14.5px}
+.bar small b{font-weight:700}
+.bar i{display:block;height:10px;border-radius:999px;background:var(--niebla);margin-top:5px;overflow:hidden}
+.bar i s{display:block;height:100%;background:var(--c);border-radius:999px}
+
+/* pedidos */
+.board{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.col{background:var(--niebla);border-radius:16px;padding:12px;min-height:120px}
+.col h3{font-size:15px;font-weight:700;display:flex;justify-content:space-between;margin-bottom:10px}
+.col h3 span{color:var(--gris);font-weight:600}
+.pc{background:#fff;border:1px solid var(--linea);border-radius:14px;padding:12px;margin-bottom:8px}
+.pc b{display:block;font-size:16px}
+.pc small{display:block;color:var(--gris);font-size:13.5px;line-height:1.4}
+.pc .a{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;align-items:center}
+.gcs{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.gci{border:1px solid var(--linea);border-radius:16px;padding:16px;background:#fff;display:flex;flex-direction:column;gap:6px}
+.gci .cd{font-family:ui-monospace,Menlo,Consolas,monospace;font-weight:700;letter-spacing:.06em;font-size:15px}
+.gci .dd{font-family:var(--serif);font-style:italic;font-size:18px;line-height:1.3}
+.gci .a{margin-top:auto;padding-top:8px;display:flex;gap:8px;align-items:center;justify-content:space-between}
+
+/* preguntas */
+.qc{border:1px solid var(--linea);border-radius:16px;padding:16px;background:#fff;margin-bottom:10px}
+.qc b{font-family:var(--serif);font-weight:600;font-size:21px;line-height:1.2;display:block}
+.qc small{color:var(--gris);font-size:13.5px}
+.qc .r{margin-top:10px;padding-left:12px;border-left:2px solid var(--oro);color:var(--gris)}
+.qc .a{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+
+/* ajustes */
+.ag{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:start}
+.pr{display:grid;gap:10px}
+.pri{border:1px solid var(--linea);border-radius:14px;padding:14px}
+.pri .h{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.pri .h b{font-size:16.5px}
+.pri .in{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-top:10px}
+.pri label small{display:block;font-size:13px;color:var(--gris);margin-bottom:3px}
+.money{position:relative}
+.money input{padding-left:24px}
+.money::before{content:"$";position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--gris);font-size:15px}
+.fld{width:100%;border:1.5px solid var(--linea);border-radius:11px;padding:10px 12px;background:#fff;font-size:16px}
+.fld:focus{outline:none;border-color:var(--noche)}
+textarea.fld{resize:vertical;min-height:84px;line-height:1.45}
+.sw{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--gris);cursor:pointer;user-select:none}
+.sw input{appearance:none;-webkit-appearance:none;width:42px;height:24px;border-radius:999px;background:#c9ccd5;position:relative;cursor:pointer;transition:background .2s;margin:0;flex:none}
+.sw input::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:transform .2s;box-shadow:0 1px 2px rgba(0,0,0,.2)}
+.sw input:checked{background:var(--ok)}
+.sw input:checked::after{transform:translateX(18px)}
+.wk{display:grid;gap:8px}
+.wkd{border:1px solid var(--linea);border-radius:14px;padding:12px 14px}
+.wkd .h{display:flex;justify-content:space-between;align-items:center}
+.wkd .h b{font-size:16px}
+.hs{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;align-items:center}
+.hs .hc{display:inline-flex;align-items:center;gap:4px;background:var(--niebla);border-radius:999px;padding:4px 6px 4px 12px;font-weight:600;font-size:14.5px}
+.hs .hc button{border:0;background:none;width:24px;height:24px;border-radius:50%;color:var(--gris);font-size:16px;line-height:1}
+.hs .hc button:hover{background:#fff;color:var(--bad)}
+.hs input{width:118px;padding:6px 10px;font-size:15px}
+.wkd.no{background:var(--niebla)}
+.wkd.no .hs{display:none}
+.libs{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+
+/* hoja de detalle */
+.sh{position:fixed;inset:0;z-index:60;display:none}
+.sh.on{display:block}
+.sh .bg{position:absolute;inset:0;background:rgba(17,23,40,.5)}
+.sh .pn{position:absolute;right:0;top:0;bottom:0;width:min(470px,100%);background:#fbfbfc;display:flex;flex-direction:column;animation:sl .25s ease}
+@keyframes sl{from{transform:translateX(30px);opacity:0}to{transform:none;opacity:1}}
+.sh .hd{display:flex;align-items:center;gap:12px;padding:18px 20px;border-bottom:1px solid var(--linea)}
+.sh .hd b{font-family:var(--serif);font-size:26px;font-weight:600;line-height:1.1;display:block}
+.sh .hd small{color:var(--gris);font-size:14.5px}
+.sh .x{margin-left:auto;width:40px;height:40px;border-radius:50%;border:0;background:#eceef2;font-size:22px;line-height:1;flex:none}
+.sh .ct{padding:18px 20px 30px;overflow:auto;flex:1}
+.kv{display:grid;gap:0;border:1px solid var(--linea);border-radius:14px;background:#fff;overflow:hidden}
+.kv div{display:grid;grid-template-columns:130px 1fr;gap:10px;padding:10px 14px;border-top:1px solid var(--linea);font-size:15.5px}
+.kv div:first-child{border-top:0}
+.kv span{color:var(--gris)}
+.pay{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0}
+.pay div{background:#fff;border:1px solid var(--linea);border-radius:12px;padding:10px 12px}
+.pay small{display:block;color:var(--gris);font-size:13px}
+.pay b{font-size:18px}
+.acts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.acts .w{grid-column:1/-1}
+.acts .btn{white-space:normal;min-width:0;text-align:center}
+.lbl{display:block;font-weight:600;font-size:14.5px;margin:14px 0 6px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.opts{display:flex;flex-wrap:wrap;gap:6px}
+.opts button{border:1.5px solid var(--linea);background:#fff;border-radius:999px;padding:8px 13px;font-size:14.5px}
+.opts button[aria-pressed="true"]{background:var(--noche);border-color:var(--noche);color:#fff}
+.opts button:disabled{opacity:.35;text-decoration:line-through;cursor:not-allowed}
+.note{font-size:13.5px;color:var(--gris);margin:8px 0 0}
+.toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);background:var(--noche);color:#fff;padding:12px 18px;border-radius:14px;font-weight:600;font-size:15px;opacity:0;pointer-events:none;transition:.25s;z-index:80;max-width:calc(100% - 32px);text-align:center}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.toast a{color:var(--luz)}
+.demo{background:var(--warnb);color:var(--warn);border-radius:12px;padding:9px 14px;font-size:14px;margin-bottom:18px;display:flex;gap:8px;align-items:center}
+
+/* tablet */
+@media (max-width:1180px){
+.agrid,.vg{grid-template-columns:1fr}
+.day{position:static}
+.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+.board{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+/* celu */
+@media (max-width:820px){
+.app{display:block}
+.side{display:none}
+.mtop{display:flex;align-items:center;gap:10px;background:var(--noche);color:#fff;padding:12px 16px;position:sticky;top:0;z-index:30}
+.mtop svg{width:30px;height:30px}
+.mtop b{font-family:var(--serif);font-weight:600;font-size:21px;letter-spacing:.16em}
+.mtop small{color:#aeb4c6;font-size:13px;margin-left:auto}
+.mtop a{color:var(--luz);font-size:13.5px;margin-left:auto;text-decoration:none;border:1px solid #4a5678;border-radius:999px;padding:5px 11px}
+.tabs{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--linea);z-index:40;padding:6px 4px calc(6px + env(safe-area-inset-bottom))}
+.tabs button{border:0;background:none;display:grid;justify-items:center;gap:2px;font-size:11.5px;font-weight:600;color:var(--gris2);padding:4px 0;position:relative}
+.tabs svg{width:23px;height:23px}
+.tabs button[aria-current="page"]{color:var(--noche)}
+.tabs .n{position:absolute;top:0;right:18%;background:var(--oro);color:#fff;border-radius:999px;font-size:10.5px;padding:0 6px}
+main{padding:18px 14px 110px}
+.vh h1{font-size:31px}
+.vh .btn{width:100%}
+.kpi{padding:12px 14px}.kpi b{font-size:22px}
+.card{padding:14px;border-radius:18px}
+.calh h2{font-size:24px}
+.cg{gap:3px}
+.cell{min-height:56px;padding:5px;border-radius:9px;align-items:center}
+.cell.sel{padding:4px}
+.cell .dn{justify-content:center;font-size:14px}
+.cell .dn em,.ev,.more{display:none}
+.dots{display:flex;justify-content:center}
+.leg{font-size:12.5px;gap:4px 12px}
+.row{grid-template-columns:70px minmax(0,1fr);row-gap:4px}
+.row .m{grid-column:2;text-align:left;display:flex;gap:8px;align-items:center}
+.row .m b{display:inline}
+.board{grid-template-columns:1fr}
+.ag{grid-template-columns:1fr}
+.sh .pn{top:auto;height:92vh;border-radius:22px 22px 0 0;width:100%}
+.kv div{grid-template-columns:110px 1fr}
+.acts{grid-template-columns:1fr}
+.toast{bottom:90px}
+}
+</style>
+</head>
+<body>
+<div class="mtop"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="31" fill="none" stroke="#b89a5e"/><path d="M38 14a19 19 0 1 0 0 36a15 15 0 1 1 0-36z" fill="#e9e6dc"/></svg><b>CIELA</b><a href="../" target="_blank" rel="noopener">Ver mi web ↗</a></div>
+<div class="app">
+  <aside class="side">
+    <div class="brand"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="31" fill="none" stroke="#b89a5e"/><path d="M38 14a19 19 0 1 0 0 36a15 15 0 1 1 0-36z" fill="#e9e6dc"/></svg><div><b>CIELA</b><small>Tu panel</small></div></div>
+    <div id="nav"></div>
+    <div class="sep"></div>
+    <a class="nv" href="../" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 2.5 15.3 0 18M12 3c-2.5 2.7-2.5 15.3 0 18"/></svg>Ver mi web ↗</a>
+    <a class="nv" href="../estudio/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="3"/><path d="M10 6h4"/></svg>Estudio de historias ↗</a>
+    <div class="foot">Boceto: los datos son de ejemplo y lo que cambies se guarda solo en este navegador.<br><button data-act="reset">Volver a los datos de ejemplo</button></div>
+  </aside>
+  <main id="main"></main>
+</div>
+<nav class="tabs" id="tabs" aria-label="Secciones"></nav>
+
+<div class="sh" id="sh" role="dialog" aria-modal="true" aria-labelledby="shT">
+  <div class="bg" data-act="cerrar"></div>
+  <div class="pn">
+    <div class="hd"><div><b id="shT"></b><small id="shS"></small></div><button class="x" data-act="cerrar" aria-label="Cerrar">×</button></div>
+    <div class="ct" id="shC"></div>
+  </div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script src="../store.js"></script>
+<script>
+(function(){
+var $=function(s){return document.querySelector(s)};
+var fmt=function(n){return "$"+Math.round(n||0).toLocaleString("es-AR")};
+var esc=function(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})};
+var C=window.CS;
+var MES=["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+var DIA=["domingo","lunes","martes","miércoles","jueves","viernes","sábado"];
+var DIAC=["Dom","Lun","Mar","Mié","Jue","Vie","Sáb"];
+var ORD=[1,2,3,4,5,6,0];
+var COL={tarot:"var(--c-tarot)",rs:"var(--c-rs)",tirada:"var(--c-tirada)",enc:"var(--c-enc)",inf:"var(--c-inf)"};
+var ETAPAS=["Datos recibidos","Pintando","Lista para entregar","Entregada"];
+var HOY=C.ymd(new Date());
+var ST={todos:false,v:"agenda",mes:primero(new Date()),sel:HOY,vmes:primero(new Date()),fil:"todo"};
+
+var ICON={
+  agenda:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16.5" rx="3"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4M7.5 13.5h2M11 13.5h2M14.5 13.5h2M7.5 17h2M11 17h2"/></svg>',
+  ventas:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>',
+  pedidos:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20 12v8a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-8M2.5 7.5h19v4.5h-19zM12 21V7.5M12 7.5S10.5 3 8 3.5 7 7.5 12 7.5zm0 0s1.5-4.5 4-4 1 4-4 4z"/></svg>',
+  preguntas:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.1A8.5 8.5 0 1 1 21 12z"/><path d="M9.6 9.5a2.5 2.5 0 1 1 3.4 2.3c-.6.3-1 .8-1 1.5M12 16.5h.01"/></svg>',
+  ajustes:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg>'
+};
+var VISTAS=[["agenda","Agenda"],["ventas","Ventas"],["pedidos","Pedidos"],["preguntas","Preguntas"],["ajustes","Precios y horarios"]];
+var CORTO={agenda:"Agenda",ventas:"Ventas",pedidos:"Pedidos",preguntas:"Preguntas",ajustes:"Ajustes"};
+
+function primero(d){return new Date(d.getFullYear(),d.getMonth(),1,12)}
+function P(s){return C.parse(s)}
+function largo(s){var d=P(s),t=DIA[d.getDay()]+" "+d.getDate()+" de "+MES[d.getMonth()];return t.charAt(0).toUpperCase()+t.slice(1)}
+function corto(s){var d=P(s);return DIAC[d.getDay()]+" "+d.getDate()+"/"+(d.getMonth()+1)}
+function serv(r){return r.tipo==="tarot"?C.SERV.tarot.opts[r.opt==null?1:r.opt]:C.SERV[r.tipo].n}
+function nac(n){if(!n||!n.fecha)return "";return n.fecha.split("-").reverse().join("/")+(n.hora?" · "+n.hora+" hs":"")+(n.lugar?" · "+esc(n.lugar):"")}
+function pago(r){
+  if(r.estado==="cancelada")return '<span class="chip gr">Cancelado</span>';
+  if(r.pagado>=r.precio)return '<span class="chip ok">Pagado</span>';
+  if(r.pagado>0)return '<span class="chip warn">Falta '+fmt(r.precio-r.pagado)+'</span>';
+  return '<span class="chip bad">Sin pagar</span>';
+}
+function pendientesQ(){return C.qs().filter(function(q){return !q.r}).length}
+function enCurso(){return C.acu().filter(function(a){return a.etapa<3}).length}
+var tt;function toast(m){var t=$("#toast");t.innerHTML=m;t.classList.add("on");clearTimeout(tt);tt=setTimeout(function(){t.classList.remove("on")},2600)}
+
+/* ---------- navegación ---------- */
+function drawNav(){
+  var b={preguntas:pendientesQ(),pedidos:enCurso()};
+  $("#nav").innerHTML=VISTAS.map(function(v){return '<button class="nv" data-v="'+v[0]+'"'+(ST.v===v[0]?' aria-current="page"':'')+'>'+ICON[v[0]]+v[1]+(b[v[0]]?'<span class="n">'+b[v[0]]+'</span>':'')+'</button>'}).join("");
+  $("#tabs").innerHTML=VISTAS.map(function(v){return '<button data-v="'+v[0]+'"'+(ST.v===v[0]?' aria-current="page"':'')+'>'+ICON[v[0]]+CORTO[v[0]]+(b[v[0]]?'<span class="n">'+b[v[0]]+'</span>':'')+'</button>'}).join("");
+}
+function render(){drawNav();({agenda:vAgenda,ventas:vVentas,pedidos:vPedidos,preguntas:vPreguntas,ajustes:vAjustes})[ST.v]();}
+
+/* ---------- agenda ---------- */
+function delDia(f,res){return res.filter(function(r){return r.fecha===f}).sort(function(a,b){return a.hora<b.hora?-1:1})}
+function vAgenda(){
+  var res=C.res(),cfg=C.cfg();
+  var hoyL=delDia(HOY,res).filter(function(r){return r.estado!=="cancelada"});
+  var sem=C.ymd(C.addD(new Date(),7));
+  var semN=res.filter(function(r){return r.fecha>=HOY&&r.fecha<sem&&r.estado!=="cancelada"}).length;
+  var saldo=res.filter(function(r){return r.estado!=="cancelada"&&r.fecha<=HOY&&r.pagado<r.precio}).reduce(function(a,r){return a+r.precio-r.pagado},0);
+  var prox=res.filter(function(r){return r.estado==="confirmada"&&(r.fecha>HOY||(r.fecha===HOY&&r.hora>=horaAhora()))}).sort(function(a,b){return (a.fecha+a.hora)<(b.fecha+b.hora)?-1:1})[0];
+  var h='<div class="demo">✦ Boceto con datos de ejemplo. Lo que cambies acá se ve en tu web, en este mismo navegador.</div>'+
+  '<header class="vh"><div><small>'+largo(HOY)+'</small><h1>Hola, Graciela</h1></div><button class="btn n" data-act="nuevo">+ Anotar un turno</button></header>'+
+  '<div class="kpis">'+
+   kpi("Hoy",hoyL.length+(hoyL.length===1?" lectura":" lecturas"),prox?"Próxima: "+(prox.fecha===HOY?"hoy":corto(prox.fecha))+" "+prox.hora+" · "+esc(prox.nombre):"No hay más por hoy")+
+   kpi("Próximos 7 días",semN+" turnos","Entre la web y los que anotaste")+
+   kpi("Te deben",fmt(saldo),"De lecturas que ya pasaron")+
+   kpi("Acuarelas en curso",enCurso(),"Mirá el detalle en Pedidos")+
+  '</div><div class="agrid"><section class="card">'+calendario(res,cfg)+'</section><section class="card day" id="dayP">'+panelDia(res,cfg)+'</section></div>';
+  $("#main").innerHTML=h;
+}
+function horaAhora(){var d=new Date();return String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0")}
+function kpi(t,v,s){return '<div class="kpi"><small>'+t+'</small><b>'+v+'</b><span>'+s+'</span></div>'}
+function noTrabaja(f,cfg){return cfg.libres.indexOf(f)>=0||!(cfg.horas[P(f).getDay()]||[]).length}
+function calendario(res,cfg){
+  var m=ST.mes,y=m.getFullYear(),mo=m.getMonth();
+  var ini=new Date(y,mo,1,12);var off=(ini.getDay()+6)%7;var start=C.addD(ini,-off);
+  var fin=new Date(y,mo+1,0,12);var tot=off+fin.getDate();var semanas=Math.ceil(tot/7);
+  var h='<div class="calh"><h2>'+MES[mo]+' '+y+'</h2><button class="btn o sm" data-act="mes-hoy">Hoy</button><button class="ib" data-act="mes" data-d="-1" aria-label="Mes anterior">‹</button><button class="ib" data-act="mes" data-d="1" aria-label="Mes siguiente">›</button></div>';
+  h+='<div class="leg">'+["tarot","rs","tirada","enc"].map(function(k){return '<span><i class="dot" style="--c:'+COL[k]+'"></i>'+(k==="tarot"?"Tarot":C.SERV[k].n)+'</span>'}).join("")+'<span><i class="dot" style="--c:#c9ccd5"></i>No trabajás</span></div>';
+  h+='<div class="cg">'+ORD.map(function(i){return '<div class="wd">'+DIAC[i]+'</div>'}).join("");
+  for(var i=0;i<semanas*7;i++){
+    var d=C.addD(start,i),f=C.ymd(d),evs=delDia(f,res),act=evs.filter(function(r){return r.estado!=="cancelada"});
+    var cls="cell"+(d.getMonth()!==mo?" out":"")+(f===HOY?" today":"")+(f===ST.sel?" sel":"")+(noTrabaja(f,cfg)?" off":"");
+    var lista=evs.slice(0,3).map(function(r){return '<span class="ev'+(r.estado==="cancelada"?" x":"")+'" style="--c:'+COL[r.tipo]+'">'+r.hora+' '+esc(r.nombre)+'</span>'}).join("");
+    h+='<button class="'+cls+'" data-act="dia" data-f="'+f+'" aria-label="'+largo(f)+', '+act.length+' turnos"><span class="dn"><b>'+d.getDate()+'</b>'+(act.length?'<em>'+act.length+'</em>':'')+'</span>'+lista+(evs.length>3?'<span class="more">+'+(evs.length-3)+' más</span>':'')+'<span class="dots">'+act.map(function(r){return '<i style="--c:'+COL[r.tipo]+'"></i>'}).join("")+'</span></button>';
+  }
+  return h+'</div>';
+}
+function panelDia(res,cfg){
+  var f=ST.sel,evs=delDia(f,res),libre=cfg.libres.indexOf(f)>=0,hs=cfg.horas[P(f).getDay()]||[];
+  var act=evs.filter(function(r){return r.estado!=="cancelada"});
+  var h='<div class="ch"><div><small class="muted">'+(f===HOY?"Hoy":"Día elegido")+'</small><h2>'+largo(f)+'</h2></div>'+(f>=HOY?'<button class="btn o sm" data-act="libre" data-f="'+f+'">'+(libre?"Vuelvo a trabajar":"No trabajo este día")+'</button>':'')+'</div>';
+  h+='<div class="muted" style="font-size:15px">'+(act.length?act.length+(act.length===1?" turno":" turnos")+" · "+fmt(act.reduce(function(a,r){return a+r.precio},0)):"Sin turnos")+'</div>';
+  if(libre||!hs.length)h+='<div class="offnote">'+(libre?"Marcaste que este día no trabajás. En tu web no se puede reservar.":"Este día no tenés horarios cargados. Podés sumarlos en Precios y horarios.")+'</div>';
+  var horas={};hs.forEach(function(x){horas[x]=1});evs.forEach(function(r){horas[r.hora]=1});
+  var orden=Object.keys(horas).sort();
+  h+='<div class="slots">';
+  orden.forEach(function(hh){
+    var rs=evs.filter(function(r){return r.hora===hh});
+    if(rs.length)rs.forEach(function(r){h+='<button class="slot bk'+(r.estado==="cancelada"?" cx":"")+'" style="--c:'+COL[r.tipo]+'" data-act="ver" data-id="'+r.id+'"><b>'+r.hora+'</b><span><span class="who">'+esc(r.nombre)+'</span><span class="what">'+serv(r)+' · '+esc(r.mod)+(r.grupo?' · '+r.grupo+' personas':'')+'</span><span class="bd">'+pago(r)+(r.estado==="hecha"?'<span class="chip gr">Hecha</span>':'')+(r.origen==="web"?'<span class="chip gr">Desde la web</span>':'')+'</span></span></button>'});
+    else if(!libre&&f>=HOY)h+='<div class="slot free"><b>'+hh+'</b><span>Libre<button class="btn o sm" data-act="nuevo" data-f="'+f+'" data-h="'+hh+'">+ Anotar</button></span></div>';
+  });
+  return h+'</div>';
+}
+
+/* ---------- hoja: detalle de un turno ---------- */
+function abrir(t,s,html){$("#shT").textContent=t;$("#shS").textContent=s||"";$("#shC").innerHTML=html;$("#sh").classList.add("on");document.body.style.overflow="hidden"}
+function cerrar(){$("#sh").classList.remove("on");document.body.style.overflow=""}
+function verRes(id){
+  var r=C.res().find(function(x){return x.id===id});if(!r)return;
+  var h='<div class="kv">'+
+   '<div><span>Cliente</span><b>'+esc(r.nombre)+'</b></div>'+
+   '<div><span>WhatsApp</span><span style="color:var(--tinta)">'+esc(r.tel||"—")+'</span></div>'+
+   '<div><span>Cuándo</span><span style="color:var(--tinta)">'+largo(r.fecha)+' · '+r.hora+' hs</span></div>'+
+   '<div><span>Cómo</span><span style="color:var(--tinta)">'+esc(r.mod)+(r.grupo?' · '+r.grupo+' personas':'')+'</span></div>'+
+   (r.nac?'<div><span>Nacimiento</span><span style="color:var(--tinta)">'+nac(r.nac)+'</span></div>':'')+
+   (r.nota?'<div><span>Quiere preguntar</span><span style="color:var(--tinta)">'+esc(r.nota)+'</span></div>':'')+
+   '<div><span>Cómo llegó</span><span style="color:var(--tinta)">'+(r.origen==="web"?"Reservó desde tu web":r.origen==="gift"?"Canjeó una gift card":"Lo anotaste vos")+'</span></div>'+
+  '</div>'+
+  '<div class="pay"><div><small>Total</small><b>'+fmt(r.precio)+'</b></div><div><small>Pagó</small><b>'+fmt(r.pagado)+'</b></div><div><small>Falta</small><b style="color:'+(r.precio>r.pagado?"var(--warn)":"var(--ok)")+'">'+fmt(Math.max(0,r.precio-r.pagado))+'</b></div></div>';
+  if(r.estado==="cancelada")h+='<p class="note">Este turno está cancelado.</p><div class="acts"><button class="btn o w" data-act="reactivar" data-id="'+r.id+'">Volver a activarlo</button></div>';
+  else h+='<div class="acts">'+
+    (r.pagado<r.precio?'<button class="btn ok w" data-act="cobrar" data-id="'+r.id+'">Ya me pagó el resto ('+fmt(r.precio-r.pagado)+')</button>':'')+
+    (r.estado!=="hecha"?'<button class="btn n" data-act="hecha" data-id="'+r.id+'">Marcar como hecha</button>':'<button class="btn o" data-act="nohecha" data-id="'+r.id+'">Desmarcar hecha</button>')+
+    '<button class="btn o" data-act="mover" data-id="'+r.id+'">Cambiar día u hora</button>'+
+    '<button class="btn o" data-act="wpp">Escribirle por WhatsApp</button>'+
+    '<button class="btn bad" data-act="cancelar" data-id="'+r.id+'">Cancelar turno</button>'+
+  '</div><div id="mov"></div>';
+  abrir(serv(r),r.tipo==="tarot"?"Lectura de Tarot · "+C.SERV.tarot.dur[r.opt==null?1:r.opt]:"",h);
+}
+function editRes(id,fn){var l=C.res();var r=l.find(function(x){return x.id===id});fn(r);C.saveRes(l);return r}
+function horasLibres(f,exceptoId){var res=C.res(),cfg=C.cfg();return (cfg.horas[P(f).getDay()]||[]).filter(function(h){return !res.some(function(r){return r.fecha===f&&r.hora===h&&r.estado!=="cancelada"&&r.id!==exceptoId})})}
+function selHoras(f,ex,actual){var hs=horasLibres(f,ex);if(actual&&hs.indexOf(actual)<0)hs.push(actual);hs.sort();return hs.length?hs.map(function(h){return '<option'+(h===actual?" selected":"")+'>'+h+'</option>'}).join("")+'<option value="otra">Otro horario…</option>':'<option value="otra">Ese día no tenés horarios libres: elegí otro horario…</option>'}
+
+/* ---------- hoja: anotar un turno ---------- */
+var OPS=[["tarot",0],["tarot",1],["tarot",2],["rs",null],["tirada",null],["enc",null]];
+function nombreOp(o){return o[0]==="tarot"?"Tarot · "+C.SERV.tarot.opts[o[1]]:C.SERV[o[0]].n}
+function nuevo(f,h,gift){
+  f=f||(ST.sel>=HOY?ST.sel:HOY);
+  if(!h){for(var i=0;i<60&&!horasLibres(f).length;i++)f=C.ymd(C.addD(P(f),1));}
+  var cfg=C.cfg(),gi=gift?OPS.findIndex(function(o){return o[0]===gift.tipo&&(o[1]===gift.opt||gift.tipo!=="tarot")}):1;
+  var html='<label class="lbl" for="nS">Qué consulta</label><select class="fld" id="nS">'+OPS.map(function(o,i){return '<option value="'+i+'"'+(i===gi?" selected":"")+'>'+nombreOp(o)+' · '+fmt(C.precio(cfg,o[0],o[1]))+'</option>'}).join("")+'</select>'+
+  '<div class="g2"><div><label class="lbl" for="nN">Nombre</label><input class="fld" id="nN" value="'+esc(gift?gift.para:"")+'" placeholder="Ej: Laura"></div><div><label class="lbl" for="nT">WhatsApp</label><input class="fld" id="nT" inputmode="tel" placeholder="11 2345-6789"></div></div>'+
+  '<div class="g2"><div><label class="lbl" for="nF">Día</label><input class="fld" type="date" id="nF" value="'+f+'"></div><div><label class="lbl" for="nH">Hora</label><select class="fld" id="nH">'+selHoras(f,null,h)+'</select><input class="fld" type="time" id="nH2" step="900" style="margin-top:6px" hidden></div></div>'+
+  '<span class="lbl">Cómo</span><div class="opts" id="nM"><button aria-pressed="true">Videollamada</button><button aria-pressed="false">Presencial</button><button aria-pressed="false">En su casa</button></div>'+
+  '<span class="lbl">Pago</span><div class="opts" id="nP">'+(gift?'<button aria-pressed="true" data-p="gift">Pagado con gift card</button>':'<button aria-pressed="false" data-p="0">Todavía no pagó</button><button aria-pressed="true" data-p="sena">Pagó la seña ('+cfg.sena+'%)</button><button aria-pressed="false" data-p="todo">Pagó todo</button>')+'</div>'+
+  '<label class="lbl" for="nQ">Notas <span style="font-weight:400">(opcional)</span></label><input class="fld" id="nQ" placeholder="Ej: quiere preguntar por trabajo">'+
+  '<p class="note" id="nErr" style="color:var(--bad)" hidden></p>'+
+  '<div class="acts"><button class="btn n w" data-act="guardar"'+(gift?' data-gift="'+gift.code+'"':'')+'>Guardar turno</button></div>';
+  abrir(gift?"Canjear gift card":"Anotar un turno",gift?gift.code+" · para "+gift.para:"Para los que te escriben por Instagram o WhatsApp",html);
+}
+function guardarNuevo(giftCode){
+  var cfg=C.cfg(),o=OPS[+$("#nS").value],n=$("#nN").value.trim(),f=$("#nF").value,h=$("#nH").value==="otra"?$("#nH2").value:$("#nH").value;
+  var err=!n?"Escribí el nombre.":!f?"Elegí el día.":!h?"Elegí la hora.":"";
+  if(err){$("#nErr").textContent=err;$("#nErr").hidden=false;return}
+  var pr=C.precio(cfg,o[0],o[1]),p=$("#nP [aria-pressed=true]").dataset.p;
+  var r={id:C.nid("r"),tipo:o[0],opt:o[1],fecha:f,hora:h,nombre:n,tel:$("#nT").value.trim(),mod:$("#nM [aria-pressed=true]").textContent,grupo:o[0]==="enc"?6:null,precio:pr,pagado:p==="0"?0:p==="sena"?Math.round(pr*cfg.sena/100):pr,estado:"confirmada",origen:giftCode?"gift":"manual",nac:null,nota:$("#nQ").value.trim(),creado:HOY};
+  C.add(C.K.res,r);
+  if(giftCode){var g=C.gifts();g.forEach(function(x){if(x.code===giftCode){x.usada=true;x.res=r.id}});C.saveGifts(g)}
+  ST.sel=f;ST.mes=primero(P(f));cerrar();ST.v="agenda";render();toast("Turno guardado: "+corto(f)+" "+h+" · "+esc(n));
+}
+
+/* ---------- ventas ---------- */
+function movimientos(m){
+  var pre=C.ymd(m).slice(0,7),out=[];
+  C.res().forEach(function(r){if(r.fecha.slice(0,7)===pre)out.push({k:"res",id:r.id,f:r.fecha,t:serv(r),c:r.nombre,tot:r.estado==="cancelada"?0:r.precio,pag:r.estado==="cancelada"?r.pagado:r.pagado,tipo:r.tipo,r:r})});
+  C.gifts().forEach(function(g){if(g.vendida.slice(0,7)===pre)out.push({k:"gift",id:g.code,f:g.vendida,t:"Gift card · "+(g.tipo==="rs"?"Revolución Solar":C.SERV.tarot.opts[g.opt]),c:"De "+g.de+" para "+g.para,tot:g.precio,pag:g.precio,tipo:"gift",g:g})});
+  C.acu().forEach(function(a){if(a.creado.slice(0,7)===pre)out.push({k:"acu",id:a.id,f:a.creado,t:"Carta natal en acuarela",c:a.nombre+(a.nene?" · para "+a.nene:""),tot:a.precio,pag:a.pagado,tipo:"inf",a:a})});
+  return out.sort(function(a,b){return a.f<b.f?1:-1});
+}
+function vVentas(){
+  var m=ST.vmes,mv=movimientos(m);
+  var cobrado=mv.reduce(function(a,x){return a+x.pag},0);
+  var falta=mv.filter(function(x){return !(x.r&&x.r.estado==="cancelada")}).reduce(function(a,x){return a+Math.max(0,x.tot-x.pag)},0);
+  var hechas=mv.filter(function(x){return x.r&&x.r.estado==="hecha"}).length;
+  var gifts=mv.filter(function(x){return x.k==="gift"});
+  var por={};mv.forEach(function(x){if(x.r&&x.r.estado==="cancelada")return;var k=x.k==="gift"?"gift":x.tipo;por[k]=(por[k]||0)+x.tot});
+  var max=Math.max.apply(null,Object.values(por).concat([1]));
+  var NOM={tarot:"Lecturas de Tarot",rs:"Revolución Solar",tirada:"Tirada astrológica",enc:"Encuentro y Tarot",inf:"Acuarelas",gift:"Gift cards"};
+  var COLB=Object.assign({gift:"var(--oro)"},COL);
+  var fil=mv.filter(function(x){return ST.fil==="todo"||(ST.fil==="falta"&&x.tot>x.pag&&!(x.r&&x.r.estado==="cancelada"))||(ST.fil==="gift"&&x.k==="gift")||(ST.fil==="acu"&&x.k==="acu")||(ST.fil==="lect"&&x.k==="res")});
+  var h='<header class="vh"><div><small>Cobros y ventas</small><h1 style="text-transform:capitalize">'+MES[m.getMonth()]+' '+m.getFullYear()+'</h1></div><div style="display:flex;gap:8px;align-items:center"><button class="ib" data-act="vmes" data-d="-1" aria-label="Mes anterior">‹</button><button class="ib" data-act="vmes" data-d="1" aria-label="Mes siguiente">›</button><button class="btn o" data-act="csv">Descargar planilla</button></div></header>'+
+  '<div class="kpis">'+kpi("Cobrado",fmt(cobrado),"Señas, saldos y gift cards")+kpi("Por cobrar",fmt(falta),"Saldos de lecturas y acuarelas")+kpi("Lecturas hechas",hechas,mv.filter(function(x){return x.r&&x.r.estado==="confirmada"}).length+" todavía por hacer")+kpi("Gift cards vendidas",gifts.length,fmt(gifts.reduce(function(a,x){return a+x.tot},0)))+'</div>'+
+  '<div class="vg"><section class="card"><div class="ch"><h2>Movimientos</h2></div><div class="fil" id="fil">'+[["todo","Todo"],["lect","Lecturas"],["falta","Falta cobrar"],["gift","Gift cards"],["acu","Acuarelas"]].map(function(b){return '<button data-act="fil" data-k="'+b[0]+'" aria-pressed="'+(ST.fil===b[0])+'">'+b[1]+'</button>'}).join("")+'</div><div class="rows">'+
+  (fil.length?fil.slice(0,ST.todos?999:12).map(function(x){var est=x.r?pago(x.r):x.k==="gift"?(x.g.usada?'<span class="chip gr">Canjeada</span>':'<span class="chip ok">Pagada</span>'):(x.pag>=x.tot?'<span class="chip ok">Pagado</span>':'<span class="chip warn">Falta '+fmt(x.tot-x.pag)+'</span>');
+    return '<button class="row" data-act="mov" data-k="'+x.k+'" data-id="'+x.id+'"><span class="f"><b>'+corto(x.f)+'</b>'+(x.r?x.r.hora:'')+'</span><span class="t"><b><i class="dot" style="--c:'+COLB[x.k==="gift"?"gift":x.tipo]+';margin-right:6px"></i>'+esc(x.t)+'</b><span>'+esc(x.c)+'</span></span><span class="m"><b>'+fmt(x.tot)+'</b>'+est+'</span></button>'}).join("")+(fil.length>12&&!ST.todos?'<button class="btn o" data-act="todos" style="justify-self:center;margin-top:6px">Ver los '+fil.length+' movimientos</button>':""):'<p class="muted">No hay movimientos para mostrar.</p>')+
+  '</div></section><section class="card"><h2>Lo que más vendiste</h2><div class="bars" style="margin-top:14px">'+
+  Object.keys(por).sort(function(a,b){return por[b]-por[a]}).map(function(k){return '<div class="bar" style="--c:'+COLB[k]+'"><small><span>'+NOM[k]+'</span><b>'+fmt(por[k])+'</b></small><i><s style="width:'+Math.round(por[k]/max*100)+'%"></s></i></div>'}).join("")+
+  '</div><p class="note" style="margin-top:16px">Montos de ejemplo. Con la web real, cada seña y cada gift card se suman solas cuando entra el pago.</p></section></div>';
+  $("#main").innerHTML=h;
+}
+function csv(){
+  var mv=movimientos(ST.vmes),q=function(s){return '"'+String(s).replace(/"/g,'""')+'"'};
+  var t="Fecha;Concepto;Cliente;Total;Pagado;Falta\n"+mv.map(function(x){return [x.f.split("-").reverse().join("/"),q(x.t),q(x.c),x.tot,x.pag,Math.max(0,x.tot-x.pag)].join(";")}).join("\n");
+  var a=document.createElement("a");a.href=URL.createObjectURL(new Blob(["﻿"+t],{type:"text/csv"}));a.download="ciela-ventas-"+C.ymd(ST.vmes).slice(0,7)+".csv";document.body.append(a);a.click();a.remove();toast("Planilla descargada");
+}
+
+/* ---------- pedidos: acuarelas y gift cards ---------- */
+function vPedidos(){
+  var acu=C.acu(),g=C.gifts().slice().sort(function(a,b){return (a.usada?1:0)-(b.usada?1:0)||(a.vendida<b.vendida?1:-1)});
+  var h='<header class="vh"><div><small>Lo que tenés en marcha</small><h1>Pedidos</h1></div><button class="btn n" data-act="nacu">+ Nuevo pedido de acuarela</button></header>'+
+  '<section class="card" style="margin-bottom:18px"><div class="ch"><h2>Cartas natales en acuarela</h2><span class="muted" style="font-size:14.5px">Tocá “Pasar a…” cuando avanzás</span></div><div class="board">'+
+  ETAPAS.map(function(e,i){var l=acu.filter(function(a){return a.etapa===i});return '<div class="col"><h3>'+e+'<span>'+l.length+'</span></h3>'+l.map(function(a){return '<div class="pc"><b>'+esc(a.nene||"Sin nombre aún")+'</b><small>Pedido por '+esc(a.nombre)+' · '+corto(a.creado)+'</small><small>'+(a.nac?"Nació "+nac(a.nac):"Faltan los datos de nacimiento")+'</small><div class="a">'+(a.pagado>=a.precio?'<span class="chip ok">Pagado</span>':'<button class="btn ok sm" data-act="cacu" data-id="'+a.id+'">Me pagó el resto</button>')+(i<3?'<button class="btn o sm" data-act="etapa" data-id="'+a.id+'">Pasar a: '+ETAPAS[i+1]+' →</button>':'')+'</div></div>'}).join("")+'</div>'}).join("")+
+  '</div></section>'+
+  '<section class="card"><div class="ch"><h2>Gift cards</h2><span class="muted" style="font-size:14.5px">'+g.filter(function(x){return !x.usada}).length+' sin canjear</span></div><div class="gcs">'+
+  g.map(function(x){return '<div class="gci"><div style="display:flex;justify-content:space-between;align-items:center"><span class="cd">'+x.code+'</span>'+(x.usada?'<span class="chip gr">Canjeada</span>':'<span class="chip ok">Sin usar</span>')+'</div><b>'+(x.tipo==="rs"?"Revolución Solar":C.SERV.tarot.opts[x.opt])+' · '+fmt(x.precio)+'</b><span class="muted" style="font-size:14.5px">Para '+esc(x.para)+' · de '+esc(x.de)+' · vendida el '+corto(x.vendida)+'</span>'+(x.dedic?'<span class="dd">“'+esc(x.dedic)+'”</span>':'')+'<div class="a">'+(x.usada?'<span class="muted" style="font-size:14px">Ya tiene su turno</span>':'<button class="btn n sm" data-act="canje" data-code="'+x.code+'">Canjear y darle turno</button>')+'</div></div>'}).join("")+
+  '</div></section>';
+  $("#main").innerHTML=h;
+}
+function nuevaAcu(){
+  abrir("Nuevo pedido de acuarela","Para los pedidos que te llegan por mensaje",
+  '<div class="g2"><div><label class="lbl" for="aN">Quién lo pide</label><input class="fld" id="aN" placeholder="Ej: Mariela"></div><div><label class="lbl" for="aK">Nombre del nene o la nena</label><input class="fld" id="aK" placeholder="Ej: Benjamín"></div></div>'+
+  '<div class="g2"><div><label class="lbl" for="aF">Fecha de nacimiento</label><input class="fld" type="date" id="aF"></div><div><label class="lbl" for="aH">Hora</label><input class="fld" type="time" id="aH"></div></div>'+
+  '<label class="lbl" for="aL">Lugar de nacimiento</label><input class="fld" id="aL" placeholder="Ej: San Isidro">'+
+  '<span class="lbl">Pago</span><div class="opts" id="aP"><button aria-pressed="false" data-p="0">Todavía no pagó</button><button aria-pressed="true" data-p="sena">Pagó la seña</button><button aria-pressed="false" data-p="todo">Pagó todo</button></div>'+
+  '<p class="note" id="aErr" style="color:var(--bad)" hidden></p><div class="acts"><button class="btn n w" data-act="gacu">Guardar pedido</button></div>');
+}
+
+/* ---------- preguntas ---------- */
+function vPreguntas(){
+  var qs=C.qs(),pen=qs.filter(function(q){return !q.r}),pub=qs.filter(function(q){return q.r});
+  var h='<header class="vh"><div><small>Preguntale al cielo</small><h1>Preguntas de la web</h1></div></header>'+
+  '<div class="ag"><section class="card"><div class="ch"><h2>Para responder</h2><span class="chip '+(pen.length?"warn":"ok")+'">'+(pen.length?pen.length+" esperando":"Al día")+'</span></div>'+
+  (pen.length?pen.map(function(q){return '<div class="qc"><b>'+esc(q.q)+'</b><small>'+esc(q.quien)+' · '+corto(q.fecha)+'</small><textarea class="fld" id="r-'+q.id+'" style="margin-top:10px" placeholder="Tu respuesta. Se publica en tu web para que le sirva a todas."></textarea><div class="a"><button class="btn n sm" data-act="resp" data-id="'+q.id+'">Publicar respuesta</button><button class="btn o sm" data-act="borq" data-id="'+q.id+'">Borrar</button></div></div>'}).join(""):'<p class="muted">No hay preguntas nuevas.</p>')+
+  '</section><section class="card"><div class="ch"><h2>Publicadas en tu web</h2></div>'+
+  pub.map(function(q){return '<div class="qc"><b>'+esc(q.q)+'</b><small>'+esc(q.quien)+'</small><div class="r">'+esc(q.r)+'</div><div class="a"><label class="sw"><input type="checkbox" data-act="pubq" data-id="'+q.id+'"'+(q.pub!==false?" checked":"")+'>'+(q.pub!==false?"Se ve en la web":"Oculta")+'</label></div></div>'}).join("")+
+  '</section></div>';
+  $("#main").innerHTML=h;
+}
+
+/* ---------- ajustes: precios y horarios ---------- */
+function vAjustes(){
+  var c=C.cfg();
+  var item=function(id,t,sub,ins){return '<div class="pri"><div class="h"><div><b>'+t+'</b>'+(sub?'<div class="muted" style="font-size:13.5px">'+sub+'</div>':'')+'</div><label class="sw"><input type="checkbox" data-act="activo" data-k="'+id+'"'+(c.activos[id]!==false?" checked":"")+'>En la web</label></div><div class="in">'+ins+'</div></div>'};
+  var mon=function(path,label,val){return '<label><small>'+label+'</small><span class="money" style="display:block"><input class="fld" inputmode="numeric" data-act="precio" data-p="'+path+'" value="'+val+'"></span></label>'};
+  var h='<header class="vh"><div><small>Lo que ve la gente en tu web</small><h1>Precios y horarios</h1></div><a class="btn o" href="../#servicios" target="_blank" rel="noopener">Ver cómo queda ↗</a></header>'+
+  '<div class="ag"><section class="card"><div class="ch"><h2>Precios</h2><span class="muted" style="font-size:14px">Se guarda solo</span></div><div class="pr">'+
+   item("tarot","Lecturas de Tarot","",mon("tarot.0","Express",c.precios.tarot[0])+mon("tarot.1","Básica",c.precios.tarot[1])+mon("tarot.2","Extensa",c.precios.tarot[2]))+
+   item("rs","Revolución Solar","",mon("rs","Precio",c.precios.rs))+
+   item("tirada","Tirada astrológica","",mon("tirada","Precio",c.precios.tirada))+
+   item("inf","Carta natal infantil","Lámina en acuarela",mon("inf","Precio",c.precios.inf))+
+   item("enc","Encuentro y Tarot","Hasta 6 personas, después se suma por persona",mon("enc","Hasta 6",c.precios.enc)+mon("encExtra","Cada persona más",c.precios.encExtra))+
+   '<div class="pri"><div class="h"><div><b>Seña para reservar</b><div class="muted" style="font-size:13.5px">Lo que se paga al reservar desde la web</div></div></div><div class="opts" style="margin-top:10px">'+[20,30,50,100].map(function(p){return '<button data-act="sena" data-p="'+p+'" aria-pressed="'+(c.sena===p)+'">'+(p===100?"Todo por adelantado":p+"%")+'</button>'}).join("")+'</div></div>'+
+  '</div></section><section class="card"><div class="ch"><h2>Días y horarios</h2><span class="muted" style="font-size:14px">Lo que se puede reservar</span></div><div class="wk">'+
+   ORD.map(function(d){var hs=c.horas[d]||[];return '<div class="wkd'+(hs.length?"":" no")+'"><div class="h"><b style="text-transform:capitalize">'+DIA[d]+'</b><label class="sw"><input type="checkbox" data-act="trabaja" data-d="'+d+'"'+(hs.length?" checked":"")+'>'+(hs.length?"Trabajo":"No trabajo")+'</label></div><div class="hs">'+hs.map(function(x){return '<span class="hc">'+x+'<button data-act="qh" data-d="'+d+'" data-h="'+x+'" aria-label="Sacar '+x+'">×</button></span>'}).join("")+'<input class="fld" type="time" step="900" id="h-'+d+'" aria-label="Nuevo horario"><button class="btn o sm" data-act="ah" data-d="'+d+'">+ Agregar</button></div></div>'}).join("")+
+  '</div><div class="pri" style="margin-top:14px"><b>Días que no trabajás</b><div class="muted" style="font-size:13.5px">Vacaciones, feriados o un día que tenés otra cosa. Ese día no se puede reservar.</div><div class="hs"><input class="fld" type="date" id="lib" style="width:170px" min="'+HOY+'"><button class="btn o sm" data-act="alib">+ Agregar</button></div><div class="libs">'+
+   (c.libres.filter(function(f){return f>=HOY}).sort().map(function(f){return '<span class="hc" style="display:inline-flex;align-items:center;gap:4px;background:var(--niebla);border-radius:999px;padding:4px 6px 4px 12px;font-weight:600;font-size:14.5px;text-transform:capitalize">'+corto(f)+'<button data-act="qlib" data-f="'+f+'" aria-label="Sacar" style="border:0;background:none;width:24px;height:24px;border-radius:50%;color:var(--gris)">×</button></span>'}).join("")||'<span class="muted" style="font-size:14px">Ninguno por ahora.</span>')+
+  '</div></div></section></div>';
+  $("#main").innerHTML=h;
+}
+var DEF_H=["10:00","11:30","15:00","17:00","18:30"];
+function cfgSet(fn,msg){var c=C.cfg();fn(c);C.saveCfg(c);toast((msg||"Guardado")+'. <a href="../" target="_blank" rel="noopener">Ya se ve en tu web ↗</a>')}
+
+/* ---------- eventos ---------- */
+document.addEventListener("click",function(e){
+  var b=e.target.closest("[data-v],[data-act]");if(!b)return;
+  if(b.dataset.v){ST.v=b.dataset.v;render();scrollTo(0,0);return}
+  var a=b.dataset.act,id=b.dataset.id;
+  if(b.tagName==="INPUT")return;
+  if(b.parentElement&&b.parentElement.classList.contains("opts")&&!a){return}
+  switch(a){
+    case "cerrar":cerrar();break;
+    case "mes":ST.mes=new Date(ST.mes.getFullYear(),ST.mes.getMonth()+(+b.dataset.d),1,12);render();break;
+    case "mes-hoy":ST.mes=primero(new Date());ST.sel=HOY;render();break;
+    case "dia":ST.sel=b.dataset.f;render();if(innerWidth<=1180){var p=$("#dayP");p&&p.scrollIntoView({behavior:"smooth",block:"start"})}break;
+    case "libre":cfgSet(function(c){var i=c.libres.indexOf(b.dataset.f);if(i>=0)c.libres.splice(i,1);else c.libres.push(b.dataset.f)},"Listo");render();break;
+    case "ver":verRes(id);break;
+    case "cobrar":editRes(id,function(r){r.pagado=r.precio});verRes(id);render();toast("Saldo cobrado");break;
+    case "hecha":editRes(id,function(r){r.estado="hecha"});verRes(id);render();toast("Marcada como hecha");break;
+    case "nohecha":editRes(id,function(r){r.estado="confirmada"});verRes(id);render();break;
+    case "reactivar":editRes(id,function(r){r.estado="confirmada"});verRes(id);render();break;
+    case "cancelar":if(confirm("¿Cancelar este turno? El horario queda libre en tu web.")){editRes(id,function(r){r.estado="cancelada"});verRes(id);render();toast("Turno cancelado. El horario quedó libre.")}break;
+    case "wpp":toast("En el boceto no abre WhatsApp. En la web real te lleva directo al chat.");break;
+    case "mover":var r=C.res().find(function(x){return x.id===id});$("#mov").innerHTML='<div class="pri" style="margin-top:14px"><b>Cambiar día u hora</b><div class="g2" style="margin-top:8px"><input class="fld" type="date" id="mF" value="'+r.fecha+'"><select class="fld" id="mH">'+selHoras(r.fecha,r.id,r.hora)+'</select></div><input class="fld" type="time" id="mH2" step="900" style="margin-top:6px" hidden><div class="acts"><button class="btn n w" data-act="movok" data-id="'+id+'">Guardar el cambio</button></div></div>';$("#mov").scrollIntoView({behavior:"smooth"});break;
+    case "movok":var nf=$("#mF").value,nh=$("#mH").value==="otra"?$("#mH2").value:$("#mH").value;if(!nf||!nh)return;editRes(id,function(r){r.fecha=nf;r.hora=nh});ST.sel=nf;ST.mes=primero(P(nf));verRes(id);render();toast("Turno movido al "+corto(nf)+" "+nh);break;
+    case "nuevo":nuevo(b.dataset.f,b.dataset.h);break;
+    case "guardar":guardarNuevo(b.dataset.gift);break;
+    case "vmes":ST.todos=false;ST.vmes=new Date(ST.vmes.getFullYear(),ST.vmes.getMonth()+(+b.dataset.d),1,12);render();break;
+    case "fil":ST.fil=b.dataset.k;ST.todos=false;render();break;
+    case "todos":ST.todos=true;render();break;
+    case "csv":csv();break;
+    case "mov":var k=b.dataset.k;if(k==="res")verRes(id);else{ST.v="pedidos";render();scrollTo(0,0)}break;
+    case "etapa":var l=C.acu();l.forEach(function(x){if(x.id===id&&x.etapa<3)x.etapa++});C.saveAcu(l);render();toast("Pedido actualizado");break;
+    case "cacu":var l2=C.acu();l2.forEach(function(x){if(x.id===id)x.pagado=x.precio});C.saveAcu(l2);render();toast("Saldo cobrado");break;
+    case "nacu":nuevaAcu();break;
+    case "gacu":var an=$("#aN").value.trim();if(!an){$("#aErr").textContent="Escribí quién lo pide.";$("#aErr").hidden=false;return}var cf=C.cfg(),pr=cf.precios.inf,pp=$("#aP [aria-pressed=true]").dataset.p;
+      C.add(C.K.acu,{id:C.nid("a"),nombre:an,nene:$("#aK").value.trim(),nac:$("#aF").value?{fecha:$("#aF").value,hora:$("#aH").value,lugar:$("#aL").value.trim()}:null,etapa:0,precio:pr,pagado:pp==="0"?0:pp==="sena"?Math.round(pr*cf.sena/100):pr,creado:HOY});cerrar();render();toast("Pedido guardado");break;
+    case "canje":var gg=C.gifts().find(function(x){return x.code===b.dataset.code});nuevo(null,null,gg);break;
+    case "resp":var t=$("#r-"+id).value.trim();if(!t){$("#r-"+id).focus();return}var q=C.qs();q.forEach(function(x){if(x.id===id){x.r=t;x.pub=true}});C.saveQs(q);render();toast('Respuesta publicada. <a href="../#preguntas" target="_blank" rel="noopener">Verla en tu web ↗</a>');break;
+    case "borq":if(confirm("¿Borrar esta pregunta?")){C.saveQs(C.qs().filter(function(x){return x.id!==id}));render()}break;
+    case "sena":cfgSet(function(c){c.sena=+b.dataset.p});render();break;
+    case "qh":cfgSet(function(c){c.horas[b.dataset.d]=(c.horas[b.dataset.d]||[]).filter(function(x){return x!==b.dataset.h})});render();break;
+    case "ah":var v=$("#h-"+b.dataset.d).value;if(!v){$("#h-"+b.dataset.d).focus();return}cfgSet(function(c){var l=c.horas[b.dataset.d]||[];if(l.indexOf(v)<0)l.push(v);l.sort();c.horas[b.dataset.d]=l});render();break;
+    case "alib":var lv=$("#lib").value;if(!lv){$("#lib").focus();return}cfgSet(function(c){if(c.libres.indexOf(lv)<0)c.libres.push(lv)});render();break;
+    case "qlib":cfgSet(function(c){c.libres=c.libres.filter(function(x){return x!==b.dataset.f})});render();break;
+    case "reset":if(confirm("¿Volver a los datos de ejemplo? Se borra lo que cambiaste en este navegador.")){C.reset();ST.sel=HOY;ST.mes=primero(new Date());render();toast("Listo, datos de ejemplo de nuevo")}break;
+  }
+});
+// botones de opción (cómo, pago) dentro de los formularios
+document.addEventListener("click",function(e){var o=e.target.closest(".opts button:not([data-act])");if(!o||o.disabled)return;o.parentElement.querySelectorAll("button").forEach(function(x){x.setAttribute("aria-pressed",x===o)})});
+document.addEventListener("change",function(e){
+  var t=e.target,a=t.dataset.act;
+  if(t.id==="nF"){$("#nH").innerHTML=selHoras(t.value,null);$("#nH2").hidden=$("#nH").value!=="otra"}
+  if(t.id==="nH")$("#nH2").hidden=t.value!=="otra";
+  if(t.id==="mF"){var mid=$("[data-act=movok]").dataset.id;$("#mH").innerHTML=selHoras(t.value,mid);$("#mH2").hidden=$("#mH").value!=="otra"}
+  if(t.id==="mH")$("#mH2").hidden=t.value!=="otra";
+  if(a==="precio"){var n=+String(t.value).replace(/\D/g,"");if(!n){t.value="";return}var p=t.dataset.p.split(".");cfgSet(function(c){if(p.length>1)c.precios[p[0]][+p[1]]=n;else c.precios[p[0]]=n},"Precio guardado");t.value=n}
+  if(a==="activo")cfgSet(function(c){c.activos[t.dataset.k]=t.checked},t.checked?"Se muestra en tu web":"Lo sacaste de tu web");
+  if(a==="trabaja"){cfgSet(function(c){c.horas[t.dataset.d]=t.checked?DEF_H.slice():[]});render()}
+  if(a==="pubq"){var q=C.qs();q.forEach(function(x){if(x.id===t.dataset.id)x.pub=t.checked});C.saveQs(q);render()}
+});
+addEventListener("keydown",function(e){if(e.key==="Escape")cerrar()});
+render();
+})();
+</script>
+</body>
+</html>
