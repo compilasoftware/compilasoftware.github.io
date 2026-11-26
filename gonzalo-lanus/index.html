@@ -1,0 +1,840 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#231f20">
+<title>Gonzalo Lanús Catering, armá tu evento</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23231f20'/%3E%3Cpath d='M14 44l-3-22 11 9 10-15 10 15 11-9-3 22z' fill='none' stroke='%2353b3e3' stroke-width='4' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@1,500;1,600;1,700&display=swap">
+<style>
+/* Gonzalo Lanús Catering (Béccar). Casamientos, 15, corporativos. Cuatro propuestas reales: Asado al pan,
+   Asado formal, Gourmet informal, Gourmet formal, con sus reglas (3 a 4 cortes, 1 estación cada 50 invitados,
+   pernil vacuno desde 300, 1 maître cada 200). Marca: carbón de su encabezado, celeste de sus títulos,
+   Playfair itálica + Montserrat como en sus menús. Lo memorable: la hoja "Tu propuesta" que se arma en vivo
+   con la misma pinta que sus PDF de menú. */
+:root{
+  --coal:#231f20;--coal-2:#34302f;--paper:#fff;--bg:#f6f4f1;--bg-2:#ece8e3;--ink:#231f20;--dim:#66605c;--line:#e2ddd7;
+  --sky:#53b3e3;--sky-d:#1a77a6;--sky-s:#e5f3fa;--ok:#2d7a57;--ok-s:#e0f0e8;--warn:#a5481d;--warn-s:#f8e6dc;--gold:#c99a3d;
+  --serif:"Playfair Display",Georgia,serif;--ui:"Montserrat",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:15.5px;line-height:1.55;-webkit-font-smoothing:antialiased}
+body{overflow-x:hidden}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2.5px solid var(--sky-d);outline-offset:2px}
+[hidden]{display:none!important}
+.wrap{max-width:1180px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-left))}
+.num{font-feature-settings:"tnum";letter-spacing:-.01em}
+.it{font-family:var(--serif);font-style:italic;font-weight:600}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* barra de boceto */
+.demo{position:sticky;top:0;z-index:60;background:#151213;color:#d9d3cf;font-size:12.5px;display:flex;align-items:center;gap:10px;justify-content:space-between;padding:7px max(12px,env(safe-area-inset-left))}
+.demo b{color:#fff;font-weight:600}
+.seg{display:flex;background:#2c2728;border-radius:999px;padding:3px;gap:2px;flex-shrink:0}
+.seg button{border:0;background:transparent;color:#cfc8c4;padding:5px 13px;border-radius:999px;font-size:12.5px;font-weight:600;position:relative}
+.seg button.on{background:var(--sky);color:#0d2633}
+.seg .dot{position:absolute;top:-4px;right:-4px;min-width:17px;height:17px;border-radius:9px;background:#e0533a;color:#fff;font-size:10.5px;line-height:17px;padding:0 4px}
+
+/* encabezado como el de sus menús */
+.top{background:var(--coal);color:#fff}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:66px}
+.wm{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;letter-spacing:.14em;font-size:15px;white-space:nowrap}
+.wm .g{font-weight:300}.wm .l{font-weight:600}
+.top .ct{font-size:11.5px;color:#bdb6b2;text-align:right;line-height:1.45}
+@media (max-width:640px){.top .ct{display:none}}
+
+/* hero */
+.hero{background:var(--coal);color:#fff;padding:34px 0 120px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:auto 0 0 0;height:1px;background:linear-gradient(90deg,transparent,#4a4443,transparent)}
+.hero h1{font-family:var(--serif);font-style:italic;font-weight:600;font-size:clamp(34px,5.4vw,60px);line-height:1.04;margin:0 0 14px;max-width:15ch;letter-spacing:-.01em}
+.hero h1 span{color:var(--sky)}
+.hero .lead{color:#cfc8c4;max-width:52ch;margin:0 0 20px;font-size:16px}
+.hero .tags{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+.hero .tags li{border:1px solid #4a4443;border-radius:999px;padding:5px 12px;font-size:13px;color:#e6e0dc}
+
+/* cotizador */
+.quote{margin-top:-92px;position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:22px;align-items:start}
+@media (max-width:980px){.quote{grid-template-columns:1fr}}
+.qbox{background:var(--paper);border-radius:18px;box-shadow:0 1px 0 var(--line),0 18px 40px -24px rgba(35,31,32,.45);padding:22px 22px 20px}
+@media (max-width:560px){.qbox{padding:18px 15px 16px;border-radius:14px}}
+.steps{display:flex;gap:6px;margin:0 0 18px;padding:0;list-style:none;overflow-x:auto;scrollbar-width:none}
+.steps::-webkit-scrollbar{display:none}
+.steps li{flex:1 0 auto;font-size:12.5px;font-weight:600;color:#9a928d;border-top:3px solid var(--bg-2);padding-top:7px;white-space:nowrap}
+.steps li.on{color:var(--ink);border-color:var(--sky)}
+.steps li.ok{color:var(--sky-d);border-color:var(--sky-d)}
+.q{font-family:var(--serif);font-style:italic;font-weight:600;font-size:27px;line-height:1.15;margin:0 0 4px}
+.qs{color:var(--dim);margin:0 0 16px;font-size:14px}
+.lbl{display:block;font-size:13px;font-weight:600;margin:16px 0 7px}
+.lbl em{font-style:normal;font-weight:400;color:var(--dim)}
+.field{width:100%;border:1.5px solid var(--line);border-radius:10px;padding:11px 12px;background:#fff;font-size:15px}
+.field:focus{border-color:var(--sky-d);outline:none}
+.err{color:var(--warn);background:var(--warn-s);border-radius:8px;padding:8px 11px;font-size:13.5px;margin:12px 0 0}
+.note{font-size:12.5px;color:var(--dim);margin:12px 0 0}
+.nxt{display:flex;gap:10px;justify-content:space-between;margin-top:22px}
+.nxt .btn:only-child{margin-left:auto}
+.btn{border:0;border-radius:999px;padding:12px 22px;font-weight:600;font-size:14.5px;display:inline-flex;align-items:center;gap:8px;justify-content:center}
+.btn.p{background:var(--coal);color:#fff}.btn.p:hover{background:#000}
+.btn.s{background:var(--sky);color:#0d2633}.btn.s:hover{background:#3ea6da}
+.btn.g{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+
+/* paso 1 */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:8px 15px;font-size:14px;font-weight:500}
+.chip.on{background:var(--coal);border-color:var(--coal);color:#fff}
+.cnt{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:520px){.cnt{grid-template-columns:1fr}}
+.cbox{border:1.5px solid var(--line);border-radius:12px;padding:12px 14px}
+.cbox small{display:block;font-size:12.5px;color:var(--dim);font-weight:500}
+.stepper{display:flex;align-items:center;gap:10px;margin-top:6px}
+.stepper button{width:38px;height:38px;border-radius:50%;border:1.5px solid var(--line);background:#fff;font-size:20px;line-height:1;flex-shrink:0}
+.stepper b{font-size:28px;font-weight:600;min-width:62px;text-align:center}
+input[type=range]{width:100%;accent-color:var(--sky-d);margin:12px 0 2px}
+.rule{display:flex;gap:9px;align-items:flex-start;background:var(--sky-s);color:#12506f;border-radius:10px;padding:9px 12px;font-size:13px;margin-top:12px}
+.rule svg{flex-shrink:0;margin-top:2px}
+
+/* paso 2: propuestas */
+.props{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.props{grid-template-columns:1fr}}
+.prop{text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:0;overflow:hidden;display:flex;flex-direction:column}
+.prop .ph{background:var(--coal);color:#fff;padding:13px 15px 11px;position:relative}
+.prop .ph b{font-family:var(--serif);font-style:italic;font-weight:600;font-size:22px;line-height:1.1;display:block}
+.prop .ph b span{font-family:var(--ui);font-style:normal;font-weight:400;font-size:13px;letter-spacing:.16em;margin-left:5px;text-transform:uppercase}
+.prop .pb{padding:11px 15px 13px;font-size:13.5px;color:var(--dim);flex:1;display:flex;flex-direction:column;gap:8px}
+.prop .pr{color:var(--ink);font-weight:600;font-size:14px}
+.prop .pr small{font-weight:400;color:var(--dim)}
+.prop.on{border-color:var(--sky-d);box-shadow:0 0 0 3px var(--sky-s)}
+.prop.on .ph{background:#173f55}
+.prop .ck{position:absolute;right:12px;top:12px;width:22px;height:22px;border-radius:50%;border:2px solid #6b6563}
+.prop.on .ck{background:var(--sky);border-color:var(--sky)}
+.prop.on .ck::after{content:"";position:absolute;left:6px;top:2px;width:5px;height:10px;border:solid #0d2633;border-width:0 2.5px 2.5px 0;transform:rotate(45deg)}
+
+/* paso 3: armado del menú */
+.grp{border-top:1px solid var(--line);padding:14px 0 4px}
+.grp:first-of-type{border-top:0;padding-top:2px}
+.gh{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:8px}
+.gh h4{margin:0;font-family:var(--serif);font-style:italic;font-weight:600;font-size:19px;color:var(--sky-d)}
+.gh .cn{font-size:12.5px;font-weight:600;color:var(--dim);white-space:nowrap}
+.gh .cn.done{color:var(--ok)}
+.gd{font-size:13px;color:var(--dim);margin:-4px 0 9px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+@media (max-width:560px){.opts{grid-template-columns:1fr}}
+.opt{display:flex;gap:10px;align-items:flex-start;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:10px;padding:9px 11px;font-size:13.5px;line-height:1.35}
+.opt .bx{width:18px;height:18px;border-radius:5px;border:1.8px solid #b5aea9;flex-shrink:0;margin-top:1px;position:relative}
+.opt.one .bx{border-radius:50%}
+.opt.on{border-color:var(--sky-d);background:var(--sky-s)}
+.opt.on .bx{background:var(--sky-d);border-color:var(--sky-d)}
+.opt.on .bx::after{content:"";position:absolute;left:5px;top:1.5px;width:4px;height:9px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.opt.off{opacity:.45}
+.opt small{display:block;color:var(--dim);font-size:12px;margin-top:2px}
+.opt .ad{display:inline-block;margin-top:4px;font-size:11.5px;font-weight:600;color:var(--warn);background:var(--warn-s);border-radius:5px;padding:1px 6px}
+.fixed{margin:0;padding:0 0 0 2px;list-style:none;font-size:13.5px;columns:2;column-gap:20px}
+@media (max-width:560px){.fixed{columns:1}}
+.fixed li{break-inside:avoid;padding:2px 0 2px 14px;position:relative}
+.fixed li::before{content:"";position:absolute;left:2px;top:10px;width:5px;height:5px;border-radius:50%;background:var(--sky)}
+
+/* paso 4: fecha y lugar */
+.cal{border:1.5px solid var(--line);border-radius:12px;padding:10px 10px 8px;max-width:420px}
+.ch{display:flex;align-items:center;justify-content:space-between;margin:0 2px 8px}
+.ch b{font-weight:600;text-transform:capitalize}
+.ch button{width:32px;height:32px;border-radius:50%;border:1.5px solid var(--line);background:#fff;display:grid;place-items:center}
+.cg{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;text-align:center}
+.cg .h{font-size:11px;font-weight:600;color:var(--dim);padding:2px 0}
+.cg button{aspect-ratio:1;border:0;border-radius:8px;background:transparent;font-size:13.5px;font-weight:500;position:relative}
+.cg button:hover:not(:disabled){background:var(--bg)}
+.cg button.full{color:#b9b1ab;text-decoration:line-through}
+.cg button.few::after{content:"";position:absolute;bottom:5px;left:50%;width:4px;height:4px;margin-left:-2px;border-radius:50%;background:var(--gold)}
+.cg button.on{background:var(--coal);color:#fff}
+.cg button:disabled{cursor:not-allowed}
+.cg button.past{color:#cfc8c3}
+.leg{display:flex;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--dim);margin:8px 2px 0}
+.leg i{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:5px;vertical-align:1px}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.duo{grid-template-columns:1fr}}
+.bars{display:grid;gap:8px}
+.bar{display:flex;gap:10px;align-items:flex-start;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:10px;padding:10px 12px;font-size:14px}
+.bar small{display:block;color:var(--dim);font-size:12.5px}
+.bar .bx{width:18px;height:18px;border-radius:50%;border:1.8px solid #b5aea9;flex-shrink:0;margin-top:2px;position:relative}
+.bar.on{border-color:var(--sky-d);background:var(--sky-s)}
+.bar.on .bx{border:5px solid var(--sky-d)}
+
+/* listo */
+.done{text-align:center;padding:12px 4px 4px}
+.done .ckc{width:58px;height:58px;border-radius:50%;background:var(--ok);display:grid;place-items:center;margin:0 auto 12px}
+.done h3{font-family:var(--serif);font-style:italic;font-weight:600;font-size:28px;margin:0 0 6px}
+.done p{color:var(--dim);margin:0 auto 16px;max-width:44ch}
+.done .nxt{justify-content:center;flex-wrap:wrap}
+
+/* hoja: tu propuesta (como sus menús) */
+.sheet{background:var(--paper);border-radius:18px;overflow:hidden;box-shadow:0 1px 0 var(--line),0 18px 40px -24px rgba(35,31,32,.45);position:sticky;top:52px}
+@media (max-width:980px){.sheet{position:static}}
+.sh-top{background:var(--coal);color:#fff;padding:14px 18px 12px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.sh-top .wm{font-size:12.5px}
+.sh-top small{font-size:11px;color:#a9a19d;text-align:right;line-height:1.3}
+.sh-title{padding:16px 18px 4px}
+.sh-title h3{margin:0;font-family:var(--serif);font-style:italic;font-weight:700;font-size:30px;line-height:1.05}
+.sh-title h3 span{font-family:var(--ui);font-style:normal;font-weight:400;font-size:17px;letter-spacing:.12em;text-transform:uppercase;margin-left:4px}
+.sh-title p{margin:6px 0 0;font-size:13px;color:var(--dim)}
+.sh-body{padding:4px 18px 8px;max-height:440px;overflow:auto}
+@media (max-width:980px){.sh-body{max-height:none}}
+.sh-empty{color:var(--dim);font-size:14px;padding:18px 0 14px}
+.sh-sec{padding:8px 0 4px}
+.sh-sec h5{margin:0 0 3px;font-family:var(--serif);font-style:italic;font-weight:600;font-size:17px;color:var(--sky)}
+.sh-sec ul{margin:0;padding:0;list-style:none;font-size:13px;line-height:1.45}
+.sh-sec li{padding:1px 0 1px 12px;position:relative}
+.sh-sec li::before{content:"•";position:absolute;left:0;color:var(--dim)}
+.sh-sec li.ph{color:#b0a8a3;font-style:italic}
+.sh-sec li em{font-style:normal;color:var(--warn);font-size:11.5px;font-weight:600;margin-left:4px}
+.sh-inc{background:var(--sky);color:#0d2633;padding:12px 18px;font-size:12.5px}
+.sh-inc h5{margin:0 0 4px;font-family:var(--serif);font-style:italic;font-weight:600;font-size:16px;color:#0d2633}
+.sh-inc ul{margin:0;padding:0 0 0 14px}
+.sh-tot{padding:12px 18px 16px;border-top:1px solid var(--line)}
+.sh-tot .r{display:flex;justify-content:space-between;gap:10px;font-size:13.5px;padding:2px 0}
+.sh-tot .r span:first-child{color:var(--dim)}
+.sh-tot .big{display:flex;justify-content:space-between;align-items:baseline;margin-top:6px;padding-top:8px;border-top:1px dashed var(--line)}
+.sh-tot .big span{font-weight:600}
+.sh-tot .big b{font-size:26px;font-weight:600}
+.sh-tot .ej{font-size:11.5px;color:var(--warn);margin:6px 0 0}
+
+/* barra móvil */
+.mbar{display:none}
+@media (max-width:980px){
+  .mbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:50;background:var(--coal);color:#fff;padding:10px max(16px,env(safe-area-inset-left)) calc(10px + env(safe-area-inset-bottom));align-items:center;justify-content:space-between;gap:12px;box-shadow:0 -8px 24px -12px rgba(0,0,0,.4)}
+  .mbar small{display:block;font-size:11.5px;color:#bdb6b2}
+  .mbar b{font-size:19px;font-weight:600}
+  .mbar button{background:var(--sky);color:#0d2633;border:0;border-radius:999px;padding:10px 16px;font-weight:600;font-size:13.5px;white-space:nowrap;flex-shrink:0}
+  .demo>span{font-size:12px;line-height:1.3}
+  body.cli{padding-bottom:70px}
+}
+
+/* sección: cómo llega */
+.blk{padding:64px 0 56px}
+.blk h2{font-family:var(--serif);font-style:italic;font-weight:600;font-size:clamp(28px,3.6vw,40px);line-height:1.1;margin:0 0 10px;max-width:22ch}
+.blk .sub{color:var(--dim);max-width:62ch;margin:0 0 26px}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media (max-width:820px){.vs{grid-template-columns:1fr}}
+.card{background:var(--paper);border-radius:16px;padding:20px;box-shadow:0 1px 0 var(--line)}
+.card h3{margin:0 0 12px;font-size:15px;font-weight:600}
+.card h3 small{font-weight:400;color:var(--dim)}
+.form-old{display:grid;gap:7px}
+.form-old div{display:flex;justify-content:space-between;gap:10px;border:1px solid var(--line);border-radius:8px;padding:8px 11px;font-size:13.5px}
+.form-old div span:last-child{color:#a59d98}
+.form-old p{margin:6px 0 0;font-size:13px;color:var(--warn)}
+.form-new{display:grid;gap:7px}
+.form-new div{display:flex;justify-content:space-between;gap:12px;border-radius:8px;padding:8px 11px;font-size:13.5px;background:var(--sky-s)}
+.form-new div span:last-child{font-weight:600;text-align:right}
+.gains{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px}
+@media (max-width:820px){.gains{grid-template-columns:1fr}}
+.gain b{display:block;font-weight:600;margin-bottom:3px}
+.gain span{color:var(--dim);font-size:14px}
+
+footer{background:var(--coal);color:#bdb6b2;font-size:13px;padding:28px 0 34px}
+footer .wrap{display:grid;grid-template-columns:1fr 1.3fr;gap:24px}
+@media (max-width:760px){footer .wrap{grid-template-columns:1fr}}
+footer a{color:var(--sky)}
+footer .wm{margin-bottom:8px}
+
+/* ================= PANEL ================= */
+.panel{background:var(--bg);min-height:100vh}
+.ptop{background:var(--coal);color:#fff}
+.ptop .wrap{display:flex;justify-content:space-between;align-items:center;min-height:58px;gap:12px}
+.ptop .who{font-size:12.5px;color:#bdb6b2}
+.phead{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;padding:26px 0 14px;flex-wrap:wrap}
+.phead h2{font-family:var(--serif);font-style:italic;font-weight:600;font-size:32px;margin:0}
+.phead p{margin:2px 0 0;color:var(--dim);font-size:14px}
+.ftabs{display:flex;gap:6px;flex-wrap:wrap}
+.ftabs button{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:6px 13px;font-size:13px;font-weight:600}
+.ftabs button.on{background:var(--coal);border-color:var(--coal);color:#fff}
+.pgrid{display:grid;grid-template-columns:360px minmax(0,1fr);gap:18px;align-items:start;padding-bottom:40px}
+@media (max-width:900px){.pgrid{grid-template-columns:1fr}}
+.clist{display:grid;gap:8px}
+.ci{text-align:left;border:1.5px solid transparent;background:#fff;border-radius:12px;padding:12px 14px;box-shadow:0 1px 0 var(--line);display:grid;gap:3px}
+.ci.on{border-color:var(--sky-d)}
+.ci .t{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.ci .t b{font-size:14.5px;font-weight:600}
+.ci .m{font-size:13px;color:var(--dim)}
+.ci .p{font-size:13px;font-weight:600}
+.st{font-size:11.5px;font-weight:600;border-radius:999px;padding:2px 9px;white-space:nowrap}
+.st.n{background:#fde7e2;color:#b2341c}
+.st.e{background:var(--sky-s);color:#12506f}
+.st.s{background:var(--ok-s);color:var(--ok)}
+.det{background:#fff;border-radius:16px;box-shadow:0 1px 0 var(--line);overflow:hidden}
+.det-h{padding:18px 20px 14px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:flex-start}
+.det-h h3{margin:0;font-size:19px;font-weight:600}
+.det-h p{margin:3px 0 0;color:var(--dim);font-size:13.5px}
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border-bottom:1px solid var(--line)}
+@media (max-width:620px){.facts{grid-template-columns:1fr 1fr}}
+.facts div{background:#fff;padding:11px 14px}
+.facts small{display:block;font-size:11.5px;color:var(--dim);font-weight:500}
+.facts b{font-size:14.5px;font-weight:600}
+.det-b{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:0}
+@media (max-width:760px){.det-b{grid-template-columns:1fr}}
+.det-menu{padding:8px 20px 16px}
+.det-side{border-left:1px solid var(--line);padding:16px 18px;display:grid;gap:10px;align-content:start;background:#fbfaf8}
+@media (max-width:760px){.det-side{border-left:0;border-top:1px solid var(--line)}}
+.det-side .btn{width:100%}
+.wa{background:#e7f6e9;border-radius:10px;padding:10px 12px;font-size:13px;white-space:pre-line}
+.wa small{display:block;font-size:11px;color:var(--ok);font-weight:600;margin-bottom:3px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);opacity:0;background:var(--coal);color:#fff;padding:10px 18px;border-radius:999px;font-size:13.5px;z-index:80;transition:.25s;pointer-events:none}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+.empty{background:#fff;border-radius:12px;padding:18px;color:var(--dim);font-size:14px}
+</style>
+</head>
+<body class="cli">
+
+<div class="demo" role="region" aria-label="Aviso de boceto">
+  <span><b>Boceto para Gonzalo Lanús Catering</b> hecho por Compila</span>
+  <div class="seg" role="tablist" aria-label="Cambiar de vista">
+    <button id="vCli" class="on" role="tab" aria-selected="true">Cliente</button>
+    <button id="vPan" role="tab" aria-selected="false">Panel<span class="dot" id="dotNew">1</span></button>
+  </div>
+</div>
+
+<!-- ===================== VISTA CLIENTE ===================== -->
+<main id="cli">
+  <header class="top">
+    <div class="wrap">
+      <a class="wm" href="#" aria-label="Gonzalo Lanús Catering">
+        <svg width="26" height="22" viewBox="0 0 52 44" aria-hidden="true"><path d="M7 36 4 12l12 10L26 5l10 17 12-10-3 24z" fill="none" stroke="#53b3e3" stroke-width="3" stroke-linejoin="round"/><path d="M8 41h36" stroke="#53b3e3" stroke-width="3" stroke-linecap="round"/></svg>
+        <span><span class="g">GONZALO</span><span class="l">LANÚS</span></span>
+      </a>
+      <span class="ct">Juan B. Justo 1258, Béccar, San Isidro<br>Eventos en Zona Norte, CABA, GBA e interior de Buenos Aires</span>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap">
+      <h1>Armá el menú de tu evento <span>y mirá el presupuesto.</span></h1>
+      <p class="lead">Elegí la propuesta, los cortes, las estaciones y el postre, como en nuestros menús. Te mostramos un valor estimado al instante y nos llega tu evento completo para confirmarte.</p>
+      <ul class="tags" aria-label="Tipos de evento">
+        <li>Casamientos</li><li>Fiestas de 15</li><li>Corporativos</li><li>Cumpleaños</li><li>Bar y Bat Mitzvah</li><li>Aniversarios</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="quote" id="cotizar">
+      <div class="qbox">
+        <ol class="steps" id="steps"><li class="on">Evento</li><li>Propuesta</li><li>Menú</li><li>Fecha y lugar</li><li>Tus datos</li></ol>
+
+        <!-- 1 evento -->
+        <div class="stp" id="st1">
+          <p class="q">¿Qué festejamos?</p>
+          <p class="qs">Con el tipo de evento y la cantidad de invitados ya podemos calcular casi todo.</p>
+          <div class="chips" id="tipos"></div>
+          <span class="lbl">Invitados</span>
+          <div class="cnt">
+            <div class="cbox">
+              <small>Adultos</small>
+              <div class="stepper"><button id="aMinus" aria-label="Restar 10 invitados">−</button><b class="num" id="aVal">120</b><button id="aPlus" aria-label="Sumar 10 invitados">+</button></div>
+              <input type="range" id="aRange" min="30" max="500" step="10" value="120" aria-label="Cantidad de adultos">
+            </div>
+            <div class="cbox">
+              <small>Chicos de 3 a 9 años <em style="font-style:normal">(menú para chicos)</em></small>
+              <div class="stepper"><button id="kMinus" aria-label="Restar un chico">−</button><b class="num" id="kVal">0</b><button id="kPlus" aria-label="Sumar un chico">+</button></div>
+              <p class="note" style="margin-top:8px">Milanesas con puré, ñoquis con salsa rosa o patitas de pollo con papas fritas.</p>
+            </div>
+          </div>
+          <div class="rule" id="rule1"></div>
+          <div class="nxt"><button class="btn p" id="go1" disabled>Elegir propuesta</button></div>
+        </div>
+
+        <!-- 2 propuesta -->
+        <div class="stp" id="st2" hidden>
+          <p class="q">Elegí la propuesta</p>
+          <p class="qs">Son nuestras cuatro propuestas. En el paso siguiente elegís los platos de cada una.</p>
+          <div class="props" id="props"></div>
+          <div class="nxt"><button class="btn g" data-back="1">Volver</button><button class="btn p" id="go2" disabled>Armar el menú</button></div>
+        </div>
+
+        <!-- 3 menú -->
+        <div class="stp" id="st3" hidden>
+          <p class="q" id="mq">Armá tu menú</p>
+          <p class="qs" id="mqs">Lo que ya viene incluido está en la lista. Elegí el resto.</p>
+          <div id="groups"></div>
+          <p class="err" id="err3" hidden></p>
+          <div class="nxt"><button class="btn g" data-back="2">Volver</button><button class="btn p" id="go3">Elegir fecha</button></div>
+        </div>
+
+        <!-- 4 fecha y lugar -->
+        <div class="stp" id="st4" hidden>
+          <p class="q">¿Cuándo y dónde?</p>
+          <p class="qs">Las fechas tachadas ya están tomadas. Con punto dorado, quedan pocos lugares.</p>
+          <div class="duo">
+            <div>
+              <div class="cal">
+                <div class="ch"><button id="cPrev" aria-label="Mes anterior"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><b id="cMes">Mes</b><button id="cNext" aria-label="Mes siguiente"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button></div>
+                <div class="cg" id="cg"></div>
+                <div class="leg"><span><i style="background:var(--gold)"></i>Pocos lugares</span><span><i style="background:#cfc8c3"></i>Tomada</span></div>
+              </div>
+            </div>
+            <div>
+              <label class="lbl" for="lugar" style="margin-top:0">Lugar del evento</label>
+              <select class="field" id="lugar"></select>
+              <label class="lbl" for="turno">Momento</label>
+              <select class="field" id="turno"><option>Noche</option><option>Mediodía</option><option>Tarde (coffee break o merienda)</option></select>
+              <span class="lbl">Barra de tragos <em>(opcional)</em></span>
+              <div class="bars" id="bars"></div>
+            </div>
+          </div>
+          <p class="err" id="err4" hidden></p>
+          <div class="nxt"><button class="btn g" data-back="3">Volver</button><button class="btn p" id="go4">Seguir</button></div>
+        </div>
+
+        <!-- 5 datos -->
+        <div class="stp" id="st5" hidden>
+          <p class="q">¿A quién le mandamos el presupuesto?</p>
+          <p class="qs">Te escribimos por WhatsApp para confirmar la fecha y ajustar lo que quieras.</p>
+          <div class="duo">
+            <div><label class="lbl" for="nom">Nombre y apellido</label><input class="field" id="nom" autocomplete="name" placeholder="Tu nombre"></div>
+            <div><label class="lbl" for="tel">WhatsApp</label><input class="field" id="tel" inputmode="tel" autocomplete="tel" placeholder="11 2345-6789"></div>
+          </div>
+          <label class="lbl" for="obs">Algo más que tengamos que saber <em>(opcional)</em></label>
+          <input class="field" id="obs" placeholder="Ej: 4 celíacos y 2 vegetarianos, la torta la traemos nosotros">
+          <p class="err" id="err5" hidden></p>
+          <div class="nxt"><button class="btn g" data-back="4">Volver</button><button class="btn s" id="go5">Pedir presupuesto</button></div>
+        </div>
+
+        <!-- listo -->
+        <div class="stp" id="st6" hidden>
+          <div class="done">
+            <div class="ckc"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+            <h3>¡Listo! Ya nos llegó tu evento</h3>
+            <p id="doneTx"></p>
+            <div class="nxt"><button class="btn g" id="again">Armar otro</button><button class="btn p" id="seePanel">Ver cómo le llega a Gonzalo</button></div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="sheet" id="sheet" aria-live="polite" aria-label="Tu propuesta">
+        <div class="sh-top">
+          <span class="wm"><svg width="20" height="17" viewBox="0 0 52 44" aria-hidden="true"><path d="M7 36 4 12l12 10L26 5l10 17 12-10-3 24z" fill="none" stroke="#53b3e3" stroke-width="3.4" stroke-linejoin="round"/><path d="M8 41h36" stroke="#53b3e3" stroke-width="3.4" stroke-linecap="round"/></svg><span><span class="g">GONZALO</span><span class="l">LANÚS</span></span></span>
+          <small id="shEv">Tu propuesta</small>
+        </div>
+        <div class="sh-title"><h3 id="shT">Tu <span>propuesta</span></h3><p id="shSub">Se arma mientras elegís.</p></div>
+        <div class="sh-body" id="shBody"><p class="sh-empty">Elegí el tipo de evento y la propuesta para ver tu menú acá.</p></div>
+        <div class="sh-inc" id="shInc" hidden></div>
+        <div class="sh-tot" id="shTot">
+          <div class="r"><span>Por persona</span><span class="num" id="tPP">-</span></div>
+          <div class="r" id="rKids" hidden><span id="tKl">Menú para chicos</span><span class="num" id="tK">-</span></div>
+          <div class="r" id="rBar" hidden><span id="tBl">Barra</span><span class="num" id="tB">-</span></div>
+          <div class="big"><span>Total estimado</span><b class="num" id="tTot">$0</b></div>
+          <p class="ej">Precios de ejemplo para el boceto. Gonzalo carga los suyos.</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <section class="blk">
+    <div class="wrap">
+      <h2>Del formulario al evento entero</h2>
+      <p class="sub">Hoy el formulario de la web pide tipo de evento, fecha, invitados y lugar, y el menú se conversa después, uno por uno. Con el cotizador, el cliente elige sobre sus propias propuestas y a Gonzalo le llega todo junto, listo para pasar el presupuesto.</p>
+      <div class="vs">
+        <div class="card">
+          <h3>Hoy <small>(el formulario de la web)</small></h3>
+          <div class="form-old">
+            <div><span>Tipo de evento</span><span>Bodas</span></div>
+            <div><span>Fecha del evento</span><span>sábado</span></div>
+            <div><span>Cantidad de invitados</span><span>150</span></div>
+            <div><span>Lugar del evento</span><span>Pilar</span></div>
+            <div><span>Mensaje</span><span>¿Precio?</span></div>
+            <p>Falta lo principal: qué quieren comer. Hay que mandar los PDF y esperar.</p>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Con el cotizador <small>(mismo cliente, ejemplo)</small></h3>
+          <div class="form-new">
+            <div><span>Evento</span><span>Casamiento, 150 adultos y 8 chicos</span></div>
+            <div><span>Propuesta</span><span>Asado formal</span></div>
+            <div><span>Cortes</span><span>Lomo, vacío y asado, colita, bondiola</span></div>
+            <div><span>Fecha y lugar</span><span>Sábado a la noche, Pilar Golf</span></div>
+            <div><span>Barra</span><span>Barra Premium GML</span></div>
+            <div><span>Ya vio el valor estimado</span><span>Sí</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="gains">
+        <div class="gain"><b>Los menús, en una pantalla</b><span>Los cuatro PDF pasan a ser opciones para tocar, con las reglas de siempre: 3 a 4 cortes, una estación cada 50 invitados.</span></div>
+        <div class="gain"><b>Llega alguien que ya decidió</b><span>Antes de escribir vio un valor estimado, así que la charla arranca por la fecha y no por el precio.</span></div>
+        <div class="gain"><b>Fechas que no se pisan</b><span>Los días tomados no se ofrecen, y todo lo pedido queda ordenado en un panel.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div>
+        <span class="wm"><svg width="22" height="19" viewBox="0 0 52 44" aria-hidden="true"><path d="M7 36 4 12l12 10L26 5l10 17 12-10-3 24z" fill="none" stroke="#53b3e3" stroke-width="3" stroke-linejoin="round"/><path d="M8 41h36" stroke="#53b3e3" stroke-width="3" stroke-linecap="round"/></svg><span><span class="g">GONZALO</span><span class="l">LANÚS</span></span></span>
+        <div>Catering gourmet y asados premium, más de 20 años en eventos sociales y corporativos.<br>Instagram <a href="https://www.instagram.com/gonzalolanuscatering/" rel="noopener" target="_blank">@gonzalolanuscatering</a></div>
+      </div>
+      <div>Boceto hecho por <a href="https://compilasoftware.com" rel="noopener" target="_blank">Compila Software</a> con los menús publicados en la web de Gonzalo Lanús Catering. Los precios, las fechas tomadas y las consultas del panel son de ejemplo. No se cobra ni se envía nada a nadie.</div>
+    </div>
+  </footer>
+
+  <div class="mbar" id="mbar"><div><small id="mbS">Total estimado</small><b class="num" id="mbT">$0</b></div><button id="mbGo">Ver propuesta</button></div>
+</main>
+
+<!-- ===================== PANEL ===================== -->
+<main id="pan" class="panel" hidden>
+  <header class="ptop">
+    <div class="wrap">
+      <span class="wm"><svg width="24" height="20" viewBox="0 0 52 44" aria-hidden="true"><path d="M7 36 4 12l12 10L26 5l10 17 12-10-3 24z" fill="none" stroke="#53b3e3" stroke-width="3" stroke-linejoin="round"/><path d="M8 41h36" stroke="#53b3e3" stroke-width="3" stroke-linecap="round"/></svg><span><span class="g">GONZALO</span><span class="l">LANÚS</span></span></span>
+      <span class="who">Panel de consultas</span>
+    </div>
+  </header>
+  <div class="wrap">
+    <div class="phead">
+      <div><h2>Consultas de eventos</h2><p id="pSub"></p></div>
+      <div class="ftabs" id="ftabs"><button class="on" data-f="all">Todas</button><button data-f="n">Nuevas</button><button data-f="e">Presupuesto enviado</button><button data-f="s">Señadas</button></div>
+    </div>
+    <div class="pgrid">
+      <div class="clist" id="clist"></div>
+      <div id="det"></div>
+    </div>
+  </div>
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+"use strict";
+var $=function(id){return document.getElementById(id)};
+var fmt=function(n){return "$"+Math.round(n).toLocaleString("es-AR")};
+var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})};
+var DOW=["domingo","lunes","martes","miércoles","jueves","viernes","sábado"];
+var MES=["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+var KID=24000; /* ejemplo */
+var TIPOS=["Casamiento","Fiesta de 15","Corporativo","Cumpleaños","Bar / Bat Mitzvah","Aniversario","Otro"];
+
+/* ---------- las cuatro propuestas (textos de sus menús; precios de ejemplo) ---------- */
+var POST_F=[
+  {n:"Babaroise de maracuyá",d:"sobre brownie húmedo y ganache de chocolate negro"},
+  {n:"Brownie tibio con helado de crema",d:"y salsa de frutos rojos o de maracuyá"},
+  {n:"Square brownie con mousse de limón",d:"y coulis de frutos rojos"},
+  {n:"Apple crumble con crema helada",d:"y ganache de chocolate negro"},
+  {n:"Mini brochettes de frutas de estación"},
+  {n:"Trifle de chocolate",d:"brownie, dulce de leche, mousse y merenguitos",x:3500},
+  {n:"Copa del sur",d:"frutos del bosque, brownie, dulce de leche y mascarpone",x:4000},
+  {n:"Crema crocante de almendras caramelizadas",x:3500},
+  {n:"Volcán de chocolate tibio",d:"con crema helada y salsa de frutos rojos",x:4000}
+];
+var MESA={t:"Mesa de postres y show de panqueques",items:["Mesa de postres y tortas","Show de panqueques en vivo, flambeados","Torta de bodas o cumpleaños incluida"]};
+var FINAL={t:"Final de fiesta",items:["Show de mini pizzetas: jamón y muzzarella, rúcula y parmesano, cuatro quesos"]};
+var EST=[
+  {n:"Estación mejicana",d:"Quesadillas, tacos de lomo y de pollo al curry, nachos con cheddar y dips"},
+  {n:"Chivitos uruguayos",d:"Figazzas y pletzalej, salsas e inserts de queso y cebollas caramelizadas"},
+  {n:"Estación de perniles",d:"Pernil de cerdo en cerveza y azúcar negra, pata de jamón crudo a la vista",big:"y pernil vacuno"},
+  {n:"Estación de cazuelas",d:"Lomo strogonoff, pollo y hongos al fricasé, chicken pie"},
+  {n:"Estación italiana",d:"Sorrentinos de jamón y mozzarella, penne con crema de limón, malfatti de espinaca"}
+];
+var PROPS=[
+  {id:"pan",a:"Asado",b:"al pan",pp:39000,d:"Bandejeo de sandwichitos de la parrilla con salsas para armar. Descontracturado, sin estar sentados.",
+   groups:[
+    {t:"Cocktail de recepción",fixed:["Fiambres y quesos en estación, frutos secos y fruta de estación","Paneras rústicas, focaccias y grisines","Vasitos de césar con pollo grillé","Vasito de ensalada caprese"]},
+    {t:"Bocados calientes",fixed:["Mini salteñas de carne cortada a cuchillo","Mini sándwich de chorizo bombón","Cubos de provoleta ahumada con hierbas","Mollejas crocantes al limón","Matambritos de cerdo a la mostaza","Riñoncitos y chinchulines crocantes"]},
+    {t:"Plato principal",fixed:["Lomitos a la mostaza","Ojo de bife grillé","Carré de cerdo","Tomate, lechugas, aros de cebolla y dips (mayonesa, mostaza, ketchup, chimichurri, criolla)"]},
+    {id:"pos",t:"Postre",min:1,max:1,items:[
+      {n:"Helado artesanal en vaso",d:"chocolate y dulce de leche, banana y dulce de leche, a elección"},
+      {n:"Brownie tibio con helado de crema",x:3500},{n:"Flan casero con dulce de leche",x:3000},{n:"Volcán de chocolate tibio",x:4000},
+      {n:"Apple crumble con crema helada",x:3500},{n:"Copa del sur",x:4000},{n:"Crema crocante de almendras caramelizadas",x:3500}]}
+   ],mantel:true},
+  {id:"af",a:"Asado",b:"formal",pp:56000,d:"La parrilla en formato formal: bandejeo de bocados, cortes de primera, ensaladas y mesa de postres.",
+   groups:[
+    {t:"Cocktail de recepción",fixed:["Estación de fiambres, quesos, grillados y aceitunas","Bocados fríos: bruschettas, ceasar en vaso, focaccias, brise de cabra y más","Bocados calientes de la parrilla en tablas: provoleta, mollejas, mini empanadas, chorizo bombón"]},
+    {id:"cor",t:"Cortes de la parrilla",min:3,max:4,hint:"Elegí de 3 a 4 cortes",items:[
+      {n:"Lomo laqueado a la mostaza"},{n:"Asado de ternera y vacío de ternera"},{n:"Pollo deshuesado al limón"},{n:"Colita de cuadril"},{n:"Bondiola de cerdo a la barbacoa"}]},
+    {id:"gua",t:"Guarnición del chef",min:1,max:1,items:[
+      {n:"Papas a la francesa",d:"con crema y panceta"},{n:"Papas rústicas",d:"asadas con manteca y hierbas"},{n:"Vegetales grillados",d:"berenjenas, calabaza, zucchinis, ajíes y cebollas"}]},
+    {id:"ens",t:"Ensaladas",min:2,max:2,hint:"Elegí 2 para las mesas",items:[
+      {n:"Criolla"},{n:"Mexicana",d:"choclo grillado, palta, cebolla morada y cilantro"},{n:"Caprese"},{n:"Alemana"},{n:"Andina",d:"papines andinos con crema especiada"},
+      {n:"Mediterránea"},{n:"Premium",d:"rúcula, endivias, radicchio, tomates secos y parmesano"},{n:"Francesa",d:"espinaca, hongos, panceta crocante y parmesano"},
+      {n:"Del chef",d:"espinaca, rúcula, peras y queso azul"},{n:"De la cocina",d:"tomates y ajíes asados, queso azul y garrapiñada"},{n:"Coleslaw"},{n:"De vegetales grillados"}]},
+    {id:"pos",t:"Postre emplatado",min:1,max:1,items:POST_F},
+    MESA,FINAL
+   ]},
+  {id:"gi",a:"Gourmet",b:"informal",pp:62000,d:"Cocktail largo con bocados y estaciones para recorrer. Ideal para que la gente circule.",
+   groups:[
+    {t:"Cocktail de recepción",fixed:["12 bocados fríos: rolls de salmón, blinis, bruschettas, shot de calabaza y más","9 bocados calientes: stick de pollo, bollinos, mini empanadas, pizzettas, provoleta"]},
+    {id:"est",t:"Estaciones",est:1,items:EST.slice(0,4)},
+    {id:"opc",t:"Estaciones opcionales",min:0,max:3,hint:"Podés sumar",items:[
+      {n:"Estación oriental",d:"wok en cajitas chinas: chop suey o salteado de lomo",x:6500},{n:"Sushi mix",d:"makis, niguiris, rolls, sashimis y geishas",x:9000},
+      {n:"Estación de mar",d:"rabas, gravlax, langostinos y ceviches",x:8500},{n:"Paella de mariscos a la vista",x:8500}]},
+    {id:"pos",t:"Postre",min:1,max:1,items:POST_F},
+    MESA,FINAL
+   ]},
+  {id:"gf",a:"Gourmet",b:"formal",pp:74000,d:"Cocina de autor: cocktail con estaciones y un plato principal sentado, a elección entre diez.",
+   groups:[
+    {t:"Cocktail de recepción",fixed:["12 bocados fríos: rolls de salmón, blinis, bruschettas, shot de calabaza y más","9 bocados calientes: stick de pollo, bollinos, mini empanadas, pizzettas, provoleta"]},
+    {id:"est",t:"Estaciones",est:1,items:EST},
+    {id:"pp",t:"Plato principal",min:1,max:1,items:[
+      {n:"Patient steak",d:"bife de 6ta costilla, 8 horas de cocción lenta, en reducción de Malbec",x:9500},
+      {n:"Lomo sellado en reducción de Malbec",d:"con gratin de papas y bacon o papa hasselback",x:7500},
+      {n:"Salmón del Pacífico",d:"vino blanco, eneldo y alcaparras, con cous cous especiado",x:8500},
+      {n:"Bondiola de cerdo a la barbacoa",d:"batatas y papas rotas en manteca de hierbas",x:3000},
+      {n:"Ojo de bife sellado en Malbec",d:"con puré rústico y chips de batata",x:7000},
+      {n:"Pechuga rellena",d:"panceta, puerros y provolone, con crema de Dijon"},
+      {n:"Wok de pollo teriyaki",d:"vegetales crocantes y arroz yamaní con almendras"},
+      {n:"Ribs de cerdo laqueadas",d:"papa al plomo rellena o ensalada césar"},
+      {n:"Panzotti de salmón ahumado",d:"con salsa de crema y ciboulette"},
+      {n:"Gigot de cordero patagónico",d:"braseado, con papa y batata a la manteca de hierbas",x:9000}]},
+    {id:"opc",t:"Estaciones opcionales",min:0,max:3,hint:"Podés sumar",items:[
+      {n:"Estación oriental",d:"wok en cajitas chinas o sushi mix",x:7500},{n:"Estación deli",d:"fiambres, quesos, grillados y paneras rústicas",x:5500},{n:"Estación de mar",d:"rabas, gravlax, langostinos, ceviches y paella",x:9500}]},
+    {id:"pos",t:"Postre",min:1,max:1,items:POST_F},
+    MESA,FINAL
+   ]}
+];
+var BARS=[{n:"Sin barra de tragos",d:"Ya incluye la barra sin alcohol línea Coca-Cola libre",x:0},{n:"Barra Premium GML",d:"Bebida libre, barmans y jefe de barra",x:17000},{n:"Barra Premium Drink Factory",d:"Bebida libre, barras diseñadas y supervisor",x:21000}];
+var LUGARES=["Todavía no tenemos lugar","Casa o espacio propio","Astilleros de Milberg (Nordelta)","La Herencia (Pilar)","El Dorado Eventos (Pilar)","Rincón de Pilar","Palacio Sans Souci (Victoria)","Pilar Palace","Pilar Golf","Espacio Arena Golf Center (Tortuguitas)","Espacio Mendoza (Ing. Maschwitz)","Estancia Carabassa (Pilar)","Estancia Villa María (Cañuelas)","Estancia Santa Elena (Luján)","Estancia Las Betulas (Open Door)","Estancia La República (Luján)","Estancia Puesto Viejo (Cañuelas)","Estancia Monte Viejo (Brandsen)","San Isidro Park","Salón del Río (Olivos)","Rowing Club (Tigre)","COPNA (Olivos)","Fátima Home (Pilar)","Quinta La Paz (Pilar)","Estancia Fátima (Pilar)","Tilos de Torcuato","Terrazas del Norte (Escobar)","La Posada Multiespacio (Benavídez)","Laguna Los Robles (Pilar)","Ymcahuasi (Escobar)","Otro lugar"];
+
+/* ---------- estado ---------- */
+var S;
+function fresh(){return{tipo:null,ad:120,ki:0,prop:null,picks:{},date:null,lugar:LUGARES[0],turno:"Noche",bar:0,nom:"",tel:"",obs:""}}
+S=fresh();
+var step=1;
+var TODAY=new Date(2026,10,26);
+var MINDATE=new Date(2026,11,10);
+var calM=new Date(2026,11,1);
+
+function P(){return PROPS.filter(function(p){return p.id===S.prop})[0]}
+function nEst(ad,g){return Math.min(g.items.length,Math.max(1,Math.ceil(ad/50)))}
+function lim(g,ad){if(g.est){var n=nEst(ad,g);return{min:n,max:n}}return{min:g.min,max:g.max}}
+function picks(id){return S.picks[id]||(S.picks[id]=[])}
+
+/* fechas tomadas (ejemplo): semilla fija para que siempre sean las mismas */
+function dayState(d){
+  var k=d.getFullYear()*400+d.getMonth()*32+d.getDate(),r=(k*9301+49297)%233280/233280,dw=d.getDay();
+  if(dw===6) return r<.38?"full":(r<.7?"few":"");
+  if(dw===5) return r<.22?"full":(r<.45?"few":"");
+  return r<.06?"full":"";
+}
+
+/* ---------- cálculo ---------- */
+function calc(st){
+  st=st||S;var p=PROPS.filter(function(x){return x.id===st.prop})[0];
+  if(!p) return null;
+  var x=0;
+  p.groups.forEach(function(g){if(!g.id)return;(st.picks[g.id]||[]).forEach(function(i){x+=g.items[i].x||0})});
+  var pp=p.pp+x,bar=BARS[st.bar].x;
+  return{pp:pp,ad:st.ad*pp,kids:st.ki*KID,bar:bar*(st.ad),tot:st.ad*pp+st.ki*KID+bar*st.ad};
+}
+
+/* ---------- render paso 1 ---------- */
+function rTipos(){
+  $("tipos").innerHTML=TIPOS.map(function(t){return '<button class="chip'+(S.tipo===t?" on":"")+'" data-t="'+t+'">'+t+'</button>'}).join("");
+}
+$("tipos").addEventListener("click",function(e){var b=e.target.closest("[data-t]");if(!b)return;S.tipo=b.dataset.t;rTipos();upd()});
+function setAd(v){S.ad=Math.max(30,Math.min(500,v));$("aVal").textContent=S.ad;$("aRange").value=S.ad;
+  /* recortar estaciones si bajaron invitados */
+  PROPS.forEach(function(p){p.groups.forEach(function(g){if(g.est&&S.prop===p.id){var n=nEst(S.ad,g),a=picks(g.id);if(a.length>n)a.length=n}})});
+  upd()}
+function setKi(v){S.ki=Math.max(0,Math.min(80,v));$("kVal").textContent=S.ki;upd()}
+$("aMinus").onclick=function(){setAd(S.ad-10)};$("aPlus").onclick=function(){setAd(S.ad+10)};
+$("aRange").oninput=function(){setAd(+this.value)};
+$("kMinus").onclick=function(){setKi(S.ki-1)};$("kPlus").onclick=function(){setKi(S.ki+1)};
+var IC_I='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg>';
+function rRule(){
+  var e=Math.ceil(S.ad/50),m=Math.ceil(S.ad/200);
+  $("rule1").innerHTML=IC_I+'<span>Con '+S.ad+' adultos: en las propuestas gourmet van <b>'+e+' estacion'+(e>1?"es":"")+'</b> (una cada 50 invitados) y el servicio lleva <b>1 coordinador general y '+m+' maître'+(m>1?"s":"")+'</b>.'+(S.ad>300?' Desde 300 invitados se suma el <b>pernil vacuno</b>.':'')+'</span>';
+}
+
+/* ---------- paso 2 ---------- */
+function rProps(){
+  $("props").innerHTML=PROPS.map(function(p){
+    return '<button class="prop'+(S.prop===p.id?" on":"")+'" data-p="'+p.id+'"><span class="ph"><b>'+p.a+'<span>'+p.b+'</span></b><i class="ck"></i></span><span class="pb"><span>'+p.d+'</span><span class="pr">desde '+fmt(p.pp)+' <small>por persona (ejemplo)</small></span></span></button>';
+  }).join("");
+}
+$("props").addEventListener("click",function(e){var b=e.target.closest("[data-p]");if(!b)return;if(S.prop!==b.dataset.p){S.prop=b.dataset.p;S.picks={}}rProps();upd()});
+
+/* ---------- paso 3 ---------- */
+function rGroups(){
+  var p=P();if(!p)return;
+  $("mq").innerHTML=p.a+' <span style="font-family:var(--ui);font-style:normal;font-weight:400;font-size:17px;letter-spacing:.12em;text-transform:uppercase">'+p.b+'</span>';
+  var h="";
+  p.groups.forEach(function(g){
+    if(!g.id){h+='<div class="grp"><div class="gh"><h4>'+g.t+'</h4><span class="cn done">Incluido</span></div><ul class="fixed">'+(g.fixed||g.items).map(function(t){return"<li>"+t+"</li>"}).join("")+'</ul></div>';return}
+    var L=lim(g,S.ad),a=picks(g.id),one=L.max===1,full=a.length>=L.max;
+    var hint=g.est?('Elegí '+L.max+' (una cada 50 invitados)'):(g.hint||(one?"Elegí 1":""));
+    var cn=L.min===0?(a.length?a.length+" sumada"+(a.length>1?"s":""):"Opcional"):(a.length+" de "+(L.min===L.max?L.max:L.min+" a "+L.max));
+    var ok=a.length>=L.min&&L.min>0;
+    h+='<div class="grp"><div class="gh"><h4>'+g.t+'</h4><span class="cn'+(ok?" done":"")+'">'+cn+'</span></div>'+(hint?'<p class="gd">'+hint+'</p>':'')+'<div class="opts">';
+    g.items.forEach(function(it,i){
+      var on=a.indexOf(i)>=0,off=!on&&full&&!one;
+      var d=it.d||"";if(it.big&&S.ad>300)d+=", "+it.big;
+      h+='<button class="opt'+(one?" one":"")+(on?" on":"")+(off?" off":"")+'" data-g="'+g.id+'" data-i="'+i+'" aria-pressed="'+on+'"><span class="bx"></span><span>'+it.n+(d?'<small>'+d+'</small>':'')+(it.x?'<span class="ad">+'+fmt(it.x)+' por persona</span>':'')+'</span></button>';
+    });
+    h+='</div></div>';
+  });
+  $("groups").innerHTML=h;
+}
+$("groups").addEventListener("click",function(e){
+  var b=e.target.closest("[data-g]");if(!b)return;
+  var p=P(),g=p.groups.filter(function(x){return x.id===b.dataset.g})[0],L=lim(g,S.ad),a=picks(g.id),i=+b.dataset.i,k=a.indexOf(i);
+  if(L.max===1){S.picks[g.id]=k>=0&&L.min===0?[]:[i]}
+  else if(k>=0)a.splice(k,1);
+  else if(a.length<L.max)a.push(i);
+  else{toast("Ya elegiste "+L.max+". Sacá uno para cambiarlo.");return}
+  $("err3").hidden=true;rGroups();upd();
+});
+function menuOk(){
+  var p=P();if(!p)return false;var bad=null;
+  p.groups.forEach(function(g){if(!g.id||bad)return;var L=lim(g,S.ad);if(picks(g.id).length<L.min)bad=g.t+": "+(L.min===L.max?"elegí "+L.min:"elegí al menos "+L.min)});
+  return bad||true;
+}
+
+/* ---------- paso 4 ---------- */
+function rCal(){
+  var y=calM.getFullYear(),m=calM.getMonth();
+  $("cMes").textContent=MES[m]+" "+y;
+  var first=new Date(y,m,1),off=(first.getDay()+6)%7,days=new Date(y,m+1,0).getDate();
+  var h=["L","M","M","J","V","S","D"].map(function(d){return'<span class="h">'+d+'</span>'}).join("");
+  for(var i=0;i<off;i++)h+="<span></span>";
+  for(var d=1;d<=days;d++){
+    var dt=new Date(y,m,d),past=dt<MINDATE,st=past?"":dayState(dt),on=S.date&&+S.date===+dt;
+    h+='<button data-d="'+d+'" class="'+(past?"past ":"")+st+(on?" on":"")+'"'+(past||st==="full"?" disabled":"")+' aria-label="'+DOW[dt.getDay()]+" "+d+" de "+MES[m]+(st==="full"?", tomada":st==="few"?", pocos lugares":"")+'">'+d+'</button>';
+  }
+  $("cg").innerHTML=h;
+  $("cPrev").disabled=y===2026&&m<=11;
+}
+$("cg").addEventListener("click",function(e){var b=e.target.closest("[data-d]");if(!b||b.disabled)return;S.date=new Date(calM.getFullYear(),calM.getMonth(),+b.dataset.d);$("err4").hidden=true;rCal();upd()});
+$("cPrev").onclick=function(){calM=new Date(calM.getFullYear(),calM.getMonth()-1,1);rCal()};
+$("cNext").onclick=function(){calM=new Date(calM.getFullYear(),calM.getMonth()+1,1);rCal()};
+$("lugar").innerHTML=LUGARES.map(function(l){return"<option>"+esc(l)+"</option>"}).join("");
+$("lugar").onchange=function(){S.lugar=this.value;upd()};
+$("turno").onchange=function(){S.turno=this.value;upd()};
+function rBars(){
+  $("bars").innerHTML=BARS.map(function(b,i){return'<button class="bar'+(S.bar===i?" on":"")+'" data-b="'+i+'"><span class="bx"></span><span>'+b.n+(b.x?' <b class="num" style="font-weight:600">+'+fmt(b.x)+'</b>':'')+'<small>'+b.d+(b.x?" · precio por adulto, ejemplo":"")+'</small></span></button>'}).join("");
+}
+$("bars").addEventListener("click",function(e){var b=e.target.closest("[data-b]");if(!b)return;S.bar=+b.dataset.b;rBars();upd()});
+
+/* ---------- hoja: tu propuesta ---------- */
+function longDate(d){return DOW[d.getDay()]+" "+d.getDate()+" de "+MES[d.getMonth()]+" de "+d.getFullYear()}
+function sheetHTML(st){
+  var p=PROPS.filter(function(x){return x.id===st.prop})[0];if(!p)return"";
+  var h="";
+  p.groups.forEach(function(g){
+    var li;
+    if(!g.id) li=(g.fixed||g.items).map(function(t){return"<li>"+t+"</li>"});
+    else{
+      var a=st.picks[g.id]||[],L=lim(g,st.ad);
+      if(L.min===0&&!a.length)return;
+      li=a.map(function(i){var it=g.items[i],n=it.n;if(it.big&&st.ad>300)n+=" "+it.big;return"<li>"+n+(it.x?"<em>+"+fmt(it.x)+"</em>":"")+"</li>"});
+      for(var k=a.length;k<L.min;k++)li.push('<li class="ph">a elegir</li>');
+    }
+    h+='<div class="sh-sec"><h5>'+g.t+'</h5><ul>'+li.join("")+'</ul></div>';
+  });
+  if(st.ki)h+='<div class="sh-sec"><h5>Menú para chicos</h5><ul><li>'+st.ki+' chico'+(st.ki>1?"s":"")+' de 3 a 9 años</li></ul></div>';
+  if(st.bar)h+='<div class="sh-sec"><h5>Barra</h5><ul><li>'+BARS[st.bar].n+'</li></ul></div>';
+  return h;
+}
+function incHTML(st){
+  var p=PROPS.filter(function(x){return x.id===st.prop})[0];if(!p)return"";
+  var m=Math.ceil(st.ad/200),it=["Barra sin alcohol línea Coca-Cola libre, hielo y recipientes","Mozos y ayudantes de cocina","1 coordinador general y "+m+" maître"+(m>1?"s":""),"Café y té con chocolatitos",p.mantel?"Mantelería y vajilla ("+Math.ceil((st.ad+st.ki)/10)+" mesas de 10)":"Vajilla"];
+  return'<h5>Esta propuesta incluye</h5><ul>'+it.map(function(t){return"<li>"+t+"</li>"}).join("")+'</ul>';
+}
+function upd(){
+  rRule();
+  $("mbar").hidden=!S.prop;
+  $("go1").disabled=!S.tipo;$("go2").disabled=!S.prop;
+  var p=P(),c=calc();
+  $("shEv").innerHTML=S.tipo?esc(S.tipo)+"<br>"+S.ad+" adultos"+(S.ki?" y "+S.ki+" chicos":""):"Tu propuesta";
+  if(p){
+    $("shT").innerHTML=p.a+' <span>'+p.b+'</span>';
+    $("shSub").textContent=S.date?longDate(S.date)+", "+S.turno.toLowerCase().split(" (")[0]+(S.lugar&&S.lugar.indexOf("Todavía")<0?", "+S.lugar:""):(S.tipo||"Tu evento");
+    $("shBody").innerHTML=sheetHTML(S);
+    $("shInc").innerHTML=incHTML(S);$("shInc").hidden=false;
+    $("tPP").textContent=fmt(c.pp);
+    $("rKids").hidden=!S.ki;$("tKl").textContent="Menú para chicos ("+S.ki+")";$("tK").textContent=fmt(c.kids);
+    $("rBar").hidden=!S.bar;$("tBl").textContent=BARS[S.bar].n.replace("Barra Premium","Barra");$("tB").textContent=fmt(c.bar);
+    $("tTot").textContent=fmt(c.tot);$("mbT").textContent=fmt(c.tot);$("mbS").textContent=fmt(c.pp)+" por persona";
+  }else{
+    $("shT").innerHTML='Tu <span>propuesta</span>';$("shSub").textContent=S.tipo?S.tipo+", "+S.ad+" adultos":"Se arma mientras elegís.";
+    $("shBody").innerHTML='<p class="sh-empty">Elegí la propuesta para ver tu menú acá.</p>';$("shInc").hidden=true;
+    $("tPP").textContent="-";$("rKids").hidden=true;$("rBar").hidden=true;$("tTot").textContent="$0";$("mbT").textContent="$0";$("mbS").textContent="Total estimado";
+  }
+}
+
+/* ---------- navegación ---------- */
+function go(n){
+  step=n;
+  for(var i=1;i<=6;i++)$("st"+i).hidden=i!==n;
+  [].forEach.call($("steps").children,function(li,i){li.className=i+1===n?"on":(i+1<n?"ok":"")});
+  if(n===2)rProps();if(n===3)rGroups();if(n===4){rCal();rBars()}
+  var q=$("cotizar").getBoundingClientRect().top;if(q<0||q>window.innerHeight*.6)window.scrollTo({top:window.scrollY+q-60,behavior:"smooth"});
+}
+document.addEventListener("click",function(e){var b=e.target.closest("[data-back]");if(b)go(+b.dataset.back)});
+$("go1").onclick=function(){go(2)};
+$("go2").onclick=function(){go(3)};
+$("go3").onclick=function(){var r=menuOk();if(r!==true){$("err3").textContent=r+".";$("err3").hidden=false;return}go(4)};
+$("go4").onclick=function(){if(!S.date){$("err4").textContent="Elegí la fecha del evento en el calendario.";$("err4").hidden=false;return}go(5)};
+$("go5").onclick=function(){
+  S.nom=$("nom").value.trim();S.tel=$("tel").value.trim();S.obs=$("obs").value.trim();
+  if(S.nom.length<2||S.tel.replace(/\D/g,"").length<8){$("err5").textContent="Completá tu nombre y un WhatsApp para poder escribirte.";$("err5").hidden=false;return}
+  $("err5").hidden=true;
+  var c=calc();
+  var nid="nueva"+Date.now();
+  CONS.unshift({id:nid,nuevo:1,st:"n",when:"Recién",s:JSON.parse(JSON.stringify(S,function(k,v){return k==="date"?+S.date:v}))});
+  sel=nid;filt="all";[].forEach.call($("ftabs").children,function(x){x.classList.toggle("on",x.dataset.f==="all")});
+  var nn=CONS.filter(function(c){return c.nuevo&&c.st==="n"}).length;$("dotNew").textContent=nn;$("dotNew").hidden=false;
+  $("doneTx").innerHTML="Gonzalo recibe tu "+esc(S.tipo.toLowerCase())+" para el "+longDate(S.date)+" con el menú que armaste. Te escribe por WhatsApp para confirmar la fecha. Valor estimado: <b>"+fmt(c.tot)+"</b>.";
+  go(6);
+};
+$("again").onclick=function(){S=fresh();calM=new Date(2026,11,1);rTipos();setAd(120);setKi(0);$("lugar").value=LUGARES[0];$("turno").selectedIndex=0;["nom","tel","obs"].forEach(function(i){$(i).value=""});go(1)};
+$("seePanel").onclick=function(){view("pan")};
+$("mbGo").onclick=function(){$("sheet").scrollIntoView({behavior:"smooth",block:"start"})};
+
+/* ---------- panel: consultas de ejemplo ---------- */
+function ex(tipo,ad,ki,prop,pk,date,lugar,bar,nom,st,when,obs){return{id:nom,st:st,when:when,s:{tipo:tipo,ad:ad,ki:ki,prop:prop,picks:pk,date:+date,lugar:lugar,turno:"Noche",bar:bar,nom:nom,tel:"",obs:obs||""}}}
+var CONS=[
+  ex("Casamiento",160,10,"af",{cor:[0,1,3,4],gua:[1],ens:[1,6],pos:[6]},new Date(2027,1,20),"Estancia Villa María (Cañuelas)",1,"Lucía Ferreyra (ejemplo)","n","Hoy 09:12","3 celíacos"),
+  ex("Corporativo",220,0,"gi",{est:[0,1,2,3],opc:[1],pos:[3]},new Date(2026,11,18),"Pilar Golf",2,"Martín Ocampo (ejemplo)","e","Ayer 18:40","Cena de fin de año"),
+  ex("Fiesta de 15",140,12,"gf",{est:[0,2,4],pp:[1],opc:[],pos:[8]},new Date(2027,2,13),"Palacio Sans Souci (Victoria)",1,"Carolina Paz (ejemplo)","s","Lun 11:05"),
+  ex("Cumpleaños",60,6,"pan",{pos:[0]},new Date(2026,11,12),"Casa o espacio propio",0,"Diego Arana (ejemplo)","e","Vie 21:30","Cumple 50 en el jardín")
+];
+var sel=CONS[0].id,filt="all";
+var STL={n:["Nueva","n"],e:["Presupuesto enviado","e"],s:["Fecha señada","s"]};
+function rPanel(){
+  var ls=CONS.filter(function(c){return filt==="all"||c.st===filt});
+  var nN=CONS.filter(function(c){return c.st==="n"}).length;
+  $("pSub").textContent=CONS.length+" consultas, "+nN+" nueva"+(nN!==1?"s":"")+" para responder";
+  $("clist").innerHTML=ls.length?ls.map(function(c){var s=c.s,p=PROPS.filter(function(x){return x.id===s.prop})[0],d=new Date(s.date),t=calc(s).tot;
+    return'<button class="ci'+(c.id===sel?" on":"")+'" data-c="'+esc(c.id)+'"><span class="t"><b>'+esc(s.nom)+'</b><span class="st '+c.st+'">'+STL[c.st][0]+'</span></span><span class="m">'+esc(s.tipo)+', '+s.ad+' invitados, '+p.a+' '+p.b+'</span><span class="m">'+DOW[d.getDay()]+' '+d.getDate()+' de '+MES[d.getMonth()]+', '+esc(s.lugar)+'</span><span class="p num">'+fmt(t)+' <small style="font-weight:400;color:var(--dim)">estimado · '+esc(c.when)+'</small></span></button>'}).join(""):'<div class="empty">No hay consultas en este estado.</div>';
+  var c=CONS.filter(function(x){return x.id===sel})[0]||ls[0];
+  if(!c){$("det").innerHTML="";return}
+  var s=c.s,p=PROPS.filter(function(x){return x.id===s.prop})[0],d=new Date(s.date),k=calc(s);
+  var first=s.nom.split(" ")[0];
+  var wa="Hola "+first+"! Soy Gonzalo, de Gonzalo Lanús Catering. Recibí tu "+s.tipo.toLowerCase()+" para el "+DOW[d.getDay()]+" "+d.getDate()+" de "+MES[d.getMonth()]+": "+s.ad+" invitados, "+p.a.toLowerCase()+" "+p.b+". Te paso el presupuesto: "+fmt(k.tot)+". ¿Coordinamos una llamada para ajustar detalles?";
+  $("det").innerHTML='<div class="det"><div class="det-h"><div><h3>'+esc(s.nom)+'</h3><p>'+esc(s.tipo)+' · llegó '+esc(c.when.toLowerCase())+(s.tel?' · WhatsApp '+esc(s.tel):'')+'</p></div><span class="st '+c.st+'">'+STL[c.st][0]+'</span></div>'+
+    '<div class="facts"><div><small>Fecha</small><b>'+DOW[d.getDay()].slice(0,3)+' '+d.getDate()+'/'+(d.getMonth()+1)+'/'+String(d.getFullYear()).slice(2)+'</b></div><div><small>Invitados</small><b>'+s.ad+(s.ki?' + '+s.ki+' chicos':'')+'</b></div><div><small>Lugar</small><b>'+esc(s.lugar)+'</b></div><div><small>Estimado</small><b class="num">'+fmt(k.tot)+'</b></div></div>'+
+    '<div class="det-b"><div class="det-menu"><div class="sh-sec" style="padding-top:12px"><h5 style="font-size:21px">'+p.a+' '+p.b+'</h5></div>'+sheetHTML(s)+(s.obs?'<div class="sh-sec"><h5>Nota del cliente</h5><ul><li>'+esc(s.obs)+'</li></ul></div>':'')+'</div>'+
+    '<div class="det-side"><div class="wa"><small>Respuesta lista para mandar</small>'+esc(wa)+'</div>'+
+    (c.st==="n"?'<button class="btn s" data-act="e">Mandar presupuesto</button>':'')+(c.st!=="s"?'<button class="btn p" data-act="s">Marcar fecha señada</button>':'')+'<button class="btn g" data-act="pdf">Descargar en PDF</button></div></div></div>';
+}
+$("clist").addEventListener("click",function(e){var b=e.target.closest("[data-c]");if(!b)return;sel=b.dataset.c;rPanel();if(window.innerWidth<900)$("det").scrollIntoView({behavior:"smooth"})});
+$("ftabs").addEventListener("click",function(e){var b=e.target.closest("[data-f]");if(!b)return;filt=b.dataset.f;[].forEach.call(this.children,function(x){x.classList.toggle("on",x===b)});rPanel()});
+$("det").addEventListener("click",function(e){var b=e.target.closest("[data-act]");if(!b)return;var c=CONS.filter(function(x){return x.id===sel})[0];
+  if(b.dataset.act==="pdf"){toast("En el sistema real baja el presupuesto en PDF con tu diseño.");return}
+  c.st=b.dataset.act;toast(c.st==="e"?"Presupuesto enviado (en el boceto no se manda nada)":"Fecha señada: queda tomada en el calendario");
+  var nn=CONS.filter(function(x){return x.nuevo&&x.st==="n"}).length;$("dotNew").textContent=nn;$("dotNew").hidden=!nn;rPanel()});
+
+/* ---------- vistas ---------- */
+function view(v){
+  $("cli").hidden=v!=="cli";$("pan").hidden=v!=="pan";document.body.classList.toggle("cli",v==="cli");
+  $("vCli").classList.toggle("on",v==="cli");$("vPan").classList.toggle("on",v==="pan");
+  $("vCli").setAttribute("aria-selected",v==="cli");$("vPan").setAttribute("aria-selected",v==="pan");
+  if(v==="pan")rPanel();window.scrollTo(0,0);
+}
+$("vCli").onclick=function(){view("cli")};$("vPan").onclick=function(){view("pan")};
+var tT;function toast(t){var el=$("toast");el.textContent=t;el.classList.add("on");clearTimeout(tT);tT=setTimeout(function(){el.classList.remove("on")},2600)}
+
+$("dotNew").hidden=true;
+rTipos();setAd(120);setKi(0);upd();
+})();
+</script>
+</body>
+</html>
