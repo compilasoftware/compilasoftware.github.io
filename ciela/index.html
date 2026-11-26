@@ -77,27 +77,24 @@ h2.T{font-size:clamp(30px,4.4vw,46px)}
 .sub{color:var(--gris);font-size:18.5px;max-width:36em;margin:16px auto 0}
 .noche .sub{color:#c6cad8}
 
-/* servicios */
-.svs{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:46px}
-@media (max-width:900px){.svs{grid-template-columns:1fr 1fr}}
-@media (max-width:600px){.svs{grid-template-columns:1fr}}
-.sv{background:var(--blanco);border-radius:22px;overflow:hidden;display:flex;flex-direction:column;border:1px solid #c7c8ce}
+/* servicios: cinco tarjetas iguales */
+.svs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px;margin-top:46px}
+.sv{background:var(--blanco);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;border:1px solid #c7c8ce}
 .sv img{width:100%;aspect-ratio:4/3;object-fit:contain;background:var(--bgi,#d2d2d4)}
-.sv .bd{padding:20px 22px 22px;display:flex;flex-direction:column;flex:1}
-.sv h3{font-family:var(--serif);font-size:27px;font-weight:600;margin:0;line-height:1.1}
-.sv p{color:var(--gris);font-size:16px;margin:8px 0 0}
-.sv .meta{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 0}
-.sv .meta span{font-size:13.5px;background:var(--niebla);border-radius:999px;padding:3px 10px;color:var(--gris)}
-.sv .ft{margin-top:auto;padding-top:18px;display:flex;align-items:center;justify-content:space-between;gap:10px}
-.sv .pr{font-size:15px;color:var(--gris)}.sv .pr b{color:var(--tinta);font-size:18px}
-.sv.big{grid-column:span 2;display:grid;grid-template-columns:1fr 1.1fr}
-.sv.big img{height:100%;aspect-ratio:auto;min-height:320px;object-fit:contain}
-@media (max-width:600px){.sv.big{grid-column:auto;display:flex}.sv.big img{min-height:0;height:auto}.sv img{aspect-ratio:16/9;object-fit:cover}.sv .bd{padding:18px}.sv h3{font-size:25px}}
-.lect{display:grid;gap:8px;margin-top:14px}
-.lect label{display:grid;grid-template-columns:22px 1fr auto;gap:10px;align-items:start;border:1px solid var(--linea);border-radius:14px;padding:11px 13px;cursor:pointer}
+.sv .bd{padding:18px 18px 20px;display:flex;flex-direction:column;flex:1}
+.sv h3{font-family:var(--serif);font-size:24px;font-weight:600;margin:0;line-height:1.1}
+.sv p{color:var(--gris);font-size:15px;line-height:1.5;margin:8px 0 0}
+.sv .meta{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 0}
+.sv .meta span{font-size:13.5px;color:var(--gris);line-height:1.35;display:flex;gap:7px}.sv .meta span::before{content:"✦";color:var(--oro);font-size:11px;line-height:1.7}
+.sv .ft{margin-top:auto;padding-top:16px;display:grid;gap:10px}
+.sv .pr{font-size:14.5px;color:var(--gris)}.sv .pr b{color:var(--tinta);font-size:18px}
+.sv .ft .btn{width:100%;padding:12px 16px;font-size:15.5px}
+.lect{display:grid;gap:8px}
+.lect label{display:grid;grid-template-columns:22px 1fr auto;gap:10px;align-items:start;border:1px solid var(--linea);border-radius:14px;padding:11px 13px;cursor:pointer;background:#fff}
 .lect input{accent-color:var(--noche);width:18px;height:18px;margin-top:3px}
 .lect b{display:block;font-size:16px}.lect span{color:var(--gris);font-size:14.5px;line-height:1.4;display:block}
 .lect em{font-style:normal;font-size:14px;color:var(--gris);white-space:nowrap}
+.lect em i{display:block;font-style:normal;color:var(--tinta);font-weight:600;text-align:right}
 .lect label:has(input:checked){border-color:var(--noche);background:#f1f2f6}
 
 /* reserva (drawer) */
@@ -143,68 +140,117 @@ h2.T{font-size:clamp(30px,4.4vw,46px)}
 .acq li i{font-style:normal;font-family:var(--sym);color:var(--oro);font-size:20px;width:24px;flex:none}
 
 /* blog */
-.posts{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:46px}
-@media (max-width:760px){.posts{grid-template-columns:1fr}}
-.post{background:var(--noche2);border:1px solid #3a4666;border-radius:22px;padding:24px;display:flex;flex-direction:column}
-.post .k{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#aeb4c6;display:flex;gap:10px;align-items:center}
-.post .k i{font-style:normal;font-family:var(--sym);font-size:18px;color:var(--luz);letter-spacing:0}
-.post h3{font-family:var(--serif);font-weight:500;font-size:30px;line-height:1.1;margin:10px 0 0}
-.post p{color:#c6cad8;font-size:16.5px;margin:10px 0 0}
-.post .more{display:none}
-.post.open .more{display:block}
-.post .ft{margin-top:auto;padding-top:16px;display:flex;justify-content:space-between;align-items:center;color:#aeb4c6;font-size:14px}
-.post .ft button{background:none;border:0;color:var(--luz);font-weight:600;padding:6px 0;text-decoration:underline;text-underline-offset:4px}
-.ask{margin-top:46px;display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}
-@media (max-width:820px){.ask{grid-template-columns:1fr}}
-.ask h3{font-family:var(--serif);font-weight:500;font-size:32px;margin:0;line-height:1.1}
-.ask p{color:#c6cad8;margin:10px 0 0}
-.qform{display:flex;gap:8px;margin-top:16px}
-.qform input{flex:1;border:1px solid #4a5678;background:var(--noche2);color:#fff;border-radius:999px;padding:12px 16px;min-width:0}
+.posts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:46px}
+.post{background:var(--noche2);border:1px solid #36425f;border-radius:20px;padding:24px 22px 20px;display:flex;flex-direction:column;text-align:left;color:inherit;font:inherit;cursor:pointer;transition:border-color .2s,transform .2s}
+.post:hover{border-color:#5b6687;transform:translateY(-2px)}
+.post .gl{width:46px;height:46px;border-radius:50%;border:1px solid rgba(184,154,94,.55);display:grid;place-items:center;font-family:var(--sym);font-size:20px;color:var(--oro)}
+.post .k{font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:#aeb4c6;margin-top:18px}
+.post .h{display:block;font-family:var(--serif);font-weight:500;font-size:25px;line-height:1.12;margin:6px 0 0}
+.post .p{display:block;color:#c6cad8;font-size:15.5px;line-height:1.55;margin:10px 0 0}
+.post .ft{margin-top:auto;padding-top:18px;display:flex;justify-content:space-between;align-items:center;color:#8f97ad;font-size:14px;border-top:1px solid #36425f;margin-top:auto}
+.post .ft em{font-style:normal;color:var(--luz);font-weight:600}
+.post .gap{flex:1;min-height:16px}
+.rd p{font-size:17px;line-height:1.7;color:var(--tinta);margin:0 0 14px}
+.rd .gl{width:54px;height:54px;border-radius:50%;border:1px solid var(--oro);display:grid;place-items:center;font-family:var(--sym);font-size:24px;color:var(--oro);margin-bottom:16px}
+.rd .cta{margin-top:22px;background:var(--niebla);border-radius:16px;padding:16px;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.rd .cta span{font-size:15px;color:var(--gris)}
+
+/* preguntale al cielo */
+.ask{margin-top:64px;padding-top:56px;border-top:1px solid #36425f}
+.ask .hd{text-align:center;max-width:620px;margin:0 auto}
+.ask h3{font-family:var(--serif);font-weight:500;font-size:clamp(30px,3.6vw,38px);margin:0;line-height:1.1}
+.ask .hd p{color:#c6cad8;margin:10px 0 0}
+.qform{display:flex;gap:8px;margin:22px auto 0;max-width:560px}
+.qform input{flex:1;border:1px solid #4a5678;background:var(--noche2);color:#fff;border-radius:999px;padding:13px 18px;min-width:0}
 .qform input::placeholder{color:#8f97ad}
-.qs{display:grid;gap:10px}
-.q{background:var(--noche2);border:1px solid #3a4666;border-radius:18px;padding:16px 18px}
-.q b{display:block;font-weight:600}
-.q small{color:#8f97ad;font-size:13.5px}
-.q .r{margin-top:10px;padding-left:14px;border-left:2px solid var(--oro);color:#d6d9e3;font-size:16px}
-.q .r em{display:block;font-style:normal;color:var(--oro);font-size:13.5px}
+.ask .hint{text-align:center;color:#8f97ad}
+.qs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:32px}
+.q{background:var(--noche2);border:1px solid #36425f;border-radius:20px;padding:22px;display:flex;flex-direction:column}
+.q b{display:block;font-family:var(--serif);font-weight:500;font-size:22px;line-height:1.2}
+.q small{color:#8f97ad;font-size:13.5px;margin-top:6px;display:block}
+.q .r{margin-top:auto;padding-top:16px}
+.q .r div{padding-left:14px;border-left:2px solid var(--oro);color:#d6d9e3;font-size:15.5px;line-height:1.55}
+.q .r em{display:block;font-style:normal;color:var(--oro);font-size:13px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
 .q.new{border-color:var(--oro)}
-.news{margin-top:34px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;background:var(--noche3);border-radius:22px;padding:22px 24px}
+.news{margin-top:40px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;background:var(--noche3);border-radius:20px;padding:22px 24px}
 .news b{font-family:var(--serif);font-weight:500;font-size:26px;display:block;line-height:1.15}
 .news span{color:#c6cad8;font-size:15.5px}
 
-/* gift + escuela */
-.gift{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
-@media (max-width:820px){.gift{grid-template-columns:1fr}}
-.gc{aspect-ratio:1.6;border-radius:20px;background:var(--noche);color:#fff;padding:26px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;box-shadow:0 26px 50px -26px rgba(29,39,66,.7);max-width:460px}
-.gc .s{position:absolute;right:-40px;top:-40px;width:200px;opacity:.5}
-.gc small{letter-spacing:.16em;text-transform:uppercase;color:#aeb4c6;font-size:12.5px}
-.gc b{font-family:var(--serif);font-weight:500;font-size:34px;line-height:1.05}
-.gc .to{font-size:15px;color:#d6d9e3}
+/* gift card */
+.gift{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+@media (max-width:820px){.gift{grid-template-columns:1fr;gap:30px}}
 .gift h2{text-align:left}
-.later{margin-top:0;display:flex;gap:16px;align-items:center;border:1px solid #c7c8ce;border-radius:20px;padding:18px 22px;background:var(--blanco)}
-.later i{font-style:normal;font-family:var(--sym);font-size:28px;color:var(--oro)}
-.later b{font-family:var(--serif);font-size:24px;font-weight:600;display:block;line-height:1.1}
-.later span{color:var(--gris);font-size:15.5px}
+.gift .note{display:flex;gap:10px;align-items:flex-start;margin-top:18px;font-size:15.5px;color:var(--gris)}
+.gift .note i{font-style:normal;font-family:var(--sym);color:var(--oro);font-size:18px}
+.gc{aspect-ratio:1.6;border-radius:20px;background:radial-gradient(120% 90% at 100% 0%,#34405f 0%,#1d2742 55%);color:#fff;padding:24px 26px;display:flex;flex-direction:column;position:relative;overflow:hidden;box-shadow:0 26px 50px -26px rgba(29,39,66,.7);width:100%;max-width:460px;container-type:inline-size;text-align:left}
+.gc .s{position:absolute;right:-50px;top:-50px;width:170px;opacity:.32;pointer-events:none}
+.gc .tp{display:flex;justify-content:space-between;align-items:center;position:relative}
+.gc .tp small{letter-spacing:.18em;text-transform:uppercase;color:#aeb4c6;font-size:11.5px}
+.gc .t{font-family:var(--serif);font-weight:500;font-size:clamp(22px,7.4cqi,34px);line-height:1.05;margin-top:auto;position:relative}
+.gc .d{font-family:var(--serif);font-style:italic;font-size:clamp(15px,4.6cqi,20px);line-height:1.3;color:#e9e6dc;margin-top:8px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;position:relative}
+.gc .d.ph,.gc .w .ph{opacity:.5}
+.gc .w{display:flex;justify-content:space-between;gap:10px;margin-top:14px;padding-top:10px;border-top:1px solid rgba(233,230,220,.18);font-size:clamp(12px,3.4cqi,14.5px);color:#c6cad8;position:relative}
+.gc .w b{color:#fff;font-weight:600}
+.gcw{position:sticky;top:-20px;z-index:3;background:var(--blanco);margin:-20px -20px 6px;padding:16px 20px 14px;border-bottom:1px solid var(--linea)}
+.gcw .gc{max-width:340px;margin:0 auto;box-shadow:0 16px 30px -18px rgba(29,39,66,.6)}
+.msg{background:#e7f6ec;border-radius:14px 14px 14px 4px;padding:10px 14px;font-size:15px;line-height:1.45;white-space:pre-wrap;text-align:left;max-width:340px;margin:10px auto 0}
+.msg small{display:block;color:var(--ok);font-weight:600;font-size:12.5px;margin-bottom:3px}
+.ok .gc{margin:4px auto 0}
+.dr .fo[hidden]{display:none}
+@media (max-width:600px){.gcw .gc{max-width:270px;padding:18px 20px}.gcw{padding:12px 20px 12px}}
 
-footer{background:var(--noche);color:#aeb4c6;padding:44px 0 52px;font-size:15px}
-footer .wrap{display:grid;gap:12px}
-footer b{color:#fff;font-family:var(--serif);font-size:22px;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
-footer a{color:var(--luz)}
-footer .cr{font-size:13.5px;color:#8f97ad;max-width:56em}
-@media (max-width:900px){.studio{grid-template-columns:1fr;grid-template-areas:"a" "p" "b" "d";grid-template-rows:auto;row-gap:14px}.prev{position:static}.phone{max-width:230px;border-radius:30px;padding:8px}.phone canvas{border-radius:23px}.ctrl{padding:18px}.studio .tpls{grid-template-columns:repeat(5,1fr);gap:6px}.studio .tp{font-size:11.5px;padding:9px 2px 7px}.studio .tp i{font-size:20px}.before{display:none}}
+/* pie */
+.foot{background:var(--noche);background-image:radial-gradient(70% 60% at 12% 0%,rgba(52,64,95,.9),transparent 70%);color:#c6cad8}
+.fgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:30px 18px;padding-top:46px;padding-bottom:34px}
+.fgrid .fbrand{grid-column:1/-1}
+.fwm{display:flex;align-items:center;gap:12px}
+.fwm svg{width:46px;height:46px;flex:none}
+.fwm b{font-family:var(--serif);font-weight:600;font-size:26px;letter-spacing:.16em;text-transform:uppercase;color:#fff}
+.fbrand p{margin:14px 0 18px;font-size:16px;line-height:1.55;max-width:36ch}
+.fcta{display:grid;gap:10px;max-width:360px}
+.fbtn{display:flex;align-items:center;gap:12px;border-radius:16px;padding:12px 16px;text-decoration:none;font:inherit;font-weight:700;font-size:16px;text-align:left;border:0;cursor:pointer;line-height:1.2}
+.fbtn small{display:block;font-weight:500;font-size:14px;opacity:.8;margin-top:2px}
+.fbtn svg{flex:none}
+.fbtn.lz{background:var(--luz);color:var(--noche)}
+.fbtn.fig{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.3)}
+.fcol h4{font-family:var(--serif);font-weight:600;font-size:21px;color:var(--luz);margin:0 0 12px}
+.fcol ul{list-style:none;margin:0;padding:0;display:grid;gap:9px}
+.fcol a,.fcol button{color:#c6cad8;text-decoration:none;font:inherit;font-size:15.5px;background:none;border:0;padding:0;text-align:left;cursor:pointer}
+.fcol a:hover,.fcol button:hover{color:#fff}
+.fbot{border-top:1px solid rgba(255,255,255,.1);padding:16px 0 calc(26px + env(safe-area-inset-bottom));font-size:14.5px;color:#aeb4c6}
+.fbot .wrap:first-child{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 20px}
+.fbot a{color:#fff}
+.fdemo{font-size:13px;color:#8f97ad;margin:10px auto 0}
+@media (min-width:860px){.fgrid{grid-template-columns:1.6fr 1fr 1fr;gap:48px;padding-top:60px}.fgrid .fbrand{grid-column:auto}}
 
-/* celu: todo sigue ahí, pero se desliza de costado en vez de apilarse */
+/* accesos directos (celu) */
+.quick{display:none}
+
+/* tablet y celu: lecturas, posts y preguntas se deslizan de costado */
 .swipe{display:none}
-@media (max-width:600px){
-.band{padding:58px 0}
-.svs,.posts{display:flex;align-items:flex-start;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin:30px -20px 0;padding:2px 20px 8px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
-.svs::-webkit-scrollbar,.posts::-webkit-scrollbar{display:none}
-.svs>.sv,.posts>.post{flex:0 0 86%;scroll-snap-align:center;min-width:0}
-.lect label:not(:has(input:checked)) span{display:none}
+@media (max-width:1060px){
+.svs,.posts{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;margin:34px -20px 0;padding:2px 20px 8px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.svs>.sv,.posts>.post{flex:0 0 270px;scroll-snap-align:center;min-width:0}
+.svs::-webkit-scrollbar,.posts::-webkit-scrollbar,.qs::-webkit-scrollbar{display:none}
 .swipe{display:block;text-align:center;font-size:14px;color:var(--gris);margin:12px 0 0}
 .noche .swipe{color:#aeb4c6}
+}
+@media (max-width:760px){
+.qs{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin:26px -20px 0;padding:2px 20px 8px;scrollbar-width:none}
+.qs>.q{flex:0 0 86%;scroll-snap-align:center}
+.hero .btns{display:none}
+.quick{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:26px}
+.quick a{display:grid;grid-template-columns:auto 1fr;column-gap:10px;align-items:center;background:rgba(39,50,79,.85);border:1px solid #3a4666;border-radius:16px;padding:12px;color:#fff;text-decoration:none}
+.quick i{grid-row:span 2;width:34px;height:34px;border-radius:50%;border:1px solid rgba(184,154,94,.6);display:grid;place-items:center;font-style:normal;font-family:var(--sym);color:var(--oro);font-size:16px}
+.quick b{font-size:15px;font-weight:600;line-height:1.2}
+.quick small{font-size:12.5px;color:#aeb4c6;line-height:1.25}
+}
+@media (max-width:600px){
+.band{padding:58px 0}
+.svs>.sv,.posts>.post{flex:0 0 82%}
 .acq figure{max-width:210px}
-.ask{margin-top:34px}
+.ask{margin-top:48px;padding-top:44px}
+.hero{padding:44px 0 56px}
 }
 </style>
 </head>
@@ -213,7 +259,7 @@ footer .cr{font-size:13.5px;color:#8f97ad;max-width:56em}
 <header class="top">
   <div class="wrap">
     <a class="mark" href="#"><b>Ciela</b><small>Astrología y Tarot</small></a>
-    <nav aria-label="Secciones"><a href="#servicios">Lecturas</a><a href="#cielo">El cielo</a><a href="#regalos">Regalos</a></nav>
+    <nav aria-label="Secciones"><a href="#servicios">Lecturas</a><a href="#acuarelas">Acuarelas</a><a href="#cielo">El cielo</a><a href="#regalos">Gift card</a></nav>
     <a class="cta" href="#servicios">Reservar</a>
   </div>
 </header>
@@ -226,6 +272,12 @@ footer .cr{font-size:13.5px;color:#8f97ad;max-width:56em}
       <h1>El cielo como mapa para <i>conocerte</i> mejor.</h1>
       <p class="lead">Lecturas de tarot, revolución solar y cartas natales, también para los más chicos. Soy astróloga, licenciada en Psicopedagogía y profe de astrología.</p>
       <div class="btns"><a class="btn l" href="#servicios">Ver lecturas</a><a class="btn o" href="#cielo">Leer el cielo de la semana</a></div>
+      <nav class="quick" aria-label="Qué hay en la web">
+        <a href="#servicios"><i>☾</i><b>Lecturas</b><small>Tarot, Revolución Solar</small></a>
+        <a href="#acuarelas"><i>✦</i><b>Acuarelas</b><small>Cartas natales infantiles</small></a>
+        <a href="#cielo"><i>✧</i><b>El cielo</b><small>Lunas y temporadas</small></a>
+        <a href="#regalos"><i>♡</i><b>Gift card</b><small>Regalá una lectura</small></a>
+      </nav>
     </div>
     <aside class="sky" aria-label="El cielo de hoy">
       <canvas id="moonNow" width="240" height="240" aria-hidden="true"></canvas>
@@ -244,7 +296,7 @@ footer .cr{font-size:13.5px;color:#8f97ad;max-width:56em}
   </div>
 </section>
 
-<section class="band niebla">
+<section class="band niebla" id="acuarelas">
   <div class="wrap acq">
     <figure><img src="img/acuarela.jpg" alt="Lámina en acuarela con la carta natal de una nena: Sol en Escorpio, Luna en Cáncer y Ascendente en Géminis" loading="lazy" width="800" height="957"></figure>
     <div>
@@ -267,16 +319,16 @@ footer .cr{font-size:13.5px;color:#8f97ad;max-width:56em}
     <p class="sub">Lunas, temporadas y tránsitos explicados simple. Para quienes aman la astrología y para mis alumnas.</p></div>
     <div class="posts" id="posts"></div>
     <p class="swipe">Deslizá para ver más →</p>
-    <div class="ask">
-      <div>
+    <div class="ask" id="preguntas">
+      <div class="hd">
         <h3>Preguntale al cielo</h3>
         <p>Dejá tu pregunta sobre astrología o tarot. Las respondo acá, para que le sirvan a todas.</p>
         <form class="qform" id="qf"><input id="qi" placeholder="Ej: ¿Qué es el retorno de Saturno?" aria-label="Tu pregunta" maxlength="140"><button class="btn l" type="submit">Enviar</button></form>
-        <p class="hint" style="color:#8f97ad">Preguntas y respuestas de ejemplo.</p>
+        <p class="hint">Preguntas y respuestas de ejemplo.</p>
       </div>
       <div class="qs" id="qs"></div>
     </div>
-    <div class="news">
+    <div class="news" id="luna-wpp">
       <div><b>La luna de cada semana, en tu WhatsApp</b><span>Un mensaje corto cada luna nueva y luna llena.</span></div>
       <button class="btn l" id="sub">Quiero recibirla</button>
     </div>
@@ -288,22 +340,50 @@ footer .cr{font-size:13.5px;color:#8f97ad;max-width:56em}
     <div>
       <h2 class="T">Regalá Ciela</h2>
       <div class="orn" style="justify-content:flex-start">✦</div>
-      <p class="sub" style="margin-left:0">Una lectura de regalo, para un cumpleaños o para fin de año. Elegís la consulta, escribís una dedicatoria y le llega la tarjeta a quien quieras.</p>
+      <p class="sub" style="margin-left:0">Una lectura de regalo, para un cumpleaños o para fin de año. Elegís la consulta, escribís la dedicatoria que va en la tarjeta y, si querés, un mensaje para acompañarla.</p>
+      <p class="note"><i>✉</i>La tarjeta es digital: mientras la armás ves cómo queda, y le llega por WhatsApp a quien quieras.</p>
       <div class="btns"><button class="btn n" data-book="gift">Armar una gift card</button></div>
     </div>
-    <div class="gc" id="gc">
-      <svg class="s" viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="70" fill="none" stroke="#e9e6dc" stroke-width="1"/><circle cx="100" cy="100" r="92" fill="none" stroke="#e9e6dc" stroke-width=".6" stroke-dasharray="2 6"/><path d="M118 62a40 40 0 1 0 0 76a32 32 0 1 1 0-76z" fill="#e9e6dc"/></svg>
-      <small>Gift card · Ciela</small>
-      <div><b id="gcT">Lectura de Tarot</b><div class="to" id="gcTo">Para vos, con cariño</div></div>
-    </div>
+    <div id="gcBox"></div>
   </div>
 </section>
 
-<footer>
-  <div class="wrap">
-    <b>Ciela</b>
-    <div>Astrología y Tarot · Graciela Pastore · <a href="https://www.instagram.com/ciela.astroytarot/" target="_blank" rel="noopener">@ciela.astroytarot</a></div>
-    <div class="cr">Boceto hecho por <a href="https://compilasoftware.com" target="_blank" rel="noopener">Compila Software</a> con las imágenes y textos que Ciela publica en Instagram. Los precios, los horarios, las preguntas de la comunidad y las respuestas son de ejemplo. No se cobra ni se envía nada.</div>
+<footer class="foot">
+  <div class="wrap fgrid">
+    <div class="fbrand">
+      <div class="fwm"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="31" fill="none" stroke="#b89a5e" stroke-width="1"/><path d="M38 14a19 19 0 1 0 0 36a15 15 0 1 1 0-36z" fill="#e9e6dc"/></svg><b>Ciela</b></div>
+      <p>Astrología y tarot con Graciela Pastore: lecturas, Revolución Solar y cartas natales en acuarela.</p>
+      <div class="fcta">
+        <button class="fbtn lz" data-book="tarot"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span>Reservar una lectura<small>Por videollamada o en persona</small></span></button>
+        <a class="fbtn fig" href="https://www.instagram.com/ciela.astroytarot/" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg><span>Instagram<small>@ciela.astroytarot</small></span></a>
+      </div>
+    </div>
+    <div class="fcol">
+      <h4>Consultas</h4>
+      <ul>
+        <li><button data-book="tarot">Lecturas de Tarot</button></li>
+        <li><button data-book="rs">Revolución Solar</button></li>
+        <li><button data-book="tirada">Tirada astrológica</button></li>
+        <li><button data-book="inf">Carta natal infantil</button></li>
+        <li><button data-book="enc">Encuentro y Tarot</button></li>
+      </ul>
+    </div>
+    <div class="fcol">
+      <h4>En la web</h4>
+      <ul>
+        <li><a href="#cielo">El cielo de la semana</a></li>
+        <li><a href="#preguntas">Preguntale al cielo</a></li>
+        <li><a href="#luna-wpp">La luna en tu WhatsApp</a></li>
+        <li><a href="#regalos">Gift card</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="fbot">
+    <div class="wrap">
+      <span>© 2026 Ciela · Astrología y Tarot</span>
+      <span>Web hecha por <a href="https://compilasoftware.com" target="_blank" rel="noopener">Compila Software</a></span>
+    </div>
+    <p class="wrap fdemo">Boceto con las imágenes y textos que Ciela publica en Instagram. Los precios, los horarios, las preguntas de la comunidad y las respuestas son de ejemplo. No se cobra ni se envía nada.</p>
   </div>
 </footer>
 
@@ -364,7 +444,7 @@ function sunSign(d=new Date()){const c=[[1,20,"Capricornio"],[2,19,"Acuario"],[3
 
 /* ---------- servicios ---------- */
 const SV=[
-  {id:"tarot",t:"Lecturas de Tarot",img:"img/svc-tarot.jpg",d:"Una mirada a las energías disponibles y a lo que el Tarot tiene para decirte.",tags:["Videollamada","Presencial"],opts:[["Lectura express","Lectura anual y una pregunta específica.","15 min",12000],["Lectura básica","Trabajamos sobre algún tema puntual. Lectura general y hasta 3 preguntas.","30 min",20000],["Lectura extensa","Tirada general y todas las preguntas que quieras hacer.","1 hora",32000]],big:true},
+  {id:"tarot",t:"Lecturas de Tarot",img:"img/svc-tarot.jpg",d:"Express, básica o extensa: de 15 minutos a una hora. Elegís cuál al reservar.",tags:["Videollamada o presencial"],opts:[["Lectura express","Lectura anual y una pregunta específica.","15 min",12000],["Lectura básica","Trabajamos sobre algún tema puntual. Lectura general y hasta 3 preguntas.","30 min",20000],["Lectura extensa","Tirada general y todas las preguntas que quieras hacer.","1 hora",32000]]},
   {id:"rs",t:"Revolución Solar",img:"img/svc-rs.jpg",bgi:"#10213b",d:"Cada cumpleaños nuestro Sol ilumina distintos escenarios de la carta natal. Vemos qué trae tu nuevo año.",tags:["Con tu fecha y hora de nacimiento"],p:35000,nac:true},
   {id:"tirada",t:"Tirada astrológica",img:"img/svc-tirada.jpg",d:"Astrología y tarot juntos: las cartas hablan en las doce Casas, tus escenarios de vida y vínculos para el ciclo que empieza.",tags:["Ideal para fin de año"],p:30000},
   {id:"inf",t:"Carta natal infantil",img:"img/svc-infantiles.jpg",d:"La carta natal de tu hijo, pintada en acuarela y con su descripción.",tags:["Lámina en acuarela"],p:40000,nac:true},
@@ -373,9 +453,8 @@ const SV=[
 ];
 const DEP=.3;
 $("#svs").innerHTML=SV.filter(s=>!s.hide).map(s=>{
-  const lec=s.opts?`<div class="lect" role="radiogroup" aria-label="Tipo de lectura">${s.opts.map((o,i)=>`<label><input type="radio" name="lec" value="${i}" ${i===1?"checked":""}><div><b>${o[0]}</b><span>${o[1]}</span></div><em>${o[2]}</em></label>`).join("")}</div>`:"";
-  const price=s.opts?`desde <b>${fmt(s.opts[0][3])}</b>`:`<b>${fmt(s.p)}</b>`;
-  return `<article class="sv${s.big?" big":""}"><img style="--bgi:${s.bgi||"#d2d2d4"}" src="${s.img}" alt="${esc(s.t)}" loading="lazy"><div class="bd"><h3>${s.t}</h3><p>${s.d}</p>${lec}<div class="meta">${s.tags.map(t=>`<span>${t}</span>`).join("")}</div><div class="ft"><span class="pr">${price}</span><button class="btn n" data-book="${s.id}">Reservar</button></div></div></article>`;}).join("");
+    const price=s.opts?`desde <b>${fmt(s.opts[0][3])}</b>`:`<b>${fmt(s.p)}</b>`;
+  return `<article class="sv"><img style="--bgi:${s.bgi||"#d2d2d4"}" src="${s.img}" alt="${esc(s.t)}" loading="lazy"><div class="bd"><h3>${s.t}</h3><p>${s.d}</p><div class="meta">${s.tags.map(t=>`<span>${t}</span>`).join("")}</div><div class="ft"><span class="pr">${price}</span><button class="btn n" data-book="${s.id}">Reservar</button></div></div></article>`;}).join("");
 
 /* ---------- reserva ---------- */
 const days=[];{const d=new Date();d.setHours(12);d.setDate(d.getDate()+1);while(days.length<8){if(d.getDay()!==0)days.push(new Date(d));d.setDate(d.getDate()+1);}}
@@ -383,17 +462,19 @@ const HRS=["10:00","11:30","15:00","17:00","18:30"];
 let R={};
 function openBook(id){
   const s=SV.find(x=>x.id===id);let opt=null;
-  if(s.opts){const v=document.querySelector('input[name=lec]:checked');opt=s.opts[v?+v.value:1];}
+  if(s.opts)opt=s.opts[1];
   const price=opt?opt[3]:s.p;R={s,opt,price,day:null,hr:null,mod:"Videollamada"};
   $("#drT").textContent=opt?opt[0]:s.t;$("#drS").textContent=opt?`${s.t} · ${opt[2]}`:s.gift?"Tarjeta de regalo":s.t;
-  let h="";
+  let h=s.opts?`<span class="lbl">¿Qué lectura querés?</span><div class="lect" role="radiogroup" aria-label="Tipo de lectura">${s.opts.map((o,i)=>`<label><input type="radio" name="dlec" value="${i}" ${i===1?"checked":""}><div><b>${o[0]}</b><span>${o[1]}</span></div><em>${o[2]}<i>${fmt(o[3])}</i></em></label>`).join("")}</div>`:"";
   if(s.gift){
-    h+=`<span class="lbl">¿Qué querés regalar?</span><div class="chips" id="gOpt">${SV[0].opts.map((o,i)=>`<button class="chip" data-g="${i}" aria-pressed="${i===1}">${o[0]}</button>`).join("")}<button class="chip" data-g="rs" aria-pressed="false">Revolución Solar</button></div>
-    <label class="lbl" for="gPara">Para quién es</label><input class="fld" id="gPara" placeholder="Ej: Mariana">
-    <label class="lbl" for="gMsg">Dedicatoria</label><input class="fld" id="gMsg" maxlength="70" placeholder="Ej: ¡Feliz cumple! Que el cielo te sorprenda">
-    <label class="lbl" for="bNom">Tu nombre</label><input class="fld" id="bNom" autocomplete="name">`;
+    h+=`<div class="gcw" id="gcLive"></div><span class="lbl">¿Qué querés regalar?</span><div class="chips" id="gOpt">${SV[0].opts.map((o,i)=>`<button class="chip" data-g="${i}" aria-pressed="${i===1}">${o[0]}</button>`).join("")}<button class="chip" data-g="rs" aria-pressed="false">Revolución Solar</button></div>
+    <label class="lbl" for="gPara">Para quién es</label><input class="fld" id="gPara" maxlength="30" placeholder="Ej: Abuela Marta">
+    <label class="lbl" for="gMsg">Dedicatoria <span style="font-weight:400">(va dentro de la tarjeta)</span></label><input class="fld" id="gMsg" maxlength="80" placeholder="Ej: Gracias por acompañarme siempre, este regalo es para vos">
+    <label class="lbl" for="bNom">De parte de</label><input class="fld" id="bNom" maxlength="30" autocomplete="name" placeholder="Tu nombre">
+    <label class="lbl" for="gNota">Mensaje para acompañarla <span style="font-weight:400">(opcional)</span></label><textarea class="fld" id="gNota" maxlength="400" rows="3" placeholder="Ej: ¡Abuela querida, feliz cumpleaños! Te regalo una lectura para que arranques tu año con todo."></textarea>
+    <p class="hint">Le llega por WhatsApp junto con la tarjeta.</p>`;
   }else{
-    h+=`<label class="lbl" for="bNom">Tu nombre</label><input class="fld" id="bNom" autocomplete="name" placeholder="Nombre y apellido">
+    h+=`<label class="lbl" for="bNom"${s.opts?' style="margin-top:20px"':""}>Tu nombre</label><input class="fld" id="bNom" autocomplete="name" placeholder="Nombre y apellido">
     <label class="lbl" for="bTel">Tu WhatsApp</label><input class="fld" id="bTel" inputmode="tel" placeholder="11 2345-6789">`;
     if(s.nac)h+=`<span class="lbl">${s.id==="inf"?"Datos de nacimiento del nene o la nena":"Tus datos de nacimiento"}</span><div class="g2"><input class="fld" id="bFec" type="date" aria-label="Fecha de nacimiento"><input class="fld" id="bHor" type="time" aria-label="Hora de nacimiento"></div><input class="fld" id="bLug" style="margin-top:10px" placeholder="Lugar de nacimiento (ciudad)" aria-label="Lugar de nacimiento"><p class="hint">Si no sabés la hora exacta, fijate en la partida de nacimiento.</p>`;
     if(s.id==="tarot")h+=`<label class="lbl" for="bQ">¿Sobre qué querés preguntar? <span style="font-weight:400">(opcional)</span></label><input class="fld" id="bQ" placeholder="Ej: trabajo, un vínculo, una decisión">`;
@@ -405,14 +486,15 @@ function openBook(id){
   }
   h+=`<p class="err" id="bErr" hidden></p><p class="hint">Los días tachados ya están ocupados. Precios y horarios de ejemplo.</p>`;
   $("#drC").innerHTML=h;$("#drF").hidden=false;$("#drGo").textContent=s.gift?"Pagar gift card":"Pagar seña";
-  setPrice();$("#dr").classList.add("on");document.body.style.overflow="hidden";setTimeout(()=>$("#bNom")?.focus(),50);
+  setPrice();if(s.gift)drawGift();$("#dr").classList.add("on");document.body.style.overflow="hidden";setTimeout(()=>$("#bNom")?.focus(),50);
 }
 function setPrice(){const s=R.s;let p=R.price;if(s.gift){const g=$("#gOpt [aria-pressed=true]");p=g.dataset.g==="rs"?SV[1].p:SV[0].opts[+g.dataset.g][3];R.price=p;}
   if(s.grupo){p=s.p+Math.max(0,(+($("#bG")?.value||6)-6))*8000;R.price=p;}
   $("#drF .tot span").textContent=s.gift?"Total":"Seña para reservar";$("#drP").textContent=fmt(s.gift?p:p*DEP);}
-$("#drC").addEventListener("click",e=>{const c=e.target.closest(".chip");if(!c||c.disabled)return;const g=c.parentElement;g.querySelectorAll(".chip").forEach(x=>x.setAttribute("aria-pressed",x===c));
+$("#drC").addEventListener("click",e=>{const c=e.target.closest(".chip");if(!c||c.disabled)return;const g=c.parentElement;g.querySelectorAll(".chip").forEach(x=>x.setAttribute("aria-pressed",x===c));if(g.id==="gOpt")setTimeout(drawGift);
   if(g.id==="bDay")R.day=days[+c.dataset.i];if(g.id==="bHr")R.hr=c.dataset.h;if(g.id==="bMod")R.mod=c.textContent;setPrice();});
-$("#drC").addEventListener("input",e=>{if(e.target.id==="bG")setPrice();});
+$("#drC").addEventListener("input",e=>{if(e.target.id==="bG")setPrice();if(R.s&&R.s.gift)drawGift();});
+$("#drC").addEventListener("change",e=>{if(e.target.name!=="dlec")return;R.opt=R.s.opts[+e.target.value];R.price=R.opt[3];$("#drT").textContent=R.opt[0];$("#drS").textContent=`${R.s.t} · ${R.opt[2]}`;setPrice();});
 const closeDr=()=>{$("#dr").classList.remove("on");document.body.style.overflow="";};
 document.querySelectorAll("[data-close]").forEach(b=>b.onclick=closeDr);addEventListener("keydown",e=>{if(e.key==="Escape")closeDr();});
 document.addEventListener("click",e=>{const b=e.target.closest("[data-book]");if(b)openBook(b.dataset.book);});
@@ -422,12 +504,23 @@ $("#drGo").onclick=()=>{const s=R.s,nom=($("#bNom")?.value||"").trim();let er=""
   if(er){$("#bErr").textContent=er;$("#bErr").hidden=false;return;}
   let txt,wa;
   if(s.gift){const para=$("#gPara").value.trim(),msg=$("#gMsg").value.trim();const what=$("#gOpt [aria-pressed=true]").textContent;
-    $("#gcT").textContent=what;$("#gcTo").textContent=`Para ${para}${msg?" · "+msg:""}`;
-    txt=`La gift card de ${what} para ${esc(para)} está lista. Te la mandamos para que se la reenvíes.`;wa=`🎁 Gift card vendida: ${esc(what)} para ${esc(para)}, de ${esc(nom)}. Pagada ${fmt(R.price)}.`;}
+    const nota=$("#gNota").value.trim();const card={t:what,d:msg,para,de:nom};$("#gcBox").innerHTML=gcHTML(card);
+    txt=`La gift card de ${esc(what)} para ${esc(para)} está lista. Así le llega por WhatsApp:`;wa=`🎁 Gift card vendida: ${esc(what)} para ${esc(para)}, de ${esc(nom)}. Pagada ${fmt(R.price)}.`;
+    $("#drC").innerHTML=`<div class="ok"><h3>¡Gift card lista!</h3><p>${txt}</p>${gcHTML(card)}${nota?`<div class="msg"><small>Mensaje de ${esc(nom)}</small>${esc(nota)}</div>`:""}<div class="wa"><small>Así le avisa a Ciela por WhatsApp</small>${wa}</div><p class="hint">Es un boceto: no se cobró ni se envió nada.</p></div>`;$("#drF").hidden=true;return;}
   else{const when=s.id==="inf"?"":`el ${R.day.toLocaleDateString("es-AR",{weekday:"long",day:"numeric",month:"numeric"})} a las ${R.hr}`;
     const name=R.opt?R.opt[0]:s.t;txt=`${esc(name)}${when?" "+when:""}${s.id!=="inf"&&!s.grupo?" por "+R.mod.toLowerCase():""}. Te llega la confirmación por WhatsApp.`;
     wa=`✨ Nueva reserva: ${esc(name)} · ${esc(nom)}${when?" · "+when:""}. Seña de ${fmt(R.price*DEP)} pagada.${s.nac&&$("#bFec").value?` Nacimiento: ${$("#bFec").value.split("-").reverse().join("/")} ${$("#bHor").value||""} ${esc($("#bLug").value)}`:""}`;}
   $("#drC").innerHTML=`<div class="ok">${moonSvg}<h3>${s.gift?"¡Gift card lista!":"¡Reservado!"}</h3><p>${txt}</p><div class="wa"><small>Así le llega a Ciela por WhatsApp</small>${wa}</div><p class="hint">Es un boceto: no se cobró nada.</p></div>`;$("#drF").hidden=true;};
+
+/* ---------- gift card ---------- */
+const GC_EJ={t:"Lectura de Tarot",d:"Gracias por acompañarme siempre, este regalo es para vos",para:"vos",de:""};
+const gcSvg='<svg class="s" viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="70" fill="none" stroke="#e9e6dc" stroke-width="1"/><circle cx="100" cy="100" r="92" fill="none" stroke="#e9e6dc" stroke-width=".6" stroke-dasharray="2 6"/><path d="M118 62a40 40 0 1 0 0 76a32 32 0 1 1 0-76z" fill="#e9e6dc"/></svg>';
+function gcHTML(c,ph){ph=ph||{};
+  const d=c.d?esc(c.d):`<span>${esc(GC_EJ.d)}</span>`;
+  return `<div class="gc">${gcSvg}<div class="tp"><small>Gift card · Ciela</small></div><div class="t">${esc(c.t)}</div><div class="d${c.d?"":" ph"}">“${c.d?esc(c.d):esc(GC_EJ.d)}”</div><div class="w"><span>Para <b class="${c.para?"":"ph"}">${esc(c.para||"…")}</b></span>${c.de||ph.de?`<span>De <b class="${c.de?"":"ph"}">${esc(c.de||"…")}</b></span>`:""}</div></div>`;}
+function drawGift(){const g=$("#gOpt [aria-pressed=true]");if(!g||!$("#gcLive"))return;
+  $("#gcLive").innerHTML=gcHTML({t:g.textContent,d:$("#gMsg").value.trim(),para:$("#gPara").value.trim(),de:$("#bNom").value.trim()},{de:1});}
+$("#gcBox").innerHTML=gcHTML(GC_EJ);
 
 /* ---------- blog ---------- */
 const POSTS=[
@@ -436,10 +529,13 @@ const POSTS=[
   {k:"Herramientas",g:"☉",t:"La Revolución Solar como herramienta",p:"Cada cumpleaños nuestro Sol va iluminando diferentes escenarios de nuestra Carta Natal.",m:"Nuestra energía vital va desplegando su potencial con experiencias diferentes donde nuestro ser puede evolucionar.",f:"agosto"},
   {k:"Tarot",g:"✦",t:"Tirada astrológica para el año nuevo",p:"¿Qué oportunidades y desafíos muestran las energías disponibles para el ciclo que comienza?",m:"Con una tirada astrológica, el tarot muestra sus mensajes en las doce Casas, que se expresan como escenarios de vida y vínculos.",f:"diciembre"}
 ];
-$("#posts").innerHTML=POSTS.map((p,i)=>`<article class="post"><div class="k"><i>${p.g}</i>${p.k}</div><h3>${p.t}</h3><p>${p.p}</p><p class="more">${p.m}</p><div class="ft"><span>${p.f}</span><button aria-expanded="false">Leer más</button></div></article>`).join("");
-$("#posts").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;const a=b.closest(".post");const o=a.classList.toggle("open");b.textContent=o?"Leer menos":"Leer más";b.setAttribute("aria-expanded",o);});
+$("#posts").innerHTML=POSTS.map((p,i)=>`<button class="post" data-post="${i}"><span class="gl" aria-hidden="true">${p.g}︎</span><span class="k">${p.k}</span><span class="h">${p.t}</span><span class="p">${p.p}</span><span class="gap"></span><span class="ft"><span>${p.f}</span><em>Leer →</em></span></button>`).join("");
+$("#posts").addEventListener("click",e=>{const b=e.target.closest("[data-post]");if(!b)return;const p=POSTS[+b.dataset.post];R={};
+  $("#drT").textContent=p.t;$("#drS").textContent=`${p.k} · ${p.f}`;
+  $("#drC").innerHTML=`<div class="rd"><div class="gl" aria-hidden="true">${p.g}︎</div><p>${p.p}</p><p>${p.m}</p><div class="cta"><span>¿Querés ver cómo te toca a vos?</span><button class="btn n" data-book="tarot">Reservar una lectura</button></div></div>`;
+  $("#drF").hidden=true;$("#dr").classList.add("on");document.body.style.overflow="hidden";});
 const QS=[["¿Qué diferencia hay entre una luna nueva y una llena para empezar algo?","Laura · alumna","La luna nueva es siembra: buen momento para intenciones. La llena es cosecha: ver resultados y soltar."],["¿Necesito la hora exacta para la Revolución Solar?","Vero","Sí, con la hora de nacimiento la lectura es mucho más precisa. Está en la partida de nacimiento."]];
-const drawQ=()=>{$("#qs").innerHTML=QS.map(q=>`<div class="q${q[3]?" new":""}"><b>${esc(q[0])}</b><small>${esc(q[1])}</small>${q[2]?`<div class="r"><em>Responde Ciela</em>${esc(q[2])}</div>`:`<div class="r"><em>Pendiente</em>Ciela la va a responder pronto.</div>`}</div>`).join("");};drawQ();
+const drawQ=()=>{$("#qs").innerHTML=QS.map(q=>`<div class="q${q[3]?" new":""}"><b>${esc(q[0])}</b><small>${esc(q[1])}</small>${q[2]?`<div class="r"><div><em>Responde Ciela</em>${esc(q[2])}</div></div>`:`<div class="r"><div><em>Pendiente</em>Ciela la va a responder pronto.</div></div>`}</div>`).join("");};drawQ();
 $("#qf").onsubmit=e=>{e.preventDefault();const v=$("#qi").value.trim();if(!v)return;QS.unshift([v,"Vos",null,true]);$("#qi").value="";drawQ();};
 $("#sub").onclick=e=>{e.target.textContent="¡Listo! Te llega la próxima luna";e.target.disabled=true;};
 
