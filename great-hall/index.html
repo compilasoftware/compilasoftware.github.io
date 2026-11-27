@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Great Hall · Inscripciones y cuotas (ejemplo)</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#032252; --navy-2:#0b3a7a; --sky:#8fd0ff; --sky-soft:#dcefff;
+  --cream:#f4f1ec; --paper:#fffdf9; --ink:#1a1d24; --muted:#5b6170; --line:#e3ddd3;
+  --ok:#1f7a4d; --ok-soft:#e2f3ea; --warn:#9a5b00; --warn-soft:#fdf0d8; --bad:#a2322a; --bad-soft:#fbe4e1;
+  --serif:"Fraunces",Georgia,"Times New Roman",serif; --sans:"DM Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --r:14px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--cream);color:var(--ink);font:16px/1.55 var(--sans)}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--sky);outline-offset:2px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+
+/* barra superior */
+.top{background:var(--navy);color:#fff}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:64px;flex-wrap:wrap;padding-block:10px}
+.brand{display:flex;align-items:baseline;gap:10px;text-decoration:none;color:#fff}
+.brand b{font:600 22px/1 var(--serif);letter-spacing:.2px}
+.brand small{font-size:11px;letter-spacing:.14em;color:var(--sky);font-weight:600}
+.vista{display:flex;background:rgba(255,255,255,.1);border-radius:999px;padding:4px}
+.vista button{border:0;background:transparent;color:#fff;padding:8px 16px;border-radius:999px;font-weight:600;font-size:14px;white-space:nowrap}
+.vista button[aria-pressed="true"]{background:var(--sky);color:var(--navy)}
+.aviso-ej{background:var(--sky-soft);color:var(--navy);font-size:13px}
+.aviso-ej .wrap{padding-block:8px}
+
+/* vista familias */
+.hero{background:var(--navy);color:#fff;padding:28px 0 36px}
+.hero h1{font:600 clamp(30px,5vw,46px)/1.08 var(--serif);margin:0 0 10px;max-width:16ch}
+.hero p{margin:0;max-width:52ch;color:#d6e6f7}
+.tabs{display:flex;gap:6px;margin-top:22px;flex-wrap:wrap}
+.tabs button{border:1px solid rgba(255,255,255,.35);background:transparent;color:#fff;border-radius:999px;padding:8px 16px;font-weight:600;font-size:14px}
+.tabs button[aria-selected="true"]{background:#fff;color:var(--navy);border-color:#fff}
+
+main{padding:28px 0 64px}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:24px;align-items:start}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:20px}
+.paso{display:flex;gap:12px;align-items:baseline;margin:0 0 14px}
+.paso span{flex:0 0 auto;width:28px;height:28px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-size:13px;font-weight:700}
+.paso h2{font:600 22px/1.2 var(--serif);margin:0;color:var(--navy)}
+.bloque{margin-bottom:28px}
+.bloque[hidden]{display:none}
+.cursos{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+.curso{text-align:left;border:1px solid var(--line);background:#fff;border-radius:12px;padding:14px;display:grid;gap:2px;min-height:96px}
+.curso b{font-size:16px;color:var(--navy)}
+.curso small{color:var(--muted);font-size:13px}
+.curso[aria-pressed="true"]{border-color:var(--navy);box-shadow:inset 0 0 0 1px var(--navy);background:var(--sky-soft)}
+.grupos{display:grid;gap:8px}
+.grupo{display:flex;justify-content:space-between;align-items:center;gap:12px;border:1px solid var(--line);background:#fff;border-radius:12px;padding:12px 14px;text-align:left;width:100%}
+.grupo[aria-pressed="true"]{border-color:var(--navy);box-shadow:inset 0 0 0 1px var(--navy);background:var(--sky-soft)}
+.grupo[disabled]{opacity:.5;cursor:not-allowed}
+.cupo{font-size:13px;font-weight:600;white-space:nowrap}
+.cupo.pocos{color:var(--warn)}.cupo.lleno{color:var(--bad)}.cupo.hay{color:var(--ok)}
+.nota{font-size:13px;color:var(--muted);margin:10px 0 0}
+.campos{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.campos label{display:grid;gap:4px;font-size:14px;font-weight:600}
+.campos input,.campos select{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:#fff;min-height:44px;font-weight:400}
+.campos .full{grid-column:1/-1}
+.btn{border:0;border-radius:10px;padding:12px 18px;font-weight:700;min-height:46px;background:var(--navy);color:#fff}
+.btn.sky{background:var(--sky);color:var(--navy)}
+.btn.line{background:transparent;border:1px solid var(--line);color:var(--navy)}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.resumen h3{font:600 20px/1.2 var(--serif);margin:0 0 12px;color:var(--navy)}
+.fila{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px dashed var(--line);font-size:15px}
+.fila span:first-child{color:var(--muted)}
+.fila b{text-align:right}
+.total{display:flex;justify-content:space-between;align-items:baseline;margin-top:12px}
+.total b{font:600 26px/1 var(--serif);color:var(--navy)}
+.ej{font-size:11px;font-weight:700;letter-spacing:.06em;background:var(--warn-soft);color:var(--warn);padding:2px 7px;border-radius:6px;vertical-align:middle}
+.listo{text-align:center;padding:28px 20px}
+.listo h2{font:600 26px/1.2 var(--serif);color:var(--navy);margin:8px 0}
+.listo .wa{background:#e7f6ec;border-radius:12px;padding:14px;text-align:left;font-size:14px;margin:16px auto 0;max-width:420px;white-space:pre-line}
+
+/* mi cuenta */
+.cuenta{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px}
+.alumno{display:flex;gap:14px;align-items:center;margin-bottom:16px}
+.avatar{width:52px;height:52px;border-radius:50%;background:var(--sky);color:var(--navy);display:grid;place-items:center;font:600 22px var(--serif)}
+.alumno h2{font:600 22px/1.15 var(--serif);margin:0;color:var(--navy)}
+.alumno p{margin:0;color:var(--muted);font-size:14px}
+.nivel{margin:14px 0 4px;font-size:14px;font-weight:600}
+.escala{display:grid;grid-template-columns:repeat(6,1fr);gap:4px}
+.escala div{height:34px;border-radius:8px;background:#eee8de;display:grid;place-items:center;font-size:13px;font-weight:700;color:var(--muted)}
+.escala .hecho{background:var(--navy);color:#fff}
+.escala .meta{background:var(--sky);color:var(--navy)}
+.comentario{background:var(--cream);border-radius:12px;padding:12px 14px;font-size:14px;margin-top:14px}
+.estado{display:inline-block;font-size:13px;font-weight:700;padding:3px 10px;border-radius:999px}
+.estado.ok{background:var(--ok-soft);color:var(--ok)}.estado.vence{background:var(--warn-soft);color:var(--warn)}.estado.debe{background:var(--bad-soft);color:var(--bad)}
+.cuota{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.cuota:last-child{border-bottom:0}
+.avisos{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.avisos li{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:14px}
+.avisos li b{display:block;color:var(--navy)}
+.avisos time{font-size:12px;color:var(--muted)}
+
+/* panel */
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:22px}
+.kpi{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:14px}
+.kpi b{display:block;font:600 30px/1.1 var(--serif);color:var(--navy)}
+.kpi span{font-size:13px;color:var(--muted)}
+.panel-grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:20px;align-items:start}
+.panel-grid h2{font:600 22px/1.2 var(--serif);color:var(--navy);margin:0 0 12px}
+.filtros{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.filtros button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;font-size:13px;font-weight:600}
+.filtros button[aria-pressed="true"]{background:var(--navy);color:#fff;border-color:var(--navy)}
+.tabla{display:grid;gap:8px}
+.reg{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:10px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.reg b{display:block;font-size:15px}
+.reg small{color:var(--muted);font-size:13px}
+.mini{border:1px solid var(--line);background:#fff;border-radius:8px;padding:7px 10px;font-size:13px;font-weight:600;color:var(--navy);white-space:nowrap}
+.nueva{border-color:var(--sky);box-shadow:inset 3px 0 0 var(--sky)}
+.cursos-cupo{display:grid;gap:8px;margin-bottom:22px}
+.cc{display:grid;grid-template-columns:110px minmax(0,1fr) auto;gap:10px;align-items:center;font-size:14px}
+.barra{height:10px;background:#eee8de;border-radius:6px;overflow:hidden}
+.barra i{display:block;height:100%;background:var(--navy)}
+.redactar textarea{width:100%;min-height:96px;border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:#fff;resize:vertical}
+.redactar select{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:#fff;min-height:44px;margin-bottom:8px}
+
+/* comparación */
+.antes{margin-top:8px}
+.antes h2{font:600 26px/1.2 var(--serif);color:var(--navy);margin:0 0 14px}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.vs .card h3{margin:0 0 8px;font-size:16px}
+.vs ul{margin:0;padding-left:18px;font-size:15px;color:var(--muted)}
+.vs .card:last-child{border-color:var(--navy)}
+footer{border-top:1px solid var(--line);padding:20px 0 40px;font-size:13px;color:var(--muted)}
+
+/* modal y toast */
+.modal{position:fixed;inset:0;background:rgba(3,34,82,.45);display:none;align-items:center;justify-content:center;padding:16px;z-index:20}
+.modal.on{display:flex}
+.modal .card{max-width:420px;width:100%}
+.modal h3{font:600 20px/1.2 var(--serif);color:var(--navy);margin:0 0 10px}
+.burbuja{background:#e7f6ec;border-radius:12px;padding:12px 14px;font-size:14px;white-space:pre-line;margin-bottom:14px}
+.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:12px 18px;border-radius:10px;font-size:14px;opacity:0;transition:.25s;z-index:30;max-width:calc(100% - 32px)}
+.toast.on{opacity:1;transform:translateX(-50%)}
+@media (prefers-reduced-motion:reduce){.toast{transition:none}}
+
+@media (max-width:860px){
+  .grid,.cuenta,.panel-grid,.vs{grid-template-columns:1fr}
+  .kpis{grid-template-columns:repeat(2,1fr)}
+  .resumen{position:static}
+}
+@media (max-width:520px){
+  .campos{grid-template-columns:1fr}
+  .cc{grid-template-columns:84px minmax(0,1fr) auto}
+  .reg{grid-template-columns:minmax(0,1fr) auto}
+  .reg .estado{grid-column:2;grid-row:1}
+  .reg .mini{grid-column:1/-1;justify-self:start}
+  .brand small{display:none}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#" aria-label="Great Hall"><b>Great Hall</b><small>INSTITUTO DE INGLÉS</small></a>
+    <div class="vista" role="group" aria-label="Cambiar vista">
+      <button type="button" data-vista="familias" aria-pressed="true">Familias</button>
+      <button type="button" data-vista="panel" aria-pressed="false">Panel del instituto</button>
+    </div>
+  </div>
+</header>
+<div class="aviso-ej"><div class="wrap">Ejemplo armado por Compila con los cursos de la web de Great Hall. Horarios, cupos, precios, alumnos y fechas son de ejemplo.</div></div>
+
+<!-- ===== FAMILIAS ===== -->
+<section id="v-familias">
+  <div class="hero">
+    <div class="wrap">
+      <h1>Inscribite a tu grupo desde el celu</h1>
+      <p>Elegís el curso, ves los horarios con lugar y reservás tu vacante. Después, en "Mi cuenta", ves la cuota, el nivel y los avisos del instituto.</p>
+      <div class="tabs" role="tablist">
+        <button type="button" role="tab" aria-selected="true" data-tab="inscripcion">Inscripción 2027</button>
+        <button type="button" role="tab" aria-selected="false" data-tab="cuenta">Mi cuenta</button>
+      </div>
+    </div>
+  </div>
+
+  <main class="wrap">
+    <!-- inscripción -->
+    <div id="t-inscripcion" class="grid">
+      <div>
+        <div class="bloque">
+          <div class="paso"><span>1</span><h2>¿Qué curso buscás?</h2></div>
+          <div class="cursos" id="cursos"></div>
+        </div>
+        <div class="bloque" id="b-grupo" hidden>
+          <div class="paso"><span>2</span><h2 id="h-grupo">Elegí el horario</h2></div>
+          <div class="grupos" id="grupos"></div>
+          <p class="nota" id="nota-nivel"></p>
+        </div>
+        <div class="bloque" id="b-datos" hidden>
+          <div class="paso"><span>3</span><h2>Datos del alumno</h2></div>
+          <form class="campos" id="form" autocomplete="off">
+            <label>Nombre y apellido<input name="nombre" required placeholder="Ej.: Martina López"></label>
+            <label>Edad<input name="edad" type="number" min="4" max="99" required placeholder="Ej.: 9"></label>
+            <label id="l-resp">Adulto responsable<input name="resp" placeholder="Ej.: Laura (mamá)"></label>
+            <label>WhatsApp<input name="tel" type="tel" required placeholder="11 2345-6789"></label>
+            <div class="full"><button class="btn" type="submit" id="reservar" disabled>Reservar la vacante</button></div>
+          </form>
+        </div>
+        <div class="card listo" id="listo" hidden>
+          <span class="estado ok">Vacante reservada</span>
+          <h2 id="listo-t">¡Listo!</h2>
+          <p id="listo-p" style="margin:0;color:var(--muted)"></p>
+          <div class="wa" id="listo-wa"></div>
+          <p class="nota">Este mensaje le llegaría al alumno automáticamente. Al instituto le aparece la inscripción en el panel.</p>
+          <button class="btn line" type="button" id="otra" style="margin-top:12px">Inscribir a otro alumno</button>
+        </div>
+      </div>
+      <aside class="card resumen">
+        <h3>Tu inscripción</h3>
+        <div class="fila"><span>Curso</span><b id="r-curso">—</b></div>
+        <div class="fila"><span>Horario</span><b id="r-grupo">—</b></div>
+        <div class="fila"><span>Objetivo del curso</span><b id="r-meta">—</b></div>
+        <div class="fila"><span>Matrícula <span class="ej">EJEMPLO</span></span><b id="r-mat">—</b></div>
+        <div class="fila"><span>Cuota mensual <span class="ej">EJEMPLO</span></span><b id="r-cuota">—</b></div>
+        <div class="total"><span>Para reservar hoy</span><b id="r-total">$ 0</b></div>
+        <p class="nota">La matrícula reserva el lugar en el grupo. Las cuotas se pagan del 1 al 10 de cada mes.</p>
+      </aside>
+    </div>
+
+    <!-- mi cuenta -->
+    <div id="t-cuenta" class="cuenta" hidden>
+      <div class="card">
+        <div class="alumno">
+          <div class="avatar">V</div>
+          <div><h2>Valentina R. <span class="ej">EJEMPLO</span></h2><p>Juniors · Martes y jueves 17:30</p></div>
+        </div>
+        <p class="nivel">Nivel según el Marco Común Europeo</p>
+        <div class="escala" aria-label="Nivel actual A2, objetivo B1">
+          <div class="hecho">A1</div><div class="hecho">A2</div><div class="meta">B1</div><div>B2</div><div>C1</div><div>C2</div>
+        </div>
+        <p class="nota">Ya tiene A2. El objetivo del año es B1.</p>
+        <div class="comentario"><b>Comentario de la profe</b><br>Muy buena participación en clase. Para el próximo bimestre: reforzar el pasado simple y leer en voz alta en casa.</div>
+        <h3 style="font:600 18px var(--serif);color:var(--navy);margin:20px 0 6px">Cuotas</h3>
+        <div id="cuotas-fam"></div>
+      </div>
+      <div class="card">
+        <h3 style="font:600 20px var(--serif);color:var(--navy);margin:0 0 12px">Avisos del instituto</h3>
+        <ul class="avisos">
+          <li><time>Hace 2 días</time><b>Feriado del 8 de diciembre</b>Ese martes no hay clases. Recuperamos el jueves 10 en el mismo horario.</li>
+          <li><time>Hace 1 semana</time><b>Muestra de fin de año</b>Los grupos Kinder y Juniors presentan una canción. Les mandamos la fecha por acá.</li>
+          <li><time>Hace 3 semanas</time><b>Inscripción 2027 abierta</b>Los alumnos actuales tienen prioridad para mantener su horario hasta el 15/12.</li>
+        </ul>
+        <p class="nota">Todos los avisos <span class="ej">EJEMPLO</span> le llegan también por WhatsApp a cada familia del grupo.</p>
+      </div>
+    </div>
+
+    <section class="antes">
+      <h2>De la consulta a la vacante reservada</h2>
+      <div class="vs">
+        <div class="card"><h3>Hoy, con el formulario de la web</h3><ul>
+          <li>La familia deja una consulta y espera la respuesta.</li>
+          <li>Los horarios con lugar se pasan uno por uno por WhatsApp.</li>
+          <li>Las cuotas se controlan en una planilla y se reclaman a mano.</li>
+          <li>Los avisos se mandan grupo por grupo.</li></ul></div>
+        <div class="card"><h3>Con este sistema</h3><ul>
+          <li>La familia ve los horarios con vacantes y reserva sola.</li>
+          <li>Cada alumno tiene su ficha con el nivel del Marco Común Europeo.</li>
+          <li>El recordatorio de la cuota sale solo y el pago queda registrado.</li>
+          <li>Un aviso le llega a todo un curso con un toque.</li></ul></div>
+      </div>
+    </section>
+  </main>
+</section>
+
+<!-- ===== PANEL ===== -->
+<section id="v-panel" hidden>
+  <main class="wrap" style="padding-top:28px">
+    <div class="kpis">
+      <div class="kpi"><b id="k-alumnos">0</b><span>alumnos activos</span></div>
+      <div class="kpi"><b id="k-aldia">0</b><span>cuotas de diciembre pagas</span></div>
+      <div class="kpi"><b id="k-deben">0</b><span>cuotas sin pagar</span></div>
+      <div class="kpi"><b id="k-nuevas">0</b><span>inscripciones 2027</span></div>
+    </div>
+    <div class="panel-grid">
+      <div>
+        <h2>Cuotas de diciembre</h2>
+        <div class="filtros" id="filtros">
+          <button type="button" data-f="todas" aria-pressed="true">Todas</button>
+          <button type="button" data-f="debe" aria-pressed="false">Sin pagar</button>
+          <button type="button" data-f="ok" aria-pressed="false">Pagas</button>
+          <button type="button" data-f="nueva" aria-pressed="false">Inscripciones nuevas</button>
+        </div>
+        <div class="tabla" id="tabla"></div>
+        <button class="btn sky" type="button" id="recordar-todos" style="margin-top:14px">Recordar a todos los que deben</button>
+      </div>
+      <div>
+        <h2>Cupos por curso</h2>
+        <div class="cursos-cupo" id="cupos"></div>
+        <h2>Mandar un aviso</h2>
+        <div class="card redactar">
+          <select id="aviso-a" aria-label="A quién"></select>
+          <textarea id="aviso-txt" aria-label="Mensaje">Recuerden que el martes 8 de diciembre no hay clases. Recuperamos el jueves 10 en el mismo horario.</textarea>
+          <button class="btn" type="button" id="aviso-btn" style="width:100%;margin-top:8px">Mandar aviso</button>
+        </div>
+      </div>
+    </div>
+  </main>
+</section>
+
+<footer><div class="wrap">Ejemplo hecho por Compila Software para Great Hall, Instituto de Inglés (Banfield). Los cursos salen de la web del instituto. Horarios, cupos, precios, alumnos y fechas son de ejemplo y no se manda ningún mensaje real.</div></footer>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="m-t">
+  <div class="card">
+    <h3 id="m-t">Recordatorio por WhatsApp</h3>
+    <div class="burbuja" id="m-msg"></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn" type="button" id="m-ok">Mandar</button>
+      <button class="btn line" type="button" id="m-no">Cancelar</button>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+// Cursos reales de la web de Great Hall. Horarios, cupos y precios: ejemplo.
+const CURSOS=[
+ {id:"kinder",n:"Kinder",e:"4 a 6 años",meta:"Primer contacto",chicos:true,mat:20000,cuota:38000,grupos:[["Lunes y miércoles 17:00",6,3],["Martes y jueves 17:00",6,0]]},
+ {id:"juniors",n:"Juniors",e:"7 a 11 años",meta:"A1 a B1",chicos:true,mat:20000,cuota:42000,grupos:[["Lunes y miércoles 18:00",8,2],["Martes y jueves 17:30",8,1],["Sábados 10:00",8,5]]},
+ {id:"teens",n:"Teens",e:"12 a 17 años",meta:"A2 a B2",chicos:true,nivel:true,mat:20000,cuota:46000,grupos:[["Lunes y miércoles 19:00",8,4],["Martes y jueves 18:45",8,0]]},
+ {id:"senior",n:"Senior",e:"Adultos",meta:"Según tu nivel",nivel:true,mat:20000,cuota:48000,grupos:[["Martes y jueves 20:00",8,3],["Online, miércoles 19:30",10,6]]},
+ {id:"first",n:"First / CAE",e:"Exámenes de Cambridge",meta:"B2 First o C1 Advanced",nivel:true,mat:25000,cuota:55000,grupos:[["Viernes 18:00 (First)",6,2],["Viernes 19:45 (CAE)",6,1]]},
+ {id:"esp",n:"Fines específicos",e:"Tu profesión o carrera",meta:"Inglés de tu área",nivel:true,mat:20000,cuota:52000,grupos:[["A coordinar con el instituto",4,4]]}
+];
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const plata=n=>"$ "+n.toLocaleString("es-AR");
+let sel={curso:null,grupo:null};
+
+// alumnos de ejemplo para el panel
+const ALUMNOS=[
+ ["Valentina R.","juniors","Martes y jueves 17:30","vence"],["Tomás G.","juniors","Lunes y miércoles 18:00","ok"],
+ ["Sofía M.","kinder","Lunes y miércoles 17:00","ok"],["Benjamín L.","kinder","Martes y jueves 17:00","debe"],
+ ["Julieta P.","teens","Lunes y miércoles 19:00","ok"],["Lautaro S.","teens","Martes y jueves 18:45","debe"],
+ ["Carolina F.","senior","Martes y jueves 20:00","ok"],["Martín D.","first","Viernes 18:00 (First)","ok"],
+ ["Lucía V.","first","Viernes 19:45 (CAE)","vence"],["Agustina N.","juniors","Sábados 10:00","ok"],
+ ["Federico A.","senior","Online, miércoles 19:30","debe"],["Emma C.","kinder","Martes y jueves 17:00","ok"]
+].map(([n,c,g,e])=>({n,c,g,e,tel:"11 0000-0000"}));
+const nuevas=[];
+
+// ---------- familias ----------
+function pintarCursos(){
+  $("#cursos").innerHTML=CURSOS.map(c=>`<button type="button" class="curso" data-c="${c.id}" aria-pressed="${sel.curso===c.id}"><b>${c.n}</b><small>${c.e}</small></button>`).join("")+
+   `<button type="button" class="curso" data-c="nose" aria-pressed="${sel.curso==='nose'}"><b>No estoy seguro/a</b><small>Te ayudamos a elegir</small></button>`;
+  $$("#cursos .curso").forEach(b=>b.onclick=()=>{sel.curso=b.dataset.c;sel.grupo=null;pintarCursos();pintarGrupos();resumen();});
+}
+function pintarGrupos(){
+  const c=CURSOS.find(x=>x.id===sel.curso);
+  $("#b-grupo").hidden=!sel.curso; $("#b-datos").hidden=!sel.curso;
+  if(sel.curso==="nose"){
+    $("#h-grupo").textContent="Hacé la prueba de nivel";
+    $("#grupos").innerHTML=["Sábado 10:00","Sábado 10:30","Lunes 16:30"].map((g,i)=>`<button type="button" class="grupo" data-g="Prueba de nivel · ${g}" aria-pressed="${sel.grupo==='Prueba de nivel · '+g}"><span>Prueba de nivel gratuita · ${g}</span><span class="cupo hay">20 minutos</span></button>`).join("");
+    $("#nota-nivel").textContent="Con la prueba vemos su nivel y le recomendamos el grupo justo. Días y horarios de ejemplo.";
+  } else if(c){
+    $("#h-grupo").textContent="Elegí el horario";
+    $("#grupos").innerHTML=c.grupos.map(([g,tot,lib])=>{const cls=lib===0?"lleno":lib<=2?"pocos":"hay";const t=lib===0?"Completo":lib===1?"Queda 1 lugar":`Quedan ${lib} lugares`;
+      return `<button type="button" class="grupo" data-g="${g}" aria-pressed="${sel.grupo===g}" ${lib===0?"disabled":""}><span>${g}</span><span class="cupo ${cls}">${t}</span></button>`}).join("");
+    $("#nota-nivel").textContent=c.nivel?"Si no sabés tu nivel, en la primera clase hacemos una prueba corta para ubicarte en el grupo justo.":"Los grupos se arman por edad para que todos avancen al mismo ritmo.";
+  }
+  $$("#grupos .grupo").forEach(b=>b.onclick=()=>{sel.grupo=b.dataset.g;pintarGrupos();resumen();});
+  $("#l-resp").hidden = !!(c && !c.chicos);
+}
+function resumen(){
+  const c=CURSOS.find(x=>x.id===sel.curso);
+  $("#r-curso").textContent=sel.curso==="nose"?"Prueba de nivel":c?`${c.n} (${c.e})`:"—";
+  $("#r-grupo").textContent=sel.grupo?sel.grupo.replace("Prueba de nivel · ",""):"—";
+  $("#r-meta").textContent=c?c.meta:sel.curso==="nose"?"Saber en qué grupo va":"—";
+  $("#r-mat").textContent=c?plata(c.mat):sel.curso==="nose"?"Sin cargo":"—";
+  $("#r-cuota").textContent=c?plata(c.cuota):"—";
+  $("#r-total").textContent=c&&sel.grupo?plata(c.mat):"$ 0";
+  $("#reservar").disabled=!sel.grupo;
+  $("#reservar").textContent=sel.curso==="nose"?"Reservar la prueba de nivel":"Reservar la vacante";
+}
+$("#form").onsubmit=e=>{
+  e.preventDefault();
+  const f=Object.fromEntries(new FormData(e.target));
+  const c=CURSOS.find(x=>x.id===sel.curso);
+  const nombre=f.nombre.trim().split(" ")[0]||"";
+  $("#t-inscripcion > div").querySelectorAll(".bloque").forEach(b=>b.hidden=true);
+  $("#listo").hidden=false;
+  $("#listo-t").textContent=sel.curso==="nose"?"Prueba de nivel reservada":`¡${nombre} ya tiene su lugar!`;
+  $("#listo-p").textContent=sel.curso==="nose"?sel.grupo.replace("Prueba de nivel · ",""):`${c.n} · ${sel.grupo}`;
+  $("#listo-wa").textContent=sel.curso==="nose"
+   ?`Hola! Te esperamos para la prueba de nivel el ${sel.grupo.replace("Prueba de nivel · ","").toLowerCase()} en Vetere 1390, Banfield. Dura unos 20 minutos. Great Hall`
+   :`Hola! ${nombre} quedó inscripto/a en ${c.n}, ${sel.grupo.toLowerCase()}. Para confirmar el lugar podés pagar la matrícula de ${plata(c.mat)} desde este link. Cualquier duda, escribinos. Great Hall`;
+  nuevas.unshift({n:f.nombre.trim()||"Alumno nuevo",c:sel.curso==="nose"?"prueba":sel.curso,g:sel.grupo,e:"nueva",tel:f.tel});
+  pintarPanel();
+  e.target.reset();
+};
+$("#otra").onclick=()=>{sel={curso:null,grupo:null};$("#listo").hidden=true;$$("#t-inscripcion .bloque").forEach((b,i)=>b.hidden=i>0);pintarCursos();resumen();window.scrollTo({top:0,behavior:"smooth"});};
+
+function cuotasFam(){
+  const meses=[["Octubre",42000,"ok","Pagada el 6/10"],["Noviembre",42000,"ok","Pagada el 4/11"],["Diciembre",42000,"vence","Vence el 10/12"]];
+  $("#cuotas-fam").innerHTML=meses.map(([m,v,e,t])=>`<div class="cuota"><div><b>${m}</b><br><small style="color:var(--muted)">${t}</small></div><div style="text-align:right">${plata(v)}<br>${e==="ok"?'<span class="estado ok">Paga</span>':'<button class="btn sky" type="button" data-pagar style="min-height:38px;padding:6px 14px">Pagar</button>'}</div></div>`).join("");
+  $$("[data-pagar]").forEach(b=>b.onclick=()=>{toast("En el sistema real se abre el pago (Mercado Pago o transferencia) y queda registrado.");});
+}
+
+$$(".tabs button").forEach(b=>b.onclick=()=>{$$(".tabs button").forEach(x=>x.setAttribute("aria-selected",x===b));$("#t-inscripcion").hidden=b.dataset.tab!=="inscripcion";$("#t-cuenta").hidden=b.dataset.tab!=="cuenta";});
+
+// ---------- panel ----------
+let filtro="todas";
+const NOMBRE=id=>id==="prueba"?"Prueba de nivel":(CURSOS.find(c=>c.id===id)||{}).n||id;
+function pintarPanel(){
+  const todos=[...nuevas,...ALUMNOS];
+  $("#k-alumnos").textContent=ALUMNOS.length;
+  $("#k-aldia").textContent=ALUMNOS.filter(a=>a.e==="ok").length;
+  $("#k-deben").textContent=ALUMNOS.filter(a=>a.e!=="ok").length;
+  $("#k-nuevas").textContent=nuevas.length;
+  const lista=todos.filter(a=>filtro==="todas"||(filtro==="debe"?a.e==="debe"||a.e==="vence":a.e===filtro));
+  const etiqueta={ok:'<span class="estado ok">Paga</span>',vence:'<span class="estado vence">Vence el 10</span>',debe:'<span class="estado debe">Debe noviembre</span>',nueva:'<span class="estado vence">Nueva</span>'};
+  $("#tabla").innerHTML=lista.length?lista.map((a,i)=>`<div class="reg ${a.e==='nueva'?'nueva':''}"><div><b>${esc(a.n)}</b><small>${NOMBRE(a.c)} · ${esc(a.g)}</small></div>${etiqueta[a.e]}${a.e==="ok"?'<span></span>':`<button class="mini" type="button" data-rec="${todos.indexOf(a)}">${a.e==='nueva'?'Confirmar':'Recordar'}</button>`}</div>`).join("")
+   :'<p class="nota">No hay alumnos en este filtro.</p>';
+  $$("[data-rec]").forEach(b=>b.onclick=()=>{const a=todos[+b.dataset.rec];abrir(a);});
+  $("#cupos").innerHTML=CURSOS.map(c=>{const tot=c.grupos.reduce((s,g)=>s+g[1],0),lib=c.grupos.reduce((s,g)=>s+g[2],0)-nuevas.filter(n=>n.c===c.id).length-ALUMNOS.filter(n=>n.alta&&n.c===c.id).length;const oc=tot-Math.max(lib,0);
+    return `<div class="cc"><span>${c.n}</span><div class="barra"><i style="width:${Math.round(oc/tot*100)}%"></i></div><small>${oc}/${tot}</small></div>`}).join("");
+  $("#aviso-a").innerHTML=`<option value="todos">Todas las familias (${ALUMNOS.length})</option>`+CURSOS.map(c=>{const n=ALUMNOS.filter(a=>a.c===c.id).length;return n?`<option value="${c.id}">${c.n} (${n})</option>`:""}).join("");
+}
+function esc(s){return String(s).replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]))}
+$$("#filtros button").forEach(b=>b.onclick=()=>{filtro=b.dataset.f;$$("#filtros button").forEach(x=>x.setAttribute("aria-pressed",x===b));pintarPanel();});
+
+let pendiente=null;
+function abrir(a){
+  const nom=a.n.split(" ")[0];
+  pendiente=a;
+  $("#m-t").textContent=a.e==="nueva"?"Confirmar la inscripción":"Recordatorio por WhatsApp";
+  $("#m-msg").textContent=a.e==="nueva"
+   ?`Hola! Recibimos la inscripción de ${nom} en ${NOMBRE(a.c)} (${a.g}). Ya tiene su lugar. Te esperamos! Great Hall`
+   :a.e==="debe"
+   ?`Hola! Te recordamos que quedó pendiente la cuota de noviembre de ${nom} (${plata((CURSOS.find(c=>c.id===a.c)||{cuota:0}).cuota)}). Podés pagarla desde este link. Gracias! Great Hall`
+   :`Hola! Te recordamos que la cuota de diciembre de ${nom} vence el 10/12. Podés pagarla desde este link. Gracias! Great Hall`;
+  $("#modal").classList.add("on");$("#m-ok").focus();
+}
+$("#m-no").onclick=()=>$("#modal").classList.remove("on");
+$("#modal").onclick=e=>{if(e.target.id==="modal")$("#modal").classList.remove("on")};
+document.addEventListener("keydown",e=>{if(e.key==="Escape")$("#modal").classList.remove("on")});
+$("#m-ok").onclick=()=>{$("#modal").classList.remove("on");
+  if(pendiente&&pendiente.e==="nueva"){pendiente.e="ok";pendiente.alta=true;ALUMNOS.unshift(pendiente);nuevas.splice(nuevas.indexOf(pendiente),1);}
+  toast("Ejemplo: en el sistema real el mensaje sale por WhatsApp.");pintarPanel();};
+$("#recordar-todos").onclick=()=>{const n=ALUMNOS.filter(a=>a.e!=="ok").length;toast(`Se mandaría el recordatorio a ${n} familias. En este ejemplo no se envía nada.`);};
+$("#aviso-btn").onclick=()=>{const o=$("#aviso-a");toast(`Aviso listo para ${o.options[o.selectedIndex].text}. En este ejemplo no se envía nada.`);};
+
+// ---------- vistas ----------
+$$(".vista button").forEach(b=>b.onclick=()=>{$$(".vista button").forEach(x=>x.setAttribute("aria-pressed",x===b));$("#v-familias").hidden=b.dataset.vista!=="familias";$("#v-panel").hidden=b.dataset.vista!=="panel";window.scrollTo({top:0});});
+
+let tt;function toast(t){const el=$("#toast");el.textContent=t;el.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>el.classList.remove("on"),3200);}
+
+pintarCursos();resumen();cuotasFam();pintarPanel();
+</script>
+</body>
+</html>
