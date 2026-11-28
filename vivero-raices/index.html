@@ -1,0 +1,588 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vivero Raíces · Catálogo y pedidos online (ejemplo)</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#183a2a">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green:#183a2a; --green-2:#24503a; --leaf:#4f7a3d; --sage:#e9eee2; --sage-2:#d6dfcb; --paper:#fbfcf8;
+  --rose:#c8486c; --rose-bg:#f8e3ea; --ink:#18211b; --muted:#5a665d; --soft:#8a958c; --line:#dde3d5;
+  --ok:#2c7a46; --ok-bg:#e0f1e5; --warn:#8a5a00; --warn-bg:#fbefd4; --bad:#a3302a; --bad-bg:#fbe3e0; --wa:#e2f7cb;
+  --serif:"Young Serif",Georgia,serif; --sans:"Figtree",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+body{margin:0;background:var(--sage);color:var(--ink);font:16px/1.55 var(--sans);-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--rose);outline-offset:2px;border-radius:6px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;color:var(--green);margin:0;letter-spacing:-.005em}
+.ej{display:inline-block;font:600 11px/1 var(--sans);letter-spacing:.03em;background:var(--warn-bg);color:var(--warn);padding:4px 7px;border-radius:6px;vertical-align:middle}
+[hidden]{display:none!important}
+
+.top{position:sticky;top:0;z-index:10;background:var(--green);color:#fff}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;height:64px}
+.brand{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none}
+.brand svg{flex:0 0 auto}
+.brand b{font:400 21px/1 var(--serif);display:block;white-space:nowrap}
+.brand small{font-size:12px;color:#b9d0bf;display:block;margin-top:3px}
+.switch{display:flex;background:rgba(255,255,255,.1);border-radius:999px;padding:4px}
+.switch button{border:0;background:transparent;color:#dce8df;padding:8px 14px;border-radius:999px;font-weight:600;font-size:14px;white-space:nowrap}
+.switch button[aria-pressed="true"]{background:#fff;color:var(--green)}
+.nota-ej{background:var(--green-2);color:#d3e3d7;font-size:13px}
+.nota-ej .wrap{padding-block:8px}
+
+.hero{background:var(--green);color:#fff;padding:48px 0 64px;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) 360px minmax(0,300px);gap:40px;align-items:center}
+.hero-grid > *{min-width:0}
+.hero h1{color:#fff;font-size:clamp(34px,4.4vw,54px);line-height:1.06;max-width:13ch}
+.hero h1 span{color:#f3b7c8}
+.hero p.lead{color:#c9dccd;font-size:18px;max-width:36ch;margin:18px 0 0}
+.hero ul{list-style:none;padding:0;margin:26px 0 0;display:grid;gap:10px;color:#e1ece4;font-size:15px}
+.hero li{display:flex;gap:10px}
+.hero li::before{content:"";flex:0 0 8px;height:8px;border-radius:50%;background:#f3b7c8;margin-top:8px}
+
+.phone{background:#0d1510;border-radius:42px;padding:10px;box-shadow:0 30px 60px -20px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.08)}
+.screen{background:var(--paper);color:var(--ink);border-radius:33px;height:680px;display:flex;flex-direction:column;overflow:hidden}
+.sbar{display:flex;justify-content:space-between;align-items:center;padding:12px 22px 6px;font-size:12px;font-weight:700}
+.sbar i{width:90px;height:22px;background:#0d1510;border-radius:12px;display:block}
+.apphead{padding:6px 16px 10px;border-bottom:1px solid var(--line)}
+.apphead small{color:var(--soft);font-size:12px}
+.apphead h2{font-size:21px;line-height:1.2;margin-top:2px}
+.cats{display:flex;gap:6px;overflow-x:auto;margin-top:10px;padding-bottom:2px;scrollbar-width:none}
+.cats::-webkit-scrollbar{display:none}
+.cats button{flex:0 0 auto;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;font-size:13px;font-weight:600;color:var(--muted)}
+.cats button[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:#fff}
+.luz{display:flex;gap:6px;margin-top:8px}
+.luz button{flex:1;border:1px dashed var(--sage-2);background:transparent;border-radius:10px;padding:6px 4px;font-size:12px;font-weight:600;color:var(--muted);white-space:nowrap}
+.luz-t{font-size:11.5px;color:var(--soft);margin-top:8px}
+.luz button[aria-pressed="true"]{border-style:solid;border-color:var(--leaf);background:var(--sage);color:var(--green)}
+.appbody{flex:1;overflow-y:auto;padding:12px 14px 14px;-webkit-overflow-scrolling:touch}
+.appfoot{padding:10px 14px 14px;border-top:1px solid var(--line);background:var(--paper)}
+.back{border:0;background:none;color:var(--leaf);font-weight:700;font-size:13px;padding:0;margin-bottom:8px}
+
+.prod{display:grid;grid-template-columns:64px minmax(0,1fr);gap:12px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px;margin-bottom:8px}
+.thumb{width:64px;height:64px;border-radius:12px;background:var(--sage);display:grid;place-items:center}
+.prod b{display:block;font-size:15px;color:var(--green);line-height:1.25}
+.prod small{display:block;color:var(--muted);font-size:12.5px;line-height:1.35;margin-top:2px}
+.prod .pie{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:8px}
+.precio{font-weight:700;font-size:14px}
+.stock{font-size:11.5px;font-weight:700}
+.stock.ok{color:var(--ok)}.stock.poco{color:var(--warn)}.stock.no{color:var(--bad)}
+.qty{display:flex;align-items:center;gap:2px;background:var(--sage);border-radius:10px;padding:2px}
+.qty button{width:30px;height:30px;border:0;border-radius:8px;background:#fff;font-weight:700;color:var(--green)}
+.qty span{min-width:22px;text-align:center;font-weight:700;font-size:14px}
+.add{border:0;border-radius:10px;background:var(--green);color:#fff;font-weight:700;font-size:13px;padding:7px 12px}
+.add[disabled]{background:var(--sage-2);color:var(--soft);cursor:not-allowed}
+.colores{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.colores button{width:26px;height:26px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px var(--line)}
+.colores button[aria-pressed="true"]{box-shadow:0 0 0 2px var(--green)}
+.colname{font-size:12px;color:var(--muted);margin-top:4px}
+.vacio-p{color:var(--muted);font-size:14px;text-align:center;padding:30px 10px}
+
+.cart{width:100%;border:0;border-radius:14px;background:var(--green);color:#fff;font-weight:700;font-size:15px;min-height:50px;display:flex;justify-content:space-between;align-items:center;padding:0 16px}
+.cart[disabled]{background:#b9c4bb;cursor:not-allowed}
+.linea{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px dashed var(--line);font-size:14px}
+.linea span:last-child{font-weight:700;white-space:nowrap}
+.entrega{display:grid;gap:8px;margin:14px 0 10px}
+.ent{display:block;width:100%;text-align:left;border:1px solid var(--line);background:#fff;border-radius:14px;padding:11px 13px}
+.ent b{display:block;font-size:14px;color:var(--green)}
+.ent small{color:var(--muted);font-size:12.5px}
+.ent[aria-pressed="true"]{border-color:var(--green);box-shadow:inset 0 0 0 1px var(--green);background:var(--sage)}
+.dias{display:flex;gap:6px;margin:6px 0 10px;flex-wrap:wrap}
+.dias button{border:1px solid var(--line);background:#fff;border-radius:10px;padding:7px 10px;font-size:13px;font-weight:600}
+.dias button[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:#fff}
+.field{display:grid;gap:5px;margin-bottom:10px;font-size:13px;font-weight:600;color:var(--green)}
+.field input{border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:#fff;font-weight:400;font-size:15px;min-height:44px}
+.tot{display:flex;justify-content:space-between;align-items:baseline;margin-top:6px;font-size:14px}
+.tot b{font:400 22px var(--serif);color:var(--green)}
+.done{text-align:center;padding-top:14px}
+.check{width:64px;height:64px;border-radius:50%;background:var(--ok-bg);color:var(--ok);display:grid;place-items:center;margin:0 auto 12px}
+.done h2{font-size:23px}
+.done p{color:var(--muted);font-size:14px;margin:6px 0 14px}
+.wa{background:#efeae2;border-radius:16px;padding:12px;text-align:left}
+.wa small{display:block;font-size:11px;color:var(--soft);margin-bottom:6px}
+.bubble{background:var(--wa);border-radius:12px 12px 12px 4px;padding:9px 11px;font-size:13.5px;line-height:1.45;white-space:pre-line}
+
+.recibe h3{color:#fff;font-size:21px}
+.recibe > p{color:#b9d0bf;font-size:14px;margin:6px 0 16px}
+.feed{display:grid;gap:10px}
+.notif{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:12px 14px;color:#e4eee6;font-size:14px}
+.notif b{color:#fff;display:block}
+.notif small{color:#b9d0bf;font-size:12px}
+.notif.nuevo{background:#fff;color:var(--ink);border-color:#fff;animation:entra .5s ease}
+.notif.nuevo b{color:var(--green)}.notif.nuevo small{color:var(--leaf)}
+@keyframes entra{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+.vacio{color:#9fbaa5;font-size:14px;border:1px dashed rgba(255,255,255,.22);border-radius:16px;padding:14px}
+
+section.s{padding:80px 0}
+.s-head{max-width:640px;margin-bottom:34px}
+.s-head h2{font-size:clamp(28px,3.4vw,40px);line-height:1.12}
+.s-head p{color:var(--muted);font-size:17px;margin:12px 0 0}
+.rosal{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:stretch}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:24px}
+.swatches{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}
+.sw{border:1px solid var(--line);background:#fff;border-radius:14px;padding:10px;text-align:left}
+.sw i{display:block;height:54px;border-radius:10px;margin-bottom:8px}
+.sw b{font-size:13.5px;display:block;color:var(--green)}
+.sw small{font-size:12px;color:var(--muted)}
+.sw[aria-pressed="true"]{border-color:var(--green);box-shadow:inset 0 0 0 1px var(--green)}
+.rosal-sel{display:flex;flex-direction:column;justify-content:space-between;gap:16px}
+.rosal-sel .grande{border-radius:16px;min-height:200px;display:grid;place-items:center}
+.rosal-sel .grande svg{width:150px;height:150px}
+.rosal-sel p{margin:0;color:var(--muted)}
+.compara{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.cols{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:20px;overflow:hidden;background:#fff}
+.cols > div{padding:26px}
+.cols > div + div{background:var(--green);color:#dce8df}
+.cols h3{font-size:20px;margin-bottom:14px}
+.cols > div + div h3{color:#fff}
+.cols ul{margin:0;padding:0;list-style:none;display:grid;gap:12px;font-size:15px}
+.cols li{display:grid;grid-template-columns:20px 1fr;gap:8px}
+.cols li::before{content:"–";color:var(--soft)}
+.cols > div + div li::before{content:"✓";color:#f3b7c8}
+.cierre{text-align:center;padding:72px 0}
+.cierre h2{font-size:clamp(26px,3vw,36px);max-width:22ch;margin:0 auto}
+.cierre button{margin-top:22px;border:0;background:var(--green);color:#fff;border-radius:999px;padding:14px 26px;font-weight:700}
+footer{padding:26px 0 40px;font-size:13px;color:var(--muted);border-top:1px solid var(--line)}
+
+.panel{display:grid;grid-template-columns:220px minmax(0,1fr);min-height:calc(100vh - 100px)}
+.side{background:var(--paper);border-right:1px solid var(--line);padding:22px 14px}
+.side h3{font-size:17px;padding:0 10px;margin-bottom:12px}
+.side button{display:flex;justify-content:space-between;align-items:center;width:100%;border:0;background:transparent;border-radius:10px;padding:10px;font-weight:600;font-size:14px;color:var(--muted);text-align:left}
+.side button[aria-current="true"]{background:var(--sage);color:var(--green)}
+.badge{background:var(--rose);color:#fff;border-radius:999px;font-size:11px;padding:2px 7px;min-width:20px;text-align:center}
+.badge:empty{display:none}
+.pmain{padding:26px 28px 60px}
+.pmain h2{font-size:28px}
+.pmain .sub{color:var(--muted);margin:4px 0 22px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px}
+.kpi{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:14px 16px}
+.kpi b{display:block;font:400 28px/1.15 var(--serif);color:var(--green);white-space:nowrap}
+.kpi span{font-size:13px;color:var(--muted)}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.chips button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 13px;font-size:13px;font-weight:600;color:var(--muted)}
+.chips button[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:#fff}
+.peds{display:grid;gap:10px}
+.ped{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:14px 16px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 14px;align-items:start}
+.ped.nuevo{border-color:var(--rose);box-shadow:inset 3px 0 0 var(--rose)}
+.ped b{font-size:16px}
+.ped .items{grid-column:1;color:var(--muted);font-size:14px}
+.ped .meta{font-size:13px;color:var(--soft)}
+.ped .der{grid-row:1/span 3;grid-column:2;display:grid;gap:8px;justify-items:end}
+.ped .monto{font-weight:700}
+.tag{font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px;white-space:nowrap}
+.tag.nuevo{background:var(--rose-bg);color:var(--rose)}.tag.prep{background:var(--warn-bg);color:var(--warn)}.tag.listo{background:var(--ok-bg);color:var(--ok)}.tag.camino{background:var(--sage-2);color:var(--green)}
+.act{border:1px solid var(--line);background:#fff;border-radius:10px;padding:7px 12px;font-size:13px;font-weight:700;color:var(--green);white-space:nowrap}
+.act.fill{background:var(--green);color:#fff;border-color:var(--green)}
+.tabla{background:var(--paper);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.st{display:grid;grid-template-columns:minmax(0,1fr) 120px 150px;gap:12px;align-items:center;padding:11px 16px;border-bottom:1px solid var(--line);font-size:14px}
+.st:last-child{border-bottom:0}
+.st small{display:block;color:var(--soft);font-size:12.5px}
+.ctr{display:flex;align-items:center;gap:6px;justify-self:end}
+.ctr button{width:30px;height:30px;border:1px solid var(--line);border-radius:8px;background:#fff;font-weight:700;color:var(--green)}
+.ctr span{min-width:28px;text-align:center;font-weight:700}
+.reparto{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.dia{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:16px}
+.dia h3{font-size:18px}
+.dia ol{margin:10px 0 0;padding-left:18px;font-size:14px;display:grid;gap:6px}
+.dia small{color:var(--soft)}
+
+.modal{position:fixed;inset:0;background:rgba(24,58,42,.5);display:none;align-items:center;justify-content:center;padding:16px;z-index:40}
+.modal.on{display:flex}
+.modal .card{max-width:400px;width:100%}
+.modal h3{font-size:20px;margin-bottom:12px}
+.modal .acts{display:flex;gap:8px;margin-top:14px}
+.modal .acts button{flex:1;min-height:46px;border-radius:12px;font-weight:700;border:1px solid var(--line);background:#fff;color:var(--green)}
+.modal .acts button.fill{background:var(--green);color:#fff;border-color:var(--green)}
+.toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,16px);background:var(--ink);color:#fff;padding:12px 18px;border-radius:12px;font-size:14px;opacity:0;transition:.25s;z-index:50;max-width:calc(100% - 32px);pointer-events:none}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+@media (max-width:1060px){
+  .hero-grid{grid-template-columns:minmax(0,1fr) 360px}
+  .recibe{grid-column:1/-1}
+  .feed{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
+}
+@media (max-width:820px){
+  .hero{padding:32px 0 44px}
+  .hero-grid{grid-template-columns:1fr;gap:28px}
+  .phone{max-width:390px;width:100%;margin:0 auto}
+  .rosal,.cols{grid-template-columns:1fr}
+  .panel{grid-template-columns:1fr}
+  .side{border-right:0;border-bottom:1px solid var(--line);padding:10px 12px;display:flex;gap:6px;overflow-x:auto}
+  .side h3{display:none}
+  .side button{width:auto;white-space:nowrap;gap:8px}
+  .pmain{padding:22px 16px 60px}
+  .kpis{grid-template-columns:repeat(2,1fr)}
+  .kpi b{font-size:22px}
+  .st{grid-template-columns:minmax(0,1fr) auto}
+  .st .tg{grid-column:1}
+  .ctr{grid-column:2;grid-row:1/span 2}
+  section.s{padding:56px 0}
+}
+@media (max-width:480px){
+  .wrap{padding:0 16px}
+  .brand small{display:none}
+  .brand b{font-size:18px}
+  .switch button{padding:8px 11px;font-size:13px}
+  .screen{height:640px;border-radius:30px}
+  .phone{padding:7px;border-radius:36px}
+  .swatches{grid-template-columns:repeat(2,1fr)}
+  .ped{grid-template-columns:1fr}
+  .ped .der{grid-row:auto;grid-column:1;justify-items:start;grid-auto-flow:column;align-items:center}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#" aria-label="Vivero Raíces, Pilar">
+      <svg width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 29V15" stroke="#f3b7c8" stroke-width="2" stroke-linecap="round"/><path d="M16 15c0-6 4-10 10-10 0 6-4 10-10 10Z" fill="#9cc48a"/><path d="M16 19c0-5-3.5-8.5-9-8.5 0 5 3.5 8.5 9 8.5Z" fill="#6fa25b"/><path d="M16 29c-2-2-5-2.5-7-2M16 29c2-2 5-2.5 7-2" stroke="#f3b7c8" stroke-width="1.6" stroke-linecap="round"/></svg>
+      <span><b>Vivero Raíces</b><small>Uriburu 1150 · Pilar</small></span>
+    </a>
+    <div class="switch" role="group" aria-label="Cambiar vista">
+      <button type="button" data-v="clientes" aria-pressed="true">Clientes</button>
+      <button type="button" data-v="panel" aria-pressed="false">Panel del vivero</button>
+    </div>
+  </div>
+</header>
+<div class="nota-ej"><div class="wrap">Ejemplo de Compila con las categorías y plantas del Instagram de Vivero Raíces. Precios, stock, pedidos y clientes son inventados para mostrar cómo funciona.</div></div>
+
+<div id="v-clientes">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <h1>Tu vivero, abierto <span>las 24 horas</span></h1>
+        <p class="lead">El cliente ve las plantas con precio y stock, arma el pedido y elige si lo retira o se lo llevan. Sin pedir el catálogo por mensaje.</p>
+        <ul>
+          <li>Filtra por dónde la va a poner: pleno sol, media sombra o interior.</li>
+          <li>Los rosales se eligen por color, como en el catálogo.</li>
+          <li>Retiro en los horarios del vivero o envío en Pilar.</li>
+        </ul>
+      </div>
+      <div class="phone" aria-label="Ejemplo del catálogo en el celular">
+        <div class="screen">
+          <div class="sbar"><span>9:41</span><i></i><span>5G</span></div>
+          <div class="apphead" id="a-head">
+            <small>Vivero Raíces · Pilar</small>
+            <h2 id="a-tit">¿Qué estás buscando?</h2>
+            <div id="a-filtros">
+              <div class="cats" id="cats"></div>
+              <div class="luz-t">¿Dónde la vas a poner?</div>
+              <div class="luz" id="luz" aria-label="Dónde la vas a poner">
+                <button type="button" data-l="sol" aria-pressed="false">Pleno sol</button>
+                <button type="button" data-l="sombra" aria-pressed="false">Media sombra</button>
+                <button type="button" data-l="interior" aria-pressed="false">Interior</button>
+              </div>
+            </div>
+          </div>
+          <div class="appbody" id="a-body"></div>
+          <div class="appfoot" id="a-foot"><button class="cart" id="a-cta" type="button" disabled><span id="a-cta-t">Tu pedido está vacío</span><span id="a-cta-m"></span></button></div>
+        </div>
+      </div>
+      <div class="recibe">
+        <h3>Lo que le llega a Andrea</h3>
+        <p>Armá un pedido en el celular y mirá cómo aparece acá.</p>
+        <div class="feed" id="feed">
+          <div class="vacio" id="feed-vacio">Todavía no entró ningún pedido hoy.</div>
+          <div class="notif"><small>Ayer · 22:40</small><b>Pedido para retirar el sábado</b>2 rosales rojos y una maceta de cerámica <span class="ej">EJEMPLO</span></div>
+          <div class="notif"><small>Ayer · 19:05</small><b>Pedido con envío a Del Viso</b>Olivo y 3 salvias <span class="ej">EJEMPLO</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="s">
+    <div class="wrap">
+      <div class="s-head">
+        <h2>El catálogo de rosales, sin pedirlo por mensaje</h2>
+        <p>Hoy en Instagram dicen "pedinos el catálogo y elegí el color que más te guste". Acá el cliente lo elige solo y ve si queda stock de ese color.</p>
+      </div>
+      <div class="rosal">
+        <div class="card">
+          <h3 style="font-size:22px">Rosal híbrido de té</h3>
+          <p style="color:var(--muted);margin:6px 0 0;font-size:15px">Elegí el color <span class="ej">COLORES Y STOCK DE EJEMPLO</span></p>
+          <div class="swatches" id="swatches"></div>
+        </div>
+        <div class="card rosal-sel">
+          <div class="grande" id="rosa-grande"></div>
+          <div><h3 id="rosa-n" style="font-size:22px"></h3><p id="rosa-d"></p></div>
+          <button class="cart" type="button" id="rosa-add" style="max-width:100%"><span>Sumar al pedido</span><span id="rosa-p"></span></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="s compara">
+    <div class="wrap">
+      <div class="s-head"><h2>Del mensaje directo al pedido listo</h2></div>
+      <div class="cols">
+        <div><h3>Hoy</h3><ul>
+          <li>"Consultanos precio por mensaje directo".</li>
+          <li>El catálogo de rosales se manda uno por uno.</li>
+          <li>Cada pedido se arma charlando por WhatsApp.</li>
+          <li>Lo que se vendió se descuenta de memoria.</li></ul></div>
+        <div><h3>Con este sistema</h3><ul>
+          <li>Precio y stock a la vista, a cualquier hora.</li>
+          <li>Los rosales se eligen por color, con stock real.</li>
+          <li>El pedido llega completo, con retiro o envío y el día.</li>
+          <li>El stock se descuenta solo con cada venta.</li></ul></div>
+      </div>
+    </div>
+  </section>
+  <div class="cierre wrap">
+    <h2>¿Querés ver cómo lo maneja el vivero?</h2>
+    <button type="button" data-ir-panel>Abrir el panel del vivero</button>
+  </div>
+</div>
+
+<div id="v-panel" hidden>
+  <div class="panel">
+    <nav class="side" aria-label="Secciones del panel">
+      <h3>Vivero Raíces</h3>
+      <button type="button" data-p="pedidos" aria-current="true">Pedidos <span class="badge" id="b-ped"></span></button>
+      <button type="button" data-p="stock" aria-current="false">Stock <span class="badge" id="b-stock"></span></button>
+      <button type="button" data-p="reparto" aria-current="false">Envíos de la semana</button>
+    </nav>
+    <main class="pmain">
+      <div id="p-pedidos">
+        <h2>Pedidos</h2>
+        <p class="sub">Los que entran desde el catálogo aparecen arriba. Cuando lo preparás, el cliente recibe el aviso.</p>
+        <div class="kpis">
+          <div class="kpi"><b id="k-hoy">0</b><span>pedidos esta semana</span></div>
+          <div class="kpi"><b id="k-prep">0</b><span>para preparar</span></div>
+          <div class="kpi"><b id="k-ret">0</b><span>para retirar el sábado</span></div>
+          <div class="kpi"><b id="k-total">$ 0</b><span>vendido esta semana</span></div>
+        </div>
+        <div class="chips" id="chips">
+          <button type="button" data-f="todos" aria-pressed="true">Todos</button>
+          <button type="button" data-f="nuevo" aria-pressed="false">Nuevos</button>
+          <button type="button" data-f="prep" aria-pressed="false">Preparando</button>
+          <button type="button" data-f="listo" aria-pressed="false">Listos</button>
+        </div>
+        <div class="peds" id="peds"></div>
+      </div>
+      <div id="p-stock" hidden>
+        <h2>Stock</h2>
+        <p class="sub">Se descuenta solo con cada pedido. Si algo se termina, deja de mostrarse en el catálogo.</p>
+        <div class="tabla" id="tabla-stock"></div>
+      </div>
+      <div id="p-reparto" hidden>
+        <h2>Envíos de la semana</h2>
+        <p class="sub">Cada pedido con envío cae en el día que eligió el cliente, ordenado por barrio.</p>
+        <div class="reparto" id="reparto"></div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<footer><div class="wrap">Ejemplo hecho por Compila Software para Vivero Raíces (Uriburu 1150, Pilar). Las categorías, las plantas y los horarios salen del Instagram del vivero. Precios, stock, colores, pedidos y clientes son de ejemplo. No se envía ningún mensaje real.</div></footer>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="m-t">
+  <div class="card">
+    <h3 id="m-t">Avisarle al cliente</h3>
+    <div class="wa"><small id="m-para"></small><div class="bubble" id="m-msg"></div></div>
+    <div class="acts"><button type="button" id="m-no">Cancelar</button><button type="button" class="fill" id="m-ok">Mandar</button></div>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+// Categorías y plantas: Instagram de Vivero Raíces. Precios, stock y colores: ejemplo.
+const ICO={
+ rosa:'<svg width="34" height="34" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 31V19" stroke="#4f7a3d" stroke-width="2"/><path d="M16 26c-3-2.5-6.5-2-8 .5 3 1.2 6 .6 8-.5Z" fill="#6fa25b"/><path d="M16 23c2.5-2 5.5-1.6 7 .5-2.6 1-5.2.6-7-.5Z" fill="#6fa25b"/><circle cx="16" cy="12" r="8" fill="COL"/><path d="M16 6.5a5.5 5.5 0 1 0 5.2 7.3" stroke="rgba(0,0,0,.18)" stroke-width="1.3" fill="none" stroke-linecap="round"/><path d="M16 9.2a2.8 2.8 0 1 0 2.7 3.6" stroke="rgba(0,0,0,.22)" stroke-width="1.2" fill="none" stroke-linecap="round"/></svg>',
+ hoja:'<svg width="34" height="34" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 30V12" stroke="#4f7a3d" stroke-width="2"/><path d="M16 14C16 7 20 3 27 3c0 7-4 11-11 11Z" fill="#6fa25b"/><path d="M16 22c0-6-4-10-11-10 0 6 4 10 11 10Z" fill="#9cc48a"/></svg>',
+ cactus:'<svg width="34" height="34" viewBox="0 0 32 32" aria-hidden="true"><rect x="12" y="6" width="8" height="18" rx="4" fill="#6fa25b"/><path d="M12 16H9a2 2 0 0 1-2-2v-3" stroke="#6fa25b" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M20 13h3a2 2 0 0 0 2-2V9" stroke="#6fa25b" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M9 24h14l-2 6H11Z" fill="#b5764f"/></svg>',
+ arbol:'<svg width="34" height="34" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 30V18" stroke="#7a5a3a" stroke-width="2.5"/><circle cx="16" cy="12" r="9" fill="#7fa868"/><circle cx="12" cy="11" r="1.6" fill="#e2b33a"/><circle cx="19" cy="14" r="1.6" fill="#e2b33a"/><circle cx="17" cy="8" r="1.6" fill="#e2b33a"/></svg>',
+ olivo:'<svg width="34" height="34" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 30c0-6-2-8 0-14" stroke="#7a5a3a" stroke-width="2.5" fill="none"/><ellipse cx="11" cy="10" rx="7" ry="5" fill="#9aa97a"/><ellipse cx="21" cy="12" rx="7" ry="5" fill="#86976a"/></svg>',
+ brote:'<svg width="34" height="34" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 28V16" stroke="#4f7a3d" stroke-width="2"/><path d="M16 18c-1-5-5-7-9-6 1 5 5 7 9 6ZM16 16c1-5 5-7 9-6-1 5-5 7-9 6Z" fill="#6fa25b"/><path d="M6 28h20" stroke="#8a6a4a" stroke-width="2.5" stroke-linecap="round"/></svg>',
+ maceta:'<svg width="34" height="34" viewBox="0 0 32 32" aria-hidden="true"><path d="M7 12h18l-2.5 16h-13Z" fill="#c98a5f"/><rect x="5" y="9" width="22" height="4" rx="1.5" fill="#b5764f"/></svg>'
+};
+const COLORES=[["Rojo","#b3203a",6],["Rosa","#e47fa0",4],["Blanco","#f4efe6",3],["Amarillo","#efc845",2],["Coral","#f08a6a",0],["Fucsia","#c2357a",5],["Bicolor","linear-gradient(135deg,#e47fa0 50%,#f4efe6 50%)",1],["Lila","#b9a2d6",3]];
+const P=[
+ {id:"rosal",n:"Rosal híbrido de té",d:"Flor grande, para pleno sol. Elegí el color.",cat:"Rosales",luz:["sol"],ic:"rosa",p:18500,colores:true},
+ {id:"olivo",n:"Olivo",d:"Tronco formado, para jardín o maceta grande.",cat:"Frutales",luz:["sol"],ic:"olivo",p:95000,s:3},
+ {id:"limonero",n:"Limonero",d:"Frutal en maceta, ideal para patio con sol.",cat:"Frutales",luz:["sol"],ic:"arbol",p:32000,s:5,ej:1},
+ {id:"ficus",n:"Ficus Pandurata",d:"Hojas enormes, de las favoritas para interior.",cat:"Interior",luz:["interior"],ic:"hoja",p:38000,s:4},
+ {id:"celosia",n:"Celosía",d:"Anual, de primavera a otoño. Pleno sol.",cat:"Huerta y canteros",luz:["sol"],ic:"brote",p:3500,s:24},
+ {id:"salvia",n:"Salvia",d:"Para combinar con gramíneas en canteros.",cat:"Huerta y canteros",luz:["sol","sombra"],ic:"brote",p:4200,s:18},
+ {id:"gram",n:"Gramíneas",d:"Movimiento y textura en el cantero.",cat:"Huerta y canteros",luz:["sol"],ic:"brote",p:5200,s:12},
+ {id:"sombra",n:"Combinación para poco sol",d:"Hojas de distintas formas y colores para media sombra.",cat:"Interior",luz:["sombra","interior"],ic:"hoja",p:21000,s:6,ej:1},
+ {id:"suculentas",n:"Suculentas surtidas",d:"Macetita de 10 cm. Poco riego.",cat:"Cactus y suculentas",luz:["sol","interior"],ic:"cactus",p:2800,s:40,ej:1},
+ {id:"maceta",n:"Maceta de cerámica",d:"El complemento para decorar con plantas.",cat:"Macetas",luz:["sol","sombra","interior"],ic:"maceta",p:14000,s:2}
+];
+const CATS=["Todo","Rosales","Interior","Frutales","Huerta y canteros","Cactus y suculentas","Macetas"];
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const plata=n=>"$ "+n.toLocaleString("es-AR");
+const esc=s=>String(s).replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
+const prod=id=>P.find(p=>p.id===id);
+const stockDe=(p,color)=>p.colores?(COLORES.find(c=>c[0]===color)||[0,0,0])[2]:p.s;
+const ico=(p,color)=>ICO[p.ic].replace("COL",color?(COLORES.find(c=>c[0]===color)[1].startsWith("linear")?"#e47fa0":COLORES.find(c=>c[0]===color)[1]):"#c8486c");
+
+let st={paso:"cat",cat:"Todo",luz:null,colorSel:{rosal:"Rojo"},cart:[],ent:null,dia:null};
+const carTot=()=>st.cart.reduce((s,i)=>s+prod(i.id).p*i.q,0);
+const carCant=()=>st.cart.reduce((s,i)=>s+i.q,0);
+const key=(id,c)=>id+(c?"|"+c:"");
+
+function app(){
+  $("#a-filtros").hidden=st.paso!=="cat";
+  $("#a-foot").hidden=st.paso==="listo";
+  const cta=$("#a-cta");
+  if(st.paso==="cat"){
+    $("#a-tit").textContent="¿Qué estás buscando?";
+    $("#cats").innerHTML=CATS.map(c=>`<button type="button" data-c="${c}" aria-pressed="${st.cat===c}">${c}</button>`).join("");
+    $$("#cats button").forEach(b=>b.onclick=()=>{st.cat=b.dataset.c;app();});
+    $$("#luz button").forEach(b=>{b.setAttribute("aria-pressed",st.luz===b.dataset.l);b.onclick=()=>{st.luz=st.luz===b.dataset.l?null:b.dataset.l;app();};});
+    const lista=P.filter(p=>(st.cat==="Todo"||p.cat===st.cat)&&(!st.luz||p.luz.includes(st.luz)));
+    $("#a-body").innerHTML=lista.length?lista.map(card).join(""):'<p class="vacio-p">No hay plantas con ese filtro. Probá con otro.</p>';
+    $$("#a-body [data-col]").forEach(b=>b.onclick=()=>{st.colorSel[b.dataset.p]=b.dataset.col;app();});
+    $$("#a-body [data-add]").forEach(b=>b.onclick=()=>{sumar(b.dataset.add,st.colorSel[b.dataset.add]);});
+    $$("#a-body [data-mas]").forEach(b=>b.onclick=()=>cambiar(b.dataset.mas,1));
+    $$("#a-body [data-menos]").forEach(b=>b.onclick=()=>cambiar(b.dataset.menos,-1));
+    cta.disabled=!st.cart.length;
+    $("#a-cta-t").textContent=st.cart.length?`Ver pedido (${carCant()})`:"Tu pedido está vacío";
+    $("#a-cta-m").textContent=st.cart.length?plata(carTot()):"";
+    cta.onclick=()=>{st.paso="pedido";app();};
+  }
+  if(st.paso==="pedido"){
+    $("#a-tit").textContent="Tu pedido";
+    const envio=st.ent==="envio"?6000:0;
+    $("#a-body").innerHTML=`<button class="back" type="button" data-back>← Seguir mirando</button>
+      ${st.cart.map(i=>`<div class="linea"><span>${i.q} × ${prod(i.id).n}${i.c?` · ${i.c}`:""}</span><span>${plata(prod(i.id).p*i.q)}</span></div>`).join("")}
+      <div class="entrega">
+        <button type="button" class="ent" data-e="retiro" aria-pressed="${st.ent==="retiro"}"><b>Retiro en el vivero</b><small>Uriburu 1150. Lun a vie 8:30 a 13 y 14 a 17:30. Sáb 8:30 a 16</small></button>
+        <button type="button" class="ent" data-e="envio" aria-pressed="${st.ent==="envio"}"><b>Envío a domicilio en Pilar · ${plata(6000)} <span class="ej">EJEMPLO</span></b><small>Elegís el día y te avisamos cuando sale</small></button>
+      </div>
+      ${st.ent?`<div style="font-size:13px;font-weight:600;color:var(--green)">${st.ent==="retiro"?"¿Qué día pasás?":"¿Qué día te lo llevamos?"}</div>
+      <div class="dias">${(st.ent==="retiro"?["Hoy","Mañana","Sábado"]:["Martes","Jueves","Sábado"]).map(d=>`<button type="button" data-d="${d}" aria-pressed="${st.dia===d}">${d}</button>`).join("")}</div>
+      <label class="field">Tu nombre<input id="f-n" autocomplete="off" placeholder="Carolina"></label>
+      ${st.ent==="envio"?'<label class="field">Dirección<input id="f-d" autocomplete="off" placeholder="Calle y número, barrio"></label>':""}
+      <label class="field">WhatsApp<input id="f-t" type="tel" inputmode="tel" autocomplete="off" placeholder="11 2345 6789"></label>`:""}
+      <div class="tot"><span>Total${envio?" con envío":""}</span><b>${plata(carTot()+envio)}</b></div>`;
+    $("[data-back]").onclick=()=>{st.paso="cat";app();};
+    $$("#a-body [data-e]").forEach(b=>b.onclick=()=>{st.ent=b.dataset.e;st.dia=null;app();});
+    $$("#a-body [data-d]").forEach(b=>b.onclick=()=>{const n=$("#f-n")?.value,t=$("#f-t")?.value,d=$("#f-d")?.value;st.dia=b.dataset.d;app();if(n)$("#f-n").value=n;if(t)$("#f-t").value=t;if(d&&$("#f-d"))$("#f-d").value=d;valida();});
+    const valida=()=>{cta.disabled=!(st.ent&&st.dia&&$("#f-n")&&$("#f-n").value.trim()&&$("#f-t").value.trim()&&(st.ent!=="envio"||$("#f-d").value.trim()));};
+    $$("#a-body input").forEach(i=>i.oninput=valida); valida();
+    $("#a-cta-t").textContent="Confirmar pedido"; $("#a-cta-m").textContent=plata(carTot()+envio);
+    cta.onclick=()=>{st.datos={n:$("#f-n").value.trim(),t:$("#f-t").value.trim(),d:$("#f-d")?$("#f-d").value.trim():""};registrar();st.paso="listo";app();};
+  }
+  if(st.paso==="listo"){
+    const nom=st.datos.n.split(" ")[0];
+    $("#a-tit").textContent="¡Pedido enviado!";
+    $("#a-body").innerHTML=`<div class="done"><div class="check"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+      <h2>Gracias, ${esc(nom)}</h2><p>${st.ent==="retiro"?`Lo tenés listo para retirar el ${st.dia.toLowerCase()}.`:`Te lo llevamos el ${st.dia.toLowerCase()}.`}</p>
+      <div class="wa"><small>WhatsApp de Vivero Raíces · ahora</small><div class="bubble">${st.ent==="retiro"
+        ?`Hola ${esc(nom)}! Recibimos tu pedido. Te lo dejamos listo para el ${st.dia.toLowerCase()} en Uriburu 1150. Te escribimos cuando esté preparado 🌿`
+        :`Hola ${esc(nom)}! Recibimos tu pedido. Te lo llevamos el ${st.dia.toLowerCase()} y te avisamos cuando salga 🌿`}</div></div>
+      <button class="back" type="button" id="otra" style="margin-top:18px">Hacer otro pedido</button></div>`;
+    $("#otra").onclick=()=>{st={paso:"cat",cat:"Todo",luz:null,colorSel:{rosal:"Rojo"},cart:[],ent:null,dia:null};app();};
+  }
+  $("#a-body").scrollTop=0;
+}
+function card(p){
+  const c=p.colores?st.colorSel[p.id]:null, s=stockDe(p,c), it=st.cart.find(i=>i.k===key(p.id,c));
+  const stt=s===0?'<span class="stock no">Sin stock</span>':s<=3?`<span class="stock poco">Quedan ${s}</span>`:'<span class="stock ok">Hay stock</span>';
+  return `<div class="prod"><div class="thumb">${ico(p,c)}</div><div><b>${p.n}${p.ej?' <span class="ej">EJEMPLO</span>':""}</b><small>${p.d}</small>
+   ${p.colores?`<div class="colores">${COLORES.map(([n,h])=>`<button type="button" data-p="${p.id}" data-col="${n}" aria-pressed="${c===n}" aria-label="${n}" style="background:${h}"></button>`).join("")}</div><div class="colname">Color: <b style="display:inline;font-size:12px">${c}</b></div>`:""}
+   <div class="pie"><span><span class="precio">${plata(p.p)}</span><br>${stt}</span>${it?`<span class="qty"><button type="button" data-menos="${it.k}" aria-label="Menos">−</button><span>${it.q}</span><button type="button" data-mas="${it.k}" aria-label="Más">+</button></span>`:`<button class="add" type="button" data-add="${p.id}" ${s===0?"disabled":""}>Agregar</button>`}</div></div></div>`;
+}
+function sumar(id,color){
+  const p=prod(id), c=p.colores?color:null, k=key(id,c), it=st.cart.find(i=>i.k===k);
+  if(stockDe(p,c)<=(it?it.q:0)) return toast("No queda más stock de esa planta.");
+  if(it) it.q++; else st.cart.push({k,id,c,q:1});
+  app();
+}
+function cambiar(k,d){const it=st.cart.find(i=>i.k===k);const p=prod(it.id);if(d>0&&it.q>=stockDe(p,it.c))return toast("No queda más stock de esa planta.");it.q+=d;if(it.q<=0)st.cart=st.cart.filter(i=>i!==it);app();}
+function registrar(){
+  st.cart.forEach(i=>{const p=prod(i.id); if(p.colores){const c=COLORES.find(x=>x[0]===i.c); c[2]=Math.max(0,c[2]-i.q);} else p.s=Math.max(0,p.s-i.q);});
+  const items=st.cart.map(i=>`${i.q} ${prod(i.id).n.toLowerCase()}${i.c?" "+i.c.toLowerCase():""}`).join(", ");
+  const total=carTot()+(st.ent==="envio"?6000:0);
+  PEDIDOS.unshift({n:st.datos.n,items,ent:st.ent,dia:st.dia,dir:st.datos.d,total,e:"nuevo",nuevo:true});
+  $("#feed-vacio").hidden=true;
+  const d=document.createElement("div");d.className="notif nuevo";
+  d.innerHTML=`<small>Recién · desde el catálogo</small><b>${st.ent==="retiro"?`Pedido para retirar el ${st.dia.toLowerCase()}`:`Pedido con envío el ${st.dia.toLowerCase()}`}</b>${esc(st.datos.n)} · ${esc(items)} · ${plata(total)}`;
+  $("#feed").insertBefore(d,$("#feed").children[1]);
+  panel(); rosal();
+}
+
+// ---------- rosales por color ----------
+let rosaSel="Rojo";
+function rosal(){
+  $("#swatches").innerHTML=COLORES.map(([n,h,s])=>`<button type="button" class="sw" data-r="${n}" aria-pressed="${rosaSel===n}"><i style="background:${h};${n==="Blanco"?"box-shadow:inset 0 0 0 1px var(--line)":""}"></i><b>${n}</b><small>${s===0?"Sin stock":s<=2?`Quedan ${s}`:`${s} en stock`}</small></button>`).join("");
+  $$("#swatches .sw").forEach(b=>b.onclick=()=>{rosaSel=b.dataset.r;rosal();});
+  const c=COLORES.find(x=>x[0]===rosaSel);
+  $("#rosa-grande").style.background=c[1].startsWith("linear")?c[1]:c[1]+"22";
+  $("#rosa-grande").innerHTML=ICO.rosa.replace("COL",c[1].startsWith("linear")?"#e47fa0":c[1]).replace(/width="34" height="34"/,'width="120" height="120"');
+  $("#rosa-n").textContent=`Rosal ${rosaSel.toLowerCase()}`;
+  $("#rosa-d").textContent=c[2]===0?"Este color se terminó. Se puede avisar cuando vuelva.":`${c[2]} disponibles. Flor grande, para pleno sol.`;
+  $("#rosa-p").textContent=plata(prod("rosal").p);
+  $("#rosa-add").disabled=c[2]===0;
+}
+$("#rosa-add").onclick=()=>{st.colorSel.rosal=rosaSel;st.cat="Rosales";st.paso="cat";sumar("rosal",rosaSel);document.querySelector(".phone").scrollIntoView({behavior:"smooth",block:"center"});toast(`Sumaste un rosal ${rosaSel.toLowerCase()} al pedido.`);};
+
+// ---------- panel ----------
+const PEDIDOS=[
+ {n:"Mariela G.",items:"2 rosal híbrido de té rojo, 1 maceta de cerámica",ent:"retiro",dia:"Sábado",total:51000,e:"prep"},
+ {n:"Hernán P.",items:"1 olivo, 3 salvia",ent:"envio",dia:"Jueves",dir:"Del Viso",total:113600,e:"listo"},
+ {n:"Lorena B.",items:"6 celosía, 4 gramíneas",ent:"envio",dia:"Martes",dir:"Pilar centro",total:47800,e:"camino"},
+ {n:"Diego S.",items:"1 ficus pandurata",ent:"retiro",dia:"Hoy",total:38000,e:"listo"},
+ {n:"Paula R.",items:"10 suculentas surtidas",ent:"retiro",dia:"Sábado",total:28000,e:"prep"}
+];
+let filtro="todos";
+const TAG={nuevo:'<span class="tag nuevo">Nuevo</span>',prep:'<span class="tag prep">Preparando</span>',listo:'<span class="tag listo">Listo</span>',camino:'<span class="tag camino">En camino</span>'};
+function panel(){
+  $("#k-hoy").textContent=PEDIDOS.length;
+  $("#k-prep").textContent=PEDIDOS.filter(p=>p.e==="nuevo"||p.e==="prep").length;
+  $("#k-ret").textContent=PEDIDOS.filter(p=>p.ent==="retiro"&&p.dia==="Sábado").length;
+  $("#k-total").textContent=plata(PEDIDOS.reduce((s,p)=>s+p.total,0));
+  $("#b-ped").textContent=PEDIDOS.filter(p=>p.e==="nuevo").length||"";
+  const bajos=P.reduce((n,p)=>n+(p.colores?COLORES.filter(c=>c[2]<=2).length:(p.s<=3?1:0)),0);
+  $("#b-stock").textContent=bajos||"";
+  const lista=PEDIDOS.filter(p=>filtro==="todos"||p.e===filtro||(filtro==="listo"&&p.e==="camino"));
+  $("#peds").innerHTML=lista.length?lista.map(p=>{const i=PEDIDOS.indexOf(p);const sig=p.e==="nuevo"?["Empezar a preparar","prep"]:p.e==="prep"?[p.ent==="retiro"?"Avisar que está listo":"Marcar listo para enviar","listo"]:p.e==="listo"&&p.ent==="envio"?["Avisar que sale","camino"]:null;
+    return `<div class="ped ${p.e==="nuevo"?"nuevo":""}"><b>${esc(p.n)}</b><div class="der"><span class="monto">${plata(p.total)}</span>${TAG[p.e]}${sig?`<button class="act ${p.e==="nuevo"?"fill":""}" type="button" data-sig="${i}" data-to="${sig[1]}">${sig[0]}</button>`:""}</div><div class="items">${esc(p.items)}</div><div class="meta">${p.ent==="retiro"?`Retira el ${p.dia.toLowerCase()} en el vivero`:`Envío el ${p.dia.toLowerCase()} · ${esc(p.dir||"")}`}</div></div>`}).join(""):'<p class="sub">No hay pedidos en este filtro.</p>';
+  $$("[data-sig]").forEach(b=>b.onclick=()=>avisar(PEDIDOS[+b.dataset.sig],b.dataset.to));
+  const filas=[];
+  P.forEach(p=>{ if(p.colores) COLORES.forEach(([n,h,s])=>filas.push({k:"r|"+n,n:`Rosal ${n.toLowerCase()}`,cat:"Rosales",s}));
+    else filas.push({k:p.id,n:p.n,cat:p.cat,s:p.s}); });
+  $("#tabla-stock").innerHTML=filas.map(f=>`<div class="st"><div><b>${f.n}</b><small>${f.cat}</small></div><span class="tg">${f.s===0?'<span class="tag nuevo">Sin stock</span>':f.s<=2?'<span class="tag prep">Queda poco</span>':'<span class="tag listo">OK</span>'}</span><span class="ctr"><button type="button" data-st="${f.k}" data-d="-1" aria-label="Menos">−</button><span>${f.s}</span><button type="button" data-st="${f.k}" data-d="1" aria-label="Más">+</button></span></div>`).join("");
+  $$("[data-st]").forEach(b=>b.onclick=()=>{const k=b.dataset.st,d=+b.dataset.d;if(k.startsWith("r|")){const c=COLORES.find(x=>x[0]===k.slice(2));c[2]=Math.max(0,c[2]+d);}else{const p=prod(k);p.s=Math.max(0,p.s+d);}panel();rosal();if(st.paso==="cat")app();});
+  const dias=["Martes","Jueves","Sábado"];
+  $("#reparto").innerHTML=dias.map(d=>{const ps=PEDIDOS.filter(p=>p.ent==="envio"&&p.dia===d);return `<div class="dia"><h3>${d}</h3><small>${ps.length?`${ps.length} ${ps.length===1?"envío":"envíos"}`:"Sin envíos todavía"}</small>${ps.length?`<ol>${ps.map(p=>`<li>${esc(p.dir||"Sin dirección")} · ${esc(p.n)}</li>`).join("")}</ol>`:""}</div>`}).join("");
+}
+let pend=null;
+function avisar(p,to){
+  pend={p,to}; const nom=esc(p.n.split(" ")[0]);
+  if(to==="prep"){p.e="prep";p.nuevo=false;panel();toast("Pedido en preparación.");return;}
+  $("#m-para").textContent=`Para ${p.n}`;
+  $("#m-t").textContent="Avisarle al cliente";
+  $("#m-msg").textContent=to==="camino"?`Hola ${p.n.split(" ")[0]}! Tu pedido ya salió del vivero, en un rato llega 🌿`
+   :p.ent==="retiro"?`Hola ${p.n.split(" ")[0]}! Tu pedido ya está listo. Te esperamos en Uriburu 1150 (lun a vie 8:30 a 13 y 14 a 17:30, sáb 8:30 a 16) 🌿`
+   :`Hola ${p.n.split(" ")[0]}! Tu pedido está listo y te lo llevamos el ${p.dia.toLowerCase()} 🌿`;
+  $("#modal").classList.add("on");$("#m-ok").focus();
+}
+const cerrar=()=>$("#modal").classList.remove("on");
+$("#m-no").onclick=cerrar;$("#modal").onclick=e=>{if(e.target.id==="modal")cerrar()};
+document.addEventListener("keydown",e=>{if(e.key==="Escape")cerrar()});
+$("#m-ok").onclick=()=>{cerrar();if(pend){pend.p.e=pend.to;pend.p.nuevo=false;}toast("En el sistema real este mensaje sale por WhatsApp.");panel();};
+$$("#chips button").forEach(b=>b.onclick=()=>{filtro=b.dataset.f;$$("#chips button").forEach(x=>x.setAttribute("aria-pressed",x===b));panel();});
+
+function vista(v){$$(".switch button").forEach(x=>x.setAttribute("aria-pressed",x.dataset.v===v));$("#v-clientes").hidden=v!=="clientes";$("#v-panel").hidden=v!=="panel";window.scrollTo({top:0});}
+$$(".switch button").forEach(b=>b.onclick=()=>vista(b.dataset.v));
+$("[data-ir-panel]").onclick=()=>vista("panel");
+$$(".side button").forEach(b=>b.onclick=()=>{$$(".side button").forEach(x=>x.setAttribute("aria-current",x===b));["pedidos","stock","reparto"].forEach(p=>$("#p-"+p).hidden=p!==b.dataset.p);});
+
+let tt;function toast(t){const el=$("#toast");el.textContent=t;el.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>el.classList.remove("on"),3200);}
+app();rosal();panel();
+</script>
+</body>
+</html>
